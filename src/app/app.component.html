@@ -1,20 +1,104 @@
 <div class="sidebar">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-6" style="padding-top: 0; padding-bottom: 0; border-top: none; border-bottom: none;">
+      <div class="col-6" style="padding-top: 0; padding-bottom: 0; border-top: none; border-bottom: none; border-right: 1px solid rgba(255, 255, 255, 0.2);">
 
           <div class="row">
-            <div class="col-3 full-height">
-              Side 1
+            <div class="col-3 full-height text-center sidebar-users">
+              <fa-icon icon="code" size="lg"></fa-icon>
             </div>
-            <div class="col-9 full-height">
-              Side 2
+            <div class="col-9 full-height sidebar-navigation">
+              <span>
+                <b>Personal Library</b>
+                <fa-icon class="float-right" icon="sync-alt"></fa-icon>
+              </span>
+
+              <hr style="background: #fff">
+
+              <button type="button" class="btn btn-success btn-block" style="margin-top: .75rem; margin-bottom: .75rem; text-transform: uppercase;">New Snippet</button>
+
+              <div class="list-group list-group-flush" id="list-tab" role="tablist">
+                <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">
+                  <fa-icon icon="globe" size="sm"></fa-icon> All snippets
+                </a>
+                <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">
+                  <fa-icon icon="star" size="sm"></fa-icon> Favorites
+                </a>
+                <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">
+                  <fa-icon icon="tag" size="sm"></fa-icon> Unlabeled
+                </a>
+                <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">
+                  <fa-icon icon="eye" size="sm"></fa-icon> Public
+                </a>
+                <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">
+                  <fa-icon icon="eye-slash" size="sm"></fa-icon> Private
+                </a>
+                <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">
+                  <fa-icon icon="cloud-upload-alt" size="sm"></fa-icon> Shared by me
+                  </a>
+                <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">
+                  <fa-icon icon="cloud-download-alt" size="sm"></fa-icon> Shared with me
+                </a>
+              </div>
+              
+              <hr style="background: #fff">
+              <b>Labels</b>
+              <div class="list-group list-group-flush" id="list-tab" role="tablist">
+                <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">
+                  Angular
+                </a>
+                <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">
+                  Vue
+                </a>
+                <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">
+                  Django
+                </a>
+                <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">
+                  Wordpress
+                </a>
+                <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">
+                  Laravel
+                </a>
+              </div>
+              
+              <hr style="background: #fff">
+              <b>Languages</b>
+              <div class="list-group list-group-flush" id="list-tab" role="tablist">
+                <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">
+                  php
+                </a>
+                <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">
+                  python
+                </a>
+                <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">
+                  typescript
+                </a>
+                <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">
+                  javascript
+                </a>
+                <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">
+                  sh
+                </a>
+                <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">
+                  markdown
+                </a>
+              </div>
             </div>
           </div>
 
       </div>
       <div class="col-6">
-        Side 2
+        <div ngbDropdown class="d-inline-block">
+          <button class="btn btn-sm btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Toggle dropdown</button>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <button class="dropdown-item">Action - 1</button>
+            <button class="dropdown-item">Another Action</button>
+            <button class="dropdown-item">Something else is here</button>
+          </div>
+        </div>
+
+        <hr>
+
       </div>
     </div>
   </div>
@@ -23,7 +107,14 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-12 full-height">
-        One of three columns
+
+          <div class="form-group">
+            <input type="text" class="form-control form-control-sm" id="search" placeholder="Search for snippets">
+          </div>
+
+          <hr>
+
+          
       </div>
     </div>
   </div>

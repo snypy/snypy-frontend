@@ -1,0 +1,37 @@
+.sidebar {
+    width: 560px;
+    display: block;
+    float: left;
+    color: #dddddd;
+
+    .sidebar-users {
+        background: #142F43;
+        border-right: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .sidebar-navigation {
+        background: #142F43;
+        border-right: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .sidebar-snippets {
+        
+    }
+
+}
+
+.content {
+    width: calc(100% - 560px);
+    display: block;
+    float: left;
+    background-color: #f7f7f7;
+}
+
+.row>[class^=col-] {
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+}
+
+.full-height {
+    height: 100vh;
+}
