@@ -64,6 +64,20 @@ perfect-scrollbar {
         .ps.ps--scrolling-y>.ps__rail-y {
             background-color: transparent;
         }
+        .ps__thumb-y {
+            right: 0;
+            transition: none;
+            width: 4px;
+        }
+        .ps.ps--active-y>.ps__rail-y {
+            transition: none;
+            width: 4px;
+            z-index: 10;
+        }
+        .ps.ps--active-y>.ps__rail-y:hover,
+        .ps__rail-y:focus>.ps__thumb-y, .ps__rail-y:hover>.ps__thumb-y {
+            width: 4px;
+        }
     }
 }
 
@@ -94,4 +108,26 @@ ngb-accordion {
 .side-padding {
     padding-left: .75rem;
     padding-right: .75rem;
+}
+
+.list-group-heading {
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+
+.list-group-item {
+    padding: 2px 0;
+    background: transparent;
+    border: none;
+    color: #fff;
+    padding-left: .75rem;
+    padding-right: .75rem;
+
+    &.active {
+        background: rgba(0, 0, 0, 0.3);
+    }
+
+    .icon {
+        margin-right: 10px;
+    }
 }
