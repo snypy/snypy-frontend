@@ -10,7 +10,7 @@
               </div>
               
               <div class="users">
-                <perfect-scrollbar style="max-height: calc(100vh - 40px); padding-right: 15px;" >
+                <perfect-scrollbar style="max-height: calc(100vh - 38px); padding-right: 15px;" >
                   <span class="user">
                     <fa-icon icon="user"></fa-icon>
                   </span>
@@ -30,10 +30,13 @@
                       <fa-icon class="float-right" icon="sync-alt"></fa-icon>
                   </span>
                                       
-                  <button type="button" class="btn btn-success btn-block" style="margin-top: .75rem; margin-bottom: .75rem; text-transform: uppercase;">New Snippet</button>
+                  <button 
+                    type="button" class="btn btn-sm btn-success btn-block"
+                    style="margin-top: .75rem; margin-bottom: .75rem; text-transform: uppercase; font-size: 12px; font-weight: bold;"
+                  >New Snippet</button>
       
                 </div>
-                <perfect-scrollbar style="max-height: calc(100vh - 100px);">
+                <perfect-scrollbar style="max-height: calc(100vh - 90px);">
                   <div class="list-group list-group-flush" id="list-tab" role="tablist">
                     <a class="list-group-item list-group-item-action active" id="list-home-list" href="#list-home" role="tab" aria-controls="home">
                       <fa-icon class="icon" icon="globe" size="sm"></fa-icon> All snippets
@@ -200,23 +203,41 @@
 <div class="content">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-12 full-height" style="padding-right: 0; padding-left: 0;">
+      <div class="col-12 full-height remove-side-padding">
 
-
-          <div style="padding: 0 15px;">
-            <div class="form-group">
-              <input type="text" class="form-control form-control-sm" id="search" placeholder="Search for snippets">
+          <div class="row remove-side-margin">
+            <div class="col-6 remove-side-padding" style="padding-top: 0;">
+              <div class="form-group side-padding">
+                <input type="text" class="form-control form-control-sm" id="search" placeholder="Search for snippets">
+              </div>
+            </div>
+            <div class="col-6 remove-side-padding text-right" style="padding-top: 0;">
+              
+              <div ngbDropdown class="d-inline-block side-padding" placement="bottom-right" #myDrop="ngbDropdown">
+                <button class="btn btn-sm btn-outline-info" id="dropdownBasic1" ngbDropdownToggle>username</button>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                  <div class="card" style=" border-radius: 0; border: none;">
+                      <div class="card-body text-center" style="border-bottom: 1px solid #ddd; padding: 0; margin-bottom: 10px;">
+                          <p><img class="img-fluid" src="https://cdn.pixabay.com/photo/2018/04/12/11/37/apple-3313209_960_720.jpg" alt="card image" style="border-radius: 50%; max-width: 50%;"></p>
+                          <h4 class="card-title">username</h4>
+                      </div>
+                  </div>
+                  <button class="dropdown-item">Profile</button>
+                  <button class="dropdown-item">Help</button>
+                  <button class="dropdown-item">Logout</button>
+                </div>
+              </div>
             </div>
           </div>
           
-          <div style="padding: 0 15px; background: #fff; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd;">
-            <div class="row">
-                <div class="col-6">
+          <div class="vertical-padding side-padding" style="background: #fff; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd;">
+            <div class="row remove-side-margin">
+                <div class="col-6" style="padding-top: 0;">
                     <span class="title">Snippet title</span><br>
                     <small><b>By</b> Username</small><br>
                     <small><b>Created</b> 12 May 2018 - <b>Last update</b> 14 May 2018</small><br>
                 </div>
-                <div class="col-6 text-right">
+                <div class="col-6 text-right" style="padding-top: 0;">
                     <div class="btn-group" role="group" aria-label="Basic example">
                         <button type="button" class="btn btn-sm btn-link">Edit</button>
                         <button type="button" class="btn btn-sm btn-link">Share</button>
@@ -239,7 +260,13 @@
             </div>
           </div>
           
-          <perfect-scrollbar style="max-height: calc(100vh - 210px); padding-right: 15px;">
+          <perfect-scrollbar style="max-height: calc(100vh - 190px); padding-right: 15px;">
+            
+            <div style="padding: 15px;">
+              <span class="badge badge-info">Angular</span>
+              <span class="badge badge-info">Vue</span>
+              <span class="badge badge-info">Laravel</span>
+            </div>
 
             <div style="padding: 15px;">
               Description: Groot jIH. Adim Groot. Adim Groot. We are Groot. Je suis Groot. Groot maH. I am Groot. Jest em Groot. Jest em Groot. Yo soy Groot. Eu sou Groot. En voyok Groot. Eu sou Groot. Ego sum Groot. Groot maH. Groot maH. Yo soy Groot. Ego sum Groot. En voyok Groot. Groot jIH. Groot jIH. Jest em Groot. Já jsem Groot. Nous sommes Groot. Groot jIH. 
@@ -261,13 +288,11 @@
 
           </perfect-scrollbar>
 
-
-          <div style="border-top: 1px solid black" class="text-right">
-            <small>
+          <div style="border-top: 1px solid #ddd" class="text-right">
+            <small class="side-padding">
               <b>V1.0</b> | <a href="#">Contribute</a> | <a href="#">Donate</a>
             </small>
           </div>
-
       </div>
     </div>
   </div>

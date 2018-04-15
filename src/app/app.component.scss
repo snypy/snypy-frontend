@@ -28,12 +28,19 @@
     background-color: #f7f7f7;
 }
 
-.row>[class^=col-] {
-    padding-top: .75rem;
+.row{
+    >[class^=col-] {
+        padding-top: .75rem;
 
-    &.remove-side-padding {
-        padding-left: 0;
-        padding-right: 0;
+        &.remove-side-padding {
+            padding-left: 0;
+            padding-right: 0;
+        }
+    }
+
+    &.remove-side-margin {
+        margin-left: 0;
+        margin-right: 0;
     }
 }
 
@@ -108,6 +115,11 @@ ngb-accordion {
 .side-padding {
     padding-left: .75rem;
     padding-right: .75rem;
+}
+
+.vertical-padding {
+    padding-top: .75rem;
+    padding-bottom: .75rem;
 }
 
 .list-group-heading {
