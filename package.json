@@ -27,6 +27,7 @@
     "@fortawesome/free-regular-svg-icons": "^5.1.0-8",
     "@fortawesome/free-solid-svg-icons": "^5.1.0-8",
     "@ng-bootstrap/ng-bootstrap": "^1.1.2",
+    "@ng-select/ng-select": "^0.36.2",
     "bootstrap": "^4.1.0",
     "core-js": "^2.4.1",
     "ngx-perfect-scrollbar": "^5.3.5",
