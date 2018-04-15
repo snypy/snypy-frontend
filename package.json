@@ -30,6 +30,7 @@
     "@ng-select/ng-select": "^0.36.2",
     "bootstrap": "^4.1.0",
     "core-js": "^2.4.1",
+    "ng2-handy-syntax-highlighter": "^1.0.12",
     "ngx-perfect-scrollbar": "^5.3.5",
     "rxjs": "^5.5.6",
     "zone.js": "^0.8.19"
