@@ -2,16 +2,17 @@
     width: 560px;
     display: block;
     float: left;
-    color: #dddddd;
 
     .sidebar-users {
         background: #142F43;
         border-right: 1px solid rgba(255, 255, 255, 0.2);
+        color: #dddddd;
     }
 
     .sidebar-navigation {
         background: #142F43;
         border-right: 1px solid rgba(255, 255, 255, 0.2);
+        color: #dddddd;
     }
 
     .sidebar-snippets {
@@ -34,4 +35,30 @@
 
 .full-height {
     height: 100vh;
+}
+
+.dot {
+    height: 12px;
+    width: 12px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.users .user {
+    display: inline-block;
+    margin-top: 17px;
+    padding-top: 5px;
+    width: 38px;
+    height: 38px;
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    border-radius: 100%;
+}
+
+perfect-scrollbar {
+    ::ng-deep {
+        .ps.ps--scrolling-y>.ps__rail-y {
+            background-color: transparent;
+        }
+    }
 }
