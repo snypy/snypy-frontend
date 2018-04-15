@@ -30,7 +30,11 @@
 
 .row>[class^=col-] {
     padding-top: .75rem;
-    padding-bottom: .75rem;
+
+    &.remove-side-padding {
+        padding-left: 0;
+        padding-right: 0;
+    }
 }
 
 .full-height {
@@ -61,4 +65,33 @@ perfect-scrollbar {
             background-color: transparent;
         }
     }
+}
+
+ngb-accordion {
+    ::ng-deep {
+        .card-body {
+            border-bottom: 1px solid rgba(0,0,0,.125);
+        }
+    }
+}
+
+.border-left {
+    border-left: 1px solid #ddd;
+}
+
+.border-right {
+    border-right: 1px solid #ddd;
+}
+
+.border-top {
+    border-top: 1px solid #ddd;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #ddd;
+}
+
+.side-padding {
+    padding-left: .75rem;
+    padding-right: .75rem;
 }

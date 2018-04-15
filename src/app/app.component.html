@@ -58,8 +58,11 @@
                     </a>
                   </div>
                   
-                  <hr style="background: #fff">
-                  <b>Labels</b>
+                  <span>
+                      <b>Labels</b>
+                      <fa-icon class="float-right" icon="plus"></fa-icon>
+                  </span>
+
                   <div class="list-group list-group-flush" id="list-tab" role="tablist">
                     <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center active" id="list-profile-list" href="#list-profile" role="tab" aria-controls="profile">
                       <span><span class="dot"></span> Angular</span>
@@ -83,7 +86,6 @@
                     </a>
                   </div>
                   
-                  <hr style="background: #fff">
                   <b>Languages</b>
                   <div class="list-group list-group-flush" id="list-tab" role="tablist">
                     <a class="list-group-item list-group-item-action active" id="list-home-list" href="#list-home" role="tab" aria-controls="home">
@@ -110,20 +112,20 @@
           </div>
 
       </div>
-      <div class="col-6" style="padding-right: 0;">
-        <div ngbDropdown class="d-inline-block">
-          <button class="btn btn-sm btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Toggle dropdown</button>
-          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-            <button class="dropdown-item">Action - 1</button>
-            <button class="dropdown-item">Another Action</button>
-            <button class="dropdown-item">Something else is here</button>
-          </div>
+      <div class="col-6 border-right remove-side-padding">
+
+        <div class="side-padding border-bottom">
+            <div class="form-group">
+              <select class="form-control form-control-sm" id="sel1">
+                <option>Creation date</option>
+                <option>Last modification date</option>
+                <option>Title</option>
+              </select>
+            </div>
         </div>
 
-        <hr>
-
-        <perfect-scrollbar style="max-height: calc(100vh - 100px);">
-          <div class="card" *ngFor="let i of [1,2,3,4,5,6,7,8,9]" style="border-left: 0; border-top: 0; border-right: 0;">
+        <perfect-scrollbar style="max-height: calc(100vh - 60px);">
+          <div class="card" *ngFor="let i of [1,2,3,4,5,6,7,8,9]" style="border-left: 0; border-top: 0; border-right: 0; border-radius: 0;">
             <div class="card-body">
               <h6 class="card-title">Card title {{ i }}</h6>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -138,15 +140,74 @@
 <div class="content">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-12 full-height">
+      <div class="col-12 full-height" style="padding-right: 0; padding-left: 0;">
 
-          <div class="form-group">
-            <input type="text" class="form-control form-control-sm" id="search" placeholder="Search for snippets">
+
+          <div style="padding: 0 15px;">
+            <div class="form-group">
+              <input type="text" class="form-control form-control-sm" id="search" placeholder="Search for snippets">
+            </div>
+          </div>
+          
+          <div style="padding: 0 15px; background: #fff; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd;">
+            <div class="row">
+                <div class="col-6">
+                    <span class="title">Snippet title</span><br>
+                    <small><b>By</b> Username</small><br>
+                    <small><b>Created</b> 12 May 2018 - <b>Last update</b> 14 May 2018</small><br>
+                </div>
+                <div class="col-6 text-right">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-sm btn-link">Edit</button>
+                        <button type="button" class="btn btn-sm btn-link">Share</button>
+                        <button type="button" class="btn btn-sm btn-link">Delete</button>
+                    </div>
+
+                    <div style="margin-top: 15px;">
+                      <div ngbDropdown class="d-inline-block" placement="bottom-right" #myDrop="ngbDropdown">
+                        <button class="btn btn-sm btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Labels</button>
+                        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                          <button class="dropdown-item" (click)="$event.stopPropagation(); myDrop.open();">Angular</button>
+                          <button class="dropdown-item" (click)="$event.stopPropagation(); myDrop.open();">Vue</button>
+                          <button class="dropdown-item" (click)="$event.stopPropagation(); myDrop.open();">Django</button>
+                          <button class="dropdown-item" (click)="$event.stopPropagation(); myDrop.open();">Wordpress</button>
+                          <button class="dropdown-item" (click)="$event.stopPropagation(); myDrop.open();">Laravel</button>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+          
+          <perfect-scrollbar style="max-height: calc(100vh - 210px); padding-right: 15px;">
+
+            <div style="padding: 15px;">
+              Description: Groot jIH. Adim Groot. Adim Groot. We are Groot. Je suis Groot. Groot maH. I am Groot. Jest em Groot. Jest em Groot. Yo soy Groot. Eu sou Groot. En voyok Groot. Eu sou Groot. Ego sum Groot. Groot maH. Groot maH. Yo soy Groot. Ego sum Groot. En voyok Groot. Groot jIH. Groot jIH. Jest em Groot. Já jsem Groot. Nous sommes Groot. Groot jIH. 
+            </div>
+
+            <div *ngFor="let i of [1,2,3]" style="margin: 15px;">
+              <ngb-accordion #acc="ngbAccordion" activeIds="file-{{ i }}">
+                <ngb-panel id="file-{{ i }}" title="Simple {{ i }}">
+                  <ng-template ngbPanelContent>
+                    Groot jIH. Adim Groot. Adim Groot. We are Groot. Je suis Groot. Groot maH. I am Groot. Jest em Groot. Jest em Groot. Yo soy Groot. Eu sou Groot. En voyok Groot. Eu sou Groot. Ego sum Groot. Groot maH. Groot maH. Yo soy Groot. Ego sum Groot. En voyok Groot. Groot jIH. Groot jIH. Jest em Groot. Já jsem Groot. Nous sommes Groot. Groot jIH. 
+                    <br><br>
+                    Io sono Groot. Wo shi Groot. Noi siamo Groot. Ego sum Groot. Eu sunt Groot. Wir sind Groot. Ego sum Groot. Wo shi Groot. Jest em Groot. Já jsem Groot. Wo shi Groot. Já jsem Groot. Ego sum Groot. Eu sou Groot. Yo soy Groot. Eu sou Groot. Ego sum Groot. Wo shi Groot. Adim Groot. Eu sou Groot. Yo soy Groot. Jest em Groot. Groot maH. Eu sunt Groot. Eu sou Groot. 
+                    <br><br>
+                    Wir sind Groot. En voyok Groot. Eu sou Groot. Noi siamo Groot. Ego sum Groot. Adim Groot. Yo soy Groot. Nous sommes Groot. Noi siamo Groot. Je suis Groot. En voyok Groot. I am Groot. Yo soy Groot. Já jsem Groot. Adim Groot. Eu sou Groot. Eu sou Groot. Groot jIH. Jest em Groot. Noi siamo Groot. Yo soy Groot. Io sono Groot. Noi siamo Groot. Ego sum Groot. Groot maH.              
+                  </ng-template>
+                </ngb-panel>
+              </ngb-accordion>
+            </div>
+
+          </perfect-scrollbar>
+
+
+          <div style="border-top: 1px solid black" class="text-right">
+            <small>
+              <b>V1.0</b> | <a href="#">Contribute</a> | <a href="#">Donate</a>
+            </small>
           </div>
 
-          <hr>
-
-          
       </div>
     </div>
   </div>
