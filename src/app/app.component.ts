@@ -1,12 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
+import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
+
+import { UserResource, User } from './services/resources/user.resource';
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'app';
+
+  users: ResourceModel<User>[] = [];
 
   codeSample = `
     import { BrowserModule } from '@angular/platform-browser';
@@ -61,4 +68,22 @@ export class AppComponent {
     })
     export class AppModule { }
   `;
+
+  constructor(private userResource: UserResource) {
+  }
+
+  ngOnInit() {
+    const queryParam = {};
+
+    this.userResource.query(queryParam).$promise
+      .then((data) => {
+        this.users = data;
+
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
 }
