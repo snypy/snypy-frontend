@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 
 import { UserResource, User } from './services/resources/user.resource';
+import { LabelResource, Label } from './services/resources/label.resource';
 
 
 @Component({
@@ -13,7 +14,8 @@ import { UserResource, User } from './services/resources/user.resource';
 export class AppComponent implements OnInit {
   title = 'app';
 
-  users: ResourceModel<User>[] = [];
+  currentUser = 1;
+  labels: ResourceModel<Label>[] = [];
 
   codeSample = `
     import { BrowserModule } from '@angular/platform-browser';
@@ -69,21 +71,21 @@ export class AppComponent implements OnInit {
     export class AppModule { }
   `;
 
-  constructor(private userResource: UserResource) {
+  constructor(private labelResource: LabelResource) {
   }
 
   ngOnInit() {
-    const queryParam = {};
 
-    this.userResource.query(queryParam).$promise
+    this.labelResource.query({user: this.currentUser}).$promise
       .then((data) => {
-        this.users = data;
-
-        console.log(data);
+        this.labels = data;
       })
       .catch((error) => {
         console.log(error);
       });
   }
 
+  randomNumber() {
+    return Math.floor(Math.random() * 20) + 1;
+  }
 }

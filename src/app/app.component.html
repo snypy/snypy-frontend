@@ -61,73 +61,23 @@
                     </a>
                   </div>
                   
+                  <!-- Start: Labels -->
                   <div class="list-group-heading side-padding">
                       <b>Labels</b>
                       <fa-icon class="float-right" icon="plus"></fa-icon>
                   </div>
-
                   <div class="list-group list-group-flush" id="list-tab" role="tablist">
-                    <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center active" id="list-profile-list" href="#list-profile" role="tab" aria-controls="profile">
-                      <span><span class="dot icon"></span> Angular</span>
-                      <span class="badge badge-primary badge-pill">5</span>
-                    </a>
-                    <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" id="list-profile-list" href="#list-profile" role="tab" aria-controls="profile">
-                      <span><span class="dot icon"></span> Vue</span>
-                      <span class="badge badge-primary badge-pill">9</span>
-                    </a>
-                    <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" id="list-profile-list" href="#list-profile" role="tab" aria-controls="profile">
-                      <span><span class="dot icon"></span> Django</span>
-                      <span class="badge badge-primary badge-pill">12</span>
-                    </a>
-                    <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" id="list-profile-list" href="#list-profile" role="tab" aria-controls="profile">
-                      <span><span class="dot icon"></span> Wordpress</span>
-                      <span class="badge badge-primary badge-pill">7</span>
-                    </a>
-                    <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" id="list-profile-list" href="#list-profile" role="tab" aria-controls="profile">
-                      <span><span class="dot icon"></span> Laravel</span>
-                      <span class="badge badge-primary badge-pill">2</span>
-                    </a>
-                    <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" id="list-profile-list" href="#list-profile" role="tab" aria-controls="profile">
-                      <span><span class="dot icon"></span> Angular</span>
-                      <span class="badge badge-primary badge-pill">5</span>
-                    </a>
-                    <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" id="list-profile-list" href="#list-profile" role="tab" aria-controls="profile">
-                      <span><span class="dot icon"></span> Vue</span>
-                      <span class="badge badge-primary badge-pill">9</span>
-                    </a>
-                    <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" id="list-profile-list" href="#list-profile" role="tab" aria-controls="profile">
-                      <span><span class="dot icon"></span> Django</span>
-                      <span class="badge badge-primary badge-pill">12</span>
-                    </a>
-                    <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" id="list-profile-list" href="#list-profile" role="tab" aria-controls="profile">
-                      <span><span class="dot icon"></span> Wordpress</span>
-                      <span class="badge badge-primary badge-pill">7</span>
-                    </a>
-                    <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" id="list-profile-list" href="#list-profile" role="tab" aria-controls="profile">
-                      <span><span class="dot icon"></span> Laravel</span>
-                      <span class="badge badge-primary badge-pill">2</span>
-                    </a>
-                    <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" id="list-profile-list" href="#list-profile" role="tab" aria-controls="profile">
-                      <span><span class="dot icon"></span> Angular</span>
-                      <span class="badge badge-primary badge-pill">5</span>
-                    </a>
-                    <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" id="list-profile-list" href="#list-profile" role="tab" aria-controls="profile">
-                      <span><span class="dot icon"></span> Vue</span>
-                      <span class="badge badge-primary badge-pill">9</span>
-                    </a>
-                    <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" id="list-profile-list" href="#list-profile" role="tab" aria-controls="profile">
-                      <span><span class="dot icon"></span> Django</span>
-                      <span class="badge badge-primary badge-pill">12</span>
-                    </a>
-                    <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" id="list-profile-list" href="#list-profile" role="tab" aria-controls="profile">
-                      <span><span class="dot icon"></span> Wordpress</span>
-                      <span class="badge badge-primary badge-pill">7</span>
-                    </a>
-                    <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" id="list-profile-list" href="#list-profile" role="tab" aria-controls="profile">
-                      <span><span class="dot icon"></span> Laravel</span>
-                      <span class="badge badge-primary badge-pill">2</span>
+                    <a *ngFor="let label of labels"
+                        class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                        id="list-profile-list"
+                        href="#list-profile"
+                        role="tab"
+                        aria-controls="profile">
+                      <span><span class="dot icon"></span> {{ label.name }}</span>
+                      <span class="badge badge-primary badge-pill">{{ randomNumber() }}</span>
                     </a>
                   </div>
+                  <!-- End: Labels -->
                   
                   <div class="list-group-heading side-padding">
                       <b>Languages</b>

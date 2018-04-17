@@ -1,7 +1,7 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 
 import { UserResource } from './resources/user.resource';
-
+import { LabelResource } from './resources/label.resource';
 
 @NgModule({
     imports: [],
@@ -15,7 +15,8 @@ export class ServicesModule {
         return {
             ngModule: ServicesModule,
             providers: [
-                UserResource
+                UserResource,
+                LabelResource,
             ]
         }
     }
