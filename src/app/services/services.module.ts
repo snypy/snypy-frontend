@@ -3,6 +3,7 @@ import { ModuleWithProviders, NgModule } from '@angular/core';
 import { UserResource } from './resources/user.resource';
 import { LabelResource } from './resources/label.resource';
 import { LanguageResource } from './resources/language.resource';
+import { SnippetResource } from './resources/snippet.resource';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ export class ServicesModule {
                 UserResource,
                 LabelResource,
                 LanguageResource,
+                SnippetResource,
             ]
         };
     }

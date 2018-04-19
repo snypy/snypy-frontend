@@ -43,8 +43,6 @@
     height: 100vh;
 }
 
-
-
 .users .user {
     display: inline-block;
     margin-top: 17px;
@@ -55,6 +53,36 @@
     border-radius: 100%;
 }
 
+
+.border-left {
+    border-left: 1px solid #ddd;
+}
+
+.border-right {
+    border-right: 1px solid #ddd;
+}
+
+.border-top {
+    border-top: 1px solid #ddd;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #ddd;
+}
+
+.side-padding {
+    padding-left: .75rem;
+    padding-right: .75rem;
+}
+
+.vertical-padding {
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+}
+
+/*
+* Style for child components
+*/
 perfect-scrollbar {
     ::ng-deep {
         .ps.ps--scrolling-y>.ps__rail-y {
@@ -109,33 +137,6 @@ handy-syntax-highlighter {
         }
     }
 }
-
-.border-left {
-    border-left: 1px solid #ddd;
-}
-
-.border-right {
-    border-right: 1px solid #ddd;
-}
-
-.border-top {
-    border-top: 1px solid #ddd;
-}
-
-.border-bottom {
-    border-bottom: 1px solid #ddd;
-}
-
-.side-padding {
-    padding-left: .75rem;
-    padding-right: .75rem;
-}
-
-.vertical-padding {
-    padding-top: .75rem;
-    padding-bottom: .75rem;
-}
-
 
 .navigation {
     ::ng-deep {

@@ -7,20 +7,22 @@ import { ResourceConfiguration } from 'ngx-resource-factory/resource/resource-co
 import { ResourceInstance } from 'ngx-resource-factory/resource/resource-instance';
 
 
-export class User extends ResourceInstance {
+export class Snippet extends ResourceInstance {
     pk: number;
     url: string;
-    username: string;
-    email: string;
+    title: string;
+    description: string;
+    visibility: string;
+    user: number;
 }
 
 @Injectable()
 @ResourceConfiguration({
-    name: 'UserResource',
-    url: environment.apiUrl + 'user/:pk/',
+    name: 'SnippetResource',
+    url: environment.apiUrl + 'snippet/:pk/',
     pkAttr: 'pk',
-    instanceClass: User,
+    instanceClass: Snippet,
     stripTrailingSlashes: false,
 })
-export class UserResource extends Resource<User> {
+export class SnippetResource extends Resource<Snippet> {
 }

@@ -30,6 +30,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { LablesComponent } from './components/lables/lables.component';
 import { LanguagesComponent } from './components/languages/languages.component';
 import { MenuComponent } from './components/menu/menu.component';
+import { SnippetsComponent } from './components/snippets/snippets.component';
 
 library.add(faCoffee, faCode, faSyncAlt, faGlobe, faEye, faEyeSlash, faStar, faTag, faCloudUploadAlt, faCloudDownloadAlt, faUser, faPlus);
 
@@ -39,7 +40,8 @@ library.add(faCoffee, faCode, faSyncAlt, faGlobe, faEye, faEyeSlash, faStar, faT
     AppComponent,
     LablesComponent,
     LanguagesComponent,
-    MenuComponent
+    MenuComponent,
+    SnippetsComponent
   ],
   imports: [
     BrowserModule,
