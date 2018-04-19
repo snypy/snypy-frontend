@@ -4,25 +4,32 @@
       <div class="col-6" style="padding-top: 0; padding-bottom: 0; border-top: none; border-bottom: none; border-right: 1px solid rgba(255, 255, 255, 0.2);">
 
           <div class="row">
-            <div class="col-3 full-height text-center sidebar-users" style="padding-right: 0;">
-              <div style="padding-right: 15px;">
-                <fa-icon icon="code" size="lg"></fa-icon>
-              </div>
-              
+
+            <div class="col-3 full-height text-center sidebar-users" style="padding: 0;">
               <div class="users">
-                <perfect-scrollbar style="max-height: calc(100vh - 38px); padding-right: 15px;" >
+
+                <div class="side-padding">
                   <span class="user">
-                    <fa-icon icon="user"></fa-icon>
+                      <fa-icon icon="user"></fa-icon>
                   </span>
                   <span class="user">
                     <fa-icon icon="globe"></fa-icon>
                   </span>
+                  <span class="user">
+                    <fa-icon icon="plus"></fa-icon>
+                  </span>
+                </div>
+                
+                <div class="border-bottom" style="margin-top: 0.75rem"></div>
+
+                <perfect-scrollbar class="side-padding" style="max-height: calc(100vh - 165px);">
                   <span class="user" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]">
                     <fa-icon icon="coffee" title="Team {{ i }}"></fa-icon>
                   </span>
                 </perfect-scrollbar>
               </div>
             </div>
+
             <div class="col-9 full-height sidebar-navigation" style="padding-right: 0;padding-left: 0;">
                 <div class="side-padding">
                   <span>
