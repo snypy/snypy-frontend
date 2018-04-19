@@ -5,6 +5,8 @@ import { LabelResource } from './resources/label.resource';
 import { LanguageResource } from './resources/language.resource';
 import { SnippetResource } from './resources/snippet.resource';
 
+import { ActiveFilterService } from './navigation/activeFilter.service';
+
 
 @NgModule({
     imports: [],
@@ -22,6 +24,7 @@ export class ServicesModule {
                 LabelResource,
                 LanguageResource,
                 SnippetResource,
+                ActiveFilterService,
             ]
         };
     }
