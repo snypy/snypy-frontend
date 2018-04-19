@@ -7,7 +7,7 @@ import { ResourceConfiguration } from 'ngx-resource-factory/resource/resource-co
 import { ResourceInstance } from 'ngx-resource-factory/resource/resource-instance';
 
 
-export class Label extends ResourceInstance {
+export class Language extends ResourceInstance {
     pk: number;
     url: string;
     name: string;
@@ -15,12 +15,12 @@ export class Label extends ResourceInstance {
 
 @Injectable()
 @ResourceConfiguration({
-    name: 'LabelResource',
-    url: environment.apiUrl + 'label/:pk/',
+    name: 'LanguageResource',
+    url: environment.apiUrl + 'language/:pk/',
     pkAttr: 'pk',
-    instanceClass: Label,
+    instanceClass: Language,
     stripTrailingSlashes: false,
 })
-export class LabelResource extends Resource<Label> {
+export class LanguageResource extends Resource<Language> {
 
 }

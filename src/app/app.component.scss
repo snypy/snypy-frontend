@@ -14,11 +14,6 @@
         border-right: 1px solid rgba(255, 255, 255, 0.2);
         color: #dddddd;
     }
-
-    .sidebar-snippets {
-        
-    }
-
 }
 
 .content {
@@ -48,13 +43,7 @@
     height: 100vh;
 }
 
-.dot {
-    height: 12px;
-    width: 12px;
-    background-color: #bbb;
-    border-radius: 50%;
-    display: inline-block;
-}
+
 
 .users .user {
     display: inline-block;
@@ -147,24 +136,30 @@ handy-syntax-highlighter {
     padding-bottom: .75rem;
 }
 
-.list-group-heading {
-    padding-top: 20px;
-    padding-bottom: 10px;
-}
 
-.list-group-item {
-    padding: 2px 0;
-    background: transparent;
-    border: none;
-    color: #fff;
-    padding-left: .75rem;
-    padding-right: .75rem;
-
-    &.active {
-        background: rgba(0, 0, 0, 0.3);
-    }
-
-    .icon {
-        margin-right: 10px;
+.navigation {
+    ::ng-deep {
+        .list-group-heading {
+            @extend .side-padding;
+            padding-top: 20px;
+            padding-bottom: 10px;
+        }
+        
+        .list-group-item {
+            padding: 2px 0;
+            background: transparent;
+            border: none;
+            color: #fff;
+            padding-left: .75rem;
+            padding-right: .75rem;
+        
+            &.active {
+                background: rgba(0, 0, 0, 0.3);
+            }
+        
+            .icon {
+                margin-right: 10px;
+            }
+        }
     }
 }

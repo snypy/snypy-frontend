@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 
 import { UserResource, User } from './services/resources/user.resource';
-import { LabelResource, Label } from './services/resources/label.resource';
 
 
 @Component({
@@ -15,7 +13,6 @@ export class AppComponent implements OnInit {
   title = 'app';
 
   currentUser = 1;
-  labels: ResourceModel<Label>[] = [];
 
   codeSample = `
     import { BrowserModule } from '@angular/platform-browser';
@@ -39,12 +36,25 @@ export class AppComponent implements OnInit {
     /**
      * Icons
      */
-    import { 
+    import {
       faCoffee, faCode, faSyncAlt, faGlobe, faEye, faEyeSlash, faStar, faTag, faCloudUploadAlt, faCloudDownloadAlt, faUser, faPlus
     } from '@fortawesome/free-solid-svg-icons';
     import { library } from '@fortawesome/fontawesome-svg-core';
 
-    library.add(faCoffee, faCode, faSyncAlt, faGlobe, faEye, faEyeSlash, faStar, faTag, faCloudUploadAlt, faCloudDownloadAlt, faUser, faPlus);
+    library.add(
+      faCoffee,
+      faCode,
+      faSyncAlt,
+      faGlobe,
+      faEye,
+      faEyeSlash,
+      faStar,
+      faTag,
+      faCloudUploadAlt,
+      faCloudDownloadAlt,
+      faUser,
+      faPlus
+    );
 
 
     @NgModule({
@@ -71,21 +81,10 @@ export class AppComponent implements OnInit {
     export class AppModule { }
   `;
 
-  constructor(private labelResource: LabelResource) {
+  constructor() {
   }
 
   ngOnInit() {
-
-    this.labelResource.query({user: this.currentUser}).$promise
-      .then((data) => {
-        this.labels = data;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
   }
 
-  randomNumber() {
-    return Math.floor(Math.random() * 20) + 1;
-  }
 }

@@ -2,6 +2,8 @@ import { ModuleWithProviders, NgModule } from '@angular/core';
 
 import { UserResource } from './resources/user.resource';
 import { LabelResource } from './resources/label.resource';
+import { LanguageResource } from './resources/language.resource';
+
 
 @NgModule({
     imports: [],
@@ -17,8 +19,8 @@ export class ServicesModule {
             providers: [
                 UserResource,
                 LabelResource,
+                LanguageResource,
             ]
-        }
+        };
     }
-
 }

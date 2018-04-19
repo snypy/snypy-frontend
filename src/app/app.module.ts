@@ -27,13 +27,19 @@ import {
   faCoffee, faCode, faSyncAlt, faGlobe, faEye, faEyeSlash, faStar, faTag, faCloudUploadAlt, faCloudDownloadAlt, faUser, faPlus
 } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
+import { LablesComponent } from './components/lables/lables.component';
+import { LanguagesComponent } from './components/languages/languages.component';
+import { MenuComponent } from './components/menu/menu.component';
 
 library.add(faCoffee, faCode, faSyncAlt, faGlobe, faEye, faEyeSlash, faStar, faTag, faCloudUploadAlt, faCloudDownloadAlt, faUser, faPlus);
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LablesComponent,
+    LanguagesComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,

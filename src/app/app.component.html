@@ -34,92 +34,12 @@
                     type="button" class="btn btn-sm btn-success btn-block"
                     style="margin-top: .75rem; margin-bottom: .75rem; text-transform: uppercase; font-size: 12px; font-weight: bold;"
                   >New Snippet</button>
-      
                 </div>
-                <perfect-scrollbar style="max-height: calc(100vh - 90px);">
-                  <div class="list-group list-group-flush" id="list-tab" role="tablist">
-                    <a class="list-group-item list-group-item-action active" id="list-home-list" href="#list-home" role="tab" aria-controls="home">
-                      <fa-icon class="icon" icon="globe" size="sm"></fa-icon> All snippets
-                    </a>
-                    <a class="list-group-item list-group-item-action" id="list-profile-list" href="#list-profile" role="tab" aria-controls="profile">
-                      <fa-icon class="icon" icon="star" size="sm"></fa-icon> Favorites
-                    </a>
-                    <a class="list-group-item list-group-item-action" id="list-messages-list" href="#list-messages" role="tab" aria-controls="messages">
-                      <fa-icon class="icon" icon="tag" size="sm"></fa-icon> Unlabeled
-                    </a>
-                    <a class="list-group-item list-group-item-action" id="list-settings-list" href="#list-settings" role="tab" aria-controls="settings">
-                      <fa-icon class="icon" icon="eye" size="sm"></fa-icon> Public
-                    </a>
-                    <a class="list-group-item list-group-item-action" id="list-settings-list" href="#list-settings" role="tab" aria-controls="settings">
-                      <fa-icon class="icon" icon="eye-slash" size="sm"></fa-icon> Private
-                    </a>
-                    <a class="list-group-item list-group-item-action" id="list-settings-list" href="#list-settings" role="tab" aria-controls="settings">
-                      <fa-icon class="icon" icon="cloud-upload-alt" size="sm"></fa-icon> Shared by me
-                      </a>
-                    <a class="list-group-item list-group-item-action" id="list-settings-list" href="#list-settings" role="tab" aria-controls="settings">
-                      <fa-icon class="icon" icon="cloud-download-alt" size="sm"></fa-icon> Shared with me
-                    </a>
-                  </div>
-                  
-                  <!-- Start: Labels -->
-                  <div class="list-group-heading side-padding">
-                      <b>Labels</b>
-                      <fa-icon class="float-right" icon="plus"></fa-icon>
-                  </div>
-                  <div class="list-group list-group-flush" id="list-tab" role="tablist">
-                    <a *ngFor="let label of labels"
-                        class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
-                        id="list-profile-list"
-                        href="#list-profile"
-                        role="tab"
-                        aria-controls="profile">
-                      <span><span class="dot icon"></span> {{ label.name }}</span>
-                      <span class="badge badge-primary badge-pill">{{ randomNumber() }}</span>
-                    </a>
-                  </div>
-                  <!-- End: Labels -->
-                  
-                  <div class="list-group-heading side-padding">
-                      <b>Languages</b>
-                  </div>
-                  <div class="list-group list-group-flush" id="list-tab" role="tablist">
-                    <a class="list-group-item list-group-item-action active" id="list-home-list" href="#list-home" role="tab" aria-controls="home">
-                      <span class="icon">#</span> php
-                    </a>
-                    <a class="list-group-item list-group-item-action" id="list-profile-list" href="#list-profile" role="tab" aria-controls="profile">
-                      <span class="icon">#</span> python
-                    </a>
-                    <a class="list-group-item list-group-item-action" id="list-messages-list" href="#list-messages" role="tab" aria-controls="messages">
-                      <span class="icon">#</span> typescript
-                    </a>
-                    <a class="list-group-item list-group-item-action" id="list-messages-list" href="#list-messages" role="tab" aria-controls="messages">
-                      <span class="icon">#</span> javascript
-                    </a>
-                    <a class="list-group-item list-group-item-action" id="list-messages-list" href="#list-messages" role="tab" aria-controls="messages">
-                      <span class="icon">#</span> sh
-                    </a>
-                    <a class="list-group-item list-group-item-action" id="list-messages-list" href="#list-messages" role="tab" aria-controls="messages">
-                      <span class="icon">#</span> markdown
-                    </a>
-                    <a class="list-group-item list-group-item-action" id="list-home-list" href="#list-home" role="tab" aria-controls="home">
-                      <span class="icon">#</span> php
-                    </a>
-                    <a class="list-group-item list-group-item-action" id="list-profile-list" href="#list-profile" role="tab" aria-controls="profile">
-                      <span class="icon">#</span> python
-                    </a>
-                    <a class="list-group-item list-group-item-action" id="list-messages-list" href="#list-messages" role="tab" aria-controls="messages">
-                      <span class="icon">#</span> typescript
-                    </a>
-                    <a class="list-group-item list-group-item-action" id="list-messages-list" href="#list-messages" role="tab" aria-controls="messages">
-                      <span class="icon">#</span> javascript
-                    </a>
-                    <a class="list-group-item list-group-item-action" id="list-messages-list" href="#list-messages" role="tab" aria-controls="messages">
-                      <span class="icon">#</span> sh
-                    </a>
-                    <a class="list-group-item list-group-item-action" id="list-messages-list" href="#list-messages" role="tab" aria-controls="messages">
-                      <span class="icon">#</span> markdown
-                    </a>
-                  </div>
+
+                <perfect-scrollbar style="max-height: calc(100vh - 90px);" class="navigation">
+                  <app-menu></app-menu>
+                  <app-lables></app-lables>
+                  <app-languages></app-languages>
                 </perfect-scrollbar>
             </div>
           </div>
