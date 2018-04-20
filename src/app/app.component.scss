@@ -32,11 +32,6 @@
             padding-right: 0;
         }
     }
-
-    &.remove-side-margin {
-        margin-left: 0;
-        margin-right: 0;
-    }
 }
 
 .full-height {
@@ -51,10 +46,6 @@
     height: 38px;
     border: 2px solid rgba(255, 255, 255, 0.7);
     border-radius: 100%;
-}
-
-.border-left {
-    border-left: 1px solid #ddd;
 }
 
 .border-right {
@@ -72,11 +63,6 @@
 .side-padding {
     padding-left: .75rem;
     padding-right: .75rem;
-}
-
-.vertical-padding {
-    padding-top: .75rem;
-    padding-bottom: .75rem;
 }
 
 /*

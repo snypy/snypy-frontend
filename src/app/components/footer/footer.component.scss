@@ -1,4 +1,9 @@
+:host {
+    display: inline-block;
+    width: 100%;
+}
+
 .footer {
-    padding: 0 .75rem;
+    padding-right: .75rem;
     border-top: 1px solid #ddd;
 }
