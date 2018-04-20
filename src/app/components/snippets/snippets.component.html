@@ -1,4 +1,8 @@
-<div class="card" *ngFor="let snippet of snippets" (click)="loadSnippet(snippet)">
+<div
+  class="card"
+  *ngFor="let snippet of snippets"
+  (click)="loadSnippet(snippet)"
+  [ngClass]="{active: snippet.pk === activeSnippet.pk}">
   <div class="card-body">
     <h6 class="card-title">{{ snippet.title | slice:0:30 }}<span *ngIf="snippet.description.length > 40">...</span></h6>
     <p class="card-text">{{ snippet.description | slice:0:120 }}<span *ngIf="snippet.description.length > 120">...</span></p>

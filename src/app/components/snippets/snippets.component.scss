@@ -5,4 +5,8 @@
     border-radius: 0;
 
     cursor: pointer;
+
+    &.active {
+        background: #f7f7f7;
+    }
 }
