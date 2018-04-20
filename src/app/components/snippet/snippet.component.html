@@ -1,19 +1,21 @@
-<div style="padding: 15px;">
-  <span class="badge badge-info">Angular</span>
-  <span class="badge badge-info">Vue</span>
-  <span class="badge badge-info">Laravel</span>
-</div>
+<div *ngIf="activeSnippet;">
+  <div style="padding: 15px;">
+    <span class="badge badge-info">Angular</span>
+    <span class="badge badge-info">Vue</span>
+    <span class="badge badge-info">Laravel</span>
+  </div>
 
-<div style="padding: 15px;">
-  Description: Groot jIH. Adim Groot. Adim Groot. We are Groot. Je suis Groot. Groot maH. I am Groot. Jest em Groot. Jest em Groot. Yo soy Groot. Eu sou Groot. En voyok Groot. Eu sou Groot. Ego sum Groot. Groot maH. Groot maH. Yo soy Groot. Ego sum Groot. En voyok Groot. Groot jIH. Groot jIH. Jest em Groot. Já jsem Groot. Nous sommes Groot. Groot jIH. 
-</div>
+  <div style="padding: 15px;">
+    {{ activeSnippet.description }}
+  </div>
 
-<div *ngFor="let i of [1,2,3]" style="margin: 15px;">
-  <ngb-accordion #acc="ngbAccordion" activeIds="file-{{ i }}">
-    <ngb-panel id="file-{{ i }}" title="Simple {{ i }}">
-      <ng-template ngbPanelContent>
-        <handy-syntax-highlighter [language]="'typescript'" [content]="codeSample"></handy-syntax-highlighter>
-      </ng-template>
-    </ngb-panel>
-  </ngb-accordion>
-</div>
+  <div *ngFor="let i of [1,2,3]" style="margin: 15px;">
+    <ngb-accordion #acc="ngbAccordion" activeIds="file-{{ i }}">
+      <ngb-panel id="file-{{ i }}" title="Simple {{ i }}">
+        <ng-template ngbPanelContent>
+          <handy-syntax-highlighter [language]="'typescript'" [content]="codeSample"></handy-syntax-highlighter>
+        </ng-template>
+      </ngb-panel>
+    </ngb-accordion>
+  </div>
+<div>

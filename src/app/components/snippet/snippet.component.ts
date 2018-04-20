@@ -1,11 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ActiveSnippetService } from '../../services/navigation/activeSnippet.service';
+import { Snippet } from '../../services/resources/snippet.resource';
+
+
 @Component({
   selector: 'app-snippet',
   templateUrl: './snippet.component.html',
   styleUrls: ['./snippet.component.scss']
 })
 export class SnippetComponent implements OnInit {
+
+  activeSnippet: Snippet = null;
 
   codeSample = `
     import { BrowserModule } from '@angular/platform-browser';
@@ -74,9 +80,13 @@ export class SnippetComponent implements OnInit {
     export class AppModule { }
   `;
 
-  constructor() { }
+  constructor(private activeSnippetService: ActiveSnippetService) {
+  }
 
   ngOnInit() {
+    this.activeSnippetService.snippetUpdated.subscribe((snippet) => {
+      this.activeSnippet = snippet;
+    });
   }
 
 }
