@@ -1,0 +1,26 @@
+ngb-accordion {
+    ::ng-deep {
+        .card-header {
+            padding: 0;
+            
+            a {
+                display: block;
+                padding: .75rem 1.25rem;
+            }
+        }
+
+        .card-body {
+            padding: 0;
+            border-bottom: 1px solid rgba(0,0,0,.125);
+        }
+    }
+}
+
+handy-syntax-highlighter {
+    ::ng-deep {
+        pre {
+            margin: 0;
+            padding: 0;
+        }
+    }
+}

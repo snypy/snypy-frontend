@@ -104,18 +104,6 @@ perfect-scrollbar {
     }
 }
 
-ngb-accordion {
-    ::ng-deep {
-        .card-body {
-            border-bottom: 1px solid rgba(0,0,0,.125);
-        }
-
-        .card-body {
-            padding: 0;
-        }
-    }
-}
-
 ng-select {
     ::ng-deep {
         font-size: .75rem;
@@ -124,15 +112,6 @@ ng-select {
         .ng-single .ng-control {
             min-height: auto;
             height: 27px !important;
-        }
-    }
-}
-
-handy-syntax-highlighter {
-    ::ng-deep {
-        pre {
-            margin: 0;
-            padding: 0;
         }
     }
 }

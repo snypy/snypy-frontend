@@ -31,6 +31,10 @@ import { LabelsComponent } from './components/labels/labels.component';
 import { LanguagesComponent } from './components/languages/languages.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { SnippetsComponent } from './components/snippets/snippets.component';
+import { SnippetComponent } from './components/snippet/snippet.component';
+import { SnippetOptionsComponent } from './components/snippet-options/snippet-options.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { HeaderComponent } from './components/header/header.component';
 
 library.add(faCoffee, faCode, faSyncAlt, faGlobe, faEye, faEyeSlash, faStar, faTag, faCloudUploadAlt, faCloudDownloadAlt, faUser, faPlus);
 
@@ -41,7 +45,11 @@ library.add(faCoffee, faCode, faSyncAlt, faGlobe, faEye, faEyeSlash, faStar, faT
     LabelsComponent,
     LanguagesComponent,
     MenuComponent,
-    SnippetsComponent
+    SnippetsComponent,
+    SnippetComponent,
+    SnippetOptionsComponent,
+    FooterComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

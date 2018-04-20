@@ -80,90 +80,16 @@
     <div class="row">
       <div class="col-12 full-height remove-side-padding">
 
-          <div class="row remove-side-margin">
-            <div class="col-6 remove-side-padding" style="padding-top: 0;">
-              <div class="form-group side-padding">
-                <input type="text" class="form-control form-control-sm" id="search" placeholder="Search for snippets">
-              </div>
-            </div>
-            <div class="col-6 remove-side-padding text-right" style="padding-top: 0;">
-              
-              <div ngbDropdown class="d-inline-block side-padding" placement="bottom-right" #myDrop="ngbDropdown">
-                <button class="btn btn-sm btn-outline-info" id="dropdownBasic1" ngbDropdownToggle>username</button>
-                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                  <div class="card" style=" border-radius: 0; border: none;">
-                      <div class="card-body text-center" style="border-bottom: 1px solid #ddd; padding: 0; margin-bottom: 10px;">
-                          <p><img class="img-fluid" src="https://cdn.pixabay.com/photo/2018/04/12/11/37/apple-3313209_960_720.jpg" alt="card image" style="border-radius: 50%; max-width: 50%;"></p>
-                          <h4 class="card-title">username</h4>
-                      </div>
-                  </div>
-                  <button class="dropdown-item">Profile</button>
-                  <button class="dropdown-item">Help</button>
-                  <button class="dropdown-item">Logout</button>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="vertical-padding side-padding" style="background: #fff; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd;">
-            <div class="row remove-side-margin">
-                <div class="col-6" style="padding-top: 0;">
-                    <span class="title">Snippet title</span><br>
-                    <small><b>By</b> Username</small><br>
-                    <small><b>Created</b> 12 May 2018 - <b>Last update</b> 14 May 2018</small><br>
-                </div>
-                <div class="col-6 text-right" style="padding-top: 0;">
-                    <div class="btn-group" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-sm btn-link">Edit</button>
-                        <button type="button" class="btn btn-sm btn-link">Share</button>
-                        <button type="button" class="btn btn-sm btn-link">Delete</button>
-                    </div>
+        <app-header></app-header>
+        
+        <app-snippet-options></app-snippet-options>
+        
+        <perfect-scrollbar style="max-height: calc(100vh - 190px); padding-right: 15px;">
+          <app-snippet></app-snippet>
+        </perfect-scrollbar>
 
-                    <div style="margin-top: 15px;">
-                      <div ngbDropdown class="d-inline-block" placement="bottom-right" #myDrop="ngbDropdown">
-                        <button class="btn btn-sm btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Labels</button>
-                        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                          <button class="dropdown-item" (click)="$event.stopPropagation(); myDrop.open();">Angular</button>
-                          <button class="dropdown-item" (click)="$event.stopPropagation(); myDrop.open();">Vue</button>
-                          <button class="dropdown-item" (click)="$event.stopPropagation(); myDrop.open();">Django</button>
-                          <button class="dropdown-item" (click)="$event.stopPropagation(); myDrop.open();">Wordpress</button>
-                          <button class="dropdown-item" (click)="$event.stopPropagation(); myDrop.open();">Laravel</button>
-                        </div>
-                      </div>
-                    </div>
-                </div>
-            </div>
-          </div>
-          
-          <perfect-scrollbar style="max-height: calc(100vh - 190px); padding-right: 15px;">
-            
-            <div style="padding: 15px;">
-              <span class="badge badge-info">Angular</span>
-              <span class="badge badge-info">Vue</span>
-              <span class="badge badge-info">Laravel</span>
-            </div>
+        <app-footer></app-footer>
 
-            <div style="padding: 15px;">
-              Description: Groot jIH. Adim Groot. Adim Groot. We are Groot. Je suis Groot. Groot maH. I am Groot. Jest em Groot. Jest em Groot. Yo soy Groot. Eu sou Groot. En voyok Groot. Eu sou Groot. Ego sum Groot. Groot maH. Groot maH. Yo soy Groot. Ego sum Groot. En voyok Groot. Groot jIH. Groot jIH. Jest em Groot. Já jsem Groot. Nous sommes Groot. Groot jIH. 
-            </div>
-
-            <div *ngFor="let i of [1,2,3]" style="margin: 15px;">
-              <ngb-accordion #acc="ngbAccordion" activeIds="file-{{ i }}">
-                <ngb-panel id="file-{{ i }}" title="Simple {{ i }}">
-                  <ng-template ngbPanelContent>
-                    <handy-syntax-highlighter [language]="'typescript'" [content]="codeSample"></handy-syntax-highlighter>
-                  </ng-template>
-                </ngb-panel>
-              </ngb-accordion>
-            </div>
-
-          </perfect-scrollbar>
-
-          <div style="border-top: 1px solid #ddd" class="text-right">
-            <small class="side-padding">
-              <b>V1.0</b> | <a href="#">Contribute</a> | <a href="#">Donate</a>
-            </small>
-          </div>
       </div>
     </div>
   </div>
