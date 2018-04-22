@@ -9,11 +9,11 @@
     {{ activeSnippet.description }}
   </div>
 
-  <div *ngFor="let i of [1,2,3]" style="margin: 15px;">
-    <ngb-accordion #acc="ngbAccordion" activeIds="file-{{ i }}">
-      <ngb-panel id="file-{{ i }}" title="Simple {{ i }}">
+  <div *ngFor="let file of files" style="margin: 15px;">
+    <ngb-accordion #acc="ngbAccordion" [activeIds]="'file-' + file.pk">
+      <ngb-panel [id]="'file-' + file.pk" [title]="file.name">
         <ng-template ngbPanelContent>
-          <handy-syntax-highlighter [language]="'typescript'" [content]="codeSample"></handy-syntax-highlighter>
+          <handy-syntax-highlighter [language]="'python'" [content]="file.content"></handy-syntax-highlighter>
         </ng-template>
       </ngb-panel>
     </ngb-accordion>

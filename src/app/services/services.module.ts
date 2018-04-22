@@ -4,6 +4,7 @@ import { UserResource } from './resources/user.resource';
 import { LabelResource } from './resources/label.resource';
 import { LanguageResource } from './resources/language.resource';
 import { SnippetResource } from './resources/snippet.resource';
+import { FileResource } from './resources/file.resource';
 
 import { ActiveFilterService } from './navigation/activeFilter.service';
 import { ActiveSnippetService } from './navigation/activeSnippet.service';
@@ -25,6 +26,7 @@ export class ServicesModule {
                 LabelResource,
                 LanguageResource,
                 SnippetResource,
+                FileResource,
                 ActiveFilterService,
                 ActiveSnippetService,
             ]
