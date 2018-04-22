@@ -14,7 +14,7 @@
     <ngb-accordion #acc="ngbAccordion" [activeIds]="'file-' + file.pk">
       <ngb-panel [id]="'file-' + file.pk" [title]="file.name">
         <ng-template ngbPanelContent>
-          <handy-syntax-highlighter [language]="'python'" [content]="file.content"></handy-syntax-highlighter>
+          <ngx-monaco-editor [options]="{theme: 'vs-dark', language: 'python', readOnly: true}" [(ngModel)]="file.content"></ngx-monaco-editor>
         </ng-template>
       </ngb-panel>
     </ngb-accordion>

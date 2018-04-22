@@ -35,7 +35,8 @@
         </div>
         <div class="form-group">
           <label [for]="'input-content' + i">Example textarea</label>
-          <textarea formControlName="content" class="form-control" [id]="'input-content' + i" rows="5"></textarea>
+
+          <ngx-monaco-editor [options]="{theme: 'vs-dark', language: 'python'}" formControlName="content"></ngx-monaco-editor>
         </div>
       </div>
     </div>

@@ -30,7 +30,7 @@
     "@ng-select/ng-select": "^0.36.2",
     "bootstrap": "^4.1.0",
     "core-js": "^2.4.1",
-    "ng2-handy-syntax-highlighter": "^1.0.12",
+    "ngx-monaco-editor": "^4.1.1",
     "ngx-perfect-scrollbar": "^5.3.5",
     "ngx-resource-factory": "0.0.7",
     "rxjs": "^5.5.6",

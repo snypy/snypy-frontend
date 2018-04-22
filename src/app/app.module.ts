@@ -6,11 +6,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { Ng2HandySyntaxHighlighterModule } from 'ng2-handy-syntax-highlighter';
 import { NgxResourceFactoryModule } from 'ngx-resource-factory';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import { MonacoEditorModule } from 'ngx-monaco-editor';
 
 import { ServicesModule } from './services/services.module';
 
@@ -80,7 +80,7 @@ library.add(
     NgSelectModule,
     FormsModule,
     ReactiveFormsModule,
-    Ng2HandySyntaxHighlighterModule,
+    MonacoEditorModule.forRoot(),
 
     ServicesModule.forRoot(),
   ],
