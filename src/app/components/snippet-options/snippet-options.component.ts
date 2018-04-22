@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ActiveSnippetService } from '../../services/navigation/activeSnippet.service';
 import { Snippet } from '../../services/resources/snippet.resource';
+import { SnippetModalComponent } from '../snippet-modal/snippet-modal.component';
 
 
 @Component({
@@ -15,7 +17,8 @@ export class SnippetOptionsComponent implements OnInit {
 
   activeSnippet: ResourceModel<Snippet> = null;
 
-  constructor(private activeSnippetService: ActiveSnippetService) {
+  constructor(private activeSnippetService: ActiveSnippetService,
+              private modalService: NgbModal) {
   }
 
   ngOnInit() {
@@ -27,7 +30,15 @@ export class SnippetOptionsComponent implements OnInit {
   }
 
   editSnippet() {
-    alert('ToDo: Edit Snippet');
+    const modalRef = this.modalService.open(SnippetModalComponent, {size: 'lg'});
+
+    modalRef.componentInstance.snippet = this.activeSnippet;
+
+    modalRef.result.then((result) => {
+      console.log(`Confirm: ${result}`);
+    }, (reason) => {
+      console.log(`Dismissed: ${reason}`);
+    });
   }
 
   shareSnippet() {

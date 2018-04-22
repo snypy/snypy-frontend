@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" *ngIf="activeSnippet;">
     <div class="col-9" style="padding-top: 0;">
         <fa-icon class="icon" [icon]="['far', 'star']" size="sm"></fa-icon>
         <span class="title">{{ activeSnippet.title }}</span><br>

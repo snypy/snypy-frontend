@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -35,6 +35,7 @@ import { SnippetComponent } from './components/snippet/snippet.component';
 import { SnippetOptionsComponent } from './components/snippet-options/snippet-options.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
+import { SnippetModalComponent } from './components/snippet-modal/snippet-modal.component';
 
 library.add(
   fas.faCoffee,
@@ -63,7 +64,11 @@ library.add(
     SnippetComponent,
     SnippetOptionsComponent,
     FooterComponent,
-    HeaderComponent
+    HeaderComponent,
+    SnippetModalComponent
+  ],
+  entryComponents: [
+    SnippetModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,6 +79,7 @@ library.add(
     PerfectScrollbarModule,
     NgSelectModule,
     FormsModule,
+    ReactiveFormsModule,
     Ng2HandySyntaxHighlighterModule,
 
     ServicesModule.forRoot(),

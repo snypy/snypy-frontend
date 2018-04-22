@@ -10,6 +10,6 @@
       role="tab"
       aria-controls="profile">
     <span class="filterAction" (click)="updateActiveFilter(label.pk)"><span class="dot icon"></span> {{ label.name }}</span>
-    <span class="badge badge-primary badge-pill">{{ randomNumber() }}</span>
+    <span class="badge badge-primary badge-pill">{{ label.usage }}</span>
   </a>
 </div>

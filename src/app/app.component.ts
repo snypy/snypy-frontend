@@ -14,8 +14,6 @@ export class AppComponent implements OnInit {
 
   currentUser = 1;
 
-
-
   constructor() {
   }
 

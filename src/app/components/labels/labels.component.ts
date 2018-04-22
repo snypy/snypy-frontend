@@ -28,7 +28,11 @@ export class LabelsComponent implements OnInit {
 
     this.labelResource.query({user: this.currentUser}).$promise
       .then((data) => {
-        this.labels = data;
+        this.labels = data.map((label) => {
+          label['usage'] = this.randomNumber();
+
+          return label;
+        });
       })
       .catch((error) => {
         console.log(error);

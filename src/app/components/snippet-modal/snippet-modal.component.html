@@ -1,0 +1,48 @@
+<div class="modal-header">
+  
+  <h4 class="modal-title" *ngIf="!snippet.pk">Add snippet</h4>
+  <h4 class="modal-title" *ngIf="snippet.pk">Edit snippet</h4>
+
+  <button type="button" class="close" aria-label="Close" (click)="closeAction('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="snippetForm">
+    <div class="form-group">
+      <label for="input-title">Title</label>
+      <input formControlName="title" type="text" class="form-control" id="input-title" aria-describedby="Title" placeholder="Title">
+    </div>
+    <div class="form-group">
+      <label for="input-description">Example textarea</label>
+      <textarea formControlName="description" class="form-control" id="input-description" rows="3"></textarea>
+    </div>
+
+    <ng-select
+      formControlName="labels"
+      [items]="labels"
+      bindLabel="name"
+      bindValue="pk"
+      [clearable]="false"
+      [multiple]="true">
+    </ng-select>
+    
+    <div *ngFor="let file of snippetForm.get('files').controls; let i = index" style="border-top: 1px solid black;" formArrayName="files">
+      <div [formGroupName]="i">
+        <div class="form-group">
+          <label [for]="'input-title-' + i">Name</label>
+          <input formControlName="name" type="text" class="form-control" [id]="'input-title-' + i" aria-describedby="Name" placeholder="Name">
+        </div>
+        <div class="form-group">
+          <label [for]="'input-content' + i">Example textarea</label>
+          <textarea formControlName="content" class="form-control" [id]="'input-content' + i" rows="5"></textarea>
+        </div>
+      </div>
+    </div>
+
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="closeAction('Cancel click')">Cancel</button>
+  <button type="button" class="btn btn-primary btn-outline-dark" (click)="confirmAction()">Save</button>
+</div>

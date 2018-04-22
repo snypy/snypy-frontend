@@ -7,6 +7,14 @@ import { ResourceConfiguration } from 'ngx-resource-factory/resource/resource-co
 import { ResourceInstance } from 'ngx-resource-factory/resource/resource-instance';
 
 
+export class SnippetFile {
+    pk: number;
+    url: string;
+    language: number;
+    name: string;
+    content: string;
+}
+
 export class Snippet extends ResourceInstance {
     pk: number;
     url: string;
@@ -14,6 +22,8 @@ export class Snippet extends ResourceInstance {
     description: string;
     visibility: string;
     user: number;
+    labels: number[];
+    files: SnippetFile[];
 }
 
 @Injectable()
