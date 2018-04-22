@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
+
 import { ActiveSnippetService } from '../../services/navigation/activeSnippet.service';
 import { Snippet } from '../../services/resources/snippet.resource';
 import { FileResource } from '../../services/resources/file.resource';
-import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 
 
 @Component({

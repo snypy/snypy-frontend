@@ -1,26 +1,28 @@
 <div class="row">
-    <div class="col-6" style="padding-top: 0;">
+    <div class="col-9" style="padding-top: 0;">
         <fa-icon class="icon" [icon]="['far', 'star']" size="sm"></fa-icon>
-        <span class="title">Snippet title</span><br>
-        <small><b>By</b> Username</small><br>
-        <small><b>Created</b> 12 May 2018 - <b>Last update</b> 14 May 2018</small><br>
+        <span class="title">{{ activeSnippet.title }}</span><br>
+        <small><b>By</b> {{ activeSnippet.user_display || 'Anonymous' }}</small><br>
+        <small><b>Created</b> {{ activeSnippet.created_date | date:'medium' }}</small><br>
+        <small><b>Last update</b> {{ activeSnippet.modified_date | date:'medium' }}</small>
     </div>
-    <div class="col-6 text-right" style="padding-top: 0;">
+    <div class="col-3 text-right" style="padding-top: 0;">
         <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-sm btn-link">Edit</button>
-            <button type="button" class="btn btn-sm btn-link">Share</button>
-            <button type="button" class="btn btn-sm btn-link">Delete</button>
+            <button type="button" class="btn btn-sm btn-link" (click)="editSnippet()">Edit</button>
+            <button type="button" class="btn btn-sm btn-link" (click)="shareSnippet()">Share</button>
+            <button type="button" class="btn btn-sm btn-link" (click)="deleteSnippet()">Delete</button>
         </div>
 
         <div style="margin-top: 15px;">
           <div ngbDropdown class="d-inline-block" placement="bottom-right" #myDrop="ngbDropdown">
             <button class="btn btn-sm btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Labels</button>
             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-              <button class="dropdown-item" (click)="$event.stopPropagation(); myDrop.open();">Angular</button>
-              <button class="dropdown-item" (click)="$event.stopPropagation(); myDrop.open();">Vue</button>
-              <button class="dropdown-item" (click)="$event.stopPropagation(); myDrop.open();">Django</button>
-              <button class="dropdown-item" (click)="$event.stopPropagation(); myDrop.open();">Wordpress</button>
-              <button class="dropdown-item" (click)="$event.stopPropagation(); myDrop.open();">Laravel</button>
+                <button class="dropdown-item" (click)="$event.stopPropagation(); myDrop.open();">ToDo</button>
+                <button class="dropdown-item" (click)="$event.stopPropagation(); myDrop.open();">Angular</button>
+                <button class="dropdown-item" (click)="$event.stopPropagation(); myDrop.open();">Vue</button>
+                <button class="dropdown-item" (click)="$event.stopPropagation(); myDrop.open();">Django</button>
+                <button class="dropdown-item" (click)="$event.stopPropagation(); myDrop.open();">Wordpress</button>
+                <button class="dropdown-item" (click)="$event.stopPropagation(); myDrop.open();">Laravel</button>
             </div>
           </div>
         </div>
