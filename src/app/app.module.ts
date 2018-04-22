@@ -23,9 +23,9 @@ import { AppComponent } from './app.component';
 /**
  * Icons
  */
-import {
-  faCoffee, faCode, faSyncAlt, faGlobe, faEye, faEyeSlash, faStar, faTag, faCloudUploadAlt, faCloudDownloadAlt, faUser, faPlus
-} from '@fortawesome/free-solid-svg-icons';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { far } from '@fortawesome/free-regular-svg-icons';
+
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { LabelsComponent } from './components/labels/labels.component';
 import { LanguagesComponent } from './components/languages/languages.component';
@@ -36,7 +36,21 @@ import { SnippetOptionsComponent } from './components/snippet-options/snippet-op
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 
-library.add(faCoffee, faCode, faSyncAlt, faGlobe, faEye, faEyeSlash, faStar, faTag, faCloudUploadAlt, faCloudDownloadAlt, faUser, faPlus);
+library.add(
+  fas.faCoffee,
+  fas.faCode,
+  fas.faSyncAlt,
+  fas.faGlobe,
+  fas.faEye,
+  fas.faEyeSlash,
+  fas.faTag,
+  fas.faCloudUploadAlt,
+  fas.faCloudDownloadAlt,
+  fas.faUser,
+  fas.faPlus,
+  fas.faStar,
+  far.faStar,
+);
 
 
 @NgModule({
