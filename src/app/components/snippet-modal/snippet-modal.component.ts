@@ -6,6 +6,7 @@ import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 
 import { SnippetResource, Snippet } from '../../services/resources/snippet.resource';
 import { LabelResource, Label } from '../../services/resources/label.resource';
+import { LanguageResource, Language } from '../../services/resources/language.resource';
 
 
 @Component({
@@ -18,19 +19,29 @@ export class SnippetModalComponent implements OnInit {
   @Input() snippet: ResourceModel<Snippet> = null;
 
   currentUser = 1;
+  languages: ResourceModel<Language>[] = [];
   labels: ResourceModel<Label>[] = [];
 
   snippetForm: FormGroup;
 
   constructor(private activeModal: NgbActiveModal,
               private labelResource: LabelResource,
-              private snippetResource: SnippetResource,) { }
+              private languageResource: LanguageResource,
+              private snippetResource: SnippetResource) { }
 
   ngOnInit() {
 
     this.labelResource.query({user: this.currentUser}).$promise
       .then((data) => {
         this.labels = data;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    this.languageResource.query({}).$promise
+      .then((data) => {
+        this.languages = data;
       })
       .catch((error) => {
         console.log(error);
@@ -56,6 +67,21 @@ export class SnippetModalComponent implements OnInit {
       'files': file,
     });
 
+  }
+
+  removeFile(index: number) {
+    (<FormArray>this.snippetForm.get('files')).controls.splice(index, 1);
+  }
+
+  addFile() {
+    (<FormArray>this.snippetForm.get('files')).push(
+      new FormGroup({
+        'pk': new FormControl(null),
+        'name': new FormControl(null),
+        'language': new FormControl(null),
+        'content': new FormControl(null),
+      })
+    )
   }
 
   confirmAction() {

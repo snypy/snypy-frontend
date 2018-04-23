@@ -51,6 +51,7 @@ library.add(
   fas.faPlus,
   fas.faStar,
   far.faStar,
+  fas.faTrash,
 );
 
 
