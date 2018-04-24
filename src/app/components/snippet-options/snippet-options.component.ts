@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ElementRef } from '@angular/core';
 
 import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -46,7 +46,21 @@ export class SnippetOptionsComponent implements OnInit {
   }
 
   deleteSnippet() {
-    alert('ToDo: Delete Snippet');
+    this.activeSnippet.$remove().$promise
+      .then(() => {
+        this.activeSnippetService.deleteSnippet(this.activeSnippet.pk);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  openDeleteModal(content: TemplateRef<ElementRef>) {
+    this.modalService.open(content).result.then((result) => {
+      this.deleteSnippet();
+    }, (reason) => {
+      console.log(`Dismissed ${reason}`);
+    });
   }
 
 }

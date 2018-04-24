@@ -10,7 +10,7 @@
         <div class="btn-group" role="group" aria-label="Basic example">
             <button type="button" class="btn btn-sm btn-link" (click)="editSnippet()">Edit</button>
             <button type="button" class="btn btn-sm btn-link" (click)="shareSnippet()">Share</button>
-            <button type="button" class="btn btn-sm btn-link" (click)="deleteSnippet()">Delete</button>
+            <button type="button" class="btn btn-sm btn-link" (click)="openDeleteModal(deleteModal)">Delete</button>
         </div>
 
         <div style="margin-top: 15px;">
@@ -28,3 +28,19 @@
         </div>
     </div>
 </div>
+
+<ng-template #deleteModal let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Delete Snippet</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p>Are you sure you want to delete the current snippet »{{ activeSnippet.title }}«?</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-outline-dark" (click)="d('Cancel click')">Cancel</button>
+        <button type="button" class="btn btn-danger btn-outline-dark" (click)="c('Delete click')">Delete</button>
+    </div>
+</ng-template>

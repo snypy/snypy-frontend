@@ -21,6 +21,9 @@ export class SnippetsComponent implements OnInit {
               private activeSnippetService: ActiveSnippetService) { }
 
   ngOnInit() {
+    /**
+     * Initial load
+     */
     this.snippetResource.query({user: this.currentUser}).$promise
       .then((data) => {
         this.snippets = data;
@@ -32,6 +35,9 @@ export class SnippetsComponent implements OnInit {
         console.log(error);
       });
 
+    /**
+     * Snippet updated subscription
+     */
     this.activeSnippetService.snippetUpdated.subscribe((snippet) => {
       this.activeSnippet = snippet;
 
@@ -41,6 +47,24 @@ export class SnippetsComponent implements OnInit {
         if (oldSnippet) {
           this.snippets.splice(this.snippets.indexOf(oldSnippet), 1, snippet);
         }
+      }
+    });
+
+    /**
+     * Snippet deleted subscription
+     */
+    this.activeSnippetService.snippetDeleted.subscribe((snippetPk) => {
+      // Remove snippet from list
+      if (snippetPk) {
+        const oldSnippet = this.snippets.find(item => item.pk === snippetPk);
+        if (oldSnippet) {
+          this.snippets.splice(this.snippets.indexOf(oldSnippet), 1);
+        }
+      }
+
+      // Set first snippet in list as active
+      if (this.snippets.length) {
+        this.activeSnippetService.updateSnippet(this.snippets[0]);
       }
     });
   }
