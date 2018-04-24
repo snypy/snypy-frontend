@@ -47,8 +47,8 @@ export class SnippetModalComponent implements OnInit {
         console.log(error);
       });
 
-    let file = new FormArray([]);
-    for (let snippetFile of this.snippet.files) {
+    const file = new FormArray([]);
+    for (const snippetFile of this.snippet.files) {
       file.push(
         new FormGroup({
           'pk': new FormControl(snippetFile.pk),
@@ -70,13 +70,12 @@ export class SnippetModalComponent implements OnInit {
   }
 
   removeFile(index: number) {
-    (<FormArray>this.snippetForm.get('files')).controls.splice(index, 1);
+    (<FormArray>this.snippetForm.get('files')).removeAt(index);
   }
 
   addFile() {
     (<FormArray>this.snippetForm.get('files')).push(
       new FormGroup({
-        'pk': new FormControl(null),
         'name': new FormControl(null),
         'language': new FormControl(null),
         'content': new FormControl(null),

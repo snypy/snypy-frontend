@@ -34,6 +34,14 @@ export class SnippetsComponent implements OnInit {
 
     this.activeSnippetService.snippetUpdated.subscribe((snippet) => {
       this.activeSnippet = snippet;
+
+      // Update snippet in list
+      if (snippet) {
+        const oldSnippet = this.snippets.find(item => item.pk === snippet.pk);
+        if (oldSnippet) {
+          this.snippets.splice(this.snippets.indexOf(oldSnippet), 1, snippet);
+        }
+      }
     });
   }
 

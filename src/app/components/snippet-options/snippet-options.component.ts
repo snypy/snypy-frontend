@@ -35,7 +35,7 @@ export class SnippetOptionsComponent implements OnInit {
     modalRef.componentInstance.snippet = this.activeSnippet;
 
     modalRef.result.then((result) => {
-      console.log(`Confirm: ${result}`);
+      this.activeSnippetService.updateSnippet(result);
     }, (reason) => {
       console.log(`Dismissed: ${reason}`);
     });
