@@ -17,12 +17,11 @@
           <div ngbDropdown class="d-inline-block" placement="bottom-right" #myDrop="ngbDropdown">
             <button class="btn btn-sm btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Labels</button>
             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                <button class="dropdown-item" (click)="$event.stopPropagation(); myDrop.open();">ToDo</button>
-                <button class="dropdown-item" (click)="$event.stopPropagation(); myDrop.open();">Angular</button>
-                <button class="dropdown-item" (click)="$event.stopPropagation(); myDrop.open();">Vue</button>
-                <button class="dropdown-item" (click)="$event.stopPropagation(); myDrop.open();">Django</button>
-                <button class="dropdown-item" (click)="$event.stopPropagation(); myDrop.open();">Wordpress</button>
-                <button class="dropdown-item" (click)="$event.stopPropagation(); myDrop.open();">Laravel</button>
+                <button
+                    class="dropdown-item"
+                    (click)="$event.stopPropagation(); myDrop.open(); toggleLabel(label)"
+                    *ngFor="let label of labels"
+                >{{ label.name }}</button>
             </div>
           </div>
         </div>

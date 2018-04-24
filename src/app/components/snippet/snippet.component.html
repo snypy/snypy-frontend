@@ -1,9 +1,10 @@
 <div *ngIf="activeSnippet;">
-  <div style="padding: 15px;">
-    <span class="badge badge-info">ToDo</span>
-    <span class="badge badge-info">Angular</span>
-    <span class="badge badge-info">Vue</span>
-    <span class="badge badge-info">Laravel</span>
+  <div style="padding: 15px;" *ngIf="labels.length">
+    <span *ngFor="let label of activeSnippet.labels">
+      <span  class="badge badge-info">
+        {{ (labels | filterBy: ['pk']: label)[0].name }}
+      </span>
+    </span>
   </div>
 
   <div style="padding: 15px;">

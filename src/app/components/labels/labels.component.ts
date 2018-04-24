@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 
 import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 
-import { LabelResource, Label } from '../../services/resources/label.resource';
+import { Label } from '../../services/resources/label.resource';
 import { ActiveFilterService, Filter } from '../../services/navigation/activeFilter.service';
+import { AvailableLabelsService } from '../../services/navigation/availableLabels.service';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class LabelsComponent implements OnInit {
 
   activeFilter: Filter;
 
-  constructor(private labelResource: LabelResource,
+  constructor(private availableLabelsService: AvailableLabelsService,
               private activeFilterService: ActiveFilterService) { }
 
   ngOnInit() {
@@ -26,17 +27,9 @@ export class LabelsComponent implements OnInit {
       this.activeFilter = filter;
     });
 
-    this.labelResource.query({user: this.currentUser}).$promise
-      .then((data) => {
-        this.labels = data.map((label) => {
-          label['usage'] = this.randomNumber();
-
-          return label;
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    this.availableLabelsService.labelsUpdated.subscribe((data) => {
+      this.labels = data;
+    });
   }
 
   updateActiveFilter(value: number) {

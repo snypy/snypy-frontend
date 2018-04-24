@@ -5,6 +5,8 @@ import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 import { ActiveSnippetService } from '../../services/navigation/activeSnippet.service';
 import { Snippet } from '../../services/resources/snippet.resource';
 import { FileResource } from '../../services/resources/file.resource';
+import { Label } from '../../services/resources/label.resource';
+import { AvailableLabelsService } from '../../services/navigation/availableLabels.service';
 
 
 @Component({
@@ -16,8 +18,10 @@ export class SnippetComponent implements OnInit {
 
   activeSnippet: ResourceModel<Snippet> = null;
   files: ResourceModel<File>[] = [];
+  labels: ResourceModel<Label>[] = [];
 
   constructor(private activeSnippetService: ActiveSnippetService,
+              private availableLabelsService: AvailableLabelsService,
               private fileResource: FileResource) {
   }
 
@@ -34,6 +38,11 @@ export class SnippetComponent implements OnInit {
             console.log(error);
           });
         }
+    });
+
+    this.labels = this.availableLabelsService.labels;
+    this.availableLabelsService.labelsUpdated.subscribe((data) => {
+      this.labels = data;
     });
   }
 

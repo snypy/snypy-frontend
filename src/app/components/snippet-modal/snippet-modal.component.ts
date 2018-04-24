@@ -5,9 +5,10 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 
 import { SnippetResource, Snippet } from '../../services/resources/snippet.resource';
-import { LabelResource, Label } from '../../services/resources/label.resource';
+import { Label } from '../../services/resources/label.resource';
 import { Language } from '../../services/resources/language.resource';
 import { AvailableLanguagesService } from '../../services/navigation/availableLanguages.service';
+import { AvailableLabelsService } from '../../services/navigation/availableLabels.service';
 
 
 @Component({
@@ -26,19 +27,12 @@ export class SnippetModalComponent implements OnInit {
   snippetForm: FormGroup;
 
   constructor(private activeModal: NgbActiveModal,
-              private labelResource: LabelResource,
+              private availableLabelsService: AvailableLabelsService,
               private availableLanguagesService: AvailableLanguagesService,
               private snippetResource: SnippetResource) { }
 
   ngOnInit() {
-
-    this.labelResource.query({user: this.currentUser}).$promise
-      .then((data) => {
-        this.labels = data;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    this.labels = this.availableLabelsService.labels;
 
     this.availableLanguagesService.languagesPromise
       .then((data) => {

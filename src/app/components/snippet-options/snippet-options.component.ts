@@ -6,6 +6,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ActiveSnippetService } from '../../services/navigation/activeSnippet.service';
 import { Snippet } from '../../services/resources/snippet.resource';
 import { SnippetModalComponent } from '../snippet-modal/snippet-modal.component';
+import { AvailableLabelsService } from '../../services/navigation/availableLabels.service';
+import { Label } from '../../services/resources/label.resource';
 
 
 @Component({
@@ -16,8 +18,10 @@ import { SnippetModalComponent } from '../snippet-modal/snippet-modal.component'
 export class SnippetOptionsComponent implements OnInit {
 
   activeSnippet: ResourceModel<Snippet> = null;
+  labels: ResourceModel<Label>[] = [];
 
   constructor(private activeSnippetService: ActiveSnippetService,
+              private availableLabelsService: AvailableLabelsService,
               private modalService: NgbModal) {
   }
 
@@ -26,6 +30,11 @@ export class SnippetOptionsComponent implements OnInit {
       if (snippet) {
         this.activeSnippet = snippet;
       }
+    });
+
+    this.labels = this.availableLabelsService.labels;
+    this.availableLabelsService.labelsUpdated.subscribe((data) => {
+      this.labels = data;
     });
   }
 
@@ -63,4 +72,7 @@ export class SnippetOptionsComponent implements OnInit {
     });
   }
 
+  toggleLabel(label: ResourceModel<Label>) {
+    alert('ToDo: Toggle label: ' + label.name);
+  }
 }
