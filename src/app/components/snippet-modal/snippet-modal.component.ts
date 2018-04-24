@@ -80,7 +80,7 @@ export class SnippetModalComponent implements OnInit {
         'language': new FormControl(null),
         'content': new FormControl(null),
       })
-    )
+    );
   }
 
   confirmAction() {

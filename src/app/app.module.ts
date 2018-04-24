@@ -11,6 +11,7 @@ import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { MonacoEditorModule } from 'ngx-monaco-editor';
+import { NgPipesModule } from 'ngx-pipes';
 
 import { ServicesModule } from './services/services.module';
 
@@ -54,7 +55,6 @@ library.add(
   fas.faTrash,
 );
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -82,6 +82,7 @@ library.add(
     FormsModule,
     ReactiveFormsModule,
     MonacoEditorModule.forRoot(),
+    NgPipesModule,
 
     ServicesModule.forRoot(),
   ],

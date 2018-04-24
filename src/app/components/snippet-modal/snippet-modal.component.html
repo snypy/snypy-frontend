@@ -63,10 +63,14 @@
               </div>
             </div>
           </div>
-          <div>
+          <div *ngIf="(languages | filterBy: ['pk']: file.get('language').value).length">
             <ngx-monaco-editor
               style="height: 400px;"
-              [options]="{theme: 'vs-dark', language: 'python', scrollBeyondLastLine: false}"
+              [options]="{
+                theme: 'vs-dark',
+                language: (languages | filterBy: ['pk']: file.get('language').value)[0].name,
+                scrollBeyondLastLine: false
+              }"
               formControlName="content"
             ></ngx-monaco-editor>
           </div>
