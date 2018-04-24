@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 
 import { UserResource, User } from './services/resources/user.resource';
+import { SnippetModalComponent } from './components/snippet-modal/snippet-modal.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -14,10 +16,20 @@ export class AppComponent implements OnInit {
 
   currentUser = 1;
 
-  constructor() {
+  constructor(private modalService: NgbModal) {
   }
 
   ngOnInit() {
+  }
+
+  addSnippet() {
+    const modalRef = this.modalService.open(SnippetModalComponent, {size: 'lg'});
+
+    modalRef.result.then((result) => {
+      // ToDo: Reload snippet list
+    }, (reason) => {
+      console.log(`Dismissed: ${reason}`);
+    });
   }
 
 }

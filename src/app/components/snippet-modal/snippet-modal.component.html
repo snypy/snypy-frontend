@@ -1,7 +1,7 @@
 <div class="modal-header">
   
-  <h4 class="modal-title" *ngIf="!snippet.pk">Add snippet</h4>
-  <h4 class="modal-title" *ngIf="snippet.pk">Edit snippet</h4>
+  <h4 class="modal-title" *ngIf="!snippet">Add snippet</h4>
+  <h4 class="modal-title" *ngIf="snippet">Edit snippet</h4>
 
   <button type="button" class="close" aria-label="Close" (click)="closeAction('Cross click')">
     <span aria-hidden="true">&times;</span>

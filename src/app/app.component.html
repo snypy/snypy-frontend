@@ -5,7 +5,7 @@
 
           <div class="row">
 
-            <div class="col-3 full-height text-center sidebar-users" style="padding: 0;">
+            <div class="col-3 full-height text-center sidebar-users">
               <div class="users">
 
                 <div class="side-padding">
@@ -30,14 +30,15 @@
               </div>
             </div>
 
-            <div class="col-9 full-height sidebar-navigation" style="padding-right: 0;padding-left: 0;">
+            <div class="col-9 full-height sidebar-navigation remove-side-padding">
                 <div class="side-padding">
                   <span>
                       <b>My Snippets</b>
                       <fa-icon class="float-right" icon="sync-alt"></fa-icon>
                   </span>
                                       
-                  <button 
+                  <button
+                    (click)="addSnippet()"
                     type="button" class="btn btn-sm btn-success btn-block"
                     style="margin-top: .75rem; margin-bottom: .75rem; text-transform: uppercase; font-size: 12px; font-weight: bold;"
                   >New Snippet</button>

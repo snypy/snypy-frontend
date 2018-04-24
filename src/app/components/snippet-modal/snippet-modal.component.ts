@@ -42,25 +42,37 @@ export class SnippetModalComponent implements OnInit {
         console.log(error);
       });
 
-    const file = new FormArray([]);
-    for (const snippetFile of this.snippet.files) {
-      file.push(
-        new FormGroup({
-          'pk': new FormControl(snippetFile.pk),
-          'name': new FormControl(snippetFile.name),
-          'language': new FormControl(snippetFile.language),
-          'content': new FormControl(snippetFile.content),
-        })
-      );
+    this.snippetForm = new FormGroup({
+      'pk': new FormControl(null, null),
+      'title': new FormControl(null, Validators.required),
+      'description': new FormControl(null),
+      'labels': new FormControl(null),
+    });
+
+    if (this.snippet) {
+      this.snippetForm.get('pk').setValue(this.snippet.pk);
+      this.snippetForm.get('title').setValue(this.snippet.title);
+      this.snippetForm.get('description').setValue(this.snippet.description);
+      this.snippetForm.get('labels').setValue(this.snippet.labels);
     }
 
-    this.snippetForm = new FormGroup({
-      'pk': new FormControl(this.snippet.pk),
-      'title': new FormControl(this.snippet.title, Validators.required),
-      'description': new FormControl(this.snippet.description),
-      'labels': new FormControl(this.snippet.labels),
-      'files': file,
-    });
+    if (this.snippet) {
+      const files = new FormArray([]);
+      for (const snippetFile of this.snippet.files) {
+        files.push(
+          new FormGroup({
+            'pk': new FormControl(snippetFile.pk),
+            'name': new FormControl(snippetFile.name),
+            'language': new FormControl(snippetFile.language),
+            'content': new FormControl(snippetFile.content),
+          })
+        );
+      }
+
+      this.snippetForm.addControl('files', files);
+    } else {
+      this.snippetForm.addControl('files', new FormArray([]));
+    }
 
   }
 
@@ -81,7 +93,7 @@ export class SnippetModalComponent implements OnInit {
   confirmAction() {
     let promise;
 
-    if (this.snippet.pk) {
+    if (this.snippet) {
       promise = this.snippetResource.update({}, this.snippetForm.value).$promise;
     } else {
       promise = this.snippetResource.save({}, this.snippetForm.value).$promise;
