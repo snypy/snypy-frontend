@@ -8,6 +8,7 @@ import { FileResource } from './resources/file.resource';
 
 import { ActiveFilterService } from './navigation/activeFilter.service';
 import { ActiveSnippetService } from './navigation/activeSnippet.service';
+import { AvailableLanguagesService } from './navigation/availableLanguages.service';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ export class ServicesModule {
                 FileResource,
                 ActiveFilterService,
                 ActiveSnippetService,
+                AvailableLanguagesService,
             ]
         };
     }

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ActiveFilterService, Filter } from '../../services/navigation/activeFilter.service';
-import { LanguageResource, Language } from '../../services/resources/language.resource';
+import { Language } from '../../services/resources/language.resource';
 import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
+import { AvailableLanguagesService } from '../../services/navigation/availableLanguages.service';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class LanguagesComponent implements OnInit {
 
   languages: ResourceModel<Language>[] = [];
 
-  constructor(private languageResource: LanguageResource,
+  constructor(private availableLanguagesService: AvailableLanguagesService,
               private activeFilterService: ActiveFilterService) {
   }
 
@@ -25,7 +26,7 @@ export class LanguagesComponent implements OnInit {
       this.activeFilter = filter;
     });
 
-    this.languageResource.query({}).$promise
+    this.availableLanguagesService.languagesPromise
       .then((data) => {
         this.languages = data;
       })

@@ -6,7 +6,8 @@ import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 
 import { SnippetResource, Snippet } from '../../services/resources/snippet.resource';
 import { LabelResource, Label } from '../../services/resources/label.resource';
-import { LanguageResource, Language } from '../../services/resources/language.resource';
+import { Language } from '../../services/resources/language.resource';
+import { AvailableLanguagesService } from '../../services/navigation/availableLanguages.service';
 
 
 @Component({
@@ -26,7 +27,7 @@ export class SnippetModalComponent implements OnInit {
 
   constructor(private activeModal: NgbActiveModal,
               private labelResource: LabelResource,
-              private languageResource: LanguageResource,
+              private availableLanguagesService: AvailableLanguagesService,
               private snippetResource: SnippetResource) { }
 
   ngOnInit() {
@@ -39,7 +40,7 @@ export class SnippetModalComponent implements OnInit {
         console.log(error);
       });
 
-    this.languageResource.query({}).$promise
+    this.availableLanguagesService.languagesPromise
       .then((data) => {
         this.languages = data;
       })
