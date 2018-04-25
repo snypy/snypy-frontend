@@ -7,17 +7,17 @@ import { Subject } from 'rxjs/Subject';
 
 
 @Injectable()
-export class ActiveSnippetService {
+export class SnippetLoaderService {
 
     activeSnippet: ResourceModel<Snippet> = null;
-    snippetUpdated = new BehaviorSubject<ResourceModel<Snippet>>(this.activeSnippet);
-    snippetDeleted = new Subject<number>();
+    activeSnippetUpdated = new BehaviorSubject<ResourceModel<Snippet>>(this.activeSnippet);
+    activeSnippetDeleted = new Subject<number>();
 
-    updateSnippet(snippet: ResourceModel<Snippet>) {
-        this.snippetUpdated.next(snippet);
+    updateActiveSnippet(snippet: ResourceModel<Snippet>) {
+        this.activeSnippetUpdated.next(snippet);
     }
 
     deleteSnippet(snippetPk: number) {
-        this.snippetDeleted.next(snippetPk);
+        this.activeSnippetDeleted.next(snippetPk);
     }
 }

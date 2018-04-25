@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { SnippetResource, Snippet } from '../../services/resources/snippet.resource';
 
 import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
-import { ActiveSnippetService } from '../../services/navigation/activeSnippet.service';
+import { SnippetLoaderService } from '../../services/navigation/snippetLoader.service';
 
 
 @Component({
@@ -18,7 +18,7 @@ export class SnippetsComponent implements OnInit {
   snippets: ResourceModel<Snippet>[] = [];
 
   constructor(private snippetResource: SnippetResource,
-              private activeSnippetService: ActiveSnippetService) { }
+              private snippetLoaderService: SnippetLoaderService) { }
 
   ngOnInit() {
     /**
@@ -27,8 +27,8 @@ export class SnippetsComponent implements OnInit {
     this.snippetResource.query({user: this.currentUser}).$promise
       .then((data) => {
         this.snippets = data;
-        if (this.activeSnippetService.activeSnippet === null && data.length) {
-          this.activeSnippetService.updateSnippet(data[0]);
+        if (this.snippetLoaderService.activeSnippet === null && data.length) {
+          this.snippetLoaderService.updateActiveSnippet(data[0]);
         }
       })
       .catch((error) => {
@@ -38,7 +38,7 @@ export class SnippetsComponent implements OnInit {
     /**
      * Snippet updated subscription
      */
-    this.activeSnippetService.snippetUpdated.subscribe((snippet) => {
+    this.snippetLoaderService.activeSnippetUpdated.subscribe((snippet) => {
       this.activeSnippet = snippet;
 
       // Update snippet in list
@@ -53,7 +53,7 @@ export class SnippetsComponent implements OnInit {
     /**
      * Snippet deleted subscription
      */
-    this.activeSnippetService.snippetDeleted.subscribe((snippetPk) => {
+    this.snippetLoaderService.activeSnippetDeleted.subscribe((snippetPk) => {
       // Remove snippet from list
       if (snippetPk) {
         const oldSnippet = this.snippets.find(item => item.pk === snippetPk);
@@ -64,13 +64,13 @@ export class SnippetsComponent implements OnInit {
 
       // Set first snippet in list as active
       if (this.snippets.length) {
-        this.activeSnippetService.updateSnippet(this.snippets[0]);
+        this.snippetLoaderService.updateActiveSnippet(this.snippets[0]);
       }
     });
   }
 
   loadSnippet(snippet: ResourceModel<Snippet>) {
-    this.activeSnippetService.updateSnippet(snippet);
+    this.snippetLoaderService.updateActiveSnippet(snippet);
   }
 
 }

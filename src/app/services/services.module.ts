@@ -7,7 +7,7 @@ import { SnippetResource } from './resources/snippet.resource';
 import { FileResource } from './resources/file.resource';
 
 import { ActiveFilterService } from './navigation/activeFilter.service';
-import { ActiveSnippetService } from './navigation/activeSnippet.service';
+import { SnippetLoaderService } from './navigation/snippetLoader.service';
 import { AvailableLanguagesService } from './navigation/availableLanguages.service';
 import { AvailableLabelsService } from './navigation/availableLabels.service';
 
@@ -30,7 +30,7 @@ export class ServicesModule {
                 SnippetResource,
                 FileResource,
                 ActiveFilterService,
-                ActiveSnippetService,
+                SnippetLoaderService,
                 AvailableLanguagesService,
                 AvailableLabelsService,
             ]

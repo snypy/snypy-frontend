@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 
-import { ActiveSnippetService } from '../../services/navigation/activeSnippet.service';
+import { SnippetLoaderService } from '../../services/navigation/snippetLoader.service';
 import { Snippet } from '../../services/resources/snippet.resource';
 import { FileResource } from '../../services/resources/file.resource';
 import { Label } from '../../services/resources/label.resource';
@@ -20,13 +20,13 @@ export class SnippetComponent implements OnInit {
   files: ResourceModel<File>[] = [];
   labels: ResourceModel<Label>[] = [];
 
-  constructor(private activeSnippetService: ActiveSnippetService,
+  constructor(private snippetLoaderService: SnippetLoaderService,
               private availableLabelsService: AvailableLabelsService,
               private fileResource: FileResource) {
   }
 
   ngOnInit() {
-    this.activeSnippetService.snippetUpdated.subscribe((snippet) => {
+    this.snippetLoaderService.activeSnippetUpdated.subscribe((snippet) => {
       if (snippet) {
         this.activeSnippet = snippet;
 

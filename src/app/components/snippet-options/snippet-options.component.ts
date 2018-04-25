@@ -3,7 +3,7 @@ import { Component, OnInit, TemplateRef, ElementRef } from '@angular/core';
 import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { ActiveSnippetService } from '../../services/navigation/activeSnippet.service';
+import { SnippetLoaderService } from '../../services/navigation/snippetLoader.service';
 import { Snippet } from '../../services/resources/snippet.resource';
 import { SnippetModalComponent } from '../snippet-modal/snippet-modal.component';
 import { AvailableLabelsService } from '../../services/navigation/availableLabels.service';
@@ -20,13 +20,13 @@ export class SnippetOptionsComponent implements OnInit {
   activeSnippet: ResourceModel<Snippet> = null;
   labels: ResourceModel<Label>[] = [];
 
-  constructor(private activeSnippetService: ActiveSnippetService,
+  constructor(private snippetLoaderService: SnippetLoaderService,
               private availableLabelsService: AvailableLabelsService,
               private modalService: NgbModal) {
   }
 
   ngOnInit() {
-    this.activeSnippetService.snippetUpdated.subscribe((snippet) => {
+    this.snippetLoaderService.activeSnippetUpdated.subscribe((snippet) => {
       if (snippet) {
         this.activeSnippet = snippet;
       }
@@ -44,7 +44,7 @@ export class SnippetOptionsComponent implements OnInit {
     modalRef.componentInstance.snippet = this.activeSnippet;
 
     modalRef.result.then((result) => {
-      this.activeSnippetService.updateSnippet(result);
+      this.snippetLoaderService.updateActiveSnippet(result);
     }, (reason) => {
       console.log(`Dismissed: ${reason}`);
     });
@@ -57,7 +57,7 @@ export class SnippetOptionsComponent implements OnInit {
   deleteSnippet() {
     this.activeSnippet.$remove().$promise
       .then(() => {
-        this.activeSnippetService.deleteSnippet(this.activeSnippet.pk);
+        this.snippetLoaderService.deleteSnippet(this.activeSnippet.pk);
       })
       .catch((error) => {
         console.log(error);
