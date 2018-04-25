@@ -37,6 +37,7 @@ import { SnippetOptionsComponent } from './components/snippet-options/snippet-op
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SnippetModalComponent } from './components/snippet-modal/snippet-modal.component';
+import { SnippetOrderComponent } from './components/snippet-order/snippet-order.component';
 
 library.add(
   fas.faCoffee,
@@ -66,7 +67,8 @@ library.add(
     SnippetOptionsComponent,
     FooterComponent,
     HeaderComponent,
-    SnippetModalComponent
+    SnippetModalComponent,
+    SnippetOrderComponent
   ],
   entryComponents: [
     SnippetModalComponent,

@@ -93,18 +93,6 @@ perfect-scrollbar {
     }
 }
 
-ng-select {
-    ::ng-deep {
-        font-size: .75rem;
-
-        .ng-control,
-        .ng-single .ng-control {
-            min-height: auto;
-            height: 27px !important;
-        }
-    }
-}
-
 .navigation {
     ::ng-deep {
         .list-group-heading {

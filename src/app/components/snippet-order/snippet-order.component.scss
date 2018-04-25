@@ -1,0 +1,20 @@
+:host {
+    background: #f7f7f7;
+    display: inline-block;
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+    padding: 0  .75rem;
+    padding-bottom: 8px;
+}
+
+ng-select {
+    ::ng-deep {
+        font-size: .75rem;
+
+        .ng-control,
+        .ng-single .ng-control {
+            min-height: auto;
+            height: 27px !important;
+        }
+    }
+}

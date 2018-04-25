@@ -24,16 +24,9 @@ export class SnippetsComponent implements OnInit {
     /**
      * Initial load
      */
-    this.snippetResource.query({user: this.currentUser}).$promise
-      .then((data) => {
-        this.snippets = data;
-        if (this.snippetLoaderService.activeSnippet === null && data.length) {
-          this.snippetLoaderService.updateActiveSnippet(data[0]);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    this.snippetLoaderService.snippetsLoaded.subscribe((snippets) => {
+      this.snippets = snippets;
+    })
 
     /**
      * Snippet updated subscription

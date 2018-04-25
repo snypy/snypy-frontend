@@ -1,0 +1,12 @@
+<div>
+  <small><b>Sort by</b></small>
+  <ng-select
+    [items]="options"
+    bindLabel="name"
+    bindValue="pk"
+    [clearable]="false"
+    [searchable]="false"
+    (change)="valueChange()"
+    [(ngModel)]="value">
+  </ng-select>
+</div>

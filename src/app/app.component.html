@@ -54,23 +54,10 @@
 
       </div>
       <div class="col-6 border-right remove-side-padding" style="padding-top: 0;">
-
-        <div class="side-padding border-bottom" style="padding-bottom: 8px; background: #f7f7f7">
-          <small><b>Sort by</b></small>
-          <ng-select
-            [items]="[{pk: 1, name: 'Creation date'}, {pk: 2, name: 'Last modification date'}, {pk: 3, name: 'Title'}]"
-            bindLabel="name"
-            bindValue="pk"
-            [clearable]="false"
-            [searchable]="false"
-            [ngModel]="1">
-          </ng-select>
-        </div>
-
+        <app-snippet-order></app-snippet-order>
         <perfect-scrollbar style="max-height: calc(100vh - 60px);">
           <app-snippets></app-snippets>
         </perfect-scrollbar>
-
       </div>
     </div>
   </div>
