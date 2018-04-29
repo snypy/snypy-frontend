@@ -31,6 +31,17 @@ export class AvailableLabelsService {
         this.triggerLabelsUpdated();
     }
 
+    updateLabel(label: ResourceModel<Label>) {
+        const listLabel = this.labels.find((item) => item.pk === label.pk);
+
+        if (listLabel) {
+            this.labels.splice(this.labels.indexOf(listLabel), 1, label);
+            this.triggerLabelsUpdated();
+        } else {
+            this.addLabel(label);
+        }
+    }
+
     addLabel(label: ResourceModel<Label>) {
         this.labels.push(label);
         this.triggerLabelsUpdated();

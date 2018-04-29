@@ -1,6 +1,6 @@
 <div class="list-group-heading">
   <b>Labels</b>
-  <fa-icon class="float-right" icon="plus"></fa-icon>
+  <fa-icon class="float-right add-label" icon="plus" (click)="addLabel()"></fa-icon>
 </div>
 <div class="list-group list-group-flush" id="list-tab" role="tablist">
   <a *ngFor="let label of labels"
@@ -10,6 +10,6 @@
       role="tab"
       aria-controls="profile">
     <span class="filterAction" (click)="updateActiveFilter(label.pk)"><span class="dot icon"></span> {{ label.name }}</span>
-    <span class="badge badge-primary badge-pill">{{ 0 }}</span>
+    <span class="badge badge-primary badge-pill" (click)="editLabel(label)">{{ 0 }}</span>
   </a>
 </div>

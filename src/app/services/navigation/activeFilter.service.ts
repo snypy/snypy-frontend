@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-import { SnippetLoaderService } from "./snippetLoader.service"
+import { SnippetLoaderService } from './snippetLoader.service';
 
 
 export interface Filter {
@@ -30,7 +30,7 @@ export class ActiveFilterService {
 
         switch (area) {
             case 'main':
-                switch(value) {
+                switch (value) {
                     case 'all':
                         this.snippetLoaderService.updateSnippetFilter({});
                         break;
@@ -38,7 +38,7 @@ export class ActiveFilterService {
                         console.log('Not implemented');
                         break;
                     case 'unlabeled':
-                        console.log('Not implemented');
+                    this.snippetLoaderService.updateSnippetFilter({'labeled': 'False'});
                         break;
                     case 'public':
                         this.snippetLoaderService.updateSnippetFilter({'visibility': 'PUBLIC'});

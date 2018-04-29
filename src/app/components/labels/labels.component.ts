@@ -4,7 +4,9 @@ import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 
 import { Label } from '../../services/resources/label.resource';
 import { ActiveFilterService, Filter } from '../../services/navigation/activeFilter.service';
-import { AvailableLabelsService } from '../../services/navigation/availableLabels.service';
+import { AvailableLabelsService, AvailableLabelsService } from '../../services/navigation/availableLabels.service';
+import { LabelModalComponent } from '../label-modal/label-modal.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -20,7 +22,8 @@ export class LabelsComponent implements OnInit {
   activeFilter: Filter;
 
   constructor(private availableLabelsService: AvailableLabelsService,
-              private activeFilterService: ActiveFilterService) { }
+              private activeFilterService: ActiveFilterService,
+              private modalService: NgbModal) { }
 
   ngOnInit() {
     this.activeFilterService.filterUpdated.subscribe((filter) => {
@@ -38,6 +41,28 @@ export class LabelsComponent implements OnInit {
 
   randomNumber() {
     return Math.floor(Math.random() * 20) + 1;
+  }
+
+  addLabel() {
+    const modalRef = this.modalService.open(LabelModalComponent, {size: 'sm'});
+
+    modalRef.result.then((result) => {
+      this.availableLabelsService.addLabel(result);
+    }, (reason) => {
+      console.log(`Dismissed: ${reason}`);
+    });
+  }
+
+  editLabel(label: ResourceModel<Label>) {
+    const modalRef = this.modalService.open(LabelModalComponent, {size: 'sm'});
+
+    modalRef.componentInstance.label = label;
+
+    modalRef.result.then((result) => {
+      this.availableLabelsService.updateLabel(result);
+    }, (reason) => {
+      console.log(`Dismissed: ${reason}`);
+    });
   }
 
 }
