@@ -22,6 +22,10 @@ export class SnippetLoaderService {
     activeSnippetDeleted = new Subject<number>();
 
     constructor(private snippetResource: SnippetResource) {
+        this.refreshSnippets();
+    }
+
+    refreshSnippets() {
         this.snippetsPromise = this.loadSnippets();
 
         this.snippetsPromise
@@ -71,7 +75,8 @@ export class SnippetLoaderService {
     }
 
     updateSnippetFilter(filter: {}) {
-        // ToDo
+        this.snippetFilter = filter;
+        this.refreshSnippets();
     }
 
     updateSnippetOrder(key: string, direction: -1|1) {
