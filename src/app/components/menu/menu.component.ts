@@ -37,6 +37,9 @@ export class MenuComponent implements OnInit {
       value: 'private',
       icon: 'eye-slash'
     },
+
+    /*
+    ToDo: Enable after share options are available in REST API
     {
       name: 'Shared by me',
       value: 'shared-by-me',
@@ -47,6 +50,8 @@ export class MenuComponent implements OnInit {
       value: 'shared-with-me',
       icon: 'cloud-download-alt'
     }
+    */
+
   ];
 
   constructor(private activeFilterService: ActiveFilterService) { }

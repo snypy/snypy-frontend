@@ -4,7 +4,7 @@ import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 
 import { Label } from '../../services/resources/label.resource';
 import { ActiveFilterService, Filter } from '../../services/navigation/activeFilter.service';
-import { AvailableLabelsService, AvailableLabelsService } from '../../services/navigation/availableLabels.service';
+import { AvailableLabelsService } from '../../services/navigation/availableLabels.service';
 import { LabelModalComponent } from '../label-modal/label-modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
