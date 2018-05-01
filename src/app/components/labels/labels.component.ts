@@ -23,7 +23,8 @@ export class LabelsComponent implements OnInit {
 
   constructor(private availableLabelsService: AvailableLabelsService,
               private activeFilterService: ActiveFilterService,
-              private modalService: NgbModal) { }
+              private modalService: NgbModal) {
+  }
 
   ngOnInit() {
     this.activeFilterService.filterUpdated.subscribe((filter) => {
