@@ -13,7 +13,6 @@ import { SnippetLoaderService } from '../../services/navigation/snippetLoader.se
 })
 export class SnippetsComponent implements OnInit {
 
-  currentUser = 1;
   activeSnippet: Snippet = null;
   snippets: ResourceModel<Snippet>[] = [];
 

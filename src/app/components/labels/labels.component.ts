@@ -16,7 +16,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class LabelsComponent implements OnInit {
 
-  currentUser = 1;
   labels: ResourceModel<Label>[] = [];
 
   activeFilter: Filter;

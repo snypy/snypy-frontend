@@ -14,14 +14,12 @@ export class LabelModalComponent implements OnInit {
 
   @Input() label: ResourceModel<Label> = null;
 
-  currentUser = 1;
   labelForm: FormGroup;
 
   constructor(private activeModal: NgbActiveModal,
               private labelResource: LabelResource) { }
 
   ngOnInit() {
-
     this.labelForm = new FormGroup({
       'pk': new FormControl(null, null),
       'name': new FormControl(null, Validators.required),
@@ -31,7 +29,6 @@ export class LabelModalComponent implements OnInit {
       this.labelForm.get('pk').setValue(this.label.pk);
       this.labelForm.get('name').setValue(this.label.name);
     }
-
   }
 
   confirmAction() {

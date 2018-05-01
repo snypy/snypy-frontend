@@ -20,7 +20,6 @@ export class SnippetModalComponent implements OnInit {
 
   @Input() snippet: ResourceModel<Snippet> = null;
 
-  currentUser = 1;
   languages: ResourceModel<Language>[] = [];
   labels: ResourceModel<Label>[] = [];
 
