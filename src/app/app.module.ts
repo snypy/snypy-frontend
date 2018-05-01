@@ -39,6 +39,9 @@ import { HeaderComponent } from './components/header/header.component';
 import { SnippetModalComponent } from './components/snippet-modal/snippet-modal.component';
 import { SnippetOrderComponent } from './components/snippet-order/snippet-order.component';
 import { LabelModalComponent } from './components/label-modal/label-modal.component';
+import { TeamsComponent } from './components/teams/teams.component';
+import { ViewInfoComponent } from './components/view-info/view-info.component';
+import { ViewSwitchComponent } from './components/view-switch/view-switch.component';
 
 library.add(
   fas.faCoffee,
@@ -70,7 +73,10 @@ library.add(
     HeaderComponent,
     SnippetModalComponent,
     SnippetOrderComponent,
-    LabelModalComponent
+    LabelModalComponent,
+    TeamsComponent,
+    ViewInfoComponent,
+    ViewSwitchComponent
   ],
   entryComponents: [
     SnippetModalComponent,

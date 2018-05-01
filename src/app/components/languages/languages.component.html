@@ -1,8 +1,7 @@
-<div class="list-group-heading side-padding">
+<div class="list-group-heading">
     <b>Languages</b>
 </div>
 <div class="list-group list-group-flush" id="list-tab" role="tablist">
-
   <a 
     *ngFor="let language of languages"
     [ngClass]="{active: activeFilter.area === 'languages' && activeFilter.value === language.pk}"
@@ -13,5 +12,4 @@
     <span><span class="icon">#</span> {{ language.name }}</span>
     <span class="badge badge-primary badge-pill">{{ 0 }}</span>
   </a>
-
 </div>

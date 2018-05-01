@@ -2,48 +2,15 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-6" style="padding-top: 0; padding-bottom: 0; border-top: none; border-bottom: none; border-right: 1px solid rgba(255, 255, 255, 0.2);">
-
           <div class="row">
-
             <div class="col-3 full-height text-center sidebar-users">
-              <div class="users">
-
-                <div class="side-padding">
-                  <span class="user">
-                      <fa-icon icon="user"></fa-icon>
-                  </span>
-                  <span class="user">
-                    <fa-icon icon="globe"></fa-icon>
-                  </span>
-                  <span class="user">
-                    <fa-icon icon="plus"></fa-icon>
-                  </span>
-                </div>
-
-                <div class="border-bottom" style="margin-top: 0.75rem"></div>
-
-                <perfect-scrollbar class="side-padding" style="max-height: calc(100vh - 175px);">
-                  <span class="user" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]">
-                    <fa-icon icon="coffee" title="Team {{ i }}"></fa-icon>
-                  </span>
+                <app-view-switch></app-view-switch>
+                <perfect-scrollbar style="max-height: calc(100vh - 162px);">
+                  <app-teams></app-teams>
                 </perfect-scrollbar>
               </div>
-            </div>
-
             <div class="col-9 full-height sidebar-navigation remove-side-padding">
-                <div class="side-padding">
-                  <span>
-                      <b>My Snippets</b>
-                      <fa-icon class="float-right" icon="sync-alt"></fa-icon>
-                  </span>
-                                      
-                  <button
-                    (click)="addSnippet()"
-                    type="button" class="btn btn-sm btn-success btn-block"
-                    style="margin-top: .75rem; margin-bottom: .75rem; text-transform: uppercase; font-size: 12px; font-weight: bold;"
-                  >New Snippet</button>
-                </div>
-
+                <app-view-info></app-view-info>
                 <perfect-scrollbar style="max-height: calc(100vh - 90px);" class="navigation">
                   <app-menu></app-menu>
                   <app-labels></app-labels>
@@ -51,7 +18,6 @@
                 </perfect-scrollbar>
             </div>
           </div>
-
       </div>
       <div class="col-6 border-right remove-side-padding" style="padding-top: 0;">
         <app-snippet-order></app-snippet-order>
@@ -67,17 +33,12 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-12 full-height remove-side-padding">
-
         <app-header></app-header>
-        
         <app-snippet-options></app-snippet-options>
-        
         <perfect-scrollbar style="max-height: calc(100vh - 210px); padding-right: 15px;">
           <app-snippet></app-snippet>
         </perfect-scrollbar>
-
         <app-footer></app-footer>
-
       </div>
     </div>
   </div>

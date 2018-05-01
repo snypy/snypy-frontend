@@ -46,7 +46,7 @@ export class SnippetModalComponent implements OnInit {
       'pk': new FormControl(null, null),
       'title': new FormControl(null, Validators.required),
       'description': new FormControl(null),
-      'labels': new FormControl(null),
+      'labels': new FormControl([]),
     });
 
     if (this.snippet) {

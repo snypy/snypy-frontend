@@ -14,8 +14,6 @@
         background: #142F43;
         border-right: 1px solid rgba(255, 255, 255, 0.2);
         color: #dddddd;
-        padding-left: 0;
-        padding-right: 0;
     }
 }
 
@@ -41,15 +39,6 @@
     height: 100vh;
 }
 
-.users .user {
-    display: inline-block;
-    margin-top: 0.75rem;
-    padding-top: 5px;
-    width: 38px;
-    height: 38px;
-    border: 2px solid rgba(255, 255, 255, 0.7);
-    border-radius: 100%;
-}
 
 .border-right {
     border-right: 1px solid #ddd;
@@ -61,11 +50,6 @@
 
 .border-bottom {
     border-bottom: 1px solid #ddd;
-}
-
-.side-padding {
-    padding-left: .75rem;
-    padding-right: .75rem;
 }
 
 /*
@@ -96,7 +80,8 @@ perfect-scrollbar {
 .navigation {
     ::ng-deep {
         .list-group-heading {
-            @extend .side-padding;
+            padding-left: .75rem;
+            padding-right: .75rem;
             padding-top: 20px;
             padding-bottom: 10px;
         }
