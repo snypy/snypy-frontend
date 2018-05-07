@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TeamResource, Team } from '../../services/resources/team.resource';
 import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TeamModalComponent } from '../team-modal/team-modal.component';
 
 @Component({
   selector: 'app-teams',
@@ -11,7 +13,9 @@ export class TeamsComponent implements OnInit {
 
   teams: ResourceModel<Team>[] = [];
 
-  constructor(private teamResource: TeamResource) { }
+  constructor(private teamResource: TeamResource,
+              private modalService: NgbModal) {
+  }
 
   ngOnInit() {
     this.teamResource.query({}, {}).$promise
@@ -21,6 +25,16 @@ export class TeamsComponent implements OnInit {
       .catch((error) => {
         console.log(error);
       });
+  }
+
+  addTeam() {
+    const modalRef = this.modalService.open(TeamModalComponent, {size: 'sm'});
+
+    modalRef.result.then((result) => {
+      this.teams.push(result);
+    }, (reason) => {
+      console.log(`Dismissed: ${reason}`);
+    });
   }
 
 }

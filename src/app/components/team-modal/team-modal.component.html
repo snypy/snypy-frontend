@@ -1,14 +1,14 @@
 <div class="modal-header">
   
-  <h4 class="modal-title" *ngIf="!label">Add label</h4>
-  <h4 class="modal-title" *ngIf="label">Edit label</h4>
+  <h4 class="modal-title" *ngIf="!team">Add team</h4>
+  <h4 class="modal-title" *ngIf="team">Edit team</h4>
 
   <button type="button" class="close" aria-label="Close" (click)="closeAction('Cross click')">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
 <div class="modal-body">
-  <form [formGroup]="labelForm">
+  <form [formGroup]="teamForm">
     <div class="form-group">
       <label for="input-name">Name</label>
       <input formControlName="name" type="text" class="form-control" id="input-name" aria-describedby="Name" placeholder="Name">

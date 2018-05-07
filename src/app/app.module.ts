@@ -42,6 +42,7 @@ import { LabelModalComponent } from './components/label-modal/label-modal.compon
 import { TeamsComponent } from './components/teams/teams.component';
 import { ViewInfoComponent } from './components/view-info/view-info.component';
 import { ViewSwitchComponent } from './components/view-switch/view-switch.component';
+import { TeamModalComponent } from './components/team-modal/team-modal.component';
 
 library.add(
   fas.faCoffee,
@@ -76,11 +77,13 @@ library.add(
     LabelModalComponent,
     TeamsComponent,
     ViewInfoComponent,
-    ViewSwitchComponent
+    ViewSwitchComponent,
+    TeamModalComponent
   ],
   entryComponents: [
     SnippetModalComponent,
     LabelModalComponent,
+    TeamModalComponent,
   ],
   imports: [
     BrowserModule,
