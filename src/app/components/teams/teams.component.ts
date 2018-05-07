@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TeamResource, Team } from '../../services/resources/team.resource';
+import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 
 @Component({
   selector: 'app-teams',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TeamsComponent implements OnInit {
 
-  constructor() { }
+  teams: ResourceModel<Team>[] = [];
+
+  constructor(private teamResource: TeamResource) { }
 
   ngOnInit() {
+    this.teamResource.query({}, {}).$promise
+      .then((data) => {
+        this.teams = data;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
 }
