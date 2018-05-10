@@ -6,6 +6,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
+  isLoggedIn = false;
+
   constructor() {
+  }
+
+  userLogin() {
+    this.isLoggedIn = true;
+  }
+
+  userLogout() {
+    this.isLoggedIn = false;
   }
 }

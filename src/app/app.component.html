@@ -1,2 +1,8 @@
-<app-sidebar></app-sidebar>
-<app-content></app-content>
+<div *ngIf="!isLoggedIn; else snippetsApp">
+  <app-login (login)="userLogin($event)"></app-login>
+</div>
+
+<ng-template #snippetsApp style="min-width: 1024px;">
+  <app-sidebar></app-sidebar>
+  <app-content></app-content>
+</ng-template>
