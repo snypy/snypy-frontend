@@ -1,0 +1,44 @@
+.sidebar-users {
+    background: #142F43;
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    color: #dddddd;
+    padding: 0;
+}
+
+.sidebar-navigation {
+    background: #142F43;
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    color: #dddddd;
+}
+
+.border-right {
+    border-right: 1px solid #ddd;
+}
+
+::ng-deep {
+    .navigation {
+        .list-group-heading {
+            padding-left: .75rem;
+            padding-right: .75rem;
+            padding-top: 20px;
+            padding-bottom: 10px;
+        }
+        
+        .list-group-item {
+            padding: 2px 0;
+            background: transparent;
+            border: none;
+            color: #fff;
+            padding-left: .75rem;
+            padding-right: .75rem;
+        
+            &.active {
+                background: rgba(0, 0, 0, 0.3);
+            }
+        
+            .icon {
+                margin-right: 10px;
+            }
+        }
+    }
+}

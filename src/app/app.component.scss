@@ -1,62 +1,35 @@
-.sidebar {
+app-sidebar {
     width: 560px;
     display: block;
     float: left;
-
-    .sidebar-users {
-        background: #142F43;
-        border-right: 1px solid rgba(255, 255, 255, 0.2);
-        color: #dddddd;
-        padding: 0;
-    }
-
-    .sidebar-navigation {
-        background: #142F43;
-        border-right: 1px solid rgba(255, 255, 255, 0.2);
-        color: #dddddd;
-    }
 }
 
-.content {
+app-content {
     width: calc(100% - 560px);
     display: block;
-    float: left;
-    background-color: #f7f7f7;
-}
-
-.row{
-    >[class^=col-] {
-        padding-top: .75rem;
-
-        &.remove-side-padding {
-            padding-left: 0;
-            padding-right: 0;
-        }
-    }
-}
-
-.full-height {
-    height: 100vh;
-}
-
-
-.border-right {
-    border-right: 1px solid #ddd;
-}
-
-.border-top {
-    border-top: 1px solid #ddd;
-}
-
-.border-bottom {
-    border-bottom: 1px solid #ddd;
+    float: right;
 }
 
 /*
 * Style for child components
 */
-perfect-scrollbar {
-    ::ng-deep {
+::ng-deep {
+    .row{
+        >[class^=col-] {
+            padding-top: .75rem;
+
+            &.remove-side-padding {
+                padding-left: 0;
+                padding-right: 0;
+            }
+        }
+    }
+
+    .full-height {
+        height: 100vh;
+    }
+
+    perfect-scrollbar {
         .ps.ps--scrolling-y>.ps__rail-y {
             background-color: transparent;
         }
@@ -73,34 +46,6 @@ perfect-scrollbar {
         .ps.ps--active-y>.ps__rail-y:hover,
         .ps__rail-y:focus>.ps__thumb-y, .ps__rail-y:hover>.ps__thumb-y {
             width: 4px;
-        }
-    }
-}
-
-.navigation {
-    ::ng-deep {
-        .list-group-heading {
-            padding-left: .75rem;
-            padding-right: .75rem;
-            padding-top: 20px;
-            padding-bottom: 10px;
-        }
-        
-        .list-group-item {
-            padding: 2px 0;
-            background: transparent;
-            border: none;
-            color: #fff;
-            padding-left: .75rem;
-            padding-right: .75rem;
-        
-            &.active {
-                background: rgba(0, 0, 0, 0.3);
-            }
-        
-            .icon {
-                margin-right: 10px;
-            }
         }
     }
 }

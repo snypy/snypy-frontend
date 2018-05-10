@@ -43,6 +43,8 @@ import { TeamsComponent } from './components/teams/teams.component';
 import { ViewInfoComponent } from './components/view-info/view-info.component';
 import { ViewSwitchComponent } from './components/view-switch/view-switch.component';
 import { TeamModalComponent } from './components/team-modal/team-modal.component';
+import { SidebarComponent } from './layout/sidebar/sidebar.component';
+import { ContentComponent } from './layout/content/content.component';
 
 library.add(
   fas.faCoffee,
@@ -78,7 +80,9 @@ library.add(
     TeamsComponent,
     ViewInfoComponent,
     ViewSwitchComponent,
-    TeamModalComponent
+    TeamModalComponent,
+    SidebarComponent,
+    ContentComponent
   ],
   entryComponents: [
     SnippetModalComponent,
