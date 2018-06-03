@@ -15,7 +15,7 @@ export class SnippetLoaderService {
     snippetsLoaded = new Subject<ResourceModel<Snippet>[]>();
 
     snippetFilter = {};
-    snippetOdering: {key: string, directioon: -1|1};
+    snippetOrdering: {key: string, direction: -1|1};
 
     activeSnippet: ResourceModel<Snippet> = null;
     activeSnippetUpdated = new BehaviorSubject<ResourceModel<Snippet>>(this.activeSnippet);
@@ -46,10 +46,10 @@ export class SnippetLoaderService {
     sortSnipperts() {
         this.snippetsPromise.then(() => {
             this.snippets.sort((a, b) => {
-                const x = a[this.snippetOdering.key];
-                const y = b[this.snippetOdering.key];
+                const x = a[this.snippetOrdering.key];
+                const y = b[this.snippetOrdering.key];
 
-                return ((x < y) ? -1 : ((x > y) ? 1 : 0)) * this.snippetOdering.directioon;
+                return ((x < y) ? -1 : ((x > y) ? 1 : 0)) * this.snippetOrdering.direction;
             });
 
             this.snippetsLoaded.next(this.snippets);
@@ -80,9 +80,9 @@ export class SnippetLoaderService {
     }
 
     updateSnippetOrder(key: string, direction: -1|1) {
-        this.snippetOdering = {
+        this.snippetOrdering = {
             key: key,
-            directioon: direction,
+            direction: direction,
         };
 
         this.sortSnipperts();
