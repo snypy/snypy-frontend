@@ -5,7 +5,7 @@
     </div>
   </div>
   <div class="col-6 text-right" style="padding-top: 0;">
-    
+
     <div ngbDropdown class="d-inline-block" placement="bottom-right" #myDrop="ngbDropdown">
       <button class="btn btn-sm btn-outline-info" id="dropdownBasic1" ngbDropdownToggle>username</button>
       <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
@@ -16,7 +16,7 @@
             </div>
         </div>
         <button class="dropdown-item">Help</button>
-        <button class="dropdown-item">Logout</button>
+        <button class="dropdown-item" (click)="doLogout()">Logout</button>
       </div>
     </div>
   </div>

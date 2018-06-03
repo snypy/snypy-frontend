@@ -11,6 +11,7 @@ import { ActiveFilterService } from './navigation/activeFilter.service';
 import { SnippetLoaderService } from './navigation/snippetLoader.service';
 import { AvailableLanguagesService } from './navigation/availableLanguages.service';
 import { AvailableLabelsService } from './navigation/availableLabels.service';
+import { AuthResource } from "./resources/auth.resource";
 
 
 @NgModule({
@@ -35,6 +36,7 @@ export class ServicesModule {
                 SnippetLoaderService,
                 AvailableLanguagesService,
                 AvailableLabelsService,
+                AuthResource,
             ]
         };
     }

@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -26,8 +26,8 @@ import { AppComponent } from './app.component';
  */
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
-
 import { library } from '@fortawesome/fontawesome-svg-core';
+
 import { LabelsComponent } from './components/labels/labels.component';
 import { LanguagesComponent } from './components/languages/languages.component';
 import { MenuComponent } from './components/menu/menu.component';
@@ -46,6 +46,7 @@ import { TeamModalComponent } from './components/team-modal/team-modal.component
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { ContentComponent } from './layout/content/content.component';
 import { LoginComponent } from './components/login/login.component';
+import { JwtInterceptor } from "./helpers/jwt.interceptor";
 
 library.add(
   fas.faCoffee,
@@ -110,6 +111,11 @@ library.add(
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
     }
   ],
   bootstrap: [AppComponent]
