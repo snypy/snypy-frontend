@@ -3,9 +3,11 @@
     <fa-icon icon="plus"></fa-icon>
   </span>
 
-  <span 
+  <span
     *ngFor="let team of teams"
     [title]="team.name"
-    class="team" [ngStyle]="{'background-image': 'url(https://www.gravatar.com/avatar/' + team.pk + '?d=wavatar&f=y&s=50)'}"
+    class="team"
+    [ngStyle]="{'background-image': 'url(https://www.gravatar.com/avatar/' + team.pk + '?d=wavatar&f=y&s=50)'}"
+    (click)="loadTeam(team)"
   ></span>
 </div>

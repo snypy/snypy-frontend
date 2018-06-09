@@ -37,4 +37,15 @@ export class TeamsComponent implements OnInit {
     });
   }
 
+  loadTeam(team: ResourceModel<Team>) {
+    alert("Loading team!");
+    // ToDo
+    // Switch global scope from user to team
+    // Set current team
+    // Reload labels
+    // Reload counters
+    // Reload snippets
+    // Reset active filter
+  }
+
 }
