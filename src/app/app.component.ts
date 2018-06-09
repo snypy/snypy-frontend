@@ -13,6 +13,8 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.authResource.init();
+
     this.isLoggedIn = this.authResource.isLoggedId;
 
     this.authResource.loginStatusUpdates.subscribe((value) => {

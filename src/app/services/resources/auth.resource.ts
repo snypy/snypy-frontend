@@ -4,13 +4,14 @@ import { environment } from '../../../environments/environment';
 
 import { Resource } from 'ngx-resource-factory/resource/resource';
 import { ResourceConfiguration } from 'ngx-resource-factory/resource/resource-configuration';
-import { User } from "./user.resource";
+import { User, UserResource } from "./user.resource";
 import { ResourceAction } from "ngx-resource-factory/resource/resource-action";
 import { ResourceActionHttpMethod } from "ngx-resource-factory/resource/resource-action-http-method";
 import { ResourceActionMethod } from "ngx-resource-factory/resource/resource-action-method";
 import { Subject } from "rxjs/Subject";
 import { ResourceRegistry } from "ngx-resource-factory/resource/resource-registry";
 import { HttpClient } from "@angular/common/http";
+import { ResourceModel } from "ngx-resource-factory/resource/resource-model";
 
 
 const AUTH_TOKEN = 'auth.token';
@@ -32,19 +33,13 @@ export type AuthCredentials = {
 export class AuthResource extends Resource<User> {
 
   isLoggedId = false;
+  currentUser: ResourceModel<User> = null;
   loginStatusUpdates: Subject<boolean> = new Subject<boolean>();
 
-  constructor(registry: ResourceRegistry, http: HttpClient) {
+  constructor(registry: ResourceRegistry,
+              http: HttpClient,
+              private userResource: UserResource) {
     super(registry, http);
-
-    if (this.getToken()) {
-      this.updateLoginStatus(true);
-    }
-  }
-
-  updateLoginStatus(value: boolean) {
-    this.isLoggedId = value;
-    this.loginStatusUpdates.next(value);
   }
 
   @ResourceAction({
@@ -63,13 +58,22 @@ export class AuthResource extends Resource<User> {
   })
   _logout: ResourceActionMethod<any, any, null>;
 
-  login(credentials: AuthCredentials) {
+  /**
+   * This method is used in the main app component to load an active user during the bootstrap process
+   */
+  public init() {
+    if (this.getToken()) {
+      this.loadCurrentUser();
+    }
+  }
+
+  public login(credentials: AuthCredentials) {
     let promise = this._login({}, credentials).$promise;
 
     promise
       .then((data) => {
         this.setToken(data.token);
-        this.updateLoginStatus(true);
+        this.loadCurrentUser();
       })
       .catch((reason) => {
         console.log('Cannot authenticate!');
@@ -79,10 +83,8 @@ export class AuthResource extends Resource<User> {
     return promise;
   }
 
-  logout() {
+  public logout() {
     if (this.isLoggedId) {
-      let token = this.getToken();
-
       this._logout().$promise
         .then((data) => {
         })
@@ -96,7 +98,7 @@ export class AuthResource extends Resource<User> {
     }
   }
 
-  getToken() {
+  public getToken() {
     return localStorage.getItem(AUTH_TOKEN);
   }
 
@@ -107,4 +109,25 @@ export class AuthResource extends Resource<User> {
   private removeToken() {
     localStorage.removeItem(AUTH_TOKEN);
   }
+
+  private updateLoginStatus(value: boolean) {
+    this.isLoggedId = value;
+    this.loginStatusUpdates.next(value);
+  }
+
+  private loadCurrentUser() {
+    console.log('Load current user');
+    this.userResource.current().$promise
+      .then((data) => {
+        this.currentUser = data;
+        this.updateLoginStatus(true);
+      })
+      .catch((reason) => {
+        console.log("Cannot load current user");
+        console.log(reason);
+        this.removeToken();
+        this.updateLoginStatus(false);
+      })
+  }
+
 }
