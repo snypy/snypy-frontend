@@ -32,19 +32,19 @@ export class ActiveFilterService {
             case 'main':
                 switch (value) {
                     case 'all':
-                        this.snippetLoaderService.updateSnippetFilter({});
+                        this.updateSnippetFilter({});
                         break;
                     case 'favorites':
                         console.log('Not implemented');
                         break;
                     case 'unlabeled':
-                    this.snippetLoaderService.updateSnippetFilter({'labeled': 'False'});
+                    this.updateSnippetFilter({'labeled': 'False'});
                         break;
                     case 'public':
-                        this.snippetLoaderService.updateSnippetFilter({'visibility': 'PUBLIC'});
+                        this.updateSnippetFilter({'visibility': 'PUBLIC'});
                         break;
                     case 'private':
-                        this.snippetLoaderService.updateSnippetFilter({'visibility': 'PRIVATE'});
+                        this.updateSnippetFilter({'visibility': 'PRIVATE'});
                         break;
                     case 'shared-by-me':
                         console.log('Not implemented');
@@ -58,10 +58,10 @@ export class ActiveFilterService {
                 }
                 break;
             case 'labels':
-                this.snippetLoaderService.updateSnippetFilter({'labels': value});
+                this.updateSnippetFilter({'labels': value});
                 break;
             case 'languages':
-                this.snippetLoaderService.updateSnippetFilter({'files__language': value});
+                this.updateSnippetFilter({'files__language': value});
                 break;
             default:
                 console.log('Undefined filter area" ' + area);
@@ -69,4 +69,7 @@ export class ActiveFilterService {
         }
     }
 
+    private updateSnippetFilter(filter: {}) {
+      this.snippetLoaderService.updateSnippetFilter(filter);
+    }
 }

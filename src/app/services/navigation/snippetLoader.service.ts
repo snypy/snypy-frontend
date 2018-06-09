@@ -4,6 +4,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Snippet, SnippetResource } from '../resources/snippet.resource';
 import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 import { Subject } from 'rxjs/Subject';
+import { AuthResource } from "../resources/auth.resource";
 
 
 @Injectable()
@@ -21,7 +22,8 @@ export class SnippetLoaderService {
     activeSnippetUpdated = new BehaviorSubject<ResourceModel<Snippet>>(this.activeSnippet);
     activeSnippetDeleted = new Subject<number>();
 
-    constructor(private snippetResource: SnippetResource) {
+    constructor(private snippetResource: SnippetResource,
+                private authResource: AuthResource) {
         this.refreshSnippets();
     }
 
@@ -43,7 +45,7 @@ export class SnippetLoaderService {
             });
     }
 
-    sortSnipperts() {
+    sortSnippets() {
         this.snippetsPromise.then(() => {
             this.snippets.sort((a, b) => {
                 const x = a[this.snippetOrdering.key];
@@ -57,7 +59,10 @@ export class SnippetLoaderService {
     }
 
     loadSnippets() {
-        return this.snippetResource.query(this.snippetFilter).$promise;
+        return this.snippetResource.query({
+          user: this.authResource.currentUser.pk,
+          ...this.snippetFilter,
+        }).$promise;
     }
 
     addNewSnippet(snippet: ResourceModel<Snippet>) {
@@ -66,7 +71,7 @@ export class SnippetLoaderService {
     }
 
     updateActiveSnippet(snippet: ResourceModel<Snippet>) {
-        this.sortSnipperts();
+        this.sortSnippets();
         this.activeSnippetUpdated.next(snippet);
     }
 
@@ -85,6 +90,6 @@ export class SnippetLoaderService {
             direction: direction,
         };
 
-        this.sortSnipperts();
+        this.sortSnippets();
     }
 }
