@@ -39,10 +39,6 @@ export class LabelsComponent implements OnInit {
     this.activeFilterService.updateFilter('labels', value);
   }
 
-  randomNumber() {
-    return Math.floor(Math.random() * 20) + 1;
-  }
-
   addLabel() {
     const modalRef = this.modalService.open(LabelModalComponent, {size: 'sm'});
 

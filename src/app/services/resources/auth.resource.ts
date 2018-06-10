@@ -62,7 +62,7 @@ export class AuthResource extends Resource<User> {
    * This method is used in the main app component to load an active user during the bootstrap process
    */
   public init() {
-    if (this.getToken()) {
+    if (AuthResource.getToken()) {
       this.loadCurrentUser();
     }
   }
@@ -72,7 +72,7 @@ export class AuthResource extends Resource<User> {
 
     promise
       .then((data) => {
-        this.setToken(data.token);
+        AuthResource.setToken(data.token);
         this.loadCurrentUser();
       })
       .catch((reason) => {
@@ -93,20 +93,21 @@ export class AuthResource extends Resource<User> {
           console.log(reason);
         });
 
-      this.removeToken();
+      AuthResource.removeToken();
+      this.unloadCurrentUser();
       this.updateLoginStatus(false);
     }
   }
 
-  public getToken() {
+  public static getToken() {
     return localStorage.getItem(AUTH_TOKEN);
   }
 
-  private setToken(token: string) {
+  private static setToken(token: string) {
     localStorage.setItem(AUTH_TOKEN, token);
   }
 
-  private removeToken() {
+  private static removeToken() {
     localStorage.removeItem(AUTH_TOKEN);
   }
 
@@ -125,9 +126,12 @@ export class AuthResource extends Resource<User> {
       .catch((reason) => {
         console.log("Cannot load current user");
         console.log(reason);
-        this.removeToken();
+        AuthResource.removeToken();
         this.updateLoginStatus(false);
       })
   }
 
+  private unloadCurrentUser() {
+    this.currentUser = null;
+  }
 }

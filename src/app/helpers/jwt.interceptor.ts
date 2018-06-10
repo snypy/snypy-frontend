@@ -7,11 +7,11 @@ import { AuthResource } from "../services/resources/auth.resource";
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
 
-  constructor(private authResource: AuthResource) {
+  constructor() {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    let token = this.authResource.getToken();
+    let token = AuthResource.getToken();
 
     if (token) {
       request = request.clone({

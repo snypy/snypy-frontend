@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthResource } from "./services/resources/auth.resource";
+import { ActiveScopeService } from "./services/navigation/activeScope.service";
 
 @Component({
   selector: 'app-root',
@@ -9,16 +10,27 @@ import { AuthResource } from "./services/resources/auth.resource";
 export class AppComponent implements OnInit {
   isLoggedIn = false;
 
-  constructor(private authResource: AuthResource) {
+  constructor(private authResource: AuthResource,
+              private activeScopeService: ActiveScopeService,) {
   }
 
   ngOnInit() {
+    /**
+     * Initialize auth for already authenticated users
+     */
     this.authResource.init();
 
-    this.isLoggedIn = this.authResource.isLoggedId;
-
+    /**
+     * Subscribe for user status changes
+     */
     this.authResource.loginStatusUpdates.subscribe((value) => {
       this.isLoggedIn = value;
+
+      // Update scope for loading data
+      this.activeScopeService.updateScope({
+        area: 'user',
+        value: this.authResource.currentUser,
+      });
     });
   }
 

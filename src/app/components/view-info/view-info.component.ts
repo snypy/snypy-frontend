@@ -4,6 +4,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { SnippetModalComponent } from './../../components/snippet-modal/snippet-modal.component';
 import { SnippetLoaderService } from './../../services/navigation/snippetLoader.service';
+import { ActiveScopeService, Scope } from "../../services/navigation/activeScope.service";
+import { ResourceModel } from "ngx-resource-factory/resource/resource-model";
+import { Team } from "../../services/resources/team.resource";
 
 
 @Component({
@@ -13,10 +16,27 @@ import { SnippetLoaderService } from './../../services/navigation/snippetLoader.
 })
 export class ViewInfoComponent implements OnInit {
 
+  heading = "My Snippets";
+
   constructor(private modalService: NgbModal,
-              private snippetLoaderService: SnippetLoaderService) { }
+              private snippetLoaderService: SnippetLoaderService,
+              private activeScopeService: ActiveScopeService) { }
 
   ngOnInit() {
+    this.activeScopeService.scopeUpdated.subscribe((scope: Scope) => {
+      switch (scope.area) {
+        case 'user':
+          this.heading = "My Snippets";
+          break;
+        case 'team':
+          let team = scope.value as ResourceModel<Team>;
+          this.heading = team.name;
+          break;
+        case 'global':
+          this.heading = "Global";
+          break;
+      }
+    })
   }
 
   addSnippet() {
