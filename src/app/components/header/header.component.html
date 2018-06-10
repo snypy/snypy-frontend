@@ -11,11 +11,11 @@
       <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
         <div class="card" style=" border-radius: 0; border: none;">
             <div class="card-body text-center" style="border-bottom: 1px solid #ddd; padding: 0; margin-bottom: 10px;">
-                <p><img class="img-fluid" src="https://www.gravatar.com/avatar/f4e0e4c7b62a14bb1a00a95828082cf2?s=200" alt="card image" style="border-radius: 50%; max-width: 50%;"></p>
-                <h4 class="card-title">username</h4>
+                <p><img class="img-fluid" [src]="'https://www.gravatar.com/avatar/' + currentUser.pk +'?d=identicon&f=y&s=200'" alt="card image" style="border-radius: 50%; max-width: 50%;"></p>
+                <h4 class="card-title">{{ currentUser.username }}</h4>
             </div>
         </div>
-        <button class="dropdown-item">Help</button>
+        <button class="dropdown-item" (click)="openHelp()">Help</button>
         <button class="dropdown-item" (click)="doLogout()">Logout</button>
       </div>
     </div>
