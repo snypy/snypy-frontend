@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthResource } from "./services/resources/auth.resource";
-import { ActiveScopeService } from "./services/navigation/activeScope.service";
+import { ActiveScopeService, Scope } from "./services/navigation/activeScope.service";
+import { SnippetLoaderService } from "./services/navigation/snippetLoader.service";
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,8 @@ export class AppComponent implements OnInit {
   isLoggedIn = false;
 
   constructor(private authResource: AuthResource,
-              private activeScopeService: ActiveScopeService,) {
+              private activeScopeService: ActiveScopeService,
+              private snippetLoaderService: SnippetLoaderService) {
   }
 
   ngOnInit() {
@@ -31,6 +33,13 @@ export class AppComponent implements OnInit {
         area: 'user',
         value: this.authResource.currentUser,
       });
+    });
+
+    /**
+     * Refresh snippets on scope changes
+     */
+    this.activeScopeService.scopeUpdated.subscribe((scope: Scope) => {
+      this.snippetLoaderService.refreshSnippets();
     });
   }
 

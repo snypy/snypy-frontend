@@ -4,8 +4,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Snippet, SnippetResource } from '../resources/snippet.resource';
 import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 import { Subject } from 'rxjs/Subject';
-import { AuthResource } from "../resources/auth.resource";
-import { ActiveScopeService } from "./activeScope.service";
+import { ActiveScopeService, Scope } from "./activeScope.service";
 import { User } from "../resources/user.resource";
 import { Team } from "../resources/team.resource";
 
@@ -27,7 +26,6 @@ export class SnippetLoaderService {
 
   constructor(private snippetResource: SnippetResource,
               private activeScopeService: ActiveScopeService) {
-    this.refreshSnippets();
   }
 
   refreshSnippets() {
