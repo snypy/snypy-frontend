@@ -48,6 +48,7 @@ import { ContentComponent } from './layout/content/content.component';
 import { LoginComponent } from './components/login/login.component';
 import { JwtInterceptor } from "./helpers/jwt.interceptor";
 import { HelpModalComponent } from './components/help-modal/help-modal.component';
+import { TeamMembersComponent } from './components/team-members/team-members.component';
 
 library.add(
   fas.faCoffee,
@@ -88,6 +89,7 @@ library.add(
     ContentComponent,
     LoginComponent,
     HelpModalComponent,
+    TeamMembersComponent,
   ],
   entryComponents: [
     SnippetModalComponent,

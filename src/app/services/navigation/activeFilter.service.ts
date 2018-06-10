@@ -5,7 +5,7 @@ import { SnippetLoaderService } from './snippetLoader.service';
 
 
 export interface Filter {
-    area: 'main'|'labels'|'languages';
+    area: 'main'|'labels'|'languages'|'user';
     value: string|number;
 }
 
@@ -22,7 +22,7 @@ export class ActiveFilterService {
     };
     filterUpdated = new BehaviorSubject<Filter>(this.initialFilter);
 
-    updateFilter(area: 'main'|'labels'|'languages', value: string|number) {
+    updateFilter(area: 'main'|'labels'|'languages'|'user', value: string|number) {
         this.filterUpdated.next({
             area: area,
             value: value,

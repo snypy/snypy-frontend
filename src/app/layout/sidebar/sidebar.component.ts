@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActiveScopeService, Scope } from "../../services/navigation/activeScope.service";
 
 @Component({
   selector: 'app-sidebar',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor() { }
+  scope: Scope;
+
+  constructor(private activeScopeService: ActiveScopeService) { }
 
   ngOnInit() {
+    this.activeScopeService.scopeUpdated.subscribe((scope: Scope) => {
+      this.scope = scope;
+    });
   }
 
 }
