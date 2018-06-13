@@ -1,14 +1,13 @@
 <div class="list-group-heading">
-    <b>Members</b>
-    <fa-icon class="float-right add-member" icon="plus" (click)="addMember()"></fa-icon>
+  <b>Members</b>
+  <fa-icon class="float-right add-member" icon="plus" (click)="addMember()"></fa-icon>
 </div>
 <div class="list-group list-group-flush" id="list-tab" role="tablist">
-  <span
-    *ngFor="let member of members"
-    [ngClass]="{active: activeFilter.area === 'members' && activeFilter.value === member.pk}"
-    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
-    id="list-profile-list"
-    role="tab">
+  <span *ngFor="let member of members"
+        [ngClass]="{active: activeFilter.area === 'members' && activeFilter.value === member.pk}"
+        class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+        id="list-profile-list"
+        role="tab">
     <span class="icon remove-button" (click)="deleteMember(member)">
       <fa-icon icon="user" size="sm"></fa-icon>
     </span>

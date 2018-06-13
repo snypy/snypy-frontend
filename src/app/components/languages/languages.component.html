@@ -2,14 +2,17 @@
     <b>Languages</b>
 </div>
 <div class="list-group list-group-flush" id="list-tab" role="tablist">
-  <a 
+  <a
     *ngFor="let language of languages"
     [ngClass]="{active: activeFilter.area === 'languages' && activeFilter.value === language.pk}"
     (click)="updateActiveFilter(language.pk)"
     class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
     id="list-profile-list"
     role="tab">
-    <span><span class="icon">#</span> {{ language.name }}</span>
+    <span class="icon">
+      <fa-icon icon="hashtag" size="sm"></fa-icon>
+    </span>
+    <span class="filterAction">{{ language.name }}</span>
     <span class="badge badge-primary badge-pill">{{ 0 }}</span>
   </a>
 </div>

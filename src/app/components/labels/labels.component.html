@@ -3,13 +3,15 @@
   <fa-icon class="float-right add-label" icon="plus" (click)="addLabel()"></fa-icon>
 </div>
 <div class="list-group list-group-flush" id="list-tab" role="tablist">
-  <a *ngFor="let label of labels"
-      [ngClass]="{active: activeFilter.area === 'labels' && activeFilter.value === label.pk}"
-      class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
-      id="list-profile-list"
-      role="tab"
-      aria-controls="profile">
-    <span class="filterAction" (click)="updateActiveFilter(label.pk)"><span class="dot icon"></span> {{ label.name }}</span>
+  <span *ngFor="let label of labels"
+        [ngClass]="{active: activeFilter.area === 'labels' && activeFilter.value === label.pk}"
+        class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+        id="list-profile-list"
+        role="tab">
+    <span class="icon remove-button">
+      <fa-icon icon="circle" size="sm"></fa-icon>
+    </span>
+    <span class="filterAction" (click)="updateActiveFilter(label.pk)">{{ label.name }}</span>
     <span class="badge badge-primary badge-pill" (click)="editLabel(label)">{{ 0 }}</span>
-  </a>
+  </span>
 </div>

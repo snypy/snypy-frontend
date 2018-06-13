@@ -67,6 +67,8 @@ library.add(
   fas.faStar,
   far.faStar,
   fas.faTrash,
+  fas.faCircle,
+  fas.faHashtag,
 );
 
 @NgModule({
