@@ -7,6 +7,7 @@ import { ActiveFilterService, Filter } from '../../services/navigation/activeFil
 import { AvailableLabelsService } from '../../services/navigation/availableLabels.service';
 import { LabelModalComponent } from '../label-modal/label-modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { LabelDeleteModalComponent } from "../label-delete-modal/label-delete-modal.component";
 
 
 @Component({
@@ -51,7 +52,6 @@ export class LabelsComponent implements OnInit {
 
   editLabel(label: ResourceModel<Label>) {
     const modalRef = this.modalService.open(LabelModalComponent, {size: 'sm'});
-
     modalRef.componentInstance.label = label;
 
     modalRef.result.then((result) => {
@@ -61,4 +61,14 @@ export class LabelsComponent implements OnInit {
     });
   }
 
+  deleteLabel(label: ResourceModel<Label>) {
+    const modalRef = this.modalService.open(LabelDeleteModalComponent, {size: 'sm'});
+    modalRef.componentInstance.label = label;
+
+    modalRef.result.then((result) => {
+      this.availableLabelsService.removeLabel(label);
+    }, (reason) => {
+      console.log(`Dismissed: ${reason}`);
+    });
+  }
 }

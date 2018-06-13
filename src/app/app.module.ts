@@ -51,6 +51,7 @@ import { HelpModalComponent } from './components/help-modal/help-modal.component
 import { TeamMembersComponent } from './components/team-members/team-members.component';
 import { TeamMemberModalComponent } from './components/team-member-modal/team-member-modal.component';
 import { TeamMemberDeleteModalComponent } from './components/team-member-delete-modal/team-member-delete-modal.component';
+import { LabelDeleteModalComponent } from './components/label-delete-modal/label-delete-modal.component';
 
 library.add(
   fas.faCoffee,
@@ -96,6 +97,7 @@ library.add(
     TeamMembersComponent,
     TeamMemberModalComponent,
     TeamMemberDeleteModalComponent,
+    LabelDeleteModalComponent,
   ],
   entryComponents: [
     SnippetModalComponent,
@@ -104,6 +106,7 @@ library.add(
     HelpModalComponent,
     TeamMemberModalComponent,
     TeamMemberDeleteModalComponent,
+    LabelDeleteModalComponent,
   ],
   imports: [
     BrowserModule,
