@@ -13,6 +13,7 @@ import { AvailableLanguagesService } from './navigation/availableLanguages.servi
 import { AvailableLabelsService } from './navigation/availableLabels.service';
 import { AuthResource } from "./resources/auth.resource";
 import { ActiveScopeService } from "./navigation/activeScope.service";
+import { UserTeamResource } from "./resources/userteam.resource";
 
 
 @NgModule({
@@ -27,17 +28,19 @@ export class ServicesModule {
         return {
             ngModule: ServicesModule,
             providers: [
+                AuthResource,
                 UserResource,
                 LabelResource,
                 LanguageResource,
                 SnippetResource,
                 FileResource,
                 TeamResource,
+                UserTeamResource,
+
                 ActiveFilterService,
                 SnippetLoaderService,
                 AvailableLanguagesService,
                 AvailableLabelsService,
-                AuthResource,
                 ActiveScopeService,
             ]
         };

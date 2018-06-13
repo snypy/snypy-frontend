@@ -7,19 +7,20 @@ import { ResourceConfiguration } from 'ngx-resource-factory/resource/resource-co
 import { ResourceInstance } from 'ngx-resource-factory/resource/resource-instance';
 
 
-export class Team extends ResourceInstance {
+export class UserTeam extends ResourceInstance {
     pk: number;
     url: string;
-    name: string;
+    user: number;
+    team: number;
 }
 
 @Injectable()
 @ResourceConfiguration({
-    name: 'TeamResource',
-    url: environment.apiUrl + 'team/:pk/',
+    name: 'UserTeamResource',
+    url: environment.apiUrl + 'userteam/:pk/',
     pkAttr: 'pk',
-    instanceClass: Team,
+    instanceClass: UserTeam,
     stripTrailingSlashes: false,
 })
-export class TeamResource extends Resource<Team> {
+export class UserTeamResource extends Resource<UserTeam> {
 }
