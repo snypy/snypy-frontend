@@ -6,11 +6,10 @@
   <a
     *ngFor="let member of members"
     [ngClass]="{active: activeFilter.area === 'members' && activeFilter.value === member.pk}"
-    (click)="updateActiveFilter(member.pk)"
     class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
     id="list-profile-list"
     role="tab">
-    <span><fa-icon class="icon" icon="user" size="sm"></fa-icon> {{ member.user_display }}</span>
-    <span class="badge badge-primary badge-pill">{{ 0 }}</span>
+    <span class="filterAction" (click)="updateActiveFilter(member.pk)"><fa-icon class="icon" icon="user" size="sm"></fa-icon> {{ member.user_display }}</span>
+    <span class="badge badge-primary badge-pill" (click)="editMember(member)">{{ 0 }}</span>
   </a>
 </div>

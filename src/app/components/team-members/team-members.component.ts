@@ -75,6 +75,17 @@ export class TeamMembersComponent implements OnInit, OnDestroy {
     });
   }
 
+  editMember(member: ResourceModel<UserTeam>) {
+    const modalRef = this.modalService.open(TeamMemberModalComponent, {size: 'sm'});
+    modalRef.componentInstance.userTeam = member;
+
+    modalRef.result.then((result) => {
+      this.members.splice(this.members.indexOf(member), 1, result);
+    }, (reason) => {
+      console.log(`Dismissed: ${reason}`);
+    });
+  }
+
   ngOnDestroy() {
     this.filterSubscription.unsubscribe();
     this.scopeSubscription.unsubscribe();

@@ -10,7 +10,7 @@
 <div class="modal-body">
   <form [formGroup]="userTeamForm">
 
-    <div class="form-group">
+    <div class="form-group" *ngIf="!userTeam">
       <label>User</label>
       <ng-select
         formControlName="user"
@@ -20,6 +20,10 @@
         [clearable]="false"
         [multiple]="false">
       </ng-select>
+    </div>
+
+    <div *ngIf="userTeam">
+      <b>User:</b> {{ userTeam.user_display }}
     </div>
 
   </form>

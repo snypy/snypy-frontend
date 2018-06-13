@@ -12,6 +12,7 @@ export class UserTeam extends ResourceInstance {
     url: string;
     user: number;
     team: number;
+    user_display: string;
 }
 
 @Injectable()

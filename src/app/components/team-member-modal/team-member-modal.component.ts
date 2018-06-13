@@ -10,7 +10,9 @@ import { Team } from "../../services/resources/team.resource";
 @Component({
   selector: 'app-team-member-modal',
   templateUrl: './team-member-modal.component.html',
-  styleUrls: ['./team-member-modal.component.scss']
+  styleUrls: [
+    './team-member-modal.component.scss',
+  ]
 })
 export class TeamMemberModalComponent implements OnInit {
 
