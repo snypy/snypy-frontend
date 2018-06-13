@@ -7,6 +7,7 @@ import { Team } from "../../services/resources/team.resource";
 import { Subscription } from "rxjs/Subscription";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { TeamMemberModalComponent } from "../team-member-modal/team-member-modal.component";
+import { TeamMemberDeleteModalComponent } from "../team-member-delete-modal/team-member-delete-modal.component";
 
 @Component({
   selector: 'app-team-members',
@@ -81,6 +82,17 @@ export class TeamMembersComponent implements OnInit, OnDestroy {
 
     modalRef.result.then((result) => {
       this.members.splice(this.members.indexOf(member), 1, result);
+    }, (reason) => {
+      console.log(`Dismissed: ${reason}`);
+    });
+  }
+
+  deleteMember(member: ResourceModel<UserTeam>) {
+    const modalRef = this.modalService.open(TeamMemberDeleteModalComponent, {size: 'sm'});
+    modalRef.componentInstance.userTeam = member;
+
+    modalRef.result.then((result) => {
+      this.members.splice(this.members.indexOf(member), 1);
     }, (reason) => {
       console.log(`Dismissed: ${reason}`);
     });

@@ -50,6 +50,7 @@ import { JwtInterceptor } from "./helpers/jwt.interceptor";
 import { HelpModalComponent } from './components/help-modal/help-modal.component';
 import { TeamMembersComponent } from './components/team-members/team-members.component';
 import { TeamMemberModalComponent } from './components/team-member-modal/team-member-modal.component';
+import { TeamMemberDeleteModalComponent } from './components/team-member-delete-modal/team-member-delete-modal.component';
 
 library.add(
   fas.faCoffee,
@@ -92,6 +93,7 @@ library.add(
     HelpModalComponent,
     TeamMembersComponent,
     TeamMemberModalComponent,
+    TeamMemberDeleteModalComponent,
   ],
   entryComponents: [
     SnippetModalComponent,
@@ -99,6 +101,7 @@ library.add(
     TeamModalComponent,
     HelpModalComponent,
     TeamMemberModalComponent,
+    TeamMemberDeleteModalComponent,
   ],
   imports: [
     BrowserModule,
