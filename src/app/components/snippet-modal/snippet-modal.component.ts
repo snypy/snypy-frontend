@@ -9,6 +9,8 @@ import { Label } from '../../services/resources/label.resource';
 import { Language } from '../../services/resources/language.resource';
 import { AvailableLanguagesService } from '../../services/navigation/availableLanguages.service';
 import { AvailableLabelsService } from '../../services/navigation/availableLabels.service';
+import { ActiveScopeService } from "../../services/navigation/activeScope.service";
+import { Team } from "../../services/resources/team.resource";
 
 
 @Component({
@@ -28,11 +30,26 @@ export class SnippetModalComponent implements OnInit {
   constructor(private activeModal: NgbActiveModal,
               private availableLabelsService: AvailableLabelsService,
               private availableLanguagesService: AvailableLanguagesService,
+              private activeScopeService: ActiveScopeService,
               private snippetResource: SnippetResource) { }
 
   ngOnInit() {
-    this.labels = this.availableLabelsService.labels;
+    let scope = this.activeScopeService.getScope();
 
+    /**
+     * Get available labels
+     */
+    this.availableLabelsService.labelsPromise
+      .then((data) => {
+        this.labels = data;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    /**
+     * Get available languages
+     */
     this.availableLanguagesService.languagesPromise
       .then((data) => {
         this.languages = data;
@@ -41,20 +58,41 @@ export class SnippetModalComponent implements OnInit {
         console.log(error);
       });
 
+    /**
+     * Setup snippet from
+     *
+     * @type {FormGroup}
+     */
     this.snippetForm = new FormGroup({
-      'pk': new FormControl(null, null),
+      'pk': new FormControl(null),
       'title': new FormControl(null, Validators.required),
       'description': new FormControl(null),
       'labels': new FormControl([]),
+      'team': new FormControl(null),
     });
 
+    /**
+     * Set team value from scope
+     */
+    if (scope.area == 'team') {
+      let team = scope.value as ResourceModel<Team>;
+      this.snippetForm.get('team').setValue(team.pk);
+    }
+
+    /**
+     * Set snippet values from given snippet
+     */
     if (this.snippet) {
       this.snippetForm.get('pk').setValue(this.snippet.pk);
       this.snippetForm.get('title').setValue(this.snippet.title);
       this.snippetForm.get('description').setValue(this.snippet.description);
       this.snippetForm.get('labels').setValue(this.snippet.labels);
+      this.snippetForm.get('team').setValue(this.snippet.team);
     }
 
+    /**
+     * Snippet files
+     */
     if (this.snippet) {
       const files = new FormArray([]);
       for (const snippetFile of this.snippet.files) {
