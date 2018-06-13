@@ -5,11 +5,15 @@ import { ResourceModel } from "ngx-resource-factory/resource/resource-model";
 import { UserTeam, UserTeamResource } from "../../services/resources/userteam.resource";
 import { Team } from "../../services/resources/team.resource";
 import { Subscription } from "rxjs/Subscription";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { TeamMemberModalComponent } from "../team-member-modal/team-member-modal.component";
 
 @Component({
   selector: 'app-team-members',
   templateUrl: './team-members.component.html',
-  styleUrls: ['./team-members.component.scss']
+  styleUrls: [
+    './team-members.component.scss',
+  ]
 })
 export class TeamMembersComponent implements OnInit, OnDestroy {
 
@@ -21,7 +25,8 @@ export class TeamMembersComponent implements OnInit, OnDestroy {
 
   constructor(private activeFilterService: ActiveFilterService,
               private activeScopeService: ActiveScopeService,
-              private userTeamResource: UserTeamResource,) {
+              private userTeamResource: UserTeamResource,
+              private modalService: NgbModal,) {
   }
 
   ngOnInit() {
@@ -57,11 +62,17 @@ export class TeamMembersComponent implements OnInit, OnDestroy {
   }
 
   updateActiveFilter(value: number) {
-    this.activeFilterService.updateFilter('user', value);
+    this.activeFilterService.updateFilter('members', value);
   }
 
   addMember() {
-    alert("ToDo: Add Member!");
+    const modalRef = this.modalService.open(TeamMemberModalComponent, {size: 'sm'});
+
+    modalRef.result.then((result) => {
+      this.members.push(result);
+    }, (reason) => {
+      console.log(`Dismissed: ${reason}`);
+    });
   }
 
   ngOnDestroy() {

@@ -1,0 +1,30 @@
+<div class="modal-header">
+
+  <h4 class="modal-title" *ngIf="!userTeam">Add member</h4>
+  <h4 class="modal-title" *ngIf="userTeam">Edit member</h4>
+
+  <button type="button" class="close" aria-label="Close" (click)="closeAction('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="userTeamForm">
+
+    <div class="form-group">
+      <label>User</label>
+      <ng-select
+        formControlName="user"
+        [items]="users"
+        bindLabel="username"
+        bindValue="pk"
+        [clearable]="false"
+        [multiple]="false">
+      </ng-select>
+    </div>
+
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="closeAction('Cancel click')">Cancel</button>
+  <button type="button" class="btn btn-primary btn-outline-dark" (click)="confirmAction()">Save</button>
+</div>
