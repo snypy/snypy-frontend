@@ -44,14 +44,7 @@ export class TeamsComponent implements OnInit {
     this.activeScopeService.updateScope({
       area: 'team',
       value: team,
-    })
-
-    // ToDo
-    // Set current team
-    // Reload labels
-    // Reload counters
-    // Reload snippets
-    // Reset active filter
+    });
   }
 
 }

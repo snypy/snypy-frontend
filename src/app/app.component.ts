@@ -3,6 +3,7 @@ import { AuthResource } from "./services/resources/auth.resource";
 import { ActiveScopeService, Scope } from "./services/navigation/activeScope.service";
 import { SnippetLoaderService } from "./services/navigation/snippetLoader.service";
 import { AvailableLabelsService } from "./services/navigation/availableLabels.service";
+import { ActiveFilterService } from "./services/navigation/activeFilter.service";
 
 @Component({
   selector: 'app-root',
@@ -15,6 +16,7 @@ export class AppComponent implements OnInit {
   constructor(private authResource: AuthResource,
               private activeScopeService: ActiveScopeService,
               private availableLabelsService: AvailableLabelsService,
+              private activeFilterService: ActiveFilterService,
               private snippetLoaderService: SnippetLoaderService) {
   }
 
@@ -41,8 +43,9 @@ export class AppComponent implements OnInit {
      * Refresh snippets on scope changes
      */
     this.activeScopeService.scopeUpdated.subscribe((scope: Scope) => {
+      this.snippetLoaderService.activeSnippet = null;
       this.availableLabelsService.refreshLabels();
-      this.snippetLoaderService.refreshSnippets();
+      this.activeFilterService.updateFilter('main', 'all');
     });
   }
 
