@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ElementRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, ElementRef, OnDestroy } from '@angular/core';
 
 import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -8,6 +8,7 @@ import { Snippet } from '../../services/resources/snippet.resource';
 import { SnippetModalComponent } from '../snippet-modal/snippet-modal.component';
 import { AvailableLabelsService } from '../../services/navigation/availableLabels.service';
 import { Label } from '../../services/resources/label.resource';
+import { Subscription } from "rxjs/Subscription";
 
 
 @Component({
@@ -15,10 +16,13 @@ import { Label } from '../../services/resources/label.resource';
   templateUrl: './snippet-options.component.html',
   styleUrls: ['./snippet-options.component.scss']
 })
-export class SnippetOptionsComponent implements OnInit {
+export class SnippetOptionsComponent implements OnInit, OnDestroy {
 
   activeSnippet: ResourceModel<Snippet> = null;
   labels: ResourceModel<Label>[] = [];
+
+  availableLabelsSubscription: Subscription;
+  snippetLoaderSubscription: Subscription;
 
   constructor(private snippetLoaderService: SnippetLoaderService,
               private availableLabelsService: AvailableLabelsService,
@@ -26,14 +30,15 @@ export class SnippetOptionsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.snippetLoaderService.activeSnippetUpdated.subscribe((snippet) => {
+    this.labels = this.availableLabelsService.labels;
+
+    this.availableLabelsSubscription = this.snippetLoaderService.activeSnippetUpdated.subscribe((snippet) => {
       if (snippet) {
         this.activeSnippet = snippet;
       }
     });
 
-    this.labels = this.availableLabelsService.labels;
-    this.availableLabelsService.labelsUpdated.subscribe((data) => {
+    this.snippetLoaderSubscription = this.availableLabelsService.labelsUpdated.subscribe((data) => {
       this.labels = data;
     });
   }
@@ -48,10 +53,6 @@ export class SnippetOptionsComponent implements OnInit {
     }, (reason) => {
       console.log(`Dismissed: ${reason}`);
     });
-  }
-
-  shareSnippet() {
-    alert('ToDo: Share Snippet');
   }
 
   deleteSnippet() {
@@ -74,5 +75,10 @@ export class SnippetOptionsComponent implements OnInit {
 
   toggleLabel(label: ResourceModel<Label>) {
     alert('ToDo: Toggle label: ' + label.name);
+  }
+
+  ngOnDestroy() {
+    this.availableLabelsSubscription.unsubscribe();
+    this.snippetLoaderSubscription.unsubscribe();
   }
 }

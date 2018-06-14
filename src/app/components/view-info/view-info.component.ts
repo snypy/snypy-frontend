@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -7,6 +7,7 @@ import { SnippetLoaderService } from './../../services/navigation/snippetLoader.
 import { ActiveScopeService, Scope } from "../../services/navigation/activeScope.service";
 import { ResourceModel } from "ngx-resource-factory/resource/resource-model";
 import { Team } from "../../services/resources/team.resource";
+import { Subscription } from "rxjs/Subscription";
 
 
 @Component({
@@ -14,16 +15,18 @@ import { Team } from "../../services/resources/team.resource";
   templateUrl: './view-info.component.html',
   styleUrls: ['./view-info.component.scss']
 })
-export class ViewInfoComponent implements OnInit {
+export class ViewInfoComponent implements OnInit, OnDestroy {
 
   heading = "My Snippets";
+
+  scopeUpdatedSubscription: Subscription;
 
   constructor(private modalService: NgbModal,
               private snippetLoaderService: SnippetLoaderService,
               private activeScopeService: ActiveScopeService) { }
 
   ngOnInit() {
-    this.activeScopeService.scopeUpdated.subscribe((scope: Scope) => {
+    this.scopeUpdatedSubscription = this.activeScopeService.scopeUpdated.subscribe((scope: Scope) => {
       switch (scope.area) {
         case 'user':
           this.heading = "My Snippets";
@@ -47,5 +50,9 @@ export class ViewInfoComponent implements OnInit {
     }, (reason) => {
       console.log(`Dismissed: ${reason}`);
     });
+  }
+
+  ngOnDestroy() {
+    this.scopeUpdatedSubscription.unsubscribe();
   }
 }

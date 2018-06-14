@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { ActiveFilterService, Filter } from '../../services/navigation/activeFilter.service';
 import { Language } from '../../services/resources/language.resource';
 import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 import { AvailableLanguagesService } from '../../services/navigation/availableLanguages.service';
+import { Subscription } from "rxjs/Subscription";
 
 
 @Component({
@@ -11,18 +12,20 @@ import { AvailableLanguagesService } from '../../services/navigation/availableLa
   templateUrl: './languages.component.html',
   styleUrls: ['./languages.component.scss']
 })
-export class LanguagesComponent implements OnInit {
+export class LanguagesComponent implements OnInit, OnDestroy {
 
   activeFilter: Filter;
 
   languages: ResourceModel<Language>[] = [];
+
+  activeFilterSubscription: Subscription;
 
   constructor(private availableLanguagesService: AvailableLanguagesService,
               private activeFilterService: ActiveFilterService) {
   }
 
   ngOnInit() {
-    this.activeFilterService.filterUpdated.subscribe((filter) => {
+    this.activeFilterSubscription = this.activeFilterService.filterUpdated.subscribe((filter) => {
       this.activeFilter = filter;
     });
 
@@ -39,4 +42,7 @@ export class LanguagesComponent implements OnInit {
     this.activeFilterService.updateFilter('languages', value);
   }
 
+  ngOnDestroy() {
+    this.activeFilterSubscription.unsubscribe();
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 
@@ -8,6 +8,7 @@ import { AvailableLabelsService } from '../../services/navigation/availableLabel
 import { LabelModalComponent } from '../label-modal/label-modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LabelDeleteModalComponent } from "../label-delete-modal/label-delete-modal.component";
+import { Subscription } from "rxjs/Subscription";
 
 
 @Component({
@@ -15,11 +16,14 @@ import { LabelDeleteModalComponent } from "../label-delete-modal/label-delete-mo
   templateUrl: './labels.component.html',
   styleUrls: ['./labels.component.scss']
 })
-export class LabelsComponent implements OnInit {
+export class LabelsComponent implements OnInit, OnDestroy {
 
   labels: ResourceModel<Label>[] = [];
 
   activeFilter: Filter;
+
+  activeFilterSubscription: Subscription;
+  availableLabelsSubscription: Subscription;
 
   constructor(private availableLabelsService: AvailableLabelsService,
               private activeFilterService: ActiveFilterService,
@@ -27,11 +31,11 @@ export class LabelsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.activeFilterService.filterUpdated.subscribe((filter) => {
+    this.activeFilterSubscription = this.activeFilterService.filterUpdated.subscribe((filter) => {
       this.activeFilter = filter;
     });
 
-    this.availableLabelsService.labelsUpdated.subscribe((data) => {
+    this.availableLabelsSubscription = this.availableLabelsService.labelsUpdated.subscribe((data) => {
       this.labels = data;
     });
   }
@@ -70,5 +74,10 @@ export class LabelsComponent implements OnInit {
     }, (reason) => {
       console.log(`Dismissed: ${reason}`);
     });
+  }
+
+  ngOnDestroy() {
+    this.activeFilterSubscription.unsubscribe();
+    this.availableLabelsSubscription.unsubscribe();
   }
 }

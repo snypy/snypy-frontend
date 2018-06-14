@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { SnippetResource, Snippet } from '../../services/resources/snippet.resource';
 
 import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 import { SnippetLoaderService } from '../../services/navigation/snippetLoader.service';
+import { Subscription } from "rxjs/Subscription";
 
 
 @Component({
@@ -11,10 +12,14 @@ import { SnippetLoaderService } from '../../services/navigation/snippetLoader.se
   templateUrl: './snippets.component.html',
   styleUrls: ['./snippets.component.scss']
 })
-export class SnippetsComponent implements OnInit {
+export class SnippetsComponent implements OnInit, OnDestroy {
 
   activeSnippet: Snippet = null;
   snippets: ResourceModel<Snippet>[] = [];
+
+  snippetsLoadedSubscription: Subscription;
+  activeSnippetSubscription: Subscription;
+  activeSnippetDeletedSubscription: Subscription;
 
   constructor(private snippetResource: SnippetResource,
               private snippetLoaderService: SnippetLoaderService) { }
@@ -23,14 +28,14 @@ export class SnippetsComponent implements OnInit {
     /**
      * Initial load
      */
-    this.snippetLoaderService.snippetsLoaded.subscribe((snippets) => {
+    this.snippetsLoadedSubscription = this.snippetLoaderService.snippetsLoaded.subscribe((snippets) => {
       this.snippets = snippets;
-    })
+    });
 
     /**
      * Snippet updated subscription
      */
-    this.snippetLoaderService.activeSnippetUpdated.subscribe((snippet) => {
+    this.activeSnippetSubscription = this.snippetLoaderService.activeSnippetUpdated.subscribe((snippet) => {
       this.activeSnippet = snippet;
 
       // Update snippet in list
@@ -45,7 +50,7 @@ export class SnippetsComponent implements OnInit {
     /**
      * Snippet deleted subscription
      */
-    this.snippetLoaderService.activeSnippetDeleted.subscribe((snippetPk) => {
+    this.activeSnippetDeletedSubscription = this.snippetLoaderService.activeSnippetDeleted.subscribe((snippetPk) => {
       // Remove snippet from list
       if (snippetPk) {
         const oldSnippet = this.snippets.find(item => item.pk === snippetPk);
@@ -65,4 +70,9 @@ export class SnippetsComponent implements OnInit {
     this.snippetLoaderService.updateActiveSnippet(snippet);
   }
 
+  ngOnDestroy() {
+    this.snippetsLoadedSubscription.unsubscribe();
+    this.activeSnippetSubscription.unsubscribe();
+    this.activeSnippetDeletedSubscription.unsubscribe();
+  }
 }

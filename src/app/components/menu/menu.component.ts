@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { ActiveFilterService, Filter } from '../../services/navigation/activeFilter.service';
+import { Subscription } from "rxjs/Subscription";
 
 
 @Component({
@@ -8,7 +9,7 @@ import { ActiveFilterService, Filter } from '../../services/navigation/activeFil
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss']
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent implements OnInit, OnDestroy {
 
   activeFilter: Filter;
   navigations = [
@@ -51,13 +52,14 @@ export class MenuComponent implements OnInit {
       icon: 'cloud-download-alt'
     }
     */
-
   ];
+
+  activeFilterSubscription: Subscription;
 
   constructor(private activeFilterService: ActiveFilterService) { }
 
   ngOnInit() {
-    this.activeFilterService.filterUpdated.subscribe((filter) => {
+    this.activeFilterSubscription = this.activeFilterService.filterUpdated.subscribe((filter) => {
       this.activeFilter = filter;
     });
   }
@@ -66,4 +68,7 @@ export class MenuComponent implements OnInit {
     this.activeFilterService.updateFilter('main', value);
   }
 
+  ngOnDestroy() {
+    this.activeFilterSubscription.unsubscribe();
+  }
 }

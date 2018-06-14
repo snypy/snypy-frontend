@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 
@@ -7,6 +7,7 @@ import { Snippet } from '../../services/resources/snippet.resource';
 import { FileResource } from '../../services/resources/file.resource';
 import { Label } from '../../services/resources/label.resource';
 import { AvailableLabelsService } from '../../services/navigation/availableLabels.service';
+import { Subscription } from "rxjs/Subscription";
 
 
 @Component({
@@ -14,11 +15,14 @@ import { AvailableLabelsService } from '../../services/navigation/availableLabel
   templateUrl: './snippet.component.html',
   styleUrls: ['./snippet.component.scss']
 })
-export class SnippetComponent implements OnInit {
+export class SnippetComponent implements OnInit, OnDestroy {
 
   activeSnippet: ResourceModel<Snippet> = null;
   files: ResourceModel<File>[] = [];
   labels: ResourceModel<Label>[] = [];
+
+  availableLabelsSubscription: Subscription;
+  snippetLoaderSubscription: Subscription;
 
   constructor(private snippetLoaderService: SnippetLoaderService,
               private availableLabelsService: AvailableLabelsService,
@@ -26,7 +30,9 @@ export class SnippetComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.snippetLoaderService.activeSnippetUpdated.subscribe((snippet) => {
+    this.labels = this.availableLabelsService.labels;
+
+    this.availableLabelsSubscription = this.snippetLoaderService.activeSnippetUpdated.subscribe((snippet) => {
       if (snippet) {
         this.activeSnippet = snippet;
 
@@ -40,10 +46,13 @@ export class SnippetComponent implements OnInit {
         }
     });
 
-    this.labels = this.availableLabelsService.labels;
-    this.availableLabelsService.labelsUpdated.subscribe((data) => {
+    this.snippetLoaderSubscription = this.availableLabelsService.labelsUpdated.subscribe((data) => {
       this.labels = data;
     });
   }
 
+  ngOnDestroy() {
+    this.availableLabelsSubscription.unsubscribe();
+    this.snippetLoaderSubscription.unsubscribe();
+  }
 }
