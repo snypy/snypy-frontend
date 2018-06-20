@@ -1,26 +1,20 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthResource } from "./services/resources/auth.resource";
-import { ActiveScopeService, Scope } from "./services/navigation/activeScope.service";
+import { ActiveScopeService } from "./services/navigation/activeScope.service";
 import { SnippetLoaderService } from "./services/navigation/snippetLoader.service";
-import { AvailableLabelsService } from "./services/navigation/availableLabels.service";
-import { ActiveFilterService } from "./services/navigation/activeFilter.service";
-import { Subscription } from "rxjs/Subscription";
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit, OnDestroy {
-  isLoggedIn = false;
+export class AppComponent implements OnInit {
 
-  activeScopeSubscription: Subscription;
+  isLoggedIn: boolean = false;
 
   constructor(private authResource: AuthResource,
-              private activeScopeService: ActiveScopeService,
-              private availableLabelsService: AvailableLabelsService,
-              private activeFilterService: ActiveFilterService,
-              private snippetLoaderService: SnippetLoaderService) {
+              private activeScopeService: ActiveScopeService,) {
   }
 
   ngOnInit() {
@@ -42,14 +36,6 @@ export class AppComponent implements OnInit, OnDestroy {
       });
     });
 
-    /**
-     * Refresh snippets on scope changes
-     */
-    this.activeScopeSubscription = this.activeScopeService.scopeUpdated.subscribe((scope: Scope) => {
-      this.snippetLoaderService.activeSnippet = null;
-      this.availableLabelsService.refreshLabels();
-      this.activeFilterService.updateFilter('main', 'all');
-    });
   }
 
   userLogin(credentials: { username: string, password: string }) {
@@ -60,9 +46,5 @@ export class AppComponent implements OnInit, OnDestroy {
       .catch((reason) => {
         // Login failed
       })
-  }
-
-  ngOnDestroy() {
-    this.activeScopeSubscription.unsubscribe();
   }
 }

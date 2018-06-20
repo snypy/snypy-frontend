@@ -1,0 +1,40 @@
+app-sidebar {
+    width: 560px;
+    display: block;
+    float: left;
+}
+
+app-content {
+    width: calc(100% - 560px);
+    display: block;
+    float: right;
+}
+
+/*
+* Style for child components
+*/
+::ng-deep {
+    .full-height {
+        height: 100vh;
+    }
+
+    perfect-scrollbar {
+        .ps.ps--scrolling-y>.ps__rail-y {
+            background-color: transparent;
+        }
+        .ps__thumb-y {
+            right: 0;
+            transition: none;
+            width: 4px;
+        }
+        .ps.ps--active-y>.ps__rail-y {
+            transition: none;
+            width: 4px;
+            z-index: 10;
+        }
+        .ps.ps--active-y>.ps__rail-y:hover,
+        .ps__rail-y:focus>.ps__thumb-y, .ps__rail-y:hover>.ps__thumb-y {
+            width: 4px;
+        }
+    }
+}
