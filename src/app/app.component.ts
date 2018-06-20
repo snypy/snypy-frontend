@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthResource } from "./services/resources/auth.resource";
-import { ActiveScopeService } from "./services/navigation/activeScope.service";
-import { SnippetLoaderService } from "./services/navigation/snippetLoader.service";
+import { ActiveScopeService, Scope } from "./services/navigation/activeScope.service";
 
 
 @Component({
@@ -27,13 +26,24 @@ export class AppComponent implements OnInit {
      * Subscribe for user status changes
      */
     this.authResource.loginStatusUpdates.subscribe((value) => {
+      let scope: Scope;
+
       this.isLoggedIn = value;
 
       // Update scope for loading data
-      this.activeScopeService.updateScope({
-        area: 'user',
-        value: this.authResource.currentUser,
-      });
+      if (value) {
+        scope = {
+          area: 'user',
+          value: this.authResource.currentUser,
+        };
+      } else {
+        scope = {
+          area: null,
+          value: null,
+        };
+      }
+
+      this.activeScopeService.updateScope(scope);
     });
 
   }

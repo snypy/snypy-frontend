@@ -25,9 +25,11 @@ export class BaseComponent implements OnInit, OnDestroy {
      * Refresh snippets on scope changes
      */
     this.activeScopeSubscription = this.activeScopeService.scopeUpdated.subscribe((scope: Scope) => {
-      this.snippetLoaderService.activeSnippet = null;
-      this.availableLabelsService.refreshLabels();
-      this.activeFilterService.updateFilter('main', 'all');
+      if (scope.area) {
+        this.snippetLoaderService.activeSnippet = null;
+        this.availableLabelsService.refreshLabels();
+        this.activeFilterService.updateFilter('main', 'all');
+      }
     });
 
     this.activeScopeService.refreshScope();

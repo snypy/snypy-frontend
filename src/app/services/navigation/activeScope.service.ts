@@ -7,7 +7,7 @@ import { Subject } from "rxjs/Subject";
 
 
 export interface Scope {
-  area: 'user' | 'team' | 'global' | 'none';
+  area: 'user' | 'team' | 'global' | null;
   value: ResourceModel<User | Team>;
 }
 
