@@ -7,7 +7,7 @@
   <div class="col-6 text-right" style="padding-top: 0;">
 
     <div ngbDropdown class="d-inline-block" placement="bottom-right" #myDrop="ngbDropdown">
-      <button class="btn btn-sm btn-outline-info" id="dropdownBasic1" ngbDropdownToggle>username</button>
+      <button class="btn btn-sm btn-outline-info" id="dropdownBasic1" ngbDropdownToggle>{{ currentUser.username }}</button>
       <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
         <div class="card" style=" border-radius: 0; border: none;">
             <div class="card-body text-center" style="border-bottom: 1px solid #ddd; padding: 0; margin-bottom: 10px;">
