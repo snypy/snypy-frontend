@@ -7,29 +7,33 @@ import { Subject } from "rxjs/Subject";
 
 
 export interface Scope {
-    area: 'user'|'team'|'global'|'none';
-    value: ResourceModel<User|Team>;
+  area: 'user' | 'team' | 'global' | 'none';
+  value: ResourceModel<User | Team>;
 }
 
 @Injectable()
 export class ActiveScopeService {
 
-    private activeScope: Scope;
+  private activeScope: Scope;
 
-    scopeUpdated = new Subject<Scope>();
+  scopeUpdated = new Subject<Scope>();
 
-    constructor() {
-    }
+  constructor() {
+  }
 
-    getScope() {
-      return this.activeScope;
-    }
+  getScope() {
+    return this.activeScope;
+  }
 
-    updateScope(scope: Scope) {
-        console.log("Scope updated");
-        console.log(scope);
+  updateScope(scope: Scope) {
+    console.log("Scope updated");
+    console.log(scope);
 
-        this.activeScope = scope;
-        this.scopeUpdated.next(scope);
-    }
+    this.activeScope = scope;
+    this.scopeUpdated.next(scope);
+  }
+
+  refreshScope() {
+    this.scopeUpdated.next(this.activeScope);
+  }
 }

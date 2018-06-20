@@ -52,6 +52,10 @@ export class ViewInfoComponent implements OnInit, OnDestroy {
     });
   }
 
+  triggerReload() {
+    this.activeScopeService.refreshScope();
+  }
+
   ngOnDestroy() {
     this.scopeUpdatedSubscription.unsubscribe();
   }

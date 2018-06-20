@@ -1,7 +1,7 @@
 <div>
   <span>
       <b>{{ heading }}</b>
-      <fa-icon class="float-right" icon="sync-alt"></fa-icon>
+      <fa-icon class="float-right" icon="sync-alt" (click)="triggerReload()"></fa-icon>
   </span>
   <button
     (click)="addSnippet()"
