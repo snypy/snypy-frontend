@@ -26,6 +26,7 @@
                   *ngFor="let label of labels"
                   size="sm"
                   [label]="label.name"
+                  [ngModel]="activeLabels.indexOf(label.pk) > -1"
                 ></app-bootstrap-switch>
               </perfect-scrollbar>
             </div>

@@ -20,6 +20,7 @@ export class SnippetOptionsComponent implements OnInit, OnDestroy {
 
   activeSnippet: ResourceModel<Snippet> = null;
   labels: ResourceModel<Label>[] = [];
+  activeLabels: number[] = [];
 
   availableLabelsSubscription: Subscription;
   snippetLoaderSubscription: Subscription;
@@ -35,6 +36,7 @@ export class SnippetOptionsComponent implements OnInit, OnDestroy {
     this.availableLabelsSubscription = this.snippetLoaderService.activeSnippetUpdated.subscribe((snippet) => {
       if (snippet) {
         this.activeSnippet = snippet;
+        this.activeLabels = this.activeSnippet.labels;
       }
     });
 
@@ -71,10 +73,6 @@ export class SnippetOptionsComponent implements OnInit, OnDestroy {
     }, (reason) => {
       console.log(`Dismissed ${reason}`);
     });
-  }
-
-  toggleLabel(label: ResourceModel<Label>) {
-    alert('ToDo: Toggle label: ' + label.name);
   }
 
   ngOnDestroy() {
