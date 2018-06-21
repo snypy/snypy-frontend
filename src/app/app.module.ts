@@ -53,6 +53,7 @@ import { TeamMemberModalComponent } from './components/team-member-modal/team-me
 import { TeamMemberDeleteModalComponent } from './components/team-member-delete-modal/team-member-delete-modal.component';
 import { LabelDeleteModalComponent } from './components/label-delete-modal/label-delete-modal.component';
 import { BaseComponent } from './layout/base/base.component';
+import { BootstrapSwitchComponent } from './components/bootstrap-switch/bootstrap-switch.component';
 
 library.add(
   fas.faCoffee,
@@ -100,6 +101,7 @@ library.add(
     TeamMemberDeleteModalComponent,
     LabelDeleteModalComponent,
     BaseComponent,
+    BootstrapSwitchComponent,
   ],
   entryComponents: [
     SnippetModalComponent,

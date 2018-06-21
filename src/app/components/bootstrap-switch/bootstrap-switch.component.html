@@ -1,0 +1,6 @@
+<div class="form-group">
+  <span class="switch" [ngClass]="{'switch-sm': size === 'sm', 'switch-md': size === 'md', 'switch-lg': size === 'lg'}">
+    <input [(ngModel)]="value" (blur)="onBlur()" type="checkbox" class="switch" [id]="uniqueId">
+    <label [for]="uniqueId">Large switch</label>
+  </span>
+</div>

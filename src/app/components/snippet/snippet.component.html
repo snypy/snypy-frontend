@@ -11,6 +11,11 @@
     {{ activeSnippet.description }}
   </div>
 
+  <app-bootstrap-switch size="sm"></app-bootstrap-switch>
+  <app-bootstrap-switch size="md"></app-bootstrap-switch>
+  <app-bootstrap-switch size="lg"></app-bootstrap-switch>
+
+
   <div *ngFor="let file of files" style="margin: 30px;">
     <ngb-accordion #acc="ngbAccordion" [activeIds]="'file-' + file.pk">
       <ngb-panel [id]="'file-' + file.pk" [title]="file.name">
