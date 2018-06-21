@@ -19,11 +19,15 @@
           <div ngbDropdown class="d-inline-block" placement="bottom-right" #myDrop="ngbDropdown">
             <button class="btn btn-sm btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Labels</button>
             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                <button
-                    class="dropdown-item"
-                    (click)="$event.stopPropagation(); myDrop.open(); toggleLabel(label)"
-                    *ngFor="let label of labels"
-                >{{ label.name }}</button>
+              <perfect-scrollbar style="max-height: 40vh;">
+                <app-bootstrap-switch
+                  class="label-toggle"
+                  (click)="$event.stopPropagation();myDrop.open();"
+                  *ngFor="let label of labels"
+                  size="sm"
+                  [label]="label.name"
+                ></app-bootstrap-switch>
+              </perfect-scrollbar>
             </div>
           </div>
         </div>

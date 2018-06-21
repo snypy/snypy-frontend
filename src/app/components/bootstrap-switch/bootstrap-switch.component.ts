@@ -19,6 +19,7 @@ import { noop } from "rxjs/internal-compatibility";
 export class BootstrapSwitchComponent implements ControlValueAccessor {
 
   @Input() size: 'sm'|'md'|'lg' = 'md';
+  @Input() label: string;
 
   uniqueId: string = Math.random().toString(36).substr(2, 15)
 
