@@ -1,7 +1,7 @@
 <div *ngIf="activeSnippet;">
-  <div style="padding: 15px;" *ngIf="labels.length">
+  <div class="label-list" *ngIf="labels.length">
     <span *ngFor="let label of activeSnippet.labels">
-      <span  class="badge badge-info">
+      <span class="badge badge-info">
         {{ (labels | filterBy: ['pk']: label)[0].name }}
       </span>
     </span>

@@ -9,6 +9,7 @@ import { SnippetModalComponent } from '../snippet-modal/snippet-modal.component'
 import { AvailableLabelsService } from '../../services/navigation/availableLabels.service';
 import { Label } from '../../services/resources/label.resource';
 import { Subscription } from "rxjs/Subscription";
+import { SnippetLabelResource } from "../../services/resources/snippetlabel.resource";
 
 
 @Component({
@@ -27,6 +28,7 @@ export class SnippetOptionsComponent implements OnInit, OnDestroy {
 
   constructor(private snippetLoaderService: SnippetLoaderService,
               private availableLabelsService: AvailableLabelsService,
+              private snippetLabelResource: SnippetLabelResource,
               private modalService: NgbModal) {
   }
 
@@ -73,6 +75,43 @@ export class SnippetOptionsComponent implements OnInit, OnDestroy {
     }, (reason) => {
       console.log(`Dismissed ${reason}`);
     });
+  }
+
+  toggleLabel(label: ResourceModel<Label>) {
+    let index = this.activeLabels.indexOf(label.pk);
+
+    if (index > -1) {
+      this.snippetLabelResource.query({snippet: this.activeSnippet.pk, label: label.pk}).$promise
+        .then((data) => {
+          if (data.length == 1) {
+            data[0].$remove().$promise
+              .then(() => {
+                this.activeLabels.splice(index, 1);
+              })
+              .catch((reason) => {
+                console.log("Cannot delete snippet label");
+                console.log(reason);
+              })
+          }
+          else {
+            console.log("Snippet label not found");
+          }
+        })
+        .catch((reason) => {
+          console.log("Cannot fetch snippet label");
+          console.log(reason);
+        })
+    }
+    else {
+       this.snippetLabelResource.save({}, {snippet: this.activeSnippet.pk, label: label.pk}).$promise
+         .then((data) => {
+           this.activeLabels.push(label.pk);
+         })
+         .catch((reason) => {
+            console.log("Cannot add snippet label");
+            console.log(reason);
+          })
+    }
   }
 
   ngOnDestroy() {
