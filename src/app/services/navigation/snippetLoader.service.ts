@@ -70,6 +70,7 @@ export class SnippetLoaderService {
       case 'user':
         let user = scope.value as ResourceModel<User>;
         payload['user'] = user.pk;
+        payload['team_is_null'] = 'True';
         break;
       case 'team':
         let team = scope.value as ResourceModel<Team>;

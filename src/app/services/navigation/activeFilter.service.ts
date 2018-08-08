@@ -63,6 +63,9 @@ export class ActiveFilterService {
             case 'languages':
                 this.updateSnippetFilter({'files__language': value});
                 break;
+            case 'members':
+                this.updateSnippetFilter({'user': value});
+                break;
             default:
                 console.log('Undefined filter area" ' + area);
                 break;

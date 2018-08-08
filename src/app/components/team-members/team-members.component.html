@@ -11,7 +11,7 @@
     <span class="icon remove-button" (click)="deleteMember(member)">
       <fa-icon icon="user" size="sm"></fa-icon>
     </span>
-    <span class="filterAction" (click)="updateActiveFilter(member.pk)">{{ member.user_display }}</span>
+    <span class="filterAction" (click)="updateActiveFilter(member.user)">{{ member.user_display }}</span>
     <span class="badge badge-primary badge-pill" (click)="editMember(member)">{{ 0 }}</span>
   </span>
 </div>
