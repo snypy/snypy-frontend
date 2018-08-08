@@ -13,6 +13,7 @@ export class UserTeam extends ResourceInstance {
     user: number;
     team: number;
     user_display: string;
+    snippet_count: number;
 }
 
 @Injectable()

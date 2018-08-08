@@ -11,6 +11,7 @@ export class Language extends ResourceInstance {
     pk: number;
     url: string;
     name: string;
+    snippet_count: number;
 }
 
 @Injectable()

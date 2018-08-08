@@ -12,6 +12,6 @@
       <fa-icon icon="circle" size="sm"></fa-icon>
     </span>
     <span class="filterAction" (click)="updateActiveFilter(label.pk)">{{ label.name }}</span>
-    <span class="badge badge-primary badge-pill" (click)="editLabel(label)">{{ 0 }}</span>
+    <span class="badge badge-primary badge-pill" (click)="editLabel(label)">{{ label.snippet_count }}</span>
   </span>
 </div>
