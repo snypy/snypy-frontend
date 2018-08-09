@@ -19,6 +19,7 @@ export class LanguagesComponent implements OnInit, OnDestroy {
   languages: ResourceModel<Language>[] = [];
 
   activeFilterSubscription: Subscription;
+  availableLanguagesSubscription: Subscription;
 
   constructor(private availableLanguagesService: AvailableLanguagesService,
               private activeFilterService: ActiveFilterService) {
@@ -29,13 +30,9 @@ export class LanguagesComponent implements OnInit, OnDestroy {
       this.activeFilter = filter;
     });
 
-    this.availableLanguagesService.languagesPromise
-      .then((data) => {
-        this.languages = data;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    this.availableLanguagesSubscription = this.availableLanguagesService.languagesUpdated.subscribe((data) => {
+      this.languages = data;
+    });
   }
 
   updateActiveFilter(value: number) {
@@ -44,5 +41,6 @@ export class LanguagesComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.activeFilterSubscription.unsubscribe();
+    this.availableLanguagesSubscription.unsubscribe();
   }
 }

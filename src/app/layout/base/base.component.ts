@@ -4,6 +4,7 @@ import { ActiveScopeService, Scope } from "../../services/navigation/activeScope
 import { AvailableLabelsService } from "../../services/navigation/availableLabels.service";
 import { SnippetLoaderService } from "../../services/navigation/snippetLoader.service";
 import { Subscription } from "rxjs/Subscription";
+import {AvailableLanguagesService} from "../../services/navigation/availableLanguages.service";
 
 @Component({
   selector: 'app-base',
@@ -17,6 +18,7 @@ export class BaseComponent implements OnInit, OnDestroy {
   constructor(private activeScopeService: ActiveScopeService,
               private activeFilterService: ActiveFilterService,
               private availableLabelsService: AvailableLabelsService,
+              private availableLanguagesService: AvailableLanguagesService,
               private snippetLoaderService: SnippetLoaderService,) {
   }
 
@@ -28,6 +30,7 @@ export class BaseComponent implements OnInit, OnDestroy {
       if (scope.area) {
         this.snippetLoaderService.activeSnippet = null;
         this.availableLabelsService.refreshLabels();
+        this.availableLanguagesService.refreshLanguages();
         this.activeFilterService.updateFilter('main', 'all');
       }
     });
