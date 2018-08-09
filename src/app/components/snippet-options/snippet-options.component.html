@@ -1,6 +1,8 @@
 <div class="row" *ngIf="activeSnippet;">
     <div class="col-9" style="padding-top: 0;">
+        <!-- ToDo: Implement in 1.1
         <fa-icon class="icon" [icon]="['far', 'star']" size="sm"></fa-icon>
+        !-->
         <span class="title">{{ activeSnippet.title }}</span><br>
         <small><b>By</b> {{ activeSnippet.user_display || 'Anonymous' }}</small><br>
         <small><b>Created</b> {{ activeSnippet.created_date | date:'medium' }}</small><br>
@@ -9,7 +11,7 @@
     <div class="col-3 text-right" style="padding-top: 0;">
         <div class="btn-group" role="group" aria-label="Basic example">
             <button type="button" class="btn btn-sm btn-link" (click)="editSnippet()">Edit</button>
-            <!-- ToDo: Enable after share options are available in REST API
+            <!-- ToDo: Implement in 1.1
             <button type="button" class="btn btn-sm btn-link" (click)="shareSnippet()">Share</button>
             -->
             <button type="button" class="btn btn-sm btn-link" (click)="openDeleteModal(deleteModal)">Delete</button>

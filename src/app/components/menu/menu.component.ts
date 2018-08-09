@@ -18,29 +18,32 @@ export class MenuComponent implements OnInit, OnDestroy {
       value: 'all',
       icon: 'globe'
     },
-    {
-      name: 'Favorites',
-      value: 'favorites',
-      icon: 'star'
-    },
+    // ToDo: Implement in 1.1
+    // {
+    //   name: 'Favorites',
+    //   value: 'favorites',
+    //   icon: 'star'
+    // },
     {
       name: 'Unlabeled',
       value: 'unlabeled',
       icon: 'tag'
     },
-    {
-      name: 'Public',
-      value: 'public',
-      icon: 'eye'
-    },
-    {
-      name: 'Private',
-      value: 'private',
-      icon: 'eye-slash'
-    },
+
+    // ToDo: Implement in 1.1
+    // {
+    //   name: 'Public',
+    //   value: 'public',
+    //   icon: 'eye'
+    // },
+    // {
+    //   name: 'Private',
+    //   value: 'private',
+    //   icon: 'eye-slash'
+    // },
 
     /*
-    ToDo: Enable after share options are available in REST API
+    ToDo: Implement in 1.1
     {
       name: 'Shared by me',
       value: 'shared-by-me',
