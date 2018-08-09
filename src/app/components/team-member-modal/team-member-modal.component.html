@@ -10,7 +10,7 @@
 <div class="modal-body">
   <form [formGroup]="userTeamForm">
 
-    <div class="form-group" *ngIf="!userTeam">
+    <div class="form-group" *ngIf="!userTeam; else userIsSet">
       <label>User</label>
       <ng-select
         formControlName="user"
@@ -22,9 +22,16 @@
       </ng-select>
     </div>
 
-    <div *ngIf="userTeam">
-      <b>User:</b> {{ userTeam.user_display }}
-    </div>
+
+    <label>Role</label>
+    <ng-select
+      formControlName="role"
+      [items]="roles"
+      bindLabel="label"
+      bindValue="pk"
+      [clearable]="false"
+      [multiple]="false">
+    </ng-select>
 
   </form>
 </div>
@@ -32,3 +39,9 @@
   <button type="button" class="btn btn-outline-dark" (click)="closeAction('Cancel click')">Cancel</button>
   <button type="button" class="btn btn-primary btn-outline-dark" (click)="confirmAction()">Save</button>
 </div>
+
+<ng-template #userIsSet>
+  <div class="form-group">
+    <b>User:</b> {{ userTeam.user_display }}
+  </div>
+</ng-template>

@@ -21,6 +21,12 @@ export class TeamMemberModalComponent implements OnInit {
   userTeamForm: FormGroup;
   users: ResourceModel<User>[] = [];
 
+  roles = [
+    {pk: 'SUBSCRIBER', label: 'Subscriber'},
+    {pk: 'CONTRIBUTOR', label: 'Contributor'},
+    {pk: 'EDITOR', label: 'Editor'},
+  ];
+
   constructor(private activeModal: NgbActiveModal,
               private userResource: UserResource,
               private userTeamResource: UserTeamResource,
@@ -36,11 +42,13 @@ export class TeamMemberModalComponent implements OnInit {
         'pk': new FormControl(null, null),
         'user': new FormControl(null, Validators.required),
         'team': new FormControl(team.pk, Validators.required),
+        'role': new FormControl(team.pk, Validators.required),
       });
 
       if (this.userTeam) {
         this.userTeamForm.get('pk').setValue(this.userTeam.pk);
         this.userTeamForm.get('user').setValue(this.userTeam.user);
+        this.userTeamForm.get('role').setValue(this.userTeam.role);
       }
 
       this.userResource.query({exclude_team: scope.value}).$promise
