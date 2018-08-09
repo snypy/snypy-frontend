@@ -138,6 +138,9 @@ export class SnippetModalComponent implements OnInit {
 
     promise
       .then((data) => {
+        this.availableLabelsService.refreshLabels();
+        this.availableLanguagesService.refreshLanguages();
+
         this.activeModal.close(data);
       })
       .catch((error) => {
