@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-6" style="padding-top: 0;">
-    <div class="form-group">
-      <input type="text" class="form-control form-control-sm" id="search" placeholder="Search for snippets">
+    <div class="form-group" [formGroup]="snippetSearchForm">
+      <input type="text" class="form-control form-control-sm" formControlName="search" id="search" placeholder="Search for snippets">
     </div>
   </div>
   <div class="col-6 text-right" style="padding-top: 0;">
@@ -9,7 +9,7 @@
     <div ngbDropdown class="d-inline-block" placement="bottom-right" #myDrop="ngbDropdown">
       <button class="btn btn-sm btn-outline-info" id="dropdownBasic1" ngbDropdownToggle>{{ currentUser.username }}</button>
       <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-        <div class="card" style=" border-radius: 0; border: none;">
+        <div class="card" style="border-radius: 0; border: none;">
             <div class="card-body text-center" style="border-bottom: 1px solid #ddd; padding: 0; margin-bottom: 10px;">
                 <p><img class="img-fluid" [src]="'https://www.gravatar.com/avatar/' + currentUser.pk +'?d=identicon&f=y&s=200'" alt="card image" style="border-radius: 50%; max-width: 50%;"></p>
                 <h4 class="card-title">{{ currentUser.username }}</h4>

@@ -18,6 +18,7 @@ export class SnippetLoaderService {
   snippetsLoaded = new Subject<ResourceModel<Snippet>[]>();
 
   snippetFilter = {};
+  snippetSearchFilter: string = '';
   snippetOrdering: { key: string, direction: -1 | 1 };
 
   activeSnippet: ResourceModel<Snippet> = null;
@@ -59,7 +60,40 @@ export class SnippetLoaderService {
     });
   }
 
-  loadSnippets() {
+  addNewSnippet(snippet: ResourceModel<Snippet>) {
+    this.snippets.unshift(snippet);
+    this.updateActiveSnippet(snippet);
+  }
+
+  updateActiveSnippet(snippet: ResourceModel<Snippet>) {
+    this.sortSnippets();
+    this.activeSnippetUpdated.next(snippet);
+  }
+
+  deleteSnippet(snippetPk: number) {
+    this.activeSnippetDeleted.next(snippetPk);
+  }
+
+  updateSnippetFilter(filter: {}) {
+    this.snippetFilter = filter;
+    this.refreshSnippets();
+  }
+
+  updateSnippetSearchFilter(filter: string) {
+    this.snippetSearchFilter = filter;
+    this.refreshSnippets();
+  }
+
+  updateSnippetOrder(key: string, direction: -1 | 1) {
+    this.snippetOrdering = {
+      key: key,
+      direction: direction,
+    };
+
+    this.sortSnippets();
+  }
+
+  private loadSnippets() {
     let payload = {};
     let scope = this.activeScopeService.getScope();
 
@@ -81,34 +115,7 @@ export class SnippetLoaderService {
     return this.snippetResource.query({
       ...payload,
       ...this.snippetFilter,
+      search: this.snippetSearchFilter,
     }).$promise;
-  }
-
-  addNewSnippet(snippet: ResourceModel<Snippet>) {
-    this.snippets.unshift(snippet);
-    this.updateActiveSnippet(snippet);
-  }
-
-  updateActiveSnippet(snippet: ResourceModel<Snippet>) {
-    this.sortSnippets();
-    this.activeSnippetUpdated.next(snippet);
-  }
-
-  deleteSnippet(snippetPk: number) {
-    this.activeSnippetDeleted.next(snippetPk);
-  }
-
-  updateSnippetFilter(filter: {}) {
-    this.snippetFilter = filter;
-    this.refreshSnippets();
-  }
-
-  updateSnippetOrder(key: string, direction: -1 | 1) {
-    this.snippetOrdering = {
-      key: key,
-      direction: direction,
-    };
-
-    this.sortSnippets();
   }
 }
