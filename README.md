@@ -1,4 +1,6 @@
 [![Waffle.io - Columns and their card count](https://badge.waffle.io/nezhar/snypy-frontend.png?columns=all)](https://waffle.io/nezhar/snypy-frontend?utm_source=badge)
+[![Known Vulnerabilities](https://snyk.io/test/github/nezhar/snypy-frontend/badge.svg?targetFile=package.json)](https://snyk.io/test/github/nezhar/snypy-frontend?targetFile=package.json)
+
 # SnyPy Frontend
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.4.
