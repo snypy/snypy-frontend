@@ -1,0 +1,9 @@
+---
+applications:
+- name: cf-snypy-static
+  instances: 1
+  random-route: false
+  buildpack: staticfile_buildpack
+  memory: 16M
+  disk_quota: 32M
+  path: dist
