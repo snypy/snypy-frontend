@@ -56,7 +56,7 @@ export class AuthResource extends Resource<User> {
     invalidateCache: true,
     urlSuffix: 'logout/',
   })
-  _logout: ResourceActionMethod<any, any, null>;
+  _logout: ResourceActionMethod<any, any, any>;
 
   /**
    * This method is used in the main app component to load an active user during the bootstrap process
