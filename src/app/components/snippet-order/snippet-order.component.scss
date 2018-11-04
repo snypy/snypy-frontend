@@ -11,8 +11,7 @@ ng-select {
     ::ng-deep {
         font-size: .75rem;
 
-        .ng-control,
-        .ng-single .ng-control {
+        .ng-select-container {
             min-height: auto;
             height: 27px !important;
         }
