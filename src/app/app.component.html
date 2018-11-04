@@ -1,3 +1,5 @@
+<app-loading-screen></app-loading-screen>
+
 <div *ngIf="!isLoggedIn; else snippetsApp">
   <app-login (login)="userLogin($event)"></app-login>
 </div>

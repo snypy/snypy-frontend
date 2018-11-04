@@ -54,6 +54,8 @@ import { TeamMemberDeleteModalComponent } from './components/team-member-delete-
 import { LabelDeleteModalComponent } from './components/label-delete-modal/label-delete-modal.component';
 import { BaseComponent } from './layout/base/base.component';
 import { BootstrapSwitchComponent } from './components/bootstrap-switch/bootstrap-switch.component';
+import { LoadingScreenComponent } from './components/loading-screen/loading-screen.component';
+import { LoadingScreenInterceptor } from "./helpers/loading.interceptor";
 
 library.add(
   fas.faCoffee,
@@ -102,6 +104,7 @@ library.add(
     LabelDeleteModalComponent,
     BaseComponent,
     BootstrapSwitchComponent,
+    LoadingScreenComponent,
   ],
   entryComponents: [
     SnippetModalComponent,
@@ -135,6 +138,11 @@ library.add(
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadingScreenInterceptor,
       multi: true
     }
   ],

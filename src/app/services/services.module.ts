@@ -15,6 +15,7 @@ import { AuthResource } from "./resources/auth.resource";
 import { ActiveScopeService } from "./navigation/activeScope.service";
 import { UserTeamResource } from "./resources/userteam.resource";
 import { SnippetLabelResource } from "./resources/snippetlabel.resource";
+import { LoadingScreenService } from "./loading-screen/loading-screen.service";
 
 
 @NgModule({
