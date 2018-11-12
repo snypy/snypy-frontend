@@ -12,6 +12,7 @@ import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { MonacoEditorModule } from 'ngx-monaco-editor';
 import { NgPipesModule } from 'ngx-pipes';
+import { ToastrModule } from "ngx-toastr";
 
 import { ServicesModule } from './services/services.module';
 
@@ -36,26 +37,28 @@ import { SnippetComponent } from './components/snippet/snippet.component';
 import { SnippetOptionsComponent } from './components/snippet-options/snippet-options.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
-import { SnippetModalComponent } from './components/snippet-modal/snippet-modal.component';
 import { SnippetOrderComponent } from './components/snippet-order/snippet-order.component';
-import { LabelModalComponent } from './components/label-modal/label-modal.component';
 import { TeamsComponent } from './components/teams/teams.component';
 import { ViewInfoComponent } from './components/view-info/view-info.component';
 import { ViewSwitchComponent } from './components/view-switch/view-switch.component';
-import { TeamModalComponent } from './components/team-modal/team-modal.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { ContentComponent } from './layout/content/content.component';
 import { LoginComponent } from './components/login/login.component';
 import { JwtInterceptor } from "./helpers/jwt.interceptor";
-import { HelpModalComponent } from './components/help-modal/help-modal.component';
-import { TeamMembersComponent } from './components/team-members/team-members.component';
-import { TeamMemberModalComponent } from './components/team-member-modal/team-member-modal.component';
-import { TeamMemberDeleteModalComponent } from './components/team-member-delete-modal/team-member-delete-modal.component';
-import { LabelDeleteModalComponent } from './components/label-delete-modal/label-delete-modal.component';
 import { BaseComponent } from './layout/base/base.component';
 import { BootstrapSwitchComponent } from './components/bootstrap-switch/bootstrap-switch.component';
 import { LoadingScreenComponent } from './components/loading-screen/loading-screen.component';
 import { LoadingScreenInterceptor } from "./helpers/loading.interceptor";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { TeamMembersComponent } from './components/team-members/team-members.component';
+
+import { SnippetModalComponent } from './modals/snippet-modal/snippet-modal.component';
+import { LabelModalComponent } from './modals/label-modal/label-modal.component';
+import { TeamModalComponent } from './modals/team-modal/team-modal.component';
+import { HelpModalComponent } from './modals/help-modal/help-modal.component';
+import { TeamMemberModalComponent } from './modals/team-member-modal/team-member-modal.component';
+import { TeamMemberDeleteModalComponent } from './modals/team-member-delete-modal/team-member-delete-modal.component';
+import { LabelDeleteModalComponent } from './modals/label-delete-modal/label-delete-modal.component';
 
 library.add(
   fas.faCoffee,
@@ -127,6 +130,8 @@ library.add(
     ReactiveFormsModule,
     MonacoEditorModule.forRoot(),
     NgPipesModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
 
     ServicesModule.forRoot(),
   ],

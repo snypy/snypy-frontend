@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { SnippetModalComponent } from './../../components/snippet-modal/snippet-modal.component';
+import { SnippetModalComponent } from '../../modals/snippet-modal/snippet-modal.component';
 import { SnippetLoaderService } from './../../services/navigation/snippetLoader.service';
 import { ActiveScopeService, Scope } from "../../services/navigation/activeScope.service";
 import { ResourceModel } from "ngx-resource-factory/resource/resource-model";

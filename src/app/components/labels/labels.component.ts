@@ -5,9 +5,9 @@ import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 import { Label } from '../../services/resources/label.resource';
 import { ActiveFilterService, Filter } from '../../services/navigation/activeFilter.service';
 import { AvailableLabelsService } from '../../services/navigation/availableLabels.service';
-import { LabelModalComponent } from '../label-modal/label-modal.component';
+import { LabelModalComponent } from '../../modals/label-modal/label-modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { LabelDeleteModalComponent } from "../label-delete-modal/label-delete-modal.component";
+import { LabelDeleteModalComponent } from "../../modals/label-delete-modal/label-delete-modal.component";
 import { Subscription } from "rxjs/Subscription";
 
 

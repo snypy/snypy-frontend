@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TeamResource, Team } from '../../services/resources/team.resource';
 import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { TeamModalComponent } from '../team-modal/team-modal.component';
+import { TeamModalComponent } from '../../modals/team-modal/team-modal.component';
 import { ActiveScopeService } from "../../services/navigation/activeScope.service";
 
 @Component({

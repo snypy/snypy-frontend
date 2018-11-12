@@ -5,6 +5,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ActiveScopeService } from "../../services/navigation/activeScope.service";
 import { Team } from "../../services/resources/team.resource";
+import { ToastrService } from "ngx-toastr";
 
 
 @Component({
@@ -20,7 +21,8 @@ export class LabelModalComponent implements OnInit {
 
   constructor(private activeModal: NgbActiveModal,
               private labelResource: LabelResource,
-              private activeScopeService: ActiveScopeService,) {
+              private activeScopeService: ActiveScopeService,
+              private toastr: ToastrService) {
   }
 
   ngOnInit() {
@@ -55,20 +57,26 @@ export class LabelModalComponent implements OnInit {
   }
 
   confirmAction() {
-    let promise;
+    let promise, message, errorMessage;
 
     if (this.label) {
       promise = this.labelResource.update({}, this.labelForm.value).$promise;
+      message = "Label updated!";
+      errorMessage = "Cannot update label!";
     } else {
       promise = this.labelResource.save({}, this.labelForm.value).$promise;
+      message = "Label added!";
+      errorMessage = "Cannot add label!";
     }
 
     promise
       .then((data) => {
+        this.toastr.success(message);
         this.activeModal.close(data);
       })
       .catch((error) => {
         console.log(error);
+        this.toastr.error(errorMessage);
       });
   }
 

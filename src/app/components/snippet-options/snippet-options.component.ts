@@ -5,7 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { SnippetLoaderService } from '../../services/navigation/snippetLoader.service';
 import { Snippet } from '../../services/resources/snippet.resource';
-import { SnippetModalComponent } from '../snippet-modal/snippet-modal.component';
+import { SnippetModalComponent } from '../../modals/snippet-modal/snippet-modal.component';
 import { AvailableLabelsService } from '../../services/navigation/availableLabels.service';
 import { Label } from '../../services/resources/label.resource';
 import { Subscription } from "rxjs/Subscription";

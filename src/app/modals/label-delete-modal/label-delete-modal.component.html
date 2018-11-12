@@ -1,12 +1,12 @@
 <div class="modal-header">
   <h4 class="modal-title">Delete member</h4>
 
-  <button type="button" class="close" aria-label="Close" (click)="closeAction('Cross click')">
+  <div class="close" aria-label="Close" (click)="closeAction('Cross click')">
     <span aria-hidden="true">&times;</span>
-  </button>
+  </div>
 </div>
 <div class="modal-body">
-  <p>Are you sure you want to remove the user <b>{{ userTeam.user_display }}</b> from the current team?</p>
+  <p>Are you sure you want to remove the label <b>{{ label.name }}</b>?</p>
 </div>
 <div class="modal-footer">
   <button type="button" class="btn btn-outline-dark" (click)="closeAction('Cancel click')">Cancel</button>

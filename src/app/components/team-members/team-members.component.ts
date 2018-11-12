@@ -6,8 +6,8 @@ import { UserTeam, UserTeamResource } from "../../services/resources/userteam.re
 import { Team } from "../../services/resources/team.resource";
 import { Subscription } from "rxjs/Subscription";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { TeamMemberModalComponent } from "../team-member-modal/team-member-modal.component";
-import { TeamMemberDeleteModalComponent } from "../team-member-delete-modal/team-member-delete-modal.component";
+import { TeamMemberModalComponent } from "../../modals/team-member-modal/team-member-modal.component";
+import { TeamMemberDeleteModalComponent } from "../../modals/team-member-delete-modal/team-member-delete-modal.component";
 
 @Component({
   selector: 'app-team-members',

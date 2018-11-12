@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ResourceModel } from "ngx-resource-factory/resource/resource-model";
 import { UserTeam } from "../../services/resources/userteam.resource";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: 'app-team-member-delete-modal',
@@ -14,7 +15,8 @@ export class TeamMemberDeleteModalComponent implements OnInit {
 
   @Input() userTeam: ResourceModel<UserTeam> = null;
 
-  constructor(private activeModal: NgbActiveModal,) { }
+  constructor(private activeModal: NgbActiveModal,
+              private toastr: ToastrService) { }
 
   ngOnInit() {
   }
@@ -22,10 +24,12 @@ export class TeamMemberDeleteModalComponent implements OnInit {
   confirmAction() {
     this.userTeam.$remove().$promise
       .then(() => {
+        this.toastr.success("Team deleted!");
         this.activeModal.close();
       })
       .catch((error) => {
         console.log(error);
+        this.toastr.error("Cannot delete team!");
       });
   }
 

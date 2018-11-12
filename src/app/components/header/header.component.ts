@@ -3,7 +3,7 @@ import {AuthResource} from "../../services/resources/auth.resource";
 import {ResourceModel} from "ngx-resource-factory/resource/resource-model";
 import {User} from "../../services/resources/user.resource";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {HelpModalComponent} from "../help-modal/help-modal.component";
+import {HelpModalComponent} from "../../modals/help-modal/help-modal.component";
 import {FormControl, FormGroup} from "@angular/forms";
 import {Subscription} from "rxjs";
 import {SnippetLoaderService} from "../../services/navigation/snippetLoader.service";

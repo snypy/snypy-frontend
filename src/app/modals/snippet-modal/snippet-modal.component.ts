@@ -11,6 +11,7 @@ import { AvailableLanguagesService } from '../../services/navigation/availableLa
 import { AvailableLabelsService } from '../../services/navigation/availableLabels.service';
 import { ActiveScopeService } from "../../services/navigation/activeScope.service";
 import { Team } from "../../services/resources/team.resource";
+import { ToastrService } from "ngx-toastr";
 
 
 @Component({
@@ -31,7 +32,8 @@ export class SnippetModalComponent implements OnInit {
               private availableLabelsService: AvailableLabelsService,
               private availableLanguagesService: AvailableLanguagesService,
               private activeScopeService: ActiveScopeService,
-              private snippetResource: SnippetResource) { }
+              private snippetResource: SnippetResource,
+              private toastr: ToastrService) { }
 
   ngOnInit() {
     let scope = this.activeScopeService.getScope();
@@ -128,12 +130,16 @@ export class SnippetModalComponent implements OnInit {
   }
 
   confirmAction() {
-    let promise;
+    let promise, message, errorMessage;
 
     if (this.snippet) {
       promise = this.snippetResource.update({}, this.snippetForm.value).$promise;
+      message = "Snippet updated!";
+      errorMessage = "Cannot update snippet!";
     } else {
       promise = this.snippetResource.save({}, this.snippetForm.value).$promise;
+      message = "Snippet added!";
+      errorMessage = "Cannot add snippet!";
     }
 
     promise
@@ -141,10 +147,12 @@ export class SnippetModalComponent implements OnInit {
         this.availableLabelsService.refreshLabels();
         this.availableLanguagesService.refreshLanguages();
 
+        this.toastr.success(message);
         this.activeModal.close(data);
       })
       .catch((error) => {
         console.log(error);
+        this.toastr.error(errorMessage);
       });
   }
 
