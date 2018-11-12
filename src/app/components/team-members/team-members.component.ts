@@ -8,6 +8,7 @@ import { Subscription } from "rxjs/Subscription";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { TeamMemberModalComponent } from "../../modals/team-member-modal/team-member-modal.component";
 import { TeamMemberDeleteModalComponent } from "../../modals/team-member-delete-modal/team-member-delete-modal.component";
+import { AuthResource } from "../../services/resources/auth.resource";
 
 @Component({
   selector: 'app-team-members',
@@ -20,6 +21,7 @@ export class TeamMembersComponent implements OnInit, OnDestroy {
 
   activeFilter: Filter;
   members: ResourceModel<UserTeam>[] = [];
+  currentUserTeamMembership: ResourceModel<UserTeam>;
 
   filterSubscription: Subscription;
   scopeSubscription: Subscription;
@@ -27,7 +29,8 @@ export class TeamMembersComponent implements OnInit, OnDestroy {
   constructor(private activeFilterService: ActiveFilterService,
               private activeScopeService: ActiveScopeService,
               private userTeamResource: UserTeamResource,
-              private modalService: NgbModal,) {
+              private modalService: NgbModal,
+              private authResource: AuthResource) {
   }
 
   ngOnInit() {
@@ -54,6 +57,7 @@ export class TeamMembersComponent implements OnInit, OnDestroy {
       this.userTeamResource.query({team: team.pk}).$promise
         .then((data) => {
           this.members = data;
+          this.currentUserTeamMembership = this.members.find(member => member.user == this.authResource.currentUser.pk);
         })
         .catch((reason) => {
           console.log("Cannot load teams!");

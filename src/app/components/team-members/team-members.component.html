@@ -8,10 +8,30 @@
         class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
         id="list-profile-list"
         role="tab">
-    <span class="icon remove-button" (click)="deleteMember(member)">
+    <span class="icon remove-button"
+          (click)="deleteMember(member)"
+          *appPerms="[{perm: 'canDeleteTeamMember', args: [currentUserTeamMembership]}]; else noDeleteMember"
+    >
       <fa-icon icon="user" size="sm"></fa-icon>
     </span>
+
     <span class="filterAction" (click)="updateActiveFilter(member.user)">{{ member.user_display }}</span>
-    <span class="badge badge-primary badge-pill" (click)="editMember(member)">{{ member.snippet_count }}</span>
+
+    <span class="badge badge-primary badge-pill badge-hover"
+          (click)="editMember(member)"
+          *appPerms="[{perm: 'canEditTeamMember', args: [currentUserTeamMembership]}]; else noEditMember"
+    >
+      {{ member.snippet_count }}
+    </span>
+
+    <ng-template #noDeleteMember>
+      <span class="icon"><fa-icon icon="user" size="sm"></fa-icon></span>
+    </ng-template>
+    <ng-template #noEditMember>
+      <span class="badge badge-primary badge-pill">{{ member.snippet_count }}</span>
+    </ng-template>
   </span>
 </div>
+
+
+

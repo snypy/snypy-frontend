@@ -59,6 +59,7 @@ import { HelpModalComponent } from './modals/help-modal/help-modal.component';
 import { TeamMemberModalComponent } from './modals/team-member-modal/team-member-modal.component';
 import { TeamMemberDeleteModalComponent } from './modals/team-member-delete-modal/team-member-delete-modal.component';
 import { LabelDeleteModalComponent } from './modals/label-delete-modal/label-delete-modal.component';
+import { PermsDirective } from './directives/perms/perms.directive';
 
 library.add(
   fas.faCoffee,
@@ -108,6 +109,7 @@ library.add(
     BaseComponent,
     BootstrapSwitchComponent,
     LoadingScreenComponent,
+    PermsDirective,
   ],
   entryComponents: [
     SnippetModalComponent,
