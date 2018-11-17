@@ -1,6 +1,11 @@
 <div class="list-group-heading">
   <b>Members</b>
-  <fa-icon class="float-right add-member" icon="plus" (click)="addMember()"></fa-icon>
+  <fa-icon
+    *appPerm="'cadAddTeamMember'; args [currentUserTeamMembership]"
+    class="float-right add-member"
+    icon="plus"
+    (click)="addMember()"
+  ></fa-icon>
 </div>
 <div class="list-group list-group-flush" id="list-tab" role="tablist">
   <span *ngFor="let member of members"
@@ -10,28 +15,26 @@
         role="tab">
     <span class="icon remove-button"
           (click)="deleteMember(member)"
-          *appPerms="[{perm: 'canDeleteTeamMember', args: [currentUserTeamMembership]}]; else noDeleteMember"
+          *appPerm="'canDeleteTeamMember'; args [currentUserTeamMembership]; else noDeleteMember"
     >
       <fa-icon icon="user" size="sm"></fa-icon>
     </span>
-
-    <span class="filterAction" (click)="updateActiveFilter(member.user)">{{ member.user_display }}</span>
-
-    <span class="badge badge-primary badge-pill badge-hover"
-          (click)="editMember(member)"
-          *appPerms="[{perm: 'canEditTeamMember', args: [currentUserTeamMembership]}]; else noEditMember"
-    >
-      {{ member.snippet_count }}
-    </span>
-
     <ng-template #noDeleteMember>
       <span class="icon"><fa-icon icon="user" size="sm"></fa-icon></span>
     </ng-template>
+
+    <span class="filterAction" (click)="updateActiveFilter(member.user)">
+      {{ member.user_display }}
+    </span>
+
+    <span class="badge badge-primary badge-pill badge-hover"
+          (click)="editMember(member)"
+          *appPerm="'canEditTeamMember'; args [currentUserTeamMembership]; else noEditMember"
+    >
+      {{ member.snippet_count }}
+    </span>
     <ng-template #noEditMember>
       <span class="badge badge-primary badge-pill">{{ member.snippet_count }}</span>
     </ng-template>
   </span>
 </div>
-
-
-
