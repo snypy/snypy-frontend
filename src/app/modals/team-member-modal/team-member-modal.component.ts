@@ -76,7 +76,7 @@ export class TeamMemberModalComponent implements OnInit {
     } else {
       promise = this.userTeamResource.save({}, this.userTeamForm.value).$promise;
       message = "Team member updated!";
-      errorMessage = "Cannot update team member!";
+      errorMessage = "Cannot add team member!";
     }
 
     promise
@@ -87,6 +87,7 @@ export class TeamMemberModalComponent implements OnInit {
       .catch((error) => {
         console.log(error);
         this.toastr.error(errorMessage);
+        // ToDo: Map form errors
       });
   }
 

@@ -68,7 +68,7 @@ export class SnippetModalComponent implements OnInit {
     this.snippetForm = new FormGroup({
       'pk': new FormControl(null),
       'title': new FormControl(null, Validators.required),
-      'description': new FormControl(null),
+      'description': new FormControl(null, Validators.required),
       'labels': new FormControl([]),
       'team': new FormControl(null),
     });
@@ -153,6 +153,7 @@ export class SnippetModalComponent implements OnInit {
       .catch((error) => {
         console.log(error);
         this.toastr.error(errorMessage);
+        // ToDo: Map form errors
       });
   }
 

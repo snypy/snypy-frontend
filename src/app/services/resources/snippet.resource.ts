@@ -8,31 +8,32 @@ import { ResourceInstance } from 'ngx-resource-factory/resource/resource-instanc
 
 
 export class SnippetFile {
-    pk: number;
-    url: string;
-    language: number;
-    name: string;
-    content: string;
+  pk: number;
+  url: string;
+  language: number;
+  name: string;
+  content: string;
 }
 
 export class Snippet extends ResourceInstance {
-    pk: number;
-    url: string;
-    title: string;
-    description: string;
-    visibility: string;
-    user: number;
-    labels: number[];
-    files: SnippetFile[];
+  pk: number;
+  url: string;
+  title: string;
+  description: string;
+  visibility: string;
+  user: number;
+  labels: number[];
+  files: SnippetFile[]
+  team: number;
 }
 
 @Injectable()
 @ResourceConfiguration({
-    name: 'SnippetResource',
-    url: environment.apiUrl + 'snippet/:pk/',
-    pkAttr: 'pk',
-    instanceClass: Snippet,
-    stripTrailingSlashes: false,
+  name: 'SnippetResource',
+  url: environment.apiUrl + 'snippet/:pk/',
+  pkAttr: 'pk',
+  instanceClass: Snippet,
+  stripTrailingSlashes: false,
 })
 export class SnippetResource extends Resource<Snippet> {
 }

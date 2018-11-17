@@ -9,10 +9,11 @@
 </div>
 <div class="modal-body">
   <form [formGroup]="labelForm">
-    <div class="form-group">
-      <label for="input-name">Name</label>
-      <input formControlName="name" type="text" class="form-control" id="input-name" aria-describedby="Name" placeholder="Name">
-    </div>
+    <span>Name</span>
+    <anx-forms-input
+      formControlName="name"
+      [errors]="labelForm.get('name').errors"
+    ></anx-forms-input>
   </form>
 </div>
 <div class="modal-footer">

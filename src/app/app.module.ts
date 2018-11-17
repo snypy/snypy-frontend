@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -13,6 +14,7 @@ import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { MonacoEditorModule } from 'ngx-monaco-editor';
 import { NgPipesModule } from 'ngx-pipes';
 import { ToastrModule } from "ngx-toastr";
+import { NgxAnxFormsModule } from "ngx-anx-forms";
 
 import { ServicesModule } from './services/services.module';
 
@@ -49,7 +51,6 @@ import { BaseComponent } from './layout/base/base.component';
 import { BootstrapSwitchComponent } from './components/bootstrap-switch/bootstrap-switch.component';
 import { LoadingScreenComponent } from './components/loading-screen/loading-screen.component';
 import { LoadingScreenInterceptor } from "./helpers/loading.interceptor";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { TeamMembersComponent } from './components/team-members/team-members.component';
 
 import { SnippetModalComponent } from './modals/snippet-modal/snippet-modal.component';
@@ -134,6 +135,7 @@ library.add(
     NgPipesModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    NgxAnxFormsModule.forRoot(),
 
     ServicesModule.forRoot(),
   ],

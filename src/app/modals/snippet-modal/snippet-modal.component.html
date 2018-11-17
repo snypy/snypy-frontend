@@ -9,24 +9,28 @@
 </div>
 <div class="modal-body">
   <form [formGroup]="snippetForm">
-    <div class="form-group">
-      <label for="input-title">Title</label>
-      <input formControlName="title" type="text" class="form-control" id="input-title" aria-describedby="Title" placeholder="Title">
-    </div>
-    <div class="form-group">
-      <label for="input-description">Example textarea</label>
-      <textarea formControlName="description" class="form-control" id="input-description" rows="3"></textarea>
-    </div>
+    <span>Title</span>
+    <anx-forms-input
+      formControlName="title"
+      [errors]="snippetForm.get('title').errors"
+    ></anx-forms-input>
 
-    <ng-select
-      formControlName="labels"
-      [items]="labels"
-      bindLabel="name"
-      bindValue="pk"
-      [clearable]="false"
-      [multiple]="true">
-    </ng-select>
-    
+    <span>Description</span>
+    <anx-forms-input-textarea
+      formControlName="description"
+      [errors]="snippetForm.get('description').errors"
+    ></anx-forms-input-textarea>
+
+    <span>Labels</span>
+    <anx-forms-input-select
+        bindLabel="name"
+        bindValue="pk"
+        [options]="labels"
+        [multiple]="true"
+        formControlName="labels"
+        [errors]="snippetForm.get('labels').errors"
+    ></anx-forms-input-select>
+
     <div *ngFor="let file of snippetForm.get('files').controls; let i = index" formArrayName="files" style="margin-top: 0.75rem;">
       <div [formGroupName]="i">
         <div class="card" style="border: none;">

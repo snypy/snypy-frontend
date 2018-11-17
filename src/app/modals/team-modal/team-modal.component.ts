@@ -43,7 +43,7 @@ export class TeamModalComponent implements OnInit {
     } else {
       promise = this.teamResource.save({}, this.teamForm.value).$promise;
       message = "Team updated!";
-      errorMessage = "Cannot update team!";
+      errorMessage = "Cannot add team!";
     }
 
     promise
@@ -54,6 +54,7 @@ export class TeamModalComponent implements OnInit {
       .catch((error) => {
         console.log(error);
         this.toastr.error(errorMessage);
+        // ToDo: Map form errors
       });
   }
 

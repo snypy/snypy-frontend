@@ -31,6 +31,7 @@
     "bootstrap": "^4.1.3",
     "core-js": "^2.5.7",
     "monaco-editor": "^0.15.0",
+    "ngx-anx-forms": "0.0.1",
     "ngx-monaco-editor": "^6.0.0",
     "ngx-perfect-scrollbar": "^7.0.0",
     "ngx-pipes": "^2.3.6",
