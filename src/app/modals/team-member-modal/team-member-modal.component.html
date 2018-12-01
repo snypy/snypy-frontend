@@ -17,7 +17,9 @@
         [options]="users"
         bindLabel="username"
         bindValue="pk"
-        [multiple]="false">
+        [multiple]="false"
+        [errors]="userTeamForm.get('user').errors"
+      >
       </anx-forms-input-select>
     </div>
 
@@ -27,7 +29,9 @@
       [options]="roles"
       bindLabel="label"
       bindValue="pk"
-      [multiple]="false">
+      [multiple]="false"
+      [errors]="userTeamForm.get('role').errors"
+    >
     </anx-forms-input-select>
 
   </form>

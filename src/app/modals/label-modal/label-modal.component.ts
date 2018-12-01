@@ -6,6 +6,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ActiveScopeService } from "../../services/navigation/activeScope.service";
 import { Team } from "../../services/resources/team.resource";
 import { ToastrService } from "ngx-toastr";
+import { mapFormErrors } from "ngx-anx-forms";
 
 
 @Component({
@@ -35,7 +36,7 @@ export class LabelModalComponent implements OnInit {
      */
     this.labelForm = new FormGroup({
       'pk': new FormControl(null, null),
-      'name': new FormControl(null, Validators.required),
+      'name': new FormControl('', Validators.required),
       'team': new FormControl(null, null),
     });
 
@@ -77,7 +78,7 @@ export class LabelModalComponent implements OnInit {
       .catch((error) => {
         console.log(error);
         this.toastr.error(errorMessage);
-        // ToDo: Map form errors
+        mapFormErrors(this.labelForm, error.error);
       });
   }
 

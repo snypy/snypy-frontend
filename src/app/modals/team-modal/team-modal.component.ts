@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Team, TeamResource } from '../../services/resources/team.resource';
 import { ToastrService } from "ngx-toastr";
+import { mapFormErrors } from "ngx-anx-forms";
 
 
 @Component({
@@ -54,7 +55,7 @@ export class TeamModalComponent implements OnInit {
       .catch((error) => {
         console.log(error);
         this.toastr.error(errorMessage);
-        // ToDo: Map form errors
+        mapFormErrors(this.teamForm, error.error);
       });
   }
 

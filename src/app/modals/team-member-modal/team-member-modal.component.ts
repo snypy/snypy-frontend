@@ -7,6 +7,7 @@ import { ActiveScopeService } from "../../services/navigation/activeScope.servic
 import { User, UserResource } from "../../services/resources/user.resource";
 import { Team } from "../../services/resources/team.resource";
 import { ToastrService } from "ngx-toastr";
+import { mapFormErrors } from "ngx-anx-forms";
 
 @Component({
   selector: 'app-team-member-modal',
@@ -44,7 +45,7 @@ export class TeamMemberModalComponent implements OnInit {
         'pk': new FormControl(null, null),
         'user': new FormControl(null, Validators.required),
         'team': new FormControl(team.pk, Validators.required),
-        'role': new FormControl(team.pk, Validators.required),
+        'role': new FormControl(null, Validators.required),
       });
 
       if (this.userTeam) {
@@ -87,7 +88,7 @@ export class TeamMemberModalComponent implements OnInit {
       .catch((error) => {
         console.log(error);
         this.toastr.error(errorMessage);
-        // ToDo: Map form errors
+        mapFormErrors(this.userTeamForm, error.error);
       });
   }
 

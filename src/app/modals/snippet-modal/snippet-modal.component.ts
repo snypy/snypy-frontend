@@ -12,6 +12,7 @@ import { AvailableLabelsService } from '../../services/navigation/availableLabel
 import { ActiveScopeService } from "../../services/navigation/activeScope.service";
 import { Team } from "../../services/resources/team.resource";
 import { ToastrService } from "ngx-toastr";
+import { mapFormErrors } from "ngx-anx-forms";
 
 
 @Component({
@@ -67,8 +68,8 @@ export class SnippetModalComponent implements OnInit {
      */
     this.snippetForm = new FormGroup({
       'pk': new FormControl(null),
-      'title': new FormControl(null, Validators.required),
-      'description': new FormControl(null, Validators.required),
+      'title': new FormControl('', Validators.required),
+      'description': new FormControl('', Validators.required),
       'labels': new FormControl([]),
       'team': new FormControl(null),
     });
@@ -153,7 +154,7 @@ export class SnippetModalComponent implements OnInit {
       .catch((error) => {
         console.log(error);
         this.toastr.error(errorMessage);
-        // ToDo: Map form errors
+        mapFormErrors(this.snippetForm, error.error);
       });
   }
 
