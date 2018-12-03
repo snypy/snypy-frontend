@@ -10,6 +10,8 @@ import { AvailableLabelsService } from '../../services/navigation/availableLabel
 import { Label } from '../../services/resources/label.resource';
 import { Subscription } from "rxjs/Subscription";
 import { SnippetLabelResource } from "../../services/resources/snippetlabel.resource";
+import { AuthResource } from "../../services/resources/auth.resource";
+import { User } from "../../services/resources/user.resource";
 
 
 @Component({
@@ -22,6 +24,7 @@ export class SnippetOptionsComponent implements OnInit, OnDestroy {
   activeSnippet: ResourceModel<Snippet> = null;
   labels: ResourceModel<Label>[] = [];
   activeLabels: number[] = [];
+  currentUser: ResourceModel<User>;
 
   availableLabelsSubscription: Subscription;
   snippetLoaderSubscription: Subscription;
@@ -29,11 +32,13 @@ export class SnippetOptionsComponent implements OnInit, OnDestroy {
   constructor(private snippetLoaderService: SnippetLoaderService,
               private availableLabelsService: AvailableLabelsService,
               private snippetLabelResource: SnippetLabelResource,
+              private authResource: AuthResource,
               private modalService: NgbModal) {
   }
 
   ngOnInit() {
     this.labels = this.availableLabelsService.labels;
+    this.currentUser = this.authResource.currentUser;
 
     this.availableLabelsSubscription = this.snippetLoaderService.activeSnippetUpdated.subscribe((snippet) => {
       if (snippet) {

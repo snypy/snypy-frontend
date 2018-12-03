@@ -23,8 +23,11 @@ export class Snippet extends ResourceInstance {
   visibility: string;
   user: number;
   labels: number[];
-  files: SnippetFile[]
+  files: SnippetFile[];
   team: number;
+  user_display: string;
+  created_date: string;
+  modified_date: string;
 }
 
 @Injectable()

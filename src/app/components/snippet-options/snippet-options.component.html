@@ -10,14 +10,28 @@
     </div>
     <div class="col-3 text-right" style="padding-top: 0;">
         <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-sm btn-link" (click)="editSnippet()">Edit</button>
+            <button
+              type="button"
+              class="btn btn-sm btn-link"
+              (click)="editSnippet()"
+              *appPerm="'canEditSnippet'; args [currentUser, activeSnippet]"
+            >
+              Edit
+            </button>
             <!-- ToDo: Implement in 1.1
             <button type="button" class="btn btn-sm btn-link" (click)="shareSnippet()">Share</button>
             -->
-            <button type="button" class="btn btn-sm btn-link" (click)="openDeleteModal(deleteModal)">Delete</button>
+            <button
+              type="button"
+              class="btn btn-sm btn-link"
+              (click)="openDeleteModal(deleteModal)"
+              *appPerm="'canDeleteSnippet'; args [currentUser, activeSnippet]"
+            >
+              Delete
+            </button>
         </div>
 
-        <div style="margin-top: 15px;">
+        <div style="margin-top: 15px;" *appPerm="'canEditSnippet'; args [currentUser, activeSnippet]">
           <div ngbDropdown class="d-inline-block" placement="bottom-right" #myDrop="ngbDropdown">
             <button class="btn btn-sm btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Labels</button>
             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">

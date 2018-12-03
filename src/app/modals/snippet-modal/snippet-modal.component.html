@@ -31,7 +31,7 @@
         [errors]="snippetForm.get('labels').errors"
     ></anx-forms-input-select>
 
-    <div *ngFor="let file of snippetForm.get('files').controls; let i = index" formArrayName="files" style="margin-top: 0.75rem;">
+    <div *ngFor="let file of snippetForm.get('files')['controls']; let i = index" formArrayName="files" style="margin-top: 0.75rem;">
       <div [formGroupName]="i">
         <div class="card" style="border: none;">
           <div class="card-head" style="border: 1px solid rgba(0,0,0,.125);">

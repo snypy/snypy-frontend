@@ -1,12 +1,16 @@
 import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
 import { ResourceModel } from "ngx-resource-factory/resource/resource-model";
 import { ROLES, UserTeam } from "../../services/resources/userteam.resource";
+import { Snippet } from "../../services/resources/snippet.resource";
+import { User } from "../../services/resources/user.resource";
 
 
 export enum PERMISSION {
   'cadAddTeamMember',
   'canEditTeamMember',
   'canDeleteTeamMember',
+  'canEditSnippet',
+  'canDeleteSnippet',
 }
 
 
@@ -52,16 +56,35 @@ export class PermDirective {
   /**
    * Permissions
    */
-  static cadAddTeamMember(instance: ResourceModel<UserTeam>): boolean {
-    return instance.role == ROLES.EDITOR;
+  static cadAddTeamMember(userTeam: ResourceModel<UserTeam>): boolean {
+    return userTeam.role == ROLES.EDITOR;
   }
 
-  static canEditTeamMember(instance: ResourceModel<UserTeam>): boolean {
-    return instance.role == ROLES.EDITOR;
+  static canEditTeamMember(userTeam: ResourceModel<UserTeam>): boolean {
+    return PermDirective.cadAddTeamMember(userTeam);
   }
 
-  static canDeleteTeamMember(instance: ResourceModel<UserTeam>): boolean {
-    return instance.role == ROLES.EDITOR;
+  static canDeleteTeamMember(userTeam: ResourceModel<UserTeam>): boolean {
+    return PermDirective.cadAddTeamMember(userTeam);
   }
 
+  static canEditSnippet(user: ResourceModel<User>, snippet: ResourceModel<Snippet>) {
+    return snippet.user === user.pk;
+
+    // To be implemented in 1.1, userTeam must be loaded from global state
+    //
+    // if (!snippet.team && snippet.user === user.pk) {
+    //   return true;
+    // }
+    // else if (snippet.team && userTeam.role == ROLES.CONTRIBUTOR) {
+    //   return true;
+    // }
+    // else if (snippet.team && userTeam.role == ROLES.EDITOR) {
+    //   return true;
+    // }
+  }
+
+  static canDeleteSnippet(user: ResourceModel<User>, snippet: ResourceModel<Snippet>) {
+    return PermDirective.canEditSnippet(user, snippet);
+  }
 }
