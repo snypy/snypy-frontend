@@ -4,7 +4,15 @@
   (click)="loadSnippet(snippet)"
   [ngClass]="{active: snippet.pk === activeSnippet.pk}">
   <div class="card-body">
-    <h6 class="card-title">{{ snippet.title | slice:0:30 }}<span *ngIf="snippet.description.title > 30">...</span></h6>
-    <p class="card-text">{{ snippet.description | slice:0:120 }}<span *ngIf="snippet.description.length > 120">...</span></p>
+    <h6 class="card-title">
+      {{ snippet.title | slice:0:30 }}
+      <span *ngIf="snippet.description.title > 30">...</span>
+    </h6>
+    <p class="card-text">
+      <small>
+        {{ snippet.description | slice:0:120 }}
+        <span *ngIf="snippet.description.length > 120">...</span>
+      </small>
+    </p>
   </div>
 </div>
