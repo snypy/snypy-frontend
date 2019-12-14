@@ -7,7 +7,7 @@ import { SnippetLoaderService } from './../../services/navigation/snippetLoader.
 import { ActiveScopeService, Scope } from "../../services/navigation/activeScope.service";
 import { ResourceModel } from "ngx-resource-factory/resource/resource-model";
 import { Team } from "../../services/resources/team.resource";
-import { Subscription } from "rxjs/Subscription";
+import { Subscription } from "rxjs";
 
 
 @Component({

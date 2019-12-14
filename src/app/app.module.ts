@@ -125,7 +125,7 @@ library.add(
     BrowserModule,
     HttpClientModule,
     NgxResourceFactoryModule.forRoot(),
-    NgbModule.forRoot(),
+    NgbModule,
     FontAwesomeModule,
     PerfectScrollbarModule,
     NgSelectModule,

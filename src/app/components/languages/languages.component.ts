@@ -4,7 +4,7 @@ import { ActiveFilterService, Filter } from '../../services/navigation/activeFil
 import { Language } from '../../services/resources/language.resource';
 import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 import { AvailableLanguagesService } from '../../services/navigation/availableLanguages.service';
-import { Subscription } from "rxjs/Subscription";
+import { Subscription } from "rxjs";
 
 
 @Component({

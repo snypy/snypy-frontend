@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActiveScopeService, Scope } from "../../services/navigation/activeScope.service";
-import { Subscription } from "rxjs/Subscription";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: 'app-sidebar',

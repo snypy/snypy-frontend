@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 import { Label, LabelResource } from '../resources/label.resource';
-import { Subject } from 'rxjs/Subject';
+import { Subject } from 'rxjs';
 import { Team } from "../resources/team.resource";
 import { User } from "../resources/user.resource";
 import { ActiveScopeService } from "./activeScope.service";

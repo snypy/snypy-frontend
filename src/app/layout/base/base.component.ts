@@ -3,7 +3,7 @@ import { ActiveFilterService } from "../../services/navigation/activeFilter.serv
 import { ActiveScopeService, Scope } from "../../services/navigation/activeScope.service";
 import { AvailableLabelsService } from "../../services/navigation/availableLabels.service";
 import { SnippetLoaderService } from "../../services/navigation/snippetLoader.service";
-import { Subscription } from "rxjs/Subscription";
+import { Subscription } from "rxjs";
 import {AvailableLanguagesService} from "../../services/navigation/availableLanguages.service";
 
 @Component({

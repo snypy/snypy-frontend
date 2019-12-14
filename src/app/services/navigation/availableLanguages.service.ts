@@ -5,7 +5,7 @@ import {ResourceModel} from 'ngx-resource-factory/resource/resource-model';
 import {Language, LanguageResource} from '../resources/language.resource';
 import {Team} from "../resources/team.resource";
 import {ActiveScopeService} from "./activeScope.service";
-import {Subject} from "rxjs/Subject";
+import {Subject} from "rxjs";
 import {User} from "../resources/user.resource";
 
 

@@ -8,7 +8,7 @@ import { User, UserResource } from "./user.resource";
 import { ResourceAction } from "ngx-resource-factory/resource/resource-action";
 import { ResourceActionHttpMethod } from "ngx-resource-factory/resource/resource-action-http-method";
 import { ResourceActionMethod } from "ngx-resource-factory/resource/resource-action-method";
-import { Subject } from "rxjs/Subject";
+import { Subject } from "rxjs";
 import { ResourceRegistry } from "ngx-resource-factory/resource/resource-registry";
 import { HttpClient } from "@angular/common/http";
 import { ResourceModel } from "ngx-resource-factory/resource/resource-model";

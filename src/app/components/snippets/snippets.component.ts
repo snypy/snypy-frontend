@@ -4,7 +4,7 @@ import { SnippetResource, Snippet } from '../../services/resources/snippet.resou
 
 import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 import { SnippetLoaderService } from '../../services/navigation/snippetLoader.service';
-import { Subscription } from "rxjs/Subscription";
+import { Subscription } from "rxjs";
 
 
 @Component({

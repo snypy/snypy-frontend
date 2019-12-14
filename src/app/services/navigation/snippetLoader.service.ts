@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { BehaviorSubject } from 'rxjs';
 
 import { Snippet, SnippetResource } from '../resources/snippet.resource';
 import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
-import { Subject } from 'rxjs/Subject';
+import { Subject } from 'rxjs';
 import { ActiveScopeService, Scope } from "./activeScope.service";
 import { User } from "../resources/user.resource";
 import { Team } from "../resources/team.resource";

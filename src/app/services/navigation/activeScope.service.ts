@@ -3,7 +3,7 @@ import { ResourceModel } from "ngx-resource-factory/resource/resource-model";
 
 import { Team } from "../resources/team.resource";
 import { User } from "../resources/user.resource";
-import { Subject } from "rxjs/Subject";
+import { Subject } from "rxjs";
 
 
 export interface Scope {

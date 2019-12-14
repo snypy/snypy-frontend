@@ -8,7 +8,7 @@ import { AvailableLabelsService } from '../../services/navigation/availableLabel
 import { LabelModalComponent } from '../../modals/label-modal/label-modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LabelDeleteModalComponent } from "../../modals/label-delete-modal/label-delete-modal.component";
-import { Subscription } from "rxjs/Subscription";
+import { Subscription } from "rxjs";
 
 
 @Component({

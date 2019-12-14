@@ -8,7 +8,7 @@ import { Snippet } from '../../services/resources/snippet.resource';
 import { SnippetModalComponent } from '../../modals/snippet-modal/snippet-modal.component';
 import { AvailableLabelsService } from '../../services/navigation/availableLabels.service';
 import { Label } from '../../services/resources/label.resource';
-import { Subscription } from "rxjs/Subscription";
+import { Subscription } from "rxjs";
 import { SnippetLabelResource } from "../../services/resources/snippetlabel.resource";
 import { AuthResource } from "../../services/resources/auth.resource";
 import { User } from "../../services/resources/user.resource";

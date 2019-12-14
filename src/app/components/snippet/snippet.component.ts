@@ -7,7 +7,7 @@ import { Snippet } from '../../services/resources/snippet.resource';
 import { FileResource } from '../../services/resources/file.resource';
 import { Label } from '../../services/resources/label.resource';
 import { AvailableLabelsService } from '../../services/navigation/availableLabels.service';
-import { Subscription } from "rxjs/Subscription";
+import { Subscription } from "rxjs";
 
 
 @Component({

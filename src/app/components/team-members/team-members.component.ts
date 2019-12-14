@@ -4,7 +4,7 @@ import { ActiveScopeService, Scope } from "../../services/navigation/activeScope
 import { ResourceModel } from "ngx-resource-factory/resource/resource-model";
 import { UserTeam, UserTeamResource } from "../../services/resources/userteam.resource";
 import { Team } from "../../services/resources/team.resource";
-import { Subscription } from "rxjs/Subscription";
+import { Subscription } from "rxjs";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { TeamMemberModalComponent } from "../../modals/team-member-modal/team-member-modal.component";
 import { TeamMemberDeleteModalComponent } from "../../modals/team-member-delete-modal/team-member-delete-modal.component";
