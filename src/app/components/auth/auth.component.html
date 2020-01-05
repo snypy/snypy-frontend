@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-6 mx-auto">
+          <div class="card rounded-0">
+            <div class="card-header text-center">
+              <h3 class="mb-0">SnyPy</h3>
+            </div>
+            <div class="card-body">
+              <app-login *ngIf="ACTIVE_STATE == STATE_LOGIN" (login)="doLogin($event)"></app-login>
+              <app-register *ngIf="ACTIVE_STATE == STATE_REGISTER" (register)="doRegister($event)"></app-register>
+            </div>
+
+            <div class="card-footer">
+              <button *ngIf="ACTIVE_STATE == STATE_PASSWORD_FORGOT" type="button" class="btn btn-outline-info btn-sm" (click)="setActiveState(STATE_LOGIN)">Login</button>
+              <button *ngIf="ACTIVE_STATE != STATE_PASSWORD_FORGOT" type="button" class="btn btn-outline-info btn-sm" (click)="setActiveState(STATE_PASSWORD_FORGOT)">Password forgot</button>
+
+              <button *ngIf="ACTIVE_STATE == STATE_REGISTER" type="button" class="btn btn-outline-info btn-sm float-right" (click)="setActiveState(STATE_LOGIN)">Login</button>
+              <button *ngIf="ACTIVE_STATE != STATE_REGISTER" type="button" class="btn btn-outline-info btn-sm float-right" (click)="setActiveState(STATE_REGISTER)">Register</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  

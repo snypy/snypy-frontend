@@ -1,6 +1,6 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { AuthCredentials } from "../../services/resources/auth.resource";
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { AuthCredentials } from '../../../services/resources/auth.resource';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -25,4 +25,5 @@ export class LoginComponent implements OnInit {
   doLogin() {
     this.login.emit(this.authForm.value);
   }
+
 }

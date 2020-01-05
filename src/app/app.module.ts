@@ -45,7 +45,6 @@ import { ViewInfoComponent } from './components/view-info/view-info.component';
 import { ViewSwitchComponent } from './components/view-switch/view-switch.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { ContentComponent } from './layout/content/content.component';
-import { LoginComponent } from './components/login/login.component';
 import { JwtInterceptor } from "./helpers/jwt.interceptor";
 import { BaseComponent } from './layout/base/base.component';
 import { BootstrapSwitchComponent } from './components/bootstrap-switch/bootstrap-switch.component';
@@ -61,6 +60,10 @@ import { TeamMemberModalComponent } from './modals/team-member-modal/team-member
 import { TeamMemberDeleteModalComponent } from './modals/team-member-delete-modal/team-member-delete-modal.component';
 import { LabelDeleteModalComponent } from './modals/label-delete-modal/label-delete-modal.component';
 import { PermDirective } from './directives/perm/perm.directive';
+import { AuthComponent } from './components/auth/auth.component';
+import { RegisterComponent } from './components/auth/register/register.component';
+import { LoginComponent } from './components/auth/login/login.component';
+
 
 library.add(
   fas.faCoffee,
@@ -111,6 +114,8 @@ library.add(
     BootstrapSwitchComponent,
     LoadingScreenComponent,
     PermDirective,
+    AuthComponent,
+    RegisterComponent,
   ],
   entryComponents: [
     SnippetModalComponent,

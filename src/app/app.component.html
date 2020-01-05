@@ -1,7 +1,7 @@
 <app-loading-screen></app-loading-screen>
 
 <div *ngIf="!isLoggedIn; else snippetsApp">
-  <app-login (login)="userLogin($event)"></app-login>
+  <app-auth (login)="userLogin($event)" (register)="userRegister($event)" (reset)="passwordReset($event)"></app-auth>
 </div>
 
 <ng-template #snippetsApp style="min-width: 1024px;">

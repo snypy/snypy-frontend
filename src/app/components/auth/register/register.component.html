@@ -1,0 +1,42 @@
+<form class="form" role="form" autocomplete="off" id="formRegister" novalidate="" [formGroup]="authForm">
+
+    <anx-forms-input
+        formControlName="username"
+        [errors]="authForm.get('username').errors"
+        [placeholder]="'Username'"
+    ></anx-forms-input>
+
+    <anx-forms-input
+        formControlName="first_name"
+        [errors]="authForm.get('first_name').errors"
+        [placeholder]="'First name'"
+    ></anx-forms-input>
+
+    <anx-forms-input
+        formControlName="last_name"
+        [errors]="authForm.get('last_name').errors"
+        [placeholder]="'Last name'"
+    ></anx-forms-input>
+
+    <anx-forms-input
+        formControlName="email"
+        [errors]="authForm.get('email').errors"
+        [placeholder]="'Email'"
+    ></anx-forms-input>
+
+    <anx-forms-input
+        formControlName="password"
+        [errors]="authForm.get('password').errors"
+        [placeholder]="'Password'"
+        [type]="'password'"
+    ></anx-forms-input>
+
+    <anx-forms-input
+        formControlName="password_confirm"
+        [errors]="authForm.get('password_confirm').errors"
+        [placeholder]="'Password confirm'"
+        [type]="'password'"
+    ></anx-forms-input>
+
+    <button type="submit" class="btn btn-success" id="btnRegister" (click)="doLogin()">Register</button>
+</form>
