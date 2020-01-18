@@ -63,6 +63,7 @@ import { PermDirective } from './directives/perm/perm.directive';
 import { AuthComponent } from './components/auth/auth.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { LoginComponent } from './components/auth/login/login.component';
+import { RegisterCompleteComponent } from './components/auth/register-complete/register-complete.component';
 
 
 library.add(
@@ -116,6 +117,7 @@ library.add(
     PermDirective,
     AuthComponent,
     RegisterComponent,
+    RegisterCompleteComponent,
   ],
   entryComponents: [
     SnippetModalComponent,

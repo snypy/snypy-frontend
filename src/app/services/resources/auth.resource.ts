@@ -58,6 +58,14 @@ export class AuthResource extends Resource<User> {
   })
   _logout: ResourceActionMethod<any, any, any>;
 
+  @ResourceAction({
+    method: ResourceActionHttpMethod.POST,
+    isList: false,
+    invalidateCache: true,
+    url: environment.apiUrl + 'auth/register/',
+  })
+  register: ResourceActionMethod<any, any, any>
+
   /**
    * This method is used in the main app component to load an active user during the bootstrap process
    */

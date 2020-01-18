@@ -9,15 +9,17 @@
             </div>
             <div class="card-body">
               <app-login *ngIf="ACTIVE_STATE == STATE_LOGIN" (login)="doLogin($event)"></app-login>
-              <app-register *ngIf="ACTIVE_STATE == STATE_REGISTER" (register)="doRegister($event)"></app-register>
+              <app-register *ngIf="ACTIVE_STATE == STATE_REGISTER" (register)="doRegister($event)" [errors]="server_errors"></app-register>
+              <app-register-complete *ngIf="ACTIVE_STATE == STATE_REGISTER_COMPLETE"></app-register-complete>
             </div>
 
-            <div class="card-footer">
-              <button *ngIf="ACTIVE_STATE == STATE_PASSWORD_FORGOT" type="button" class="btn btn-outline-info btn-sm" (click)="setActiveState(STATE_LOGIN)">Login</button>
-              <button *ngIf="ACTIVE_STATE != STATE_PASSWORD_FORGOT" type="button" class="btn btn-outline-info btn-sm" (click)="setActiveState(STATE_PASSWORD_FORGOT)">Password forgot</button>
-
-              <button *ngIf="ACTIVE_STATE == STATE_REGISTER" type="button" class="btn btn-outline-info btn-sm float-right" (click)="setActiveState(STATE_LOGIN)">Login</button>
-              <button *ngIf="ACTIVE_STATE != STATE_REGISTER" type="button" class="btn btn-outline-info btn-sm float-right" (click)="setActiveState(STATE_REGISTER)">Register</button>
+            <div class="card-footer" *ngIf="ACTIVE_STATE == STATE_LOGIN">
+              <button type="button" class="btn btn-outline-info btn-sm float-right" (click)="setActiveState(STATE_REGISTER)">Register</button>
+              <!-- <button type="button" class="btn btn-outline-info btn-sm" (click)="setActiveState(STATE_PASSWORD_FORGOT)">Password forgot</button> -->
+            </div>
+            
+            <div class="card-footer" *ngIf="ACTIVE_STATE != STATE_LOGIN">
+              <button type="button" class="btn btn-outline-info btn-sm float-right" (click)="setActiveState(STATE_LOGIN)">Login</button>
             </div>
           </div>
         </div>

@@ -47,14 +47,4 @@ export class AppComponent implements OnInit {
     });
 
   }
-
-  userLogin(credentials: { username: string, password: string }) {
-    this.authResource.login(credentials)
-      .then((data) => {
-        // Login success
-      })
-      .catch((reason) => {
-        // Login failed
-      })
-  }
 }
