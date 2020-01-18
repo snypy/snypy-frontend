@@ -66,6 +66,14 @@ export class AuthResource extends Resource<User> {
   })
   register: ResourceActionMethod<any, any, any>
 
+  @ResourceAction({
+    method: ResourceActionHttpMethod.POST,
+    isList: false,
+    invalidateCache: true,
+    url: environment.apiUrl + 'auth/verify-registration/',
+  })
+  verify: ResourceActionMethod<any, any, any>
+
   /**
    * This method is used in the main app component to load an active user during the bootstrap process
    */

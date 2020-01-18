@@ -4,7 +4,8 @@ import { ActiveScopeService, Scope } from "../../services/navigation/activeScope
 import { AvailableLabelsService } from "../../services/navigation/availableLabels.service";
 import { SnippetLoaderService } from "../../services/navigation/snippetLoader.service";
 import { Subscription } from "rxjs";
-import {AvailableLanguagesService} from "../../services/navigation/availableLanguages.service";
+import { AvailableLanguagesService } from "../../services/navigation/availableLanguages.service";
+import { AuthResource } from '../../services/resources/auth.resource';
 
 @Component({
   selector: 'app-base',
@@ -13,9 +14,12 @@ import {AvailableLanguagesService} from "../../services/navigation/availableLang
 })
 export class BaseComponent implements OnInit, OnDestroy {
 
+  isLoggedIn: boolean = false;
+
   activeScopeSubscription: Subscription;
 
-  constructor(private activeScopeService: ActiveScopeService,
+  constructor(private authResource: AuthResource,
+              private activeScopeService: ActiveScopeService,
               private activeFilterService: ActiveFilterService,
               private availableLabelsService: AvailableLabelsService,
               private availableLanguagesService: AvailableLanguagesService,
@@ -34,8 +38,31 @@ export class BaseComponent implements OnInit, OnDestroy {
         this.activeFilterService.updateFilter('main', 'all');
       }
     });
-
     this.activeScopeService.refreshScope();
+
+    /**
+     * Subscribe for user status changes
+     */
+    this.authResource.loginStatusUpdates.subscribe((value) => {
+      let scope: Scope;
+
+      this.isLoggedIn = value;
+
+      // Update scope for loading data
+      if (value) {
+        scope = {
+          area: 'user',
+          value: this.authResource.currentUser,
+        };
+      } else {
+        scope = {
+          area: null,
+          value: null,
+        };
+      }
+
+      this.activeScopeService.updateScope(scope);
+    });
   }
 
   ngOnDestroy() {

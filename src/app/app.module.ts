@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { RouterModule, Routes } from '@angular/router';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -64,6 +65,7 @@ import { AuthComponent } from './components/auth/auth.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterCompleteComponent } from './components/auth/register-complete/register-complete.component';
+import { AuthActivateComponent } from './components/auth-activate/auth-activate.component';
 
 
 library.add(
@@ -84,6 +86,22 @@ library.add(
   fas.faCircle,
   fas.faHashtag,
 );
+
+const appRoutes: Routes = [
+  {
+    path: '',
+    component: BaseComponent,
+  },
+  {
+    path: 'verify-user',
+    component: AuthActivateComponent,
+  },
+  {
+    path: '**',
+    redirectTo: '',
+  }
+];
+
 
 @NgModule({
   declarations: [
@@ -118,6 +136,7 @@ library.add(
     AuthComponent,
     RegisterComponent,
     RegisterCompleteComponent,
+    AuthActivateComponent,
   ],
   entryComponents: [
     SnippetModalComponent,
@@ -143,6 +162,7 @@ library.add(
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     NgxAnxFormsModule.forRoot(),
+    RouterModule.forRoot(appRoutes),
 
     ServicesModule.forRoot(),
   ],
