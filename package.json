@@ -30,7 +30,7 @@
     "@ng-select/ng-select": "^3.7.0",
     "bootstrap": "^4.4.1",
     "core-js": "^3.5.0",
-    "monaco-editor": "^0.18.1",
+    "monaco-editor": "^0.19.3",
     "ngx-anx-forms": "^0.2.2",
     "ngx-monaco-editor": "^8.1.1",
     "ngx-perfect-scrollbar": "^8.0.0",
