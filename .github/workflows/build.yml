@@ -1,4 +1,4 @@
-name: Library Build
+name: Project Build
 
 on: [push, pull_request]
 
