@@ -36,7 +36,7 @@
     "ngx-perfect-scrollbar": "^8.0.0",
     "ngx-pipes": "^2.6.0",
     "ngx-resource-factory": "1.0.0",
-    "ngx-toastr": "^11.2.1",
+    "ngx-toastr": "^11.3.3",
     "rxjs": "^6.5.4",
     "rxjs-compat": "^6.5.4",
     "zone.js": "^0.10.2"
