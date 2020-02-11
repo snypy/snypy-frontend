@@ -38,7 +38,7 @@
     "ngx-resource-factory": "1.0.0",
     "ngx-toastr": "^11.2.1",
     "rxjs": "^6.5.3",
-    "rxjs-compat": "^6.5.3",
+    "rxjs-compat": "^6.5.4",
     "zone.js": "^0.10.2"
   },
   "devDependencies": {
