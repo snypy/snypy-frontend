@@ -29,7 +29,7 @@
     "@ng-bootstrap/ng-bootstrap": "^5.2.2",
     "@ng-select/ng-select": "^3.7.0",
     "bootstrap": "^4.4.1",
-    "core-js": "^3.5.0",
+    "core-js": "^3.6.4",
     "monaco-editor": "^0.20.0",
     "ngx-anx-forms": "^0.2.2",
     "ngx-monaco-editor": "^8.1.1",
