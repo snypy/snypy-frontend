@@ -31,4 +31,6 @@ export class UserTeam extends ResourceInstance {
     stripTrailingSlashes: false,
 })
 export class UserTeamResource extends Resource<UserTeam> {
+  // TODO: add explicit constructor
+
 }

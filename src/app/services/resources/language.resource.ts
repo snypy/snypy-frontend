@@ -23,4 +23,6 @@ export class Language extends ResourceInstance {
     stripTrailingSlashes: false,
 })
 export class LanguageResource extends Resource<Language> {
+  // TODO: add explicit constructor
+
 }

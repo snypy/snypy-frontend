@@ -23,4 +23,6 @@ export class SnippetLabel extends ResourceInstance {
     stripTrailingSlashes: false,
 })
 export class SnippetLabelResource extends Resource<SnippetLabel> {
+  // TODO: add explicit constructor
+
 }

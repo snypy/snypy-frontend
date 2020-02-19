@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { RouterModule, Routes } from '@angular/router';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxResourceFactoryModule } from 'ngx-resource-factory';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
@@ -30,7 +30,6 @@ import { AppComponent } from './app.component';
  */
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
-import { library } from '@fortawesome/fontawesome-svg-core';
 
 import { LabelsComponent } from './components/labels/labels.component';
 import { LanguagesComponent } from './components/languages/languages.component';
@@ -66,26 +65,6 @@ import { RegisterComponent } from './components/auth/register/register.component
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterCompleteComponent } from './components/auth/register-complete/register-complete.component';
 import { AuthActivateComponent } from './components/auth-activate/auth-activate.component';
-
-
-library.add(
-  fas.faCoffee,
-  fas.faCode,
-  fas.faSyncAlt,
-  fas.faGlobe,
-  fas.faEye,
-  fas.faEyeSlash,
-  fas.faTag,
-  fas.faCloudUploadAlt,
-  fas.faCloudDownloadAlt,
-  fas.faUser,
-  fas.faPlus,
-  fas.faStar,
-  far.faStar,
-  fas.faTrash,
-  fas.faCircle,
-  fas.faHashtag,
-);
 
 const appRoutes: Routes = [
   {
@@ -184,4 +163,27 @@ const appRoutes: Routes = [
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+  constructor(library: FaIconLibrary) {
+    library.addIcons(
+      fas.faCoffee,
+      fas.faCode,
+      fas.faSyncAlt,
+      fas.faGlobe,
+      fas.faEye,
+      fas.faEyeSlash,
+      fas.faTag,
+      fas.faCloudUploadAlt,
+      fas.faCloudDownloadAlt,
+      fas.faUser,
+      fas.faPlus,
+      fas.faStar,
+      far.faStar,
+      fas.faTrash,
+      fas.faCircle,
+      fas.faHashtag,
+    );
+  }
+
+}

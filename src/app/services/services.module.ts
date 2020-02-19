@@ -11,11 +11,10 @@ import { ActiveFilterService } from './navigation/activeFilter.service';
 import { SnippetLoaderService } from './navigation/snippetLoader.service';
 import { AvailableLanguagesService } from './navigation/availableLanguages.service';
 import { AvailableLabelsService } from './navigation/availableLabels.service';
-import { AuthResource } from "./resources/auth.resource";
-import { ActiveScopeService } from "./navigation/activeScope.service";
-import { UserTeamResource } from "./resources/userteam.resource";
-import { SnippetLabelResource } from "./resources/snippetlabel.resource";
-import { LoadingScreenService } from "./loading-screen/loading-screen.service";
+import { AuthResource } from './resources/auth.resource';
+import { ActiveScopeService } from './navigation/activeScope.service';
+import { UserTeamResource } from './resources/userteam.resource';
+import { SnippetLabelResource } from './resources/snippetlabel.resource';
 
 
 @NgModule({
@@ -26,7 +25,7 @@ import { LoadingScreenService } from "./loading-screen/loading-screen.service";
 })
 export class ServicesModule {
 
-    static forRoot(): ModuleWithProviders {
+    static forRoot(): ModuleWithProviders<ServicesModule> {
         return {
             ngModule: ServicesModule,
             providers: [

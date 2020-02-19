@@ -39,4 +39,6 @@ export class Snippet extends ResourceInstance {
   stripTrailingSlashes: false,
 })
 export class SnippetResource extends Resource<Snippet> {
+  // TODO: add explicit constructor
+
 }

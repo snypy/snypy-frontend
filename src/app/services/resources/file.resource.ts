@@ -25,4 +25,6 @@ export class File extends ResourceInstance {
     stripTrailingSlashes: false,
 })
 export class FileResource extends Resource<File> {
+  // TODO: add explicit constructor
+
 }

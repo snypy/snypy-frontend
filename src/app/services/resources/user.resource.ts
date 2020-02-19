@@ -26,6 +26,8 @@ export class User extends ResourceInstance {
     stripTrailingSlashes: false,
 })
 export class UserResource extends Resource<User> {
+  // TODO: add explicit constructor
+
 
   @ResourceAction({
     method: ResourceActionHttpMethod.GET,

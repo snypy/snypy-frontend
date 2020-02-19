@@ -23,4 +23,6 @@ export class Label extends ResourceInstance {
     stripTrailingSlashes: false,
 })
 export class LabelResource extends Resource<Label> {
+  // TODO: add explicit constructor
+
 }
