@@ -68,12 +68,18 @@ import { AuthActivateComponent } from './components/auth-activate/auth-activate.
 
 const appRoutes: Routes = [
   {
-    path: '',
+    path: 'dashboard',
     component: BaseComponent,
+    children: []
   },
   {
     path: 'verify-user',
     component: AuthActivateComponent,
+  },
+  {
+    path: '',
+    redirectTo: 'dashboard',
+    pathMatch: 'full'
   },
   {
     path: '**',
