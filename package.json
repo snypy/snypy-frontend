@@ -33,7 +33,7 @@
     "core-js": "^3.6.4",
     "monaco-editor": "^0.20.0",
     "ngx-anx-forms": "^0.3.1",
-    "ngx-monaco-editor": "^8.1.1",
+    "ngx-monaco-editor": "^9.0.0",
     "ngx-perfect-scrollbar": "^9.0.0",
     "ngx-pipes": "^2.7.3",
     "ngx-resource-factory": "1.0.0",
