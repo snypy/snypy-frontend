@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActiveScopeService, Scope } from "../../services/navigation/activeScope.service";
-import { Subscription } from "rxjs";
+import { Observable, Subscription } from "rxjs";
+import { Select } from "@ngxs/store";
+import { ScopeState } from "../../state/scope/scope.state";
+import { ScopeModel } from "../../state/scope/scope.model";
 
 @Component({
   selector: 'app-sidebar',
@@ -9,14 +11,16 @@ import { Subscription } from "rxjs";
 })
 export class SidebarComponent implements OnInit, OnDestroy {
 
-  scope: Scope;
+  scope: ScopeModel;
 
   scopeUpdatedSubscription: Subscription;
 
-  constructor(private activeScopeService: ActiveScopeService) { }
+  @Select(ScopeState) scope$: Observable<ScopeModel>;
+
+  constructor() { }
 
   ngOnInit() {
-    this.scopeUpdatedSubscription = this.activeScopeService.scopeUpdated.subscribe((scope: Scope) => {
+    this.scopeUpdatedSubscription = this.scope$.subscribe((scope: ScopeModel) => {
       this.scope = scope;
     });
   }

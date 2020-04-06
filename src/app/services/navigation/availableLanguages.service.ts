@@ -1,12 +1,14 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
-import {ResourceModel} from 'ngx-resource-factory/resource/resource-model';
+import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 
-import {Language, LanguageResource} from '../resources/language.resource';
-import {Team} from "../resources/team.resource";
-import {ActiveScopeService} from "./activeScope.service";
-import {Subject} from "rxjs";
-import {User} from "../resources/user.resource";
+import { Language, LanguageResource } from '../resources/language.resource';
+import { Team } from "../resources/team.resource";
+import { Subject } from "rxjs";
+import { User } from "../resources/user.resource";
+import { SelectSnapshot } from "@ngxs-labs/select-snapshot";
+import { ScopeState } from "../../state/scope/scope.state";
+import { ScopeModel } from "../../state/scope/scope.model";
 
 
 @Injectable()
@@ -16,8 +18,10 @@ export class AvailableLanguagesService {
   languagesPromise: Promise<ResourceModel<Language>[]> = null;
   languagesUpdated = new Subject<ResourceModel<Language>[]>();
 
-  constructor(private languageResource: LanguageResource,
-              private activeScopeService: ActiveScopeService,) {
+  @SelectSnapshot(ScopeState)
+  public scope: ScopeModel;
+
+  constructor(private languageResource: LanguageResource) {
   }
 
   refreshLanguages() {
@@ -35,7 +39,7 @@ export class AvailableLanguagesService {
 
   loadLanguages() {
     let payload = {};
-    let scope = this.activeScopeService.getScope();
+    let scope = this.scope;
 
     /**
      * Scope specific filters

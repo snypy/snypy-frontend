@@ -3,11 +3,14 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { SnippetModalComponent } from '../../modals/snippet-modal/snippet-modal.component';
-import { SnippetLoaderService } from './../../services/navigation/snippetLoader.service';
-import { ActiveScopeService, Scope } from "../../services/navigation/activeScope.service";
+import { SnippetLoaderService } from '../../services/navigation/snippetLoader.service';
 import { ResourceModel } from "ngx-resource-factory/resource/resource-model";
 import { Team } from "../../services/resources/team.resource";
-import { Subscription } from "rxjs";
+import { Observable, Subscription } from "rxjs";
+import { RefreshScope } from "../../state/scope/scope.actions";
+import { Select, Store } from "@ngxs/store";
+import { ScopeState } from "../../state/scope/scope.state";
+import { ScopeModel } from "../../state/scope/scope.model";
 
 
 @Component({
@@ -21,12 +24,15 @@ export class ViewInfoComponent implements OnInit, OnDestroy {
 
   scopeUpdatedSubscription: Subscription;
 
-  constructor(private modalService: NgbModal,
-              private snippetLoaderService: SnippetLoaderService,
-              private activeScopeService: ActiveScopeService) { }
+  @Select(ScopeState) scope$: Observable<ScopeModel>;
+
+  constructor(private store: Store,
+              private modalService: NgbModal,
+              private snippetLoaderService: SnippetLoaderService) {
+  }
 
   ngOnInit() {
-    this.scopeUpdatedSubscription = this.activeScopeService.scopeUpdated.subscribe((scope: Scope) => {
+    this.scopeUpdatedSubscription = this.scope$.subscribe((scope: ScopeModel) => {
       switch (scope.area) {
         case 'user':
           this.heading = "My Snippets";
@@ -53,7 +59,7 @@ export class ViewInfoComponent implements OnInit, OnDestroy {
   }
 
   triggerReload() {
-    this.activeScopeService.refreshScope();
+    this.store.dispatch(new RefreshScope());
   }
 
   ngOnDestroy() {

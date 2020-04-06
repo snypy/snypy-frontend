@@ -65,6 +65,10 @@ import { RegisterComponent } from './components/auth/register/register.component
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterCompleteComponent } from './components/auth/register-complete/register-complete.component';
 import { AuthActivateComponent } from './components/auth-activate/auth-activate.component';
+import {NgxsModule} from "@ngxs/store";
+import {ScopeState} from "./state/scope/scope.state";
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
+import {NgxsSelectSnapshotModule} from "@ngxs-labs/select-snapshot";
 
 const appRoutes: Routes = [
   {
@@ -148,6 +152,9 @@ const appRoutes: Routes = [
     ToastrModule.forRoot(),
     NgxAnxFormsModule.forRoot(),
     RouterModule.forRoot(appRoutes),
+    NgxsModule.forRoot([ScopeState]),
+    NgxsSelectSnapshotModule.forRoot(),
+    NgxsReduxDevtoolsPluginModule.forRoot(),
 
     ServicesModule.forRoot(),
   ],

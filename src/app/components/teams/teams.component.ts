@@ -3,7 +3,8 @@ import { TeamResource, Team } from '../../services/resources/team.resource';
 import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TeamModalComponent } from '../../modals/team-modal/team-modal.component';
-import { ActiveScopeService } from "../../services/navigation/activeScope.service";
+import { UpdateScope } from "../../state/scope/scope.actions";
+import { Store } from "@ngxs/store";
 
 @Component({
   selector: 'app-teams',
@@ -14,9 +15,9 @@ export class TeamsComponent implements OnInit {
 
   teams: ResourceModel<Team>[] = [];
 
-  constructor(private teamResource: TeamResource,
-              private modalService: NgbModal,
-              private activeScopeService: ActiveScopeService,) {
+  constructor(private store: Store,
+              private teamResource: TeamResource,
+              private modalService: NgbModal,) {
   }
 
   ngOnInit() {
@@ -41,10 +42,10 @@ export class TeamsComponent implements OnInit {
 
   loadTeam(team: ResourceModel<Team>) {
     console.log("Loading team!");
-    this.activeScopeService.updateScope({
+    this.store.dispatch(new UpdateScope({
       area: 'team',
       value: team,
-    });
+    }));
   }
 
 }

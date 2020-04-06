@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 import { Snippet, SnippetResource } from '../resources/snippet.resource';
 import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 import { Subject } from 'rxjs';
-import { ActiveScopeService, Scope } from "./activeScope.service";
 import { User } from "../resources/user.resource";
 import { Team } from "../resources/team.resource";
+import { ScopeState } from "../../state/scope/scope.state";
+import { Select, Store } from "@ngxs/store";
+import { ScopeModel } from "../../state/scope/scope.model";
+import { RefreshScope } from "../../state/scope/scope.actions";
 
 
 @Injectable()
@@ -25,29 +28,31 @@ export class SnippetLoaderService {
   activeSnippetUpdated = new BehaviorSubject<ResourceModel<Snippet>>(this.activeSnippet);
   activeSnippetDeleted = new Subject<number>();
 
-  constructor(private snippetResource: SnippetResource,
-              private activeScopeService: ActiveScopeService) {
+  @Select(ScopeState) scope$: Observable<ScopeModel>;
+
+  constructor(private snippetResource: SnippetResource, private store: Store) {
+    this.scope$.subscribe((scope) => {
+      if (scope.area) {
+        this.snippetsPromise = this.loadSnippets(scope);
+
+        this.snippetsPromise
+          .then((data) => {
+            this.snippets = data;
+
+            if (data.length) {
+              this.updateActiveSnippet(data[0]);
+            }
+
+            this.snippetsLoaded.next(data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    });
   }
 
-  refreshSnippets() {
-    this.snippetsPromise = this.loadSnippets();
-
-    this.snippetsPromise
-      .then((data) => {
-        this.snippets = data;
-
-        if (data.length) {
-          this.updateActiveSnippet(data[0]);
-        }
-
-        this.snippetsLoaded.next(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-
-  sortSnippets() {
+  private sortSnippets() {
     this.snippetsPromise.then(() => {
       this.snippets.sort((a, b) => {
         const x = a[this.snippetOrdering.key];
@@ -76,12 +81,12 @@ export class SnippetLoaderService {
 
   updateSnippetFilter(filter: {}) {
     this.snippetFilter = filter;
-    this.refreshSnippets();
+    this.store.dispatch(new RefreshScope())
   }
 
   updateSnippetSearchFilter(filter: string) {
     this.snippetSearchFilter = filter;
-    this.refreshSnippets();
+    this.store.dispatch(new RefreshScope())
   }
 
   updateSnippetOrder(key: string, direction: -1 | 1) {
@@ -93,9 +98,8 @@ export class SnippetLoaderService {
     this.sortSnippets();
   }
 
-  private loadSnippets() {
+  private loadSnippets(scope: ScopeModel) {
     let payload = {};
-    let scope = this.activeScopeService.getScope();
 
     /**
      * Scope specific filters

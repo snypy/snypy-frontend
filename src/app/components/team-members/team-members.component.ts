@@ -1,14 +1,17 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActiveFilterService, Filter } from "../../services/navigation/activeFilter.service";
-import { ActiveScopeService, Scope } from "../../services/navigation/activeScope.service";
 import { ResourceModel } from "ngx-resource-factory/resource/resource-model";
 import { UserTeam, UserTeamResource } from "../../services/resources/userteam.resource";
 import { Team } from "../../services/resources/team.resource";
-import { Subscription } from "rxjs";
+import { Observable, Subscription } from "rxjs";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { TeamMemberModalComponent } from "../../modals/team-member-modal/team-member-modal.component";
 import { TeamMemberDeleteModalComponent } from "../../modals/team-member-delete-modal/team-member-delete-modal.component";
 import { AuthResource } from "../../services/resources/auth.resource";
+import { SelectSnapshot } from "@ngxs-labs/select-snapshot";
+import { ScopeState } from "../../state/scope/scope.state";
+import { ScopeModel } from "../../state/scope/scope.model";
+import { Select } from "@ngxs/store";
 
 @Component({
   selector: 'app-team-members',
@@ -26,8 +29,12 @@ export class TeamMembersComponent implements OnInit, OnDestroy {
   filterSubscription: Subscription;
   scopeSubscription: Subscription;
 
+  @SelectSnapshot(ScopeState)
+  public scope: ScopeModel;
+
+  @Select(ScopeState) scope$: Observable<ScopeModel>;
+
   constructor(private activeFilterService: ActiveFilterService,
-              private activeScopeService: ActiveScopeService,
               private userTeamResource: UserTeamResource,
               private modalService: NgbModal,
               private authResource: AuthResource) {
@@ -43,16 +50,15 @@ export class TeamMembersComponent implements OnInit, OnDestroy {
       this.activeFilter = filter;
     });
 
-    this.scopeSubscription = this.activeScopeService.scopeUpdated.subscribe((scope: Scope) => {
+    this.scopeSubscription = this.scope$.subscribe((scope: ScopeModel) => {
+      this.scope = scope;
       this.loadMembers();
     });
   }
 
   loadMembers() {
-    let scope = this.activeScopeService.getScope();
-
-    if (scope.area == 'team') {
-      let team = scope.value as ResourceModel<Team>;
+    if (this.scope.area == 'team') {
+      let team = this.scope.value as ResourceModel<Team>;
 
       this.userTeamResource.query({team: team.pk}).$promise
         .then((data) => {

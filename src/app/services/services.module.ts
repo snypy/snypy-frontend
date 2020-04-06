@@ -12,7 +12,6 @@ import { SnippetLoaderService } from './navigation/snippetLoader.service';
 import { AvailableLanguagesService } from './navigation/availableLanguages.service';
 import { AvailableLabelsService } from './navigation/availableLabels.service';
 import { AuthResource } from './resources/auth.resource';
-import { ActiveScopeService } from './navigation/activeScope.service';
 import { UserTeamResource } from './resources/userteam.resource';
 import { SnippetLabelResource } from './resources/snippetlabel.resource';
 
@@ -43,7 +42,6 @@ export class ServicesModule {
                 SnippetLoaderService,
                 AvailableLanguagesService,
                 AvailableLabelsService,
-                ActiveScopeService,
             ]
         };
     }

@@ -1,11 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActiveFilterService } from "../../services/navigation/activeFilter.service";
-import { ActiveScopeService, Scope } from "../../services/navigation/activeScope.service";
 import { AvailableLabelsService } from "../../services/navigation/availableLabels.service";
 import { SnippetLoaderService } from "../../services/navigation/snippetLoader.service";
-import { Subscription } from "rxjs";
+import { Observable, Subscription } from "rxjs";
 import { AvailableLanguagesService } from "../../services/navigation/availableLanguages.service";
 import { AuthResource } from '../../services/resources/auth.resource';
+import { Select, Store } from "@ngxs/store";
+import { RefreshScope, UpdateScope } from "../../state/scope/scope.actions";
+import { ScopeState } from "../../state/scope/scope.state";
+import { ScopeModel } from "../../state/scope/scope.model";
 
 @Component({
   selector: 'app-base',
@@ -16,10 +19,12 @@ export class BaseComponent implements OnInit, OnDestroy {
 
   isLoggedIn: boolean = false;
 
-  activeScopeSubscription: Subscription;
+  scopeSubscription: Subscription;
 
-  constructor(private authResource: AuthResource,
-              private activeScopeService: ActiveScopeService,
+  @Select(ScopeState) scope$: Observable<ScopeModel>;
+
+  constructor(private store: Store,
+              private authResource: AuthResource,
               private activeFilterService: ActiveFilterService,
               private availableLabelsService: AvailableLabelsService,
               private availableLanguagesService: AvailableLanguagesService,
@@ -30,21 +35,23 @@ export class BaseComponent implements OnInit, OnDestroy {
     /**
      * Refresh snippets on scope changes
      */
-    this.activeScopeSubscription = this.activeScopeService.scopeUpdated.subscribe((scope: Scope) => {
+    this.scope$.toPromise().then(() => {
+      this.activeFilterService.updateFilter('main', 'all');
+    });
+    this.scopeSubscription = this.scope$.subscribe((scope: ScopeModel) => {
       if (scope && scope.area) {
         this.snippetLoaderService.activeSnippet = null;
         this.availableLabelsService.refreshLabels();
         this.availableLanguagesService.refreshLanguages();
-        this.activeFilterService.updateFilter('main', 'all');
       }
     });
-    this.activeScopeService.refreshScope();
+    this.store.dispatch(new RefreshScope());
 
     /**
      * Subscribe for user status changes
      */
     this.authResource.loginStatusUpdates.subscribe((value) => {
-      let scope: Scope;
+      let scope: ScopeModel;
 
       this.isLoggedIn = value;
 
@@ -61,12 +68,12 @@ export class BaseComponent implements OnInit, OnDestroy {
         };
       }
 
-      this.activeScopeService.updateScope(scope);
+      this.store.dispatch(new UpdateScope(scope));
     });
   }
 
   ngOnDestroy() {
-    this.activeScopeSubscription.unsubscribe();
+    this.scopeSubscription.unsubscribe();
   }
 
 }

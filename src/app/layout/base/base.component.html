@@ -1,7 +1,7 @@
 <div *ngIf="!isLoggedIn; else snippetsApp">
     <app-auth></app-auth>
 </div>
-  
+
 <ng-template #snippetsApp style="min-width: 1024px;">
     <app-sidebar></app-sidebar>
     <app-content></app-content>

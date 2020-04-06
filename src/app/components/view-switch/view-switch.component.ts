@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActiveScopeService } from "../../services/navigation/activeScope.service";
 import { AuthResource } from "../../services/resources/auth.resource";
+import { Store } from "@ngxs/store";
+import { UpdateScope } from "../../state/scope/scope.actions";
 
 @Component({
   selector: 'app-view-switch',
@@ -9,7 +10,7 @@ import { AuthResource } from "../../services/resources/auth.resource";
 })
 export class ViewSwitchComponent implements OnInit {
 
-  constructor(private activeScopeService: ActiveScopeService,
+  constructor(private store: Store,
               private authResource: AuthResource) {
   }
 
@@ -18,17 +19,17 @@ export class ViewSwitchComponent implements OnInit {
 
   loadUser() {
     console.log("Loading user!");
-    this.activeScopeService.updateScope({
+    this.store.dispatch(new UpdateScope({
       area: 'user',
       value: this.authResource.currentUser,
-    })
+    }));
   }
 
   loadGlobal() {
     console.log("Loading global!");
-    this.activeScopeService.updateScope({
+    this.store.dispatch(new UpdateScope({
       area: 'global',
       value: null,
-    })
+    }));
   }
 }

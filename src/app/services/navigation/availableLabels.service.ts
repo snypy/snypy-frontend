@@ -5,7 +5,9 @@ import { Label, LabelResource } from '../resources/label.resource';
 import { Subject } from 'rxjs';
 import { Team } from "../resources/team.resource";
 import { User } from "../resources/user.resource";
-import { ActiveScopeService } from "./activeScope.service";
+import { SelectSnapshot } from "@ngxs-labs/select-snapshot";
+import { ScopeState } from "../../state/scope/scope.state";
+import { ScopeModel } from "../../state/scope/scope.model";
 
 @Injectable()
 export class AvailableLabelsService {
@@ -14,8 +16,10 @@ export class AvailableLabelsService {
   labelsPromise: Promise<ResourceModel<Label>[]> = null;
   labelsUpdated = new Subject<ResourceModel<Label>[]>();
 
-  constructor(private labelResource: LabelResource,
-              private activeScopeService: ActiveScopeService,) {
+  @SelectSnapshot(ScopeState)
+  public scope: ScopeModel;
+
+  constructor(private labelResource: LabelResource) {
   }
 
   refreshLabels() {
@@ -33,7 +37,7 @@ export class AvailableLabelsService {
 
   loadLabels() {
     let payload = {};
-    let scope = this.activeScopeService.getScope();
+    let scope = this.scope;
 
     /**
      * Scope specific filters

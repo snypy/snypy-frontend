@@ -3,11 +3,13 @@ import { ROLES, UserTeam, UserTeamResource } from "../../services/resources/user
 import { ResourceModel } from "ngx-resource-factory/resource/resource-model";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
-import { ActiveScopeService } from "../../services/navigation/activeScope.service";
 import { User, UserResource } from "../../services/resources/user.resource";
 import { Team } from "../../services/resources/team.resource";
 import { ToastrService } from "ngx-toastr";
 import { mapFormErrors } from "ngx-anx-forms";
+import { SelectSnapshot } from "@ngxs-labs/select-snapshot";
+import { ScopeState } from "../../state/scope/scope.state";
+import { ScopeModel } from "../../state/scope/scope.model";
 
 @Component({
   selector: 'app-team-member-modal',
@@ -29,14 +31,17 @@ export class TeamMemberModalComponent implements OnInit {
     {pk: ROLES.EDITOR, label: 'Editor'},
   ];
 
+  @SelectSnapshot(ScopeState)
+  public scope: ScopeModel;
+
   constructor(private activeModal: NgbActiveModal,
               private userResource: UserResource,
               private userTeamResource: UserTeamResource,
-              private activeScopeService: ActiveScopeService,
-              private toastr: ToastrService) { }
+              private toastr: ToastrService) {
+  }
 
   ngOnInit() {
-    let scope = this.activeScopeService.getScope();
+    let scope = this.scope;
 
     if (scope.area == 'team') {
       let team = scope.value as ResourceModel<Team>;
