@@ -6,8 +6,9 @@ import { SnippetLoaderService } from '../../services/navigation/snippetLoader.se
 import { Snippet } from '../../services/resources/snippet.resource';
 import { FileResource } from '../../services/resources/file.resource';
 import { Label } from '../../services/resources/label.resource';
-import { AvailableLabelsService } from '../../services/navigation/availableLabels.service';
-import { Subscription } from "rxjs";
+import { Observable, Subscription } from "rxjs";
+import { Select } from "@ngxs/store";
+import { LabelState } from "../../state/label/label.state";
 
 
 @Component({
@@ -19,19 +20,18 @@ export class SnippetComponent implements OnInit, OnDestroy {
 
   activeSnippet: ResourceModel<Snippet> = null;
   files: ResourceModel<File>[] = [];
-  labels: ResourceModel<Label>[] = [];
+  labels: Label[] = [];
 
   availableLabelsSubscription: Subscription;
   snippetLoaderSubscription: Subscription;
 
+  @Select(LabelState) labels$: Observable<Label[]>;
+
   constructor(private snippetLoaderService: SnippetLoaderService,
-              private availableLabelsService: AvailableLabelsService,
               private fileResource: FileResource) {
   }
 
   ngOnInit() {
-    this.labels = this.availableLabelsService.labels;
-
     this.availableLabelsSubscription = this.snippetLoaderService.activeSnippetUpdated.subscribe((snippet) => {
       if (snippet) {
         this.activeSnippet = snippet;
@@ -46,7 +46,7 @@ export class SnippetComponent implements OnInit, OnDestroy {
         }
     });
 
-    this.snippetLoaderSubscription = this.availableLabelsService.labelsUpdated.subscribe((data) => {
+    this.snippetLoaderSubscription = this.labels$.subscribe((data) => {
       this.labels = data;
     });
   }

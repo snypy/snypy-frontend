@@ -6,12 +6,13 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SnippetLoaderService } from '../../services/navigation/snippetLoader.service';
 import { Snippet } from '../../services/resources/snippet.resource';
 import { SnippetModalComponent } from '../../modals/snippet-modal/snippet-modal.component';
-import { AvailableLabelsService } from '../../services/navigation/availableLabels.service';
 import { Label } from '../../services/resources/label.resource';
-import { Subscription } from "rxjs";
+import { Observable, Subscription } from "rxjs";
 import { SnippetLabelResource } from "../../services/resources/snippetlabel.resource";
 import { AuthResource } from "../../services/resources/auth.resource";
 import { User } from "../../services/resources/user.resource";
+import { Select } from "@ngxs/store";
+import { LabelState } from "../../state/label/label.state";
 
 
 @Component({
@@ -22,22 +23,22 @@ import { User } from "../../services/resources/user.resource";
 export class SnippetOptionsComponent implements OnInit, OnDestroy {
 
   activeSnippet: ResourceModel<Snippet> = null;
-  labels: ResourceModel<Label>[] = [];
+  labels: Label[] = [];
   activeLabels: number[] = [];
   currentUser: ResourceModel<User>;
 
   availableLabelsSubscription: Subscription;
   snippetLoaderSubscription: Subscription;
 
+  @Select(LabelState) labels$: Observable<Label[]>;
+
   constructor(private snippetLoaderService: SnippetLoaderService,
-              private availableLabelsService: AvailableLabelsService,
               private snippetLabelResource: SnippetLabelResource,
               private authResource: AuthResource,
               private modalService: NgbModal) {
   }
 
   ngOnInit() {
-    this.labels = this.availableLabelsService.labels;
     this.currentUser = this.authResource.currentUser;
 
     this.availableLabelsSubscription = this.snippetLoaderService.activeSnippetUpdated.subscribe((snippet) => {
@@ -47,7 +48,7 @@ export class SnippetOptionsComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.snippetLoaderSubscription = this.availableLabelsService.labelsUpdated.subscribe((data) => {
+    this.snippetLoaderSubscription = this.labels$.subscribe((data) => {
       this.labels = data;
     });
   }

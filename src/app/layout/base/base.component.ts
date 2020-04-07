@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActiveFilterService } from "../../services/navigation/activeFilter.service";
-import { AvailableLabelsService } from "../../services/navigation/availableLabels.service";
 import { SnippetLoaderService } from "../../services/navigation/snippetLoader.service";
 import { Observable, Subscription } from "rxjs";
 import { AuthResource } from '../../services/resources/auth.resource';
@@ -9,6 +8,7 @@ import { RefreshScope, UpdateScope } from "../../state/scope/scope.actions";
 import { ScopeState } from "../../state/scope/scope.state";
 import { ScopeModel } from "../../state/scope/scope.model";
 import { UpdateLanguages } from "../../state/language/language.actions";
+import { UpdateLabels } from "../../state/label/label.actions";
 
 @Component({
   selector: 'app-base',
@@ -26,7 +26,6 @@ export class BaseComponent implements OnInit, OnDestroy {
   constructor(private store: Store,
               private authResource: AuthResource,
               private activeFilterService: ActiveFilterService,
-              private availableLabelsService: AvailableLabelsService,
               private snippetLoaderService: SnippetLoaderService,) {
   }
 
@@ -40,7 +39,7 @@ export class BaseComponent implements OnInit, OnDestroy {
     this.scopeSubscription = this.scope$.subscribe((scope: ScopeModel) => {
       if (scope && scope.area) {
         this.snippetLoaderService.activeSnippet = null;
-        this.availableLabelsService.refreshLabels();
+        this.store.dispatch(new UpdateLabels());
         this.store.dispatch(new UpdateLanguages());
       }
     });

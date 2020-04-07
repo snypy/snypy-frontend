@@ -7,7 +7,6 @@ import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 import { SnippetResource, Snippet } from '../../services/resources/snippet.resource';
 import { Label } from '../../services/resources/label.resource';
 import { Language } from '../../services/resources/language.resource';
-import { AvailableLabelsService } from '../../services/navigation/availableLabels.service';
 import { Team } from "../../services/resources/team.resource";
 import { ToastrService } from "ngx-toastr";
 import { mapFormErrors } from "ngx-anx-forms";
@@ -17,6 +16,8 @@ import { ScopeModel } from "../../state/scope/scope.model";
 import { UpdateLanguages } from "../../state/language/language.actions";
 import { Store } from "@ngxs/store";
 import { LanguageState } from "../../state/language/language.state";
+import { UpdateLabels } from "../../state/label/label.actions";
+import { LabelState } from "../../state/label/label.state";
 
 
 @Component({
@@ -28,8 +29,6 @@ export class SnippetModalComponent implements OnInit {
 
   @Input() snippet: ResourceModel<Snippet> = null;
 
-  labels: ResourceModel<Label>[] = [];
-
   snippetForm: FormGroup;
 
   @SelectSnapshot(ScopeState)
@@ -38,27 +37,16 @@ export class SnippetModalComponent implements OnInit {
   @SelectSnapshot(LanguageState)
   public languages: Language[];
 
+  @SelectSnapshot(LabelState)
+  public labels: Label[];
+
   constructor(private activeModal: NgbActiveModal,
-              private availableLabelsService: AvailableLabelsService,
               private snippetResource: SnippetResource,
               private toastr: ToastrService,
               private store: Store,) {
   }
 
   ngOnInit() {
-    let scope = this.scope;
-
-    /**
-     * Get available labels
-     */
-    this.availableLabelsService.labelsPromise
-      .then((data) => {
-        this.labels = data;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
     /**
      * Setup snippet from
      *
@@ -75,8 +63,8 @@ export class SnippetModalComponent implements OnInit {
     /**
      * Set team value from scope
      */
-    if (scope.area == 'team') {
-      let team = scope.value as ResourceModel<Team>;
+    if (this.scope.area == 'team') {
+      let team = this.scope.value as ResourceModel<Team>;
       this.snippetForm.get('team').setValue(team.pk);
     }
 
@@ -143,7 +131,7 @@ export class SnippetModalComponent implements OnInit {
 
     promise
       .then((data) => {
-        this.availableLabelsService.refreshLabels();
+        this.store.dispatch(new UpdateLabels());
         this.store.dispatch(new UpdateLanguages());
 
         this.toastr.success(message);

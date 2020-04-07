@@ -4,11 +4,13 @@ import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 
 import { Label } from '../../services/resources/label.resource';
 import { ActiveFilterService, Filter } from '../../services/navigation/activeFilter.service';
-import { AvailableLabelsService } from '../../services/navigation/availableLabels.service';
 import { LabelModalComponent } from '../../modals/label-modal/label-modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LabelDeleteModalComponent } from "../../modals/label-delete-modal/label-delete-modal.component";
-import { Subscription } from "rxjs";
+import { Observable, Subscription } from "rxjs";
+import { Select, Store } from "@ngxs/store";
+import { LabelState } from "../../state/label/label.state";
+import { AddLabel, RemoveLabel, UpdateLabel } from "../../state/label/label.actions";
 
 
 @Component({
@@ -18,16 +20,18 @@ import { Subscription } from "rxjs";
 })
 export class LabelsComponent implements OnInit, OnDestroy {
 
-  labels: ResourceModel<Label>[] = [];
+  labels: Label[] = [];
 
   activeFilter: Filter;
 
   activeFilterSubscription: Subscription;
   availableLabelsSubscription: Subscription;
 
-  constructor(private availableLabelsService: AvailableLabelsService,
-              private activeFilterService: ActiveFilterService,
-              private modalService: NgbModal) {
+  @Select(LabelState) labels$: Observable<Label[]>;
+
+  constructor(private activeFilterService: ActiveFilterService,
+              private modalService: NgbModal,
+              private store: Store) {
   }
 
   ngOnInit() {
@@ -35,7 +39,7 @@ export class LabelsComponent implements OnInit, OnDestroy {
       this.activeFilter = filter;
     });
 
-    this.availableLabelsSubscription = this.availableLabelsService.labelsUpdated.subscribe((data) => {
+    this.availableLabelsSubscription = this.labels$.subscribe((data) => {
       this.labels = data;
     });
   }
@@ -48,7 +52,8 @@ export class LabelsComponent implements OnInit, OnDestroy {
     const modalRef = this.modalService.open(LabelModalComponent, {size: 'sm'});
 
     modalRef.result.then((result) => {
-      this.availableLabelsService.addLabel(result);
+      result.snippet_count = 0;
+      this.store.dispatch(new AddLabel(result))
     }, (reason) => {
       console.log(`Dismissed: ${reason}`);
     });
@@ -59,7 +64,7 @@ export class LabelsComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.label = label;
 
     modalRef.result.then((result) => {
-      this.availableLabelsService.updateLabel(result);
+      this.store.dispatch(new UpdateLabel(result))
     }, (reason) => {
       console.log(`Dismissed: ${reason}`);
     });
@@ -69,8 +74,8 @@ export class LabelsComponent implements OnInit, OnDestroy {
     const modalRef = this.modalService.open(LabelDeleteModalComponent, {size: 'sm'});
     modalRef.componentInstance.label = label;
 
-    modalRef.result.then((result) => {
-      this.availableLabelsService.removeLabel(label);
+    modalRef.result.then(() => {
+      this.store.dispatch(new RemoveLabel(label))
     }, (reason) => {
       console.log(`Dismissed: ${reason}`);
     });

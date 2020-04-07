@@ -9,7 +9,6 @@ import { TeamResource } from './resources/team.resource';
 
 import { ActiveFilterService } from './navigation/activeFilter.service';
 import { SnippetLoaderService } from './navigation/snippetLoader.service';
-import { AvailableLabelsService } from './navigation/availableLabels.service';
 import { AuthResource } from './resources/auth.resource';
 import { UserTeamResource } from './resources/userteam.resource';
 import { SnippetLabelResource } from './resources/snippetlabel.resource';
@@ -39,7 +38,6 @@ export class ServicesModule {
 
                 ActiveFilterService,
                 SnippetLoaderService,
-                AvailableLabelsService,
             ]
         };
     }
