@@ -3,12 +3,12 @@ import { ActiveFilterService } from "../../services/navigation/activeFilter.serv
 import { AvailableLabelsService } from "../../services/navigation/availableLabels.service";
 import { SnippetLoaderService } from "../../services/navigation/snippetLoader.service";
 import { Observable, Subscription } from "rxjs";
-import { AvailableLanguagesService } from "../../services/navigation/availableLanguages.service";
 import { AuthResource } from '../../services/resources/auth.resource';
 import { Select, Store } from "@ngxs/store";
 import { RefreshScope, UpdateScope } from "../../state/scope/scope.actions";
 import { ScopeState } from "../../state/scope/scope.state";
 import { ScopeModel } from "../../state/scope/scope.model";
+import { UpdateLanguages } from "../../state/language/language.actions";
 
 @Component({
   selector: 'app-base',
@@ -27,7 +27,6 @@ export class BaseComponent implements OnInit, OnDestroy {
               private authResource: AuthResource,
               private activeFilterService: ActiveFilterService,
               private availableLabelsService: AvailableLabelsService,
-              private availableLanguagesService: AvailableLanguagesService,
               private snippetLoaderService: SnippetLoaderService,) {
   }
 
@@ -42,7 +41,7 @@ export class BaseComponent implements OnInit, OnDestroy {
       if (scope && scope.area) {
         this.snippetLoaderService.activeSnippet = null;
         this.availableLabelsService.refreshLabels();
-        this.availableLanguagesService.refreshLanguages();
+        this.store.dispatch(new UpdateLanguages());
       }
     });
     this.store.dispatch(new RefreshScope());

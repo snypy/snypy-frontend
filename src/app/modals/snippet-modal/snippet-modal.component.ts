@@ -7,7 +7,6 @@ import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 import { SnippetResource, Snippet } from '../../services/resources/snippet.resource';
 import { Label } from '../../services/resources/label.resource';
 import { Language } from '../../services/resources/language.resource';
-import { AvailableLanguagesService } from '../../services/navigation/availableLanguages.service';
 import { AvailableLabelsService } from '../../services/navigation/availableLabels.service';
 import { Team } from "../../services/resources/team.resource";
 import { ToastrService } from "ngx-toastr";
@@ -15,6 +14,9 @@ import { mapFormErrors } from "ngx-anx-forms";
 import { SelectSnapshot } from "@ngxs-labs/select-snapshot";
 import { ScopeState } from "../../state/scope/scope.state";
 import { ScopeModel } from "../../state/scope/scope.model";
+import { UpdateLanguages } from "../../state/language/language.actions";
+import { Store } from "@ngxs/store";
+import { LanguageState } from "../../state/language/language.state";
 
 
 @Component({
@@ -26,7 +28,6 @@ export class SnippetModalComponent implements OnInit {
 
   @Input() snippet: ResourceModel<Snippet> = null;
 
-  languages: ResourceModel<Language>[] = [];
   labels: ResourceModel<Label>[] = [];
 
   snippetForm: FormGroup;
@@ -34,11 +35,14 @@ export class SnippetModalComponent implements OnInit {
   @SelectSnapshot(ScopeState)
   public scope: ScopeModel;
 
+  @SelectSnapshot(LanguageState)
+  public languages: Language[];
+
   constructor(private activeModal: NgbActiveModal,
               private availableLabelsService: AvailableLabelsService,
-              private availableLanguagesService: AvailableLanguagesService,
               private snippetResource: SnippetResource,
-              private toastr: ToastrService) {
+              private toastr: ToastrService,
+              private store: Store,) {
   }
 
   ngOnInit() {
@@ -50,17 +54,6 @@ export class SnippetModalComponent implements OnInit {
     this.availableLabelsService.labelsPromise
       .then((data) => {
         this.labels = data;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
-    /**
-     * Get available languages
-     */
-    this.availableLanguagesService.languagesPromise
-      .then((data) => {
-        this.languages = data;
       })
       .catch((error) => {
         console.log(error);
@@ -151,7 +144,7 @@ export class SnippetModalComponent implements OnInit {
     promise
       .then((data) => {
         this.availableLabelsService.refreshLabels();
-        this.availableLanguagesService.refreshLanguages();
+        this.store.dispatch(new UpdateLanguages());
 
         this.toastr.success(message);
         this.activeModal.close(data);
