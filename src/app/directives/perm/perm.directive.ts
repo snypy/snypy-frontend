@@ -32,7 +32,7 @@ export class PermDirective implements OnChanges {
    * Permissions
    */
   static cadAddTeamMember(userTeam: ResourceModel<UserTeam>): boolean {
-    return userTeam.role === ROLES.EDITOR;
+    return userTeam && userTeam.role === ROLES.EDITOR;
   }
 
   static canEditTeamMember(userTeam: ResourceModel<UserTeam>): boolean {

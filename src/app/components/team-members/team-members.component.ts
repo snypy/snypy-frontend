@@ -8,7 +8,6 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { TeamMemberModalComponent } from "../../modals/team-member-modal/team-member-modal.component";
 import { TeamMemberDeleteModalComponent } from "../../modals/team-member-delete-modal/team-member-delete-modal.component";
 import { AuthResource } from "../../services/resources/auth.resource";
-import { SelectSnapshot } from "@ngxs-labs/select-snapshot";
 import { ScopeState } from "../../state/scope/scope.state";
 import { ScopeModel } from "../../state/scope/scope.model";
 import { Select } from "@ngxs/store";
@@ -29,8 +28,7 @@ export class TeamMembersComponent implements OnInit, OnDestroy {
   filterSubscription: Subscription;
   scopeSubscription: Subscription;
 
-  @SelectSnapshot(ScopeState)
-  public scope: ScopeModel;
+  scope: ScopeModel;
 
   @Select(ScopeState) scope$: Observable<ScopeModel>;
 
@@ -44,8 +42,6 @@ export class TeamMembersComponent implements OnInit, OnDestroy {
     /**
      * Initial member loading
      */
-    this.loadMembers();
-
     this.filterSubscription = this.activeFilterService.filterUpdated.subscribe((filter) => {
       this.activeFilter = filter;
     });
