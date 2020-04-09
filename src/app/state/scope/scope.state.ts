@@ -1,7 +1,7 @@
-import {ScopeModel} from "./scope.model";
-import {Action, State, StateContext} from "@ngxs/store";
-import {Injectable} from "@angular/core";
-import {RefreshScope, UpdateScope} from "./scope.actions";
+import { ScopeModel } from "./scope.model";
+import { Action, State, StateContext } from "@ngxs/store";
+import { Injectable } from "@angular/core";
+import { RefreshScope, UpdateScope } from "./scope.actions";
 
 
 @State<ScopeModel>({

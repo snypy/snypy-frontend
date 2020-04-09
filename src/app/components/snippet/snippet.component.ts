@@ -18,7 +18,7 @@ import { LabelState } from "../../state/label/label.state";
 })
 export class SnippetComponent implements OnInit, OnDestroy {
 
-  activeSnippet: ResourceModel<Snippet> = null;
+  activeSnippet: Snippet = null;
   files: ResourceModel<File>[] = [];
   labels: Label[] = [];
 
@@ -26,13 +26,14 @@ export class SnippetComponent implements OnInit, OnDestroy {
   snippetLoaderSubscription: Subscription;
 
   @Select(LabelState) labels$: Observable<Label[]>;
+  @Select(state => state.snippet.activeSnippet) activeSnippet$: Observable<Snippet>;
 
   constructor(private snippetLoaderService: SnippetLoaderService,
               private fileResource: FileResource) {
   }
 
   ngOnInit() {
-    this.availableLabelsSubscription = this.snippetLoaderService.activeSnippetUpdated.subscribe((snippet) => {
+    this.availableLabelsSubscription = this.activeSnippet$.subscribe((snippet) => {
       if (snippet) {
         this.activeSnippet = snippet;
 

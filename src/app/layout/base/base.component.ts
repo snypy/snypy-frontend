@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActiveFilterService } from "../../services/navigation/activeFilter.service";
-import { SnippetLoaderService } from "../../services/navigation/snippetLoader.service";
 import { Observable, Subscription } from "rxjs";
 import { AuthResource } from '../../services/resources/auth.resource';
 import { Select, Store } from "@ngxs/store";
@@ -25,8 +24,7 @@ export class BaseComponent implements OnInit, OnDestroy {
 
   constructor(private store: Store,
               private authResource: AuthResource,
-              private activeFilterService: ActiveFilterService,
-              private snippetLoaderService: SnippetLoaderService,) {
+              private activeFilterService: ActiveFilterService,) {
   }
 
   ngOnInit() {
@@ -38,7 +36,6 @@ export class BaseComponent implements OnInit, OnDestroy {
     });
     this.scopeSubscription = this.scope$.subscribe((scope: ScopeModel) => {
       if (scope && scope.area) {
-        this.snippetLoaderService.activeSnippet = null;
         this.store.dispatch(new UpdateLabels());
         this.store.dispatch(new UpdateLanguages());
       }

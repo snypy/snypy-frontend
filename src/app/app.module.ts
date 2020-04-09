@@ -71,6 +71,7 @@ import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import {NgxsSelectSnapshotModule} from "@ngxs-labs/select-snapshot";
 import { LanguageState } from "./state/language/language.state";
 import { LabelState } from "./state/label/label.state";
+import { SnippetState } from "./state/snippet/snippet.state";
 
 const appRoutes: Routes = [
   {
@@ -154,7 +155,7 @@ const appRoutes: Routes = [
     ToastrModule.forRoot(),
     NgxAnxFormsModule.forRoot(),
     RouterModule.forRoot(appRoutes),
-    NgxsModule.forRoot([ScopeState, LanguageState, LabelState]),
+    NgxsModule.forRoot([ScopeState, LanguageState, LabelState, SnippetState]),
     NgxsSelectSnapshotModule.forRoot(),
     NgxsReduxDevtoolsPluginModule.forRoot(),
 

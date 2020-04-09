@@ -8,7 +8,6 @@ import { Team } from "../../services/resources/team.resource";
 import { ScopeState } from "../scope/scope.state";
 import { Label, LabelResource } from "../../services/resources/label.resource";
 import { AddLabel, RemoveLabel, UpdateLabel, UpdateLabels } from "./label.actions";
-import { UpdateScope } from "../scope/scope.actions";
 
 
 @State<Label[]>({

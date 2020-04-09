@@ -10,6 +10,7 @@ import { ScopeState } from "../../state/scope/scope.state";
 import { Select, Store } from "@ngxs/store";
 import { ScopeModel } from "../../state/scope/scope.model";
 import { RefreshScope } from "../../state/scope/scope.actions";
+import { SetActiveSnippet } from "../../state/snippet/snippet.actions";
 
 
 @Injectable()
@@ -24,8 +25,6 @@ export class SnippetLoaderService {
   snippetSearchFilter: string = '';
   snippetOrdering: { key: string, direction: -1 | 1 };
 
-  activeSnippet: ResourceModel<Snippet> = null;
-  activeSnippetUpdated = new BehaviorSubject<ResourceModel<Snippet>>(this.activeSnippet);
   activeSnippetDeleted = new Subject<number>();
 
   @Select(ScopeState) scope$: Observable<ScopeModel>;
@@ -40,7 +39,7 @@ export class SnippetLoaderService {
             this.snippets = data;
 
             if (data.length) {
-              this.updateActiveSnippet(data[0]);
+              this.store.dispatch(new SetActiveSnippet(data[0]));
             }
 
             this.snippetsLoaded.next(data);
@@ -67,12 +66,7 @@ export class SnippetLoaderService {
 
   addNewSnippet(snippet: ResourceModel<Snippet>) {
     this.snippets.unshift(snippet);
-    this.updateActiveSnippet(snippet);
-  }
-
-  updateActiveSnippet(snippet: ResourceModel<Snippet>) {
-    this.sortSnippets();
-    this.activeSnippetUpdated.next(snippet);
+    this.store.dispatch(new SetActiveSnippet(snippet));
   }
 
   deleteSnippet(snippetPk: number) {

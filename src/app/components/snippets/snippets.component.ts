@@ -4,7 +4,9 @@ import { SnippetResource, Snippet } from '../../services/resources/snippet.resou
 
 import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 import { SnippetLoaderService } from '../../services/navigation/snippetLoader.service';
-import { Subscription } from "rxjs";
+import { Observable, Subscription } from "rxjs";
+import { SetActiveSnippet } from "../../state/snippet/snippet.actions";
+import { Select, Store } from "@ngxs/store";
 
 
 @Component({
@@ -21,8 +23,11 @@ export class SnippetsComponent implements OnInit, OnDestroy {
   activeSnippetSubscription: Subscription;
   activeSnippetDeletedSubscription: Subscription;
 
+  @Select(state => state.snippet.activeSnippet) activeSnippet$: Observable<Snippet>;
+
   constructor(private snippetResource: SnippetResource,
-              private snippetLoaderService: SnippetLoaderService) { }
+              private snippetLoaderService: SnippetLoaderService,
+              private store: Store) { }
 
   ngOnInit() {
     /**
@@ -35,14 +40,14 @@ export class SnippetsComponent implements OnInit, OnDestroy {
     /**
      * Snippet updated subscription
      */
-    this.activeSnippetSubscription = this.snippetLoaderService.activeSnippetUpdated.subscribe((snippet) => {
+    this.activeSnippetSubscription = this.activeSnippet$.subscribe((snippet) => {
       this.activeSnippet = snippet;
 
       // Update snippet in list
       if (snippet) {
         const oldSnippet = this.snippets.find(item => item.pk === snippet.pk);
         if (oldSnippet) {
-          this.snippets.splice(this.snippets.indexOf(oldSnippet), 1, snippet);
+          this.snippets.splice(this.snippets.indexOf(oldSnippet), 1, this.snippetResource.create(snippet));
         }
       }
     });
@@ -61,13 +66,13 @@ export class SnippetsComponent implements OnInit, OnDestroy {
 
       // Set first snippet in list as active
       if (this.snippets.length) {
-        this.snippetLoaderService.updateActiveSnippet(this.snippets[0]);
+        this.store.dispatch(new SetActiveSnippet(this.snippets[0]));
       }
     });
   }
 
   loadSnippet(snippet: ResourceModel<Snippet>) {
-    this.snippetLoaderService.updateActiveSnippet(snippet);
+    this.store.dispatch(new SetActiveSnippet(snippet));
   }
 
   ngOnDestroy() {

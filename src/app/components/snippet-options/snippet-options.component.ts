@@ -4,15 +4,16 @@ import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { SnippetLoaderService } from '../../services/navigation/snippetLoader.service';
-import { Snippet } from '../../services/resources/snippet.resource';
+import { Snippet, SnippetResource } from '../../services/resources/snippet.resource';
 import { SnippetModalComponent } from '../../modals/snippet-modal/snippet-modal.component';
 import { Label } from '../../services/resources/label.resource';
 import { Observable, Subscription } from "rxjs";
 import { SnippetLabelResource } from "../../services/resources/snippetlabel.resource";
 import { AuthResource } from "../../services/resources/auth.resource";
 import { User } from "../../services/resources/user.resource";
-import { Select } from "@ngxs/store";
+import { Select, Store } from "@ngxs/store";
 import { LabelState } from "../../state/label/label.state";
+import { SetActiveSnippet } from "../../state/snippet/snippet.actions";
 
 
 @Component({
@@ -31,19 +32,22 @@ export class SnippetOptionsComponent implements OnInit, OnDestroy {
   snippetLoaderSubscription: Subscription;
 
   @Select(LabelState) labels$: Observable<Label[]>;
+  @Select(state => state.snippet.activeSnippet) activeSnippet$: Observable<Snippet>;
 
   constructor(private snippetLoaderService: SnippetLoaderService,
               private snippetLabelResource: SnippetLabelResource,
               private authResource: AuthResource,
-              private modalService: NgbModal) {
+              private modalService: NgbModal,
+              private snippetResource: SnippetResource,
+              private store: Store) {
   }
 
   ngOnInit() {
     this.currentUser = this.authResource.currentUser;
 
-    this.availableLabelsSubscription = this.snippetLoaderService.activeSnippetUpdated.subscribe((snippet) => {
+    this.availableLabelsSubscription = this.activeSnippet$.subscribe((snippet) => {
       if (snippet) {
-        this.activeSnippet = snippet;
+        this.activeSnippet = this.snippetResource.create(snippet);
         this.activeLabels = this.activeSnippet.labels;
       }
     });
@@ -59,7 +63,7 @@ export class SnippetOptionsComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.snippet = this.activeSnippet;
 
     modalRef.result.then((result) => {
-      this.snippetLoaderService.updateActiveSnippet(result);
+      this.store.dispatch(new SetActiveSnippet(result));
     }, (reason) => {
       console.log(`Dismissed: ${reason}`);
     });
