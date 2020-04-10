@@ -37,6 +37,7 @@ export class SnippetLoaderService {
         this.snippetsPromise
           .then((data) => {
             this.snippets = data;
+            this.sortSnippets();
 
             if (data.length) {
               this.store.dispatch(new SetActiveSnippet(data[0]));
