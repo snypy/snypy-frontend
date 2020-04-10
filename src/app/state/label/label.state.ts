@@ -24,7 +24,7 @@ export class LabelState {
   private scope: ScopeModel;
 
   @Action(UpdateLabels)
-  async updateLanguages(ctx: StateContext<Label[]>) {
+  async updateLabels(ctx: StateContext<Label[]>) {
     let payload = {};
     let scope = this.scope;
 

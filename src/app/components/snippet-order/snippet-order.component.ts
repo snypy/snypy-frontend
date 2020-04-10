@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SnippetLoaderService } from '../../services/navigation/snippetLoader.service';
+import { Store } from "@ngxs/store";
+import { UpdateSnippetOrderingFilter } from "../../state/snippet/snippet.actions";
 
 @Component({
   selector: 'app-snippet-order',
@@ -15,22 +17,23 @@ export class SnippetOrderComponent implements OnInit {
   ];
   value = 1;
 
-  constructor(private snippetLoaderService: SnippetLoaderService) { }
+  constructor(private snippetLoaderService: SnippetLoaderService,
+              private store: Store) { }
 
   ngOnInit() {
-    this.snippetLoaderService.updateSnippetOrder(
-      this.options[0].key,
-      this.options[0].ordering
-    );
+    this.store.dispatch(new UpdateSnippetOrderingFilter({
+      key: this.options[0].key,
+      direction: this.options[0].ordering
+    }));
   }
 
   valueChange() {
     const option = this.options.find((op) => op.pk === this.value);
 
-    this.snippetLoaderService.updateSnippetOrder(
-      option.key,
-      option.ordering
-    );
+    this.store.dispatch(new UpdateSnippetOrderingFilter({
+      key: option.key,
+      direction: option.ordering
+    }));
   }
 
 }

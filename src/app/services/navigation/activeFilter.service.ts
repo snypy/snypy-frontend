@@ -2,77 +2,78 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 import { SnippetLoaderService } from './snippetLoader.service';
+import { Store } from "@ngxs/store";
+import { UpdateSnippetFilter } from "../../state/snippet/snippet.actions";
 
 
 export interface Filter {
-    area: 'main'|'labels'|'languages'|'members';
-    value: string|number;
+  area: 'main' | 'labels' | 'languages' | 'members';
+  value: string | number;
 }
 
 
 @Injectable()
 export class ActiveFilterService {
 
-    constructor(private snippetLoaderService: SnippetLoaderService) {
-    }
+  constructor(private snippetLoaderService: SnippetLoaderService,
+              private store: Store) {
+  }
 
-    private initialFilter: Filter = {
-        area: 'main',
-        value: 'all',
-    };
-    filterUpdated = new BehaviorSubject<Filter>(this.initialFilter);
+  private initialFilter: Filter = {
+    area: 'main',
+    value: 'all',
+  };
+  filterUpdated = new BehaviorSubject<Filter>(this.initialFilter);
 
-    updateFilter(area: 'main'|'labels'|'languages'|'members', value: string|number) {
-        this.filterUpdated.next({
-            area: area,
-            value: value,
-        });
+  updateFilter(area: 'main' | 'labels' | 'languages' | 'members', value: string | number) {
+    this.filterUpdated.next({
+      area: area,
+      value: value,
+    });
 
-        switch (area) {
-            case 'main':
-                switch (value) {
-                    case 'all':
-                        this.updateSnippetFilter({});
-                        break;
-                    case 'favorites':
-                        console.log('Not implemented');
-                        break;
-                    case 'unlabeled':
-                    this.updateSnippetFilter({'labeled': 'False'});
-                        break;
-                    case 'public':
-                        this.updateSnippetFilter({'visibility': 'PUBLIC'});
-                        break;
-                    case 'private':
-                        this.updateSnippetFilter({'visibility': 'PRIVATE'});
-                        break;
-                    case 'shared-by-me':
-                        console.log('Not implemented');
-                        break;
-                    case 'shared-with-me':
-                        console.log('Not implemented');
-                        break;
-                    default:
-                        console.log('Undefined main area value" ' + value);
-                        break;
-                }
-                break;
-            case 'labels':
-                this.updateSnippetFilter({'labels': value});
-                break;
-            case 'languages':
-                this.updateSnippetFilter({'files__language': value});
-                break;
-            case 'members':
-                this.updateSnippetFilter({'user': value});
-                break;
-            default:
-                console.log('Undefined filter area" ' + area);
-                break;
+    console.log(area);
+
+    switch (area) {
+      case 'main':
+        switch (value) {
+          case 'all':
+            this.store.dispatch(new UpdateSnippetFilter({}))
+            break;
+          case 'favorites':
+            console.log('Not implemented');
+            break;
+          case 'unlabeled':
+            this.store.dispatch(new UpdateSnippetFilter({'labeled': 'False'}));
+            break;
+          case 'public':
+            this.store.dispatch(new UpdateSnippetFilter({'visibility': 'PUBLIC'}));
+            break;
+          case 'private':
+            this.store.dispatch(new UpdateSnippetFilter({'visibility': 'PRIVATE'}));
+            break;
+          case 'shared-by-me':
+            console.log('Not implemented');
+            break;
+          case 'shared-with-me':
+            console.log('Not implemented');
+            break;
+          default:
+            console.log('Undefined main area value" ' + value);
+            break;
         }
+        break;
+      case 'labels':
+        this.store.dispatch(new UpdateSnippetFilter({'labels': value}));
+        break;
+      case 'languages':
+        this.store.dispatch(new UpdateSnippetFilter({'files__language': value}));
+        break;
+      case 'members':
+        this.store.dispatch(new UpdateSnippetFilter({'user': value}));
+        break;
+      default:
+        console.log('Undefined filter area" ' + area);
+        break;
     }
-
-    private updateSnippetFilter(filter: {}) {
-      this.snippetLoaderService.updateSnippetFilter(filter);
-    }
+  }
 }

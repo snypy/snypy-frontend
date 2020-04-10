@@ -17,13 +17,14 @@ import { Select, Store } from "@ngxs/store";
 export class SnippetsComponent implements OnInit, OnDestroy {
 
   activeSnippet: Snippet = null;
-  snippets: ResourceModel<Snippet>[] = [];
+  snippets: Snippet[] = [];
 
   snippetsLoadedSubscription: Subscription;
   activeSnippetSubscription: Subscription;
   activeSnippetDeletedSubscription: Subscription;
 
   @Select(state => state.snippet.activeSnippet) activeSnippet$: Observable<Snippet>;
+  @Select(state => state.snippet.list) snippetList$: Observable<Snippet[]>;
 
   constructor(private snippetResource: SnippetResource,
               private snippetLoaderService: SnippetLoaderService,
@@ -33,7 +34,7 @@ export class SnippetsComponent implements OnInit, OnDestroy {
     /**
      * Initial load
      */
-    this.snippetsLoadedSubscription = this.snippetLoaderService.snippetsLoaded.subscribe((snippets) => {
+    this.snippetsLoadedSubscription = this.snippetList$.subscribe((snippets) => {
       this.snippets = snippets;
     });
 
