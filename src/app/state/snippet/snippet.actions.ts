@@ -18,7 +18,7 @@ export class AddSnippet {
 
 export class RemoveSnippet {
   static readonly type = '[Snippet] Remove snippet';
-  constructor(public scope: Snippet) {}
+  constructor(public snippet: Snippet) {}
 }
 
 /**
@@ -31,7 +31,7 @@ export class UpdateSnippetFilter {
 
 export class UpdateSnippetSearchFilter {
   static readonly type = '[Snippet] Update snippet search filter';
-  constructor() {}
+  constructor(public filter: string) {}
 }
 
 export class UpdateSnippetOrderingFilter {

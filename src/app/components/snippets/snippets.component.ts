@@ -3,7 +3,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SnippetResource, Snippet } from '../../services/resources/snippet.resource';
 
 import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
-import { SnippetLoaderService } from '../../services/navigation/snippetLoader.service';
 import { Observable, Subscription } from "rxjs";
 import { SetActiveSnippet } from "../../state/snippet/snippet.actions";
 import { Select, Store } from "@ngxs/store";
@@ -27,7 +26,6 @@ export class SnippetsComponent implements OnInit, OnDestroy {
   @Select(state => state.snippet.list) snippetList$: Observable<Snippet[]>;
 
   constructor(private snippetResource: SnippetResource,
-              private snippetLoaderService: SnippetLoaderService,
               private store: Store) { }
 
   ngOnInit() {
@@ -50,24 +48,6 @@ export class SnippetsComponent implements OnInit, OnDestroy {
         if (oldSnippet) {
           this.snippets.splice(this.snippets.indexOf(oldSnippet), 1, this.snippetResource.create(snippet));
         }
-      }
-    });
-
-    /**
-     * Snippet deleted subscription
-     */
-    this.activeSnippetDeletedSubscription = this.snippetLoaderService.activeSnippetDeleted.subscribe((snippetPk) => {
-      // Remove snippet from list
-      if (snippetPk) {
-        const oldSnippet = this.snippets.find(item => item.pk === snippetPk);
-        if (oldSnippet) {
-          this.snippets.splice(this.snippets.indexOf(oldSnippet), 1);
-        }
-      }
-
-      // Set first snippet in list as active
-      if (this.snippets.length) {
-        this.store.dispatch(new SetActiveSnippet(this.snippets[0]));
       }
     });
   }

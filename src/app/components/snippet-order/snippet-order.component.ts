@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { SnippetLoaderService } from '../../services/navigation/snippetLoader.service';
 import { Store } from "@ngxs/store";
 import { UpdateSnippetOrderingFilter } from "../../state/snippet/snippet.actions";
 
@@ -17,8 +16,7 @@ export class SnippetOrderComponent implements OnInit {
   ];
   value = 1;
 
-  constructor(private snippetLoaderService: SnippetLoaderService,
-              private store: Store) { }
+  constructor(private store: Store) { }
 
   ngOnInit() {
     this.store.dispatch(new UpdateSnippetOrderingFilter({

@@ -8,6 +8,7 @@ import { ScopeState } from "../../state/scope/scope.state";
 import { ScopeModel } from "../../state/scope/scope.model";
 import { UpdateLanguages } from "../../state/language/language.actions";
 import { UpdateLabels } from "../../state/label/label.actions";
+import { UpdateSnippets } from "../../state/snippet/snippet.actions";
 
 @Component({
   selector: 'app-base',
@@ -36,6 +37,7 @@ export class BaseComponent implements OnInit, OnDestroy {
     });
     this.scopeSubscription = this.scope$.subscribe((scope: ScopeModel) => {
       if (scope && scope.area) {
+        this.store.dispatch(new UpdateSnippets());
         this.store.dispatch(new UpdateLabels());
         this.store.dispatch(new UpdateLanguages());
       }

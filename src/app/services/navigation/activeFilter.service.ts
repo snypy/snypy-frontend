@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
-import { SnippetLoaderService } from './snippetLoader.service';
 import { Store } from "@ngxs/store";
 import { UpdateSnippetFilter } from "../../state/snippet/snippet.actions";
 
@@ -15,8 +14,7 @@ export interface Filter {
 @Injectable()
 export class ActiveFilterService {
 
-  constructor(private snippetLoaderService: SnippetLoaderService,
-              private store: Store) {
+  constructor(private store: Store) {
   }
 
   private initialFilter: Filter = {

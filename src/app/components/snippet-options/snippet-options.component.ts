@@ -3,7 +3,6 @@ import { Component, OnInit, TemplateRef, ElementRef, OnDestroy } from '@angular/
 import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { SnippetLoaderService } from '../../services/navigation/snippetLoader.service';
 import { Snippet, SnippetResource } from '../../services/resources/snippet.resource';
 import { SnippetModalComponent } from '../../modals/snippet-modal/snippet-modal.component';
 import { Label } from '../../services/resources/label.resource';
@@ -13,7 +12,7 @@ import { AuthResource } from "../../services/resources/auth.resource";
 import { User } from "../../services/resources/user.resource";
 import { Select, Store } from "@ngxs/store";
 import { LabelState } from "../../state/label/label.state";
-import { SetActiveSnippet } from "../../state/snippet/snippet.actions";
+import { RemoveSnippet, SetActiveSnippet } from "../../state/snippet/snippet.actions";
 
 
 @Component({
@@ -34,8 +33,7 @@ export class SnippetOptionsComponent implements OnInit, OnDestroy {
   @Select(LabelState) labels$: Observable<Label[]>;
   @Select(state => state.snippet.activeSnippet) activeSnippet$: Observable<Snippet>;
 
-  constructor(private snippetLoaderService: SnippetLoaderService,
-              private snippetLabelResource: SnippetLabelResource,
+  constructor(private snippetLabelResource: SnippetLabelResource,
               private authResource: AuthResource,
               private modalService: NgbModal,
               private snippetResource: SnippetResource,
@@ -72,7 +70,7 @@ export class SnippetOptionsComponent implements OnInit, OnDestroy {
   deleteSnippet() {
     this.activeSnippet.$remove().$promise
       .then(() => {
-        this.snippetLoaderService.deleteSnippet(this.activeSnippet.pk);
+        this.store.dispatch(new RemoveSnippet(this.activeSnippet))
       })
       .catch((error) => {
         console.log(error);

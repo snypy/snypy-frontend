@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 
-import { SnippetLoaderService } from '../../services/navigation/snippetLoader.service';
 import { Snippet } from '../../services/resources/snippet.resource';
 import { FileResource } from '../../services/resources/file.resource';
 import { Label } from '../../services/resources/label.resource';
@@ -28,8 +27,7 @@ export class SnippetComponent implements OnInit, OnDestroy {
   @Select(LabelState) labels$: Observable<Label[]>;
   @Select(state => state.snippet.activeSnippet) activeSnippet$: Observable<Snippet>;
 
-  constructor(private snippetLoaderService: SnippetLoaderService,
-              private fileResource: FileResource) {
+  constructor(private fileResource: FileResource) {
   }
 
   ngOnInit() {
