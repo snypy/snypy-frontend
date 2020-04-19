@@ -28,7 +28,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.13.0",
     "@ng-bootstrap/ng-bootstrap": "^6.0.2",
     "@ng-select/ng-select": "^4.0.0",
-    "@ngxs-labs/select-snapshot": "^1.1.0",
+    "@ngxs-labs/select-snapshot": "^2.0.1",
     "@ngxs/store": "^3.6.2",
     "bootstrap": "^4.4.1",
     "core-js": "^3.6.5",
