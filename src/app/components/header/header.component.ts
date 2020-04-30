@@ -6,7 +6,6 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { HelpModalComponent } from "../../modals/help-modal/help-modal.component";
 import { FormControl, FormGroup } from "@angular/forms";
 import { Subscription } from "rxjs";
-import { SnippetLoaderService } from "../../services/navigation/snippetLoader.service";
 import { debounceTime } from "rxjs/operators";
 import { Store } from "@ngxs/store";
 import { UpdateSnippetSearchFilter } from "../../state/snippet/snippet.actions";
