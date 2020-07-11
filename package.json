@@ -36,7 +36,7 @@
     "ngx-anx-forms": "^0.3.1",
     "ngx-monaco-editor": "^9.0.0",
     "ngx-perfect-scrollbar": "^9.0.0",
-    "ngx-pipes": "^2.7.3",
+    "ngx-pipes": "^2.7.5",
     "ngx-resource-factory": "1.0.0",
     "ngx-toastr": "^12.1.0",
     "rxjs": "^6.6.0",
