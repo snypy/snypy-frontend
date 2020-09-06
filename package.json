@@ -39,7 +39,7 @@
     "ngx-pipes": "^2.7.5",
     "ngx-resource-factory": "1.0.0",
     "ngx-toastr": "^12.1.0",
-    "rxjs": "^6.6.2",
+    "rxjs": "^6.6.3",
     "rxjs-compat": "^6.6.3",
     "tslib": "^1.13.0",
     "zone.js": "~0.10.3"
