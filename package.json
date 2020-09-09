@@ -29,7 +29,7 @@
     "@ng-bootstrap/ng-bootstrap": "^6.2.0",
     "@ng-select/ng-select": "^4.0.4",
     "@ngxs-labs/select-snapshot": "^2.0.1",
-    "@ngxs/store": "^3.6.2",
+    "@ngxs/store": "^3.7.0",
     "bootstrap": "^4.5.2",
     "core-js": "^3.6.5",
     "monaco-editor": "^0.20.0",
