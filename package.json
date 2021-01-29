@@ -32,7 +32,7 @@
     "@ngxs/store": "^3.7.1",
     "bootstrap": "^4.6.0",
     "core-js": "^3.8.3",
-    "monaco-editor": "^0.21.3",
+    "monaco-editor": "^0.22.1",
     "ngx-anx-forms": "^0.3.1",
     "ngx-monaco-editor": "^9.0.0",
     "ngx-perfect-scrollbar": "^10.1.0",
