@@ -31,7 +31,7 @@
     "@ngxs-labs/select-snapshot": "^2.0.1",
     "@ngxs/store": "^3.7.1",
     "bootstrap": "^4.6.0",
-    "core-js": "^3.9.0",
+    "core-js": "^3.9.1",
     "monaco-editor": "^0.21.3",
     "ngx-anx-forms": "^0.3.1",
     "ngx-monaco-editor": "^9.0.0",
