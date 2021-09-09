@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { TeamMemberDeleteModalComponent } from './team-member-delete-modal.component';
 
@@ -6,7 +6,7 @@ describe('TeamMemberDeleteModalComponent', () => {
   let component: TeamMemberDeleteModalComponent;
   let fixture: ComponentFixture<TeamMemberDeleteModalComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ TeamMemberDeleteModalComponent ]
     })

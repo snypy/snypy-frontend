@@ -154,7 +154,7 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     NgxAnxFormsModule.forRoot(),
-    RouterModule.forRoot(appRoutes),
+    RouterModule.forRoot(appRoutes, { relativeLinkResolution: 'legacy' }),
     NgxsModule.forRoot([ScopeState, LanguageState, LabelState, SnippetState]),
     NgxsSelectSnapshotModule.forRoot(),
     NgxsReduxDevtoolsPluginModule.forRoot(),

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ViewSwitchComponent } from './view-switch.component';
 
@@ -6,7 +6,7 @@ describe('ViewSwitchComponent', () => {
   let component: ViewSwitchComponent;
   let fixture: ComponentFixture<ViewSwitchComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ViewSwitchComponent ]
     })

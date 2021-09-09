@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { BootstrapSwitchComponent } from './bootstrap-switch.component';
 
@@ -6,7 +6,7 @@ describe('BootstrapSwitchComponent', () => {
   let component: BootstrapSwitchComponent;
   let fixture: ComponentFixture<BootstrapSwitchComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ BootstrapSwitchComponent ]
     })
