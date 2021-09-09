@@ -30,7 +30,7 @@
     "@ng-select/ng-select": "^7.2.0",
     "@ngxs-labs/select-snapshot": "^2.0.1",
     "@ngxs/store": "^3.7.2",
-    "bootstrap": "^4.6.0",
+    "bootstrap": "^5.1.1",
     "core-js": "^3.16.0",
     "monaco-editor": "^0.27.0",
     "ngx-anx-forms": "^0.3.1",
