@@ -1,11 +1,11 @@
 <div>
   <span>
       <b>{{ heading }}</b>
-      <fa-icon class="float-right" icon="sync-alt" (click)="triggerReload()"></fa-icon>
+      <fa-icon class="float-end" icon="sync-alt" (click)="triggerReload()"></fa-icon>
   </span>
+
   <button
     (click)="addSnippet()"
-    type="button" class="btn btn-sm btn-success btn-block"
-    style="margin-top: .75rem; margin-bottom: .75rem; text-transform: uppercase; font-size: 12px; font-weight: bold;"
+    type="button" class="btn btn-sm btn-success btn-block m-3 ms-0 text-uppercase fw-bold"
   >New Snippet</button>
 </div>

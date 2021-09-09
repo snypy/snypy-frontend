@@ -14,12 +14,12 @@
             </div>
 
             <div class="card-footer" *ngIf="ACTIVE_STATE == STATE_LOGIN">
-              <button type="button" class="btn btn-outline-info btn-sm float-right" (click)="setActiveState(STATE_REGISTER)">Register</button>
+              <button type="button" class="btn btn-outline-info btn-sm float-end" (click)="setActiveState(STATE_REGISTER)">Register</button>
               <!-- <button type="button" class="btn btn-outline-info btn-sm" (click)="setActiveState(STATE_PASSWORD_FORGOT)">Password forgot</button> -->
             </div>
-            
+
             <div class="card-footer" *ngIf="ACTIVE_STATE != STATE_LOGIN">
-              <button type="button" class="btn btn-outline-info btn-sm float-right" (click)="setActiveState(STATE_LOGIN)">Login</button>
+              <button type="button" class="btn btn-outline-info btn-sm float-end" (click)="setActiveState(STATE_LOGIN)">Login</button>
             </div>
           </div>
         </div>
@@ -27,4 +27,3 @@
     </div>
   </div>
 </div>
-  

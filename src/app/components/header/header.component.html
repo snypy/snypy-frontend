@@ -1,10 +1,10 @@
-<div class="row">
+<div class="row" style="padding-bottom: 8px; padding-top: 8px;">
   <div class="col-6" style="padding-top: 0;">
     <div class="form-group" [formGroup]="snippetSearchForm">
       <input type="text" class="form-control form-control-sm" formControlName="search" id="search" placeholder="Search for snippets">
     </div>
   </div>
-  <div class="col-6 text-right" style="padding-top: 0;">
+  <div class="col-6 text-end" style="padding-top: 0;">
 
     <div ngbDropdown class="d-inline-block" placement="bottom-right" #myDrop="ngbDropdown">
       <button class="btn btn-sm btn-outline-info" id="dropdownBasic1" ngbDropdownToggle>{{ currentUser.username }}</button>
