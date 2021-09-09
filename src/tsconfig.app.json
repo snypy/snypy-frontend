@@ -5,9 +5,6 @@
     "baseUrl": "./",
     "types": []
   },
-  "angularCompilerOptions": {
-    "enableIvy": false
-  },
   "files": [
     "main.ts",
     "polyfills.ts"
