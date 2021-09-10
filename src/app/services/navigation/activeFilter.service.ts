@@ -23,7 +23,7 @@ export class ActiveFilterService {
   };
   filterUpdated = new BehaviorSubject<Filter>(this.initialFilter);
 
-  updateFilter(area: 'main' | 'labels' | 'languages' | 'members', value: string | number) {
+  updateFilter(area: 'main' | 'labels' | 'languages' | 'members', value: string | number, reload = true) {
     this.filterUpdated.next({
       area: area,
       value: value,
@@ -35,19 +35,19 @@ export class ActiveFilterService {
       case 'main':
         switch (value) {
           case 'all':
-            this.store.dispatch(new UpdateSnippetFilter({}))
+            this.store.dispatch(new UpdateSnippetFilter({}, reload))
             break;
           case 'favorites':
             console.log('Not implemented');
             break;
           case 'unlabeled':
-            this.store.dispatch(new UpdateSnippetFilter({'labeled': 'False'}));
+            this.store.dispatch(new UpdateSnippetFilter({'labeled': 'False'}, reload));
             break;
           case 'public':
-            this.store.dispatch(new UpdateSnippetFilter({'visibility': 'PUBLIC'}));
+            this.store.dispatch(new UpdateSnippetFilter({'visibility': 'PUBLIC'}, reload));
             break;
           case 'private':
-            this.store.dispatch(new UpdateSnippetFilter({'visibility': 'PRIVATE'}));
+            this.store.dispatch(new UpdateSnippetFilter({'visibility': 'PRIVATE'}, reload));
             break;
           case 'shared-by-me':
             console.log('Not implemented');
@@ -61,13 +61,13 @@ export class ActiveFilterService {
         }
         break;
       case 'labels':
-        this.store.dispatch(new UpdateSnippetFilter({'labels': value}));
+        this.store.dispatch(new UpdateSnippetFilter({'labels': value}, reload));
         break;
       case 'languages':
-        this.store.dispatch(new UpdateSnippetFilter({'files__language': value}));
+        this.store.dispatch(new UpdateSnippetFilter({'files__language': value}, reload));
         break;
       case 'members':
-        this.store.dispatch(new UpdateSnippetFilter({'user': value}));
+        this.store.dispatch(new UpdateSnippetFilter({'user': value}, reload));
         break;
       default:
         console.log('Undefined filter area" ' + area);

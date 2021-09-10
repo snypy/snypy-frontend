@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthResource } from "../../services/resources/auth.resource";
 import { Store } from "@ngxs/store";
 import { UpdateScope } from "../../state/scope/scope.actions";
+import { ActiveFilterService } from "../../services/navigation/activeFilter.service";
 
 @Component({
   selector: 'app-view-switch',
@@ -11,7 +12,8 @@ import { UpdateScope } from "../../state/scope/scope.actions";
 export class ViewSwitchComponent implements OnInit {
 
   constructor(private store: Store,
-              private authResource: AuthResource) {
+              private authResource: AuthResource,
+              private activeFilterService: ActiveFilterService) {
   }
 
   ngOnInit() {
@@ -19,6 +21,7 @@ export class ViewSwitchComponent implements OnInit {
 
   loadUser() {
     console.log("Loading user!");
+    this.activeFilterService.updateFilter('main', 'all', false);
     this.store.dispatch(new UpdateScope({
       area: 'user',
       value: this.authResource.currentUser,

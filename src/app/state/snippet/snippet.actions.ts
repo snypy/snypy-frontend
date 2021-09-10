@@ -26,7 +26,7 @@ export class RemoveSnippet {
  */
 export class UpdateSnippetFilter {
   static readonly type = '[Snippet] Update snippet filter';
-  constructor(public filter: {}) {}
+  constructor(public filter: {}, public reload = true) {}
 }
 
 export class UpdateSnippetSearchFilter {

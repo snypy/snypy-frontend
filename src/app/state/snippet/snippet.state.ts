@@ -79,7 +79,9 @@ export class SnippetState {
     ctx.patchState({
       'filter': action.filter
     })
-    this.store.dispatch(new UpdateSnippets())
+    if (action.reload) {
+      this.store.dispatch(new UpdateSnippets())
+    }
   }
 
   @Action(UpdateSnippetOrderingFilter)

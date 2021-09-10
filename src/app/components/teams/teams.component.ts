@@ -5,6 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TeamModalComponent } from '../../modals/team-modal/team-modal.component';
 import { UpdateScope } from "../../state/scope/scope.actions";
 import { Store } from "@ngxs/store";
+import { ActiveFilterService } from "../../services/navigation/activeFilter.service";
 
 @Component({
   selector: 'app-teams',
@@ -17,7 +18,8 @@ export class TeamsComponent implements OnInit {
 
   constructor(private store: Store,
               private teamResource: TeamResource,
-              private modalService: NgbModal,) {
+              private modalService: NgbModal,
+              private activeFilterService: ActiveFilterService,) {
   }
 
   ngOnInit() {
@@ -42,6 +44,7 @@ export class TeamsComponent implements OnInit {
 
   loadTeam(team: ResourceModel<Team>) {
     console.log("Loading team!");
+    this.activeFilterService.updateFilter('main', 'all', false);
     this.store.dispatch(new UpdateScope({
       area: 'team',
       value: team,
