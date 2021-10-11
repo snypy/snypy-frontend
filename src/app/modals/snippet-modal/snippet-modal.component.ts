@@ -40,6 +40,17 @@ export class SnippetModalComponent implements OnInit {
   @SelectSnapshot(LabelState)
   public labels: Label[];
 
+  public visibilities = [
+    {
+      key: 'PRIVATE',
+      name: 'Private',
+    },
+    {
+      key: 'PUBLIC',
+      name: 'Public',
+    },
+  ];
+
   constructor(private activeModal: NgbActiveModal,
               private snippetResource: SnippetResource,
               private toastr: ToastrService,
@@ -57,6 +68,7 @@ export class SnippetModalComponent implements OnInit {
       'title': new FormControl('', Validators.required),
       'description': new FormControl('', Validators.required),
       'labels': new FormControl([]),
+      'visibility': new FormControl('PRIVATE'),
       'team': new FormControl(null),
     });
 
@@ -76,6 +88,7 @@ export class SnippetModalComponent implements OnInit {
       this.snippetForm.get('title').setValue(this.snippet.title);
       this.snippetForm.get('description').setValue(this.snippet.description);
       this.snippetForm.get('labels').setValue(this.snippet.labels);
+      this.snippetForm.get('visibility').setValue(this.snippet.visibility);
       this.snippetForm.get('team').setValue(this.snippet.team);
     }
 

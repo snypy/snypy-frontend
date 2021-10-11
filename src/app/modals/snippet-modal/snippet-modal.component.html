@@ -31,6 +31,15 @@
         [errors]="snippetForm.get('labels').errors"
     ></anx-forms-input-select>
 
+    <span>Visibility</span>
+    <anx-forms-input-select
+        bindLabel="name"
+        bindValue="key"
+        [options]="visibilities"
+        formControlName="visibility"
+        [errors]="snippetForm.get('visibility').errors"
+    ></anx-forms-input-select>
+
     <div *ngFor="let file of snippetForm.get('files')['controls']; let i = index" formArrayName="files" style="margin-top: 0.75rem;">
       <div [formGroupName]="i">
         <div class="card" style="border: none;">
