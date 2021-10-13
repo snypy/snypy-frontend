@@ -29,18 +29,16 @@ export class MenuComponent implements OnInit, OnDestroy {
       value: 'unlabeled',
       icon: 'tag'
     },
-
-    // ToDo: Implement in 1.1
-    // {
-    //   name: 'Public',
-    //   value: 'public',
-    //   icon: 'eye'
-    // },
-    // {
-    //   name: 'Private',
-    //   value: 'private',
-    //   icon: 'eye-slash'
-    // },
+    {
+      name: 'Public',
+      value: 'public',
+      icon: 'eye'
+    },
+    {
+      name: 'Private',
+      value: 'private',
+      icon: 'eye-slash'
+    },
 
     /*
     ToDo: Implement in 1.1
