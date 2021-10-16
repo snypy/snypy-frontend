@@ -4,15 +4,18 @@
   (click)="loadSnippet(snippet)"
   [ngClass]="{active: snippet.pk === activeSnippet.pk}">
   <div class="card-body">
-    <h6 class="card-title">
-      {{ snippet.title | slice:0:30 }}
-      <span *ngIf="snippet.description.title > 30">...</span>
-    </h6>
-    <p class="card-text">
-      <small>
-        {{ snippet.description | slice:0:120 }}
-        <span *ngIf="snippet.description.length > 120">...</span>
-      </small>
-    </p>
+    <img class="user-badge" [src]="'https://www.gravatar.com/avatar/' + snippet.user +'?d=identicon&f=y&s=200'" alt="card image">
+    <div class="snippet">
+      <h6 class="card-title">
+        {{ snippet.title | slice:0:30 }}
+        <span *ngIf="snippet.description.title > 30">...</span>
+      </h6>
+      <p class="card-text">
+        <small>
+          {{ snippet.description | slice:0:120 }}
+          <span *ngIf="snippet.description.length > 120">...</span>
+        </small>
+      </p>
+    </div>
   </div>
 </div>

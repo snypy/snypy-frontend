@@ -3,8 +3,24 @@
     border-top: 0;
     border-right: 0;
     border-radius: 0;
-
     cursor: pointer;
+
+    .card-body {
+        display: grid;
+        grid-template-areas: 'badge snippet';
+        grid-template-columns: minmax(10px, 40px) 1fr;
+        gap: 10px;
+
+        .user-badge {
+            grid-area: badge;
+            border-radius: 50%;
+            width: 100%;
+        }
+    
+        .snippet {
+            grid-area: snippet;
+        }
+    }
 
     &.active {
         background: #f7f7f7;
