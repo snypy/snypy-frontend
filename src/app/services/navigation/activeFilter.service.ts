@@ -29,8 +29,6 @@ export class ActiveFilterService {
       value: value,
     });
 
-    console.log(area);
-
     switch (area) {
       case 'main':
         switch (value) {
