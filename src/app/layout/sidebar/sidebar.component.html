@@ -1,28 +1,31 @@
 <div class="sidebar">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-6" style="padding-top: 0; padding-bottom: 0; border-top: none; border-bottom: none; border-right: 1px solid rgba(255, 255, 255, 0.2);">
-          <div class="row">
-            <div class="col-3 full-height text-center sidebar-users">
-                <app-view-switch></app-view-switch>
-                <perfect-scrollbar style="max-height: calc(100vh - 112px);">
-                  <app-teams></app-teams>
-                </perfect-scrollbar>
-              </div>
-            <div class="col-9 full-height sidebar-navigation remove-side-padding">
-                <app-view-info></app-view-info>
-                <perfect-scrollbar style="max-height: calc(100vh - 90px);" class="navigation">
-                  <app-menu></app-menu>
-                  <app-labels></app-labels>
-                  <app-languages></app-languages>
-                  <app-team-members *ngIf="scope && scope.area === 'team'"></app-team-members>
-                </perfect-scrollbar>
-            </div>
+      <div
+        class="col-6"
+        style="padding-top: 0; padding-bottom: 0; border-top: none; border-bottom: none; border-right: 1px solid rgba(255, 255, 255, 0.2)"
+      >
+        <div class="row">
+          <div class="col-3 full-height text-center sidebar-users">
+            <app-view-switch></app-view-switch>
+            <perfect-scrollbar style="max-height: calc(100vh - 112px)">
+              <app-teams></app-teams>
+            </perfect-scrollbar>
           </div>
+          <div class="col-9 full-height sidebar-navigation remove-side-padding">
+            <app-view-info></app-view-info>
+            <perfect-scrollbar style="max-height: calc(100vh - 90px)" class="navigation">
+              <app-menu></app-menu>
+              <app-labels></app-labels>
+              <app-languages></app-languages>
+              <app-team-members *ngIf="scope && scope.area === 'team'"></app-team-members>
+            </perfect-scrollbar>
+          </div>
+        </div>
       </div>
-      <div class="col-6 border-right remove-side-padding" style="padding-top: 0;">
+      <div class="col-6 border-right remove-side-padding" style="padding-top: 0">
         <app-snippet-order></app-snippet-order>
-        <perfect-scrollbar style="max-height: calc(100vh - 60px);">
+        <perfect-scrollbar style="max-height: calc(100vh - 60px)">
           <app-snippets></app-snippets>
         </perfect-scrollbar>
       </div>

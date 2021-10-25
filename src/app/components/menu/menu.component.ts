@@ -1,22 +1,19 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-
+import { Subscription } from 'rxjs';
 import { ActiveFilterService, Filter } from '../../services/navigation/activeFilter.service';
-import { Subscription } from "rxjs";
-
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.scss']
+  styleUrls: ['./menu.component.scss'],
 })
 export class MenuComponent implements OnInit, OnDestroy {
-
   activeFilter: Filter;
   navigations = [
     {
       name: 'All snippets',
       value: 'all',
-      icon: 'globe'
+      icon: 'globe',
     },
     // ToDo: Implement in 1.1
     // {
@@ -27,17 +24,17 @@ export class MenuComponent implements OnInit, OnDestroy {
     {
       name: 'Unlabeled',
       value: 'unlabeled',
-      icon: 'tag'
+      icon: 'tag',
     },
     {
       name: 'Public',
       value: 'public',
-      icon: 'eye'
+      icon: 'eye',
     },
     {
       name: 'Private',
       value: 'private',
-      icon: 'eye-slash'
+      icon: 'eye-slash',
     },
 
     /*
@@ -57,19 +54,19 @@ export class MenuComponent implements OnInit, OnDestroy {
 
   activeFilterSubscription: Subscription;
 
-  constructor(private activeFilterService: ActiveFilterService) { }
+  constructor(private activeFilterService: ActiveFilterService) {}
 
-  ngOnInit() {
-    this.activeFilterSubscription = this.activeFilterService.filterUpdated.subscribe((filter) => {
+  ngOnInit(): void {
+    this.activeFilterSubscription = this.activeFilterService.filterUpdated.subscribe(filter => {
       this.activeFilter = filter;
     });
   }
 
-  updateActiveFilter(value: string) {
+  updateActiveFilter(value: string): void {
     this.activeFilterService.updateFilter('main', value);
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.activeFilterSubscription.unsubscribe();
   }
 }

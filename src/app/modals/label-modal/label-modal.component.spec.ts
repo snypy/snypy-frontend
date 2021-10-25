@@ -6,12 +6,13 @@ describe('LabelModalComponent', () => {
   let component: LabelModalComponent;
   let fixture: ComponentFixture<LabelModalComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ LabelModalComponent ]
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [LabelModalComponent],
+      }).compileComponents();
     })
-    .compileComponents();
-  }));
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LabelModalComponent);

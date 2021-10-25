@@ -6,7 +6,6 @@ import { Resource } from 'ngx-resource-factory/resource/resource';
 import { ResourceConfiguration } from 'ngx-resource-factory/resource/resource-configuration';
 import { ResourceInstance } from 'ngx-resource-factory/resource/resource-instance';
 
-
 export class SnippetFile {
   pk: number;
   url: string;
@@ -40,5 +39,4 @@ export class Snippet extends ResourceInstance {
 })
 export class SnippetResource extends Resource<Snippet> {
   // TODO: add explicit constructor
-
 }

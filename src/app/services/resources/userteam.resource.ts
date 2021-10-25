@@ -13,24 +13,23 @@ export enum ROLES {
 }
 
 export class UserTeam extends ResourceInstance {
-    pk: number;
-    url: string;
-    user: number;
-    team: number;
-    user_display: string;
-    snippet_count: number;
-    role: ROLES;
+  pk: number;
+  url: string;
+  user: number;
+  team: number;
+  user_display: string;
+  snippet_count: number;
+  role: ROLES;
 }
 
 @Injectable()
 @ResourceConfiguration({
-    name: 'UserTeamResource',
-    url: environment.apiUrl + 'userteam/:pk/',
-    pkAttr: 'pk',
-    instanceClass: UserTeam,
-    stripTrailingSlashes: false,
+  name: 'UserTeamResource',
+  url: environment.apiUrl + 'userteam/:pk/',
+  pkAttr: 'pk',
+  instanceClass: UserTeam,
+  stripTrailingSlashes: false,
 })
 export class UserTeamResource extends Resource<UserTeam> {
   // TODO: add explicit constructor
-
 }

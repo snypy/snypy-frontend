@@ -1,8 +1,7 @@
-import { Label } from "../../services/resources/label.resource";
+import { Label } from '../../services/resources/label.resource';
 
 export class UpdateLabels {
   static readonly type = '[Labels] Update Labels';
-  constructor() {}
 }
 
 export class UpdateLabel {

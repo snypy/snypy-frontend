@@ -6,12 +6,13 @@ describe('LanguagesComponent', () => {
   let component: LanguagesComponent;
   let fixture: ComponentFixture<LanguagesComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ LanguagesComponent ]
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [LanguagesComponent],
+      }).compileComponents();
     })
-    .compileComponents();
-  }));
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LanguagesComponent);

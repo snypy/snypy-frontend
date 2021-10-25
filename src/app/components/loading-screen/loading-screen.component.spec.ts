@@ -6,12 +6,13 @@ describe('LoadingScreenComponent', () => {
   let component: LoadingScreenComponent;
   let fixture: ComponentFixture<LoadingScreenComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ LoadingScreenComponent ]
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [LoadingScreenComponent],
+      }).compileComponents();
     })
-    .compileComponents();
-  }));
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LoadingScreenComponent);

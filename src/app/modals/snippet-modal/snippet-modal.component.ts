@@ -1,32 +1,28 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
-
+import { Component, Input, OnInit } from '@angular/core';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { SelectSnapshot } from '@ngxs-labs/select-snapshot';
+import { Store } from '@ngxs/store';
+import { mapFormErrors } from 'ngx-anx-forms';
 import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
-
-import { SnippetResource, Snippet } from '../../services/resources/snippet.resource';
+import { ToastrService } from 'ngx-toastr';
 import { Label } from '../../services/resources/label.resource';
 import { Language } from '../../services/resources/language.resource';
-import { Team } from "../../services/resources/team.resource";
-import { ToastrService } from "ngx-toastr";
-import { mapFormErrors } from "ngx-anx-forms";
-import { SelectSnapshot } from "@ngxs-labs/select-snapshot";
-import { ScopeState } from "../../state/scope/scope.state";
-import { ScopeModel } from "../../state/scope/scope.model";
-import { UpdateLanguages } from "../../state/language/language.actions";
-import { Store } from "@ngxs/store";
-import { LanguageState } from "../../state/language/language.state";
-import { UpdateLabels } from "../../state/label/label.actions";
-import { LabelState } from "../../state/label/label.state";
-
+import { Snippet, SnippetResource } from '../../services/resources/snippet.resource';
+import { Team } from '../../services/resources/team.resource';
+import { UpdateLabels } from '../../state/label/label.actions';
+import { LabelState } from '../../state/label/label.state';
+import { UpdateLanguages } from '../../state/language/language.actions';
+import { LanguageState } from '../../state/language/language.state';
+import { ScopeModel } from '../../state/scope/scope.model';
+import { ScopeState } from '../../state/scope/scope.state';
 
 @Component({
   selector: 'app-snippet-modal',
   templateUrl: './snippet-modal.component.html',
-  styleUrls: ['./snippet-modal.component.scss']
+  styleUrls: ['./snippet-modal.component.scss'],
 })
 export class SnippetModalComponent implements OnInit {
-
   @Input() snippet: ResourceModel<Snippet> = null;
 
   snippetForm: FormGroup;
@@ -51,32 +47,33 @@ export class SnippetModalComponent implements OnInit {
     },
   ];
 
-  constructor(private activeModal: NgbActiveModal,
-              private snippetResource: SnippetResource,
-              private toastr: ToastrService,
-              private store: Store,) {
-  }
+  constructor(
+    private activeModal: NgbActiveModal,
+    private snippetResource: SnippetResource,
+    private toastr: ToastrService,
+    private store: Store
+  ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     /**
      * Setup snippet from
      *
      * @type {FormGroup}
      */
     this.snippetForm = new FormGroup({
-      'pk': new FormControl(null),
-      'title': new FormControl('', Validators.required),
-      'description': new FormControl('', Validators.required),
-      'labels': new FormControl([]),
-      'visibility': new FormControl('PRIVATE'),
-      'team': new FormControl(null),
+      pk: new FormControl(null),
+      title: new FormControl('', Validators.required),
+      description: new FormControl('', Validators.required),
+      labels: new FormControl([]),
+      visibility: new FormControl('PRIVATE'),
+      team: new FormControl(null),
     });
 
     /**
      * Set team value from scope
      */
     if (this.scope.area == 'team') {
-      let team = this.scope.value as ResourceModel<Team>;
+      const team = this.scope.value as ResourceModel<Team>;
       this.snippetForm.get('team').setValue(team.pk);
     }
 
@@ -100,10 +97,10 @@ export class SnippetModalComponent implements OnInit {
       for (const snippetFile of this.snippet.files) {
         files.push(
           new FormGroup({
-            'pk': new FormControl(snippetFile.pk),
-            'name': new FormControl(snippetFile.name),
-            'language': new FormControl(snippetFile.language),
-            'content': new FormControl(snippetFile.content),
+            pk: new FormControl(snippetFile.pk),
+            name: new FormControl(snippetFile.name),
+            language: new FormControl(snippetFile.language),
+            content: new FormControl(snippetFile.content),
           })
         );
       }
@@ -112,52 +109,51 @@ export class SnippetModalComponent implements OnInit {
     } else {
       this.snippetForm.addControl('files', new FormArray([]));
     }
-
   }
 
-  removeFile(index: number) {
+  removeFile(index: number): void {
     (<FormArray>this.snippetForm.get('files')).removeAt(index);
   }
 
-  addFile() {
+  addFile(): void {
     (<FormArray>this.snippetForm.get('files')).push(
       new FormGroup({
-        'name': new FormControl(null),
-        'language': new FormControl(null),
-        'content': new FormControl(null),
+        name: new FormControl(null),
+        language: new FormControl(null),
+        content: new FormControl(null),
       })
     );
   }
 
-  confirmAction() {
+  confirmAction(): void {
     let promise, message, errorMessage;
 
     if (this.snippet) {
       promise = this.snippetResource.update({}, this.snippetForm.value).$promise;
-      message = "Snippet updated!";
-      errorMessage = "Cannot update snippet!";
+      message = 'Snippet updated!';
+      errorMessage = 'Cannot update snippet!';
     } else {
       promise = this.snippetResource.save({}, this.snippetForm.value).$promise;
-      message = "Snippet added!";
-      errorMessage = "Cannot add snippet!";
+      message = 'Snippet added!';
+      errorMessage = 'Cannot add snippet!';
     }
 
     promise
-      .then((data) => {
+      .then(data => {
         this.store.dispatch(new UpdateLabels());
         this.store.dispatch(new UpdateLanguages());
 
         this.toastr.success(message);
         this.activeModal.close(data);
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
         this.toastr.error(errorMessage);
         mapFormErrors(this.snippetForm, error.error);
       });
   }
 
-  closeAction(reason: string) {
+  closeAction(reason: string): void {
     this.activeModal.dismiss(reason);
   }
 }

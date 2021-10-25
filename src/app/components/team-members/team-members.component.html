@@ -1,21 +1,24 @@
 <div class="list-group-heading">
   <b>Members</b>
   <fa-icon
-    *appPerm="'cadAddTeamMember'; args [currentUserTeamMembership]"
+    *appPerm="'cadAddTeamMember'; args: [currentUserTeamMembership]"
     class="float-end add-member"
     icon="plus"
     (click)="addMember()"
   ></fa-icon>
 </div>
 <div class="list-group list-group-flush" id="list-tab" role="tablist">
-  <span *ngFor="let member of members"
-        [ngClass]="{active: activeFilter.area === 'members' && activeFilter.value === member.pk}"
-        class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
-        id="list-profile-list"
-        role="tab">
-    <span class="icon remove-button"
-          (click)="deleteMember(member)"
-          *appPerm="'canDeleteTeamMember'; args [currentUserTeamMembership]; else noDeleteMember"
+  <span
+    *ngFor="let member of members"
+    [ngClass]="{ active: activeFilter.area === 'members' && activeFilter.value === member.pk }"
+    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+    id="list-profile-list"
+    role="tab"
+  >
+    <span
+      class="icon remove-button"
+      (click)="deleteMember(member)"
+      *appPerm="'canDeleteTeamMember'; args: [currentUserTeamMembership]; else: noDeleteMember"
     >
       <fa-icon icon="user" size="sm"></fa-icon>
     </span>
@@ -27,9 +30,10 @@
       {{ member.user_display }}
     </span>
 
-    <span class="badge badge-primary badge-pill badge-hover"
-          (click)="editMember(member)"
-          *appPerm="'canEditTeamMember'; args [currentUserTeamMembership]; else noEditMember"
+    <span
+      class="badge badge-primary badge-pill badge-hover"
+      (click)="editMember(member)"
+      *appPerm="'canEditTeamMember'; args: [currentUserTeamMembership]; else: noEditMember"
     >
       {{ member.snippet_count }}
     </span>

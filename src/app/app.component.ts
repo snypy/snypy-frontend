@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthResource } from "./services/resources/auth.resource";
-
+import { AuthResource } from './services/resources/auth.resource';
 
 @Component({
   selector: 'app-root',
@@ -8,11 +7,9 @@ import { AuthResource } from "./services/resources/auth.resource";
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
+  constructor(private authResource: AuthResource) {}
 
-  constructor(private authResource: AuthResource) {
-  }
-
-  ngOnInit() {
+  ngOnInit(): void {
     /**
      * Initialize auth for already authenticated users
      */

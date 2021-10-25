@@ -5,28 +5,25 @@ import { AuthResource } from '../../services/resources/auth.resource';
 @Component({
   selector: 'app-auth-activate',
   templateUrl: './auth-activate.component.html',
-  styleUrls: ['./auth-activate.component.scss']
+  styleUrls: ['./auth-activate.component.scss'],
 })
 export class AuthActivateComponent implements OnInit {
+  constructor(private activatedRoute: ActivatedRoute, private authResource: AuthResource, private router: Router) {}
 
-  constructor(private activatedRoute: ActivatedRoute,
-              private authResource: AuthResource,
-              private router: Router) { }
-
-  ngOnInit() {
+  ngOnInit(): void {
     this.authResource.logout();
 
     this.activatedRoute.queryParams.subscribe(params => {
-      this.authResource.verify({}, params).$promise
-        .then(() => {
+      this.authResource
+        .verify({}, params)
+        .$promise.then(() => {
           console.log('User activated');
           this.router.navigateByUrl('');
         })
-        .catch((reason) => {
+        .catch(() => {
           console.log('User activation failed');
           this.router.navigateByUrl('');
         });
     });
   }
-
 }

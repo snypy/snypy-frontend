@@ -1,14 +1,13 @@
 export class Login {
-    static type = '[Auth] Login';
+  static type = '[Auth] Login';
 
-    constructor(public username: string, public password: string) {
-    }
+  constructor(public username: string, public password: string) {}
 }
 
 export class Logout {
-    static type = '[Auth] Logout';
+  static type = '[Auth] Logout';
 }
 
 export class Verify {
-    static type = '[Auth] Verify';
+  static type = '[Auth] Verify';
 }

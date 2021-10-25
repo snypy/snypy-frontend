@@ -6,12 +6,13 @@ describe('ViewInfoComponent', () => {
   let component: ViewInfoComponent;
   let fixture: ComponentFixture<ViewInfoComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ ViewInfoComponent ]
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [ViewInfoComponent],
+      }).compileComponents();
     })
-    .compileComponents();
-  }));
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ViewInfoComponent);

@@ -6,12 +6,13 @@ describe('SnippetComponent', () => {
   let component: SnippetComponent;
   let fixture: ComponentFixture<SnippetComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ SnippetComponent ]
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [SnippetComponent],
+      }).compileComponents();
     })
-    .compileComponents();
-  }));
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(SnippetComponent);

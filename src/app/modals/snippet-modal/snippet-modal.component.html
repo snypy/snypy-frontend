@@ -1,5 +1,4 @@
 <div class="modal-header">
-
   <h4 class="modal-title" *ngIf="!snippet">Add snippet</h4>
   <h4 class="modal-title" *ngIf="snippet">Edit snippet</h4>
 
@@ -10,65 +9,55 @@
 <div class="modal-body">
   <form [formGroup]="snippetForm">
     <span>Title</span>
-    <anx-forms-input
-      formControlName="title"
-      [errors]="snippetForm.get('title').errors"
-    ></anx-forms-input>
+    <anx-forms-input formControlName="title" [errors]="snippetForm.get('title').errors"></anx-forms-input>
 
     <span>Description</span>
-    <anx-forms-input-textarea
-      formControlName="description"
-      [errors]="snippetForm.get('description').errors"
-    ></anx-forms-input-textarea>
+    <anx-forms-input-textarea formControlName="description" [errors]="snippetForm.get('description').errors"></anx-forms-input-textarea>
 
     <span>Labels</span>
     <anx-forms-input-select
-        bindLabel="name"
-        bindValue="pk"
-        [options]="labels"
-        [multiple]="true"
-        formControlName="labels"
-        [errors]="snippetForm.get('labels').errors"
+      bindLabel="name"
+      bindValue="pk"
+      [options]="labels"
+      [multiple]="true"
+      formControlName="labels"
+      [errors]="snippetForm.get('labels').errors"
     ></anx-forms-input-select>
 
     <span>Visibility</span>
     <anx-forms-input-select
-        bindLabel="name"
-        bindValue="key"
-        [options]="visibilities"
-        formControlName="visibility"
-        [errors]="snippetForm.get('visibility').errors"
+      bindLabel="name"
+      bindValue="key"
+      [options]="visibilities"
+      formControlName="visibility"
+      [errors]="snippetForm.get('visibility').errors"
     ></anx-forms-input-select>
 
-    <div *ngFor="let file of snippetForm.get('files')['controls']; let i = index" formArrayName="files" style="margin-top: 0.75rem;">
+    <div *ngFor="let file of snippetForm.get('files')['controls']; let i = index" formArrayName="files" style="margin-top: 0.75rem">
       <div [formGroupName]="i">
-        <div class="card" style="border: none;">
-          <div class="card-head" style="border: 1px solid rgba(0,0,0,.125);">
+        <div class="card" style="border: none">
+          <div class="card-head" style="border: 1px solid rgba(0, 0, 0, 0.125)">
             <div class="row">
               <div class="col-4">
-                <div class="form-group" style="margin: 0.75rem;">
+                <div class="form-group" style="margin: 0.75rem">
                   <input
                     formControlName="name"
                     type="text"
                     class="form-control"
                     [id]="'input-title-' + i"
                     aria-describedby="Name"
-                    placeholder="Name">
+                    placeholder="Name"
+                  />
                 </div>
               </div>
               <div class="col-4">
-                <div class="form-group" style="margin: 0.75rem;">
-                  <ng-select
-                    formControlName="language"
-                    [items]="languages"
-                    bindLabel="name"
-                    bindValue="pk"
-                    [clearable]="false">
+                <div class="form-group" style="margin: 0.75rem">
+                  <ng-select formControlName="language" [items]="languages" bindLabel="name" bindValue="pk" [clearable]="false">
                   </ng-select>
                 </div>
               </div>
               <div class="col-4 text-end">
-                <div class="form-group" style="margin: 0.75rem;">
+                <div class="form-group" style="margin: 0.75rem">
                   <span class="btn btn-link text-danger" (click)="removeFile(i)">
                     <fa-icon class="float-end" icon="trash"></fa-icon>
                   </span>
@@ -76,12 +65,12 @@
               </div>
             </div>
           </div>
-          <div *ngIf="(languages | filterBy: ['pk']: file.get('language').value).length">
+          <div *ngIf="(languages | filterBy: ['pk']:file.get('language').value).length">
             <ngx-monaco-editor
-              style="height: 400px;"
+              style="height: 400px"
               [options]="{
                 theme: 'vs-dark',
-                language: (languages | filterBy: ['pk']: file.get('language').value)[0].name,
+                language: (languages | filterBy: ['pk']:file.get('language').value)[0].name,
                 scrollBeyondLastLine: false
               }"
               formControlName="content"
@@ -91,10 +80,9 @@
       </div>
     </div>
 
-    <div style="margin-top: 0.75rem;">
+    <div style="margin-top: 0.75rem">
       <span class="btn btn-success" (click)="addFile()">Add File</span>
     </div>
-
   </form>
 </div>
 <div class="modal-footer">

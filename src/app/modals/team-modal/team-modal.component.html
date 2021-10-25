@@ -1,5 +1,4 @@
 <div class="modal-header">
-  
   <h4 class="modal-title" *ngIf="!team">Add team</h4>
   <h4 class="modal-title" *ngIf="team">Edit team</h4>
 
@@ -9,10 +8,7 @@
 </div>
 <div class="modal-body">
   <form [formGroup]="teamForm">
-    <anx-forms-input
-      formControlName="name"
-      [errors]="teamForm.get('name').errors"
-    ></anx-forms-input>
+    <anx-forms-input formControlName="name" [errors]="teamForm.get('name').errors"></anx-forms-input>
   </form>
 </div>
 <div class="modal-footer">

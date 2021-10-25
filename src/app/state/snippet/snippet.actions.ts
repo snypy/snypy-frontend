@@ -1,9 +1,8 @@
-import { Snippet } from "../../services/resources/snippet.resource";
-import { OrderingModel } from "./snippet.model";
+import { Snippet } from '../../services/resources/snippet.resource';
+import { OrderingModel } from './snippet.model';
 
 export class UpdateSnippets {
   static readonly type = '[Snippet] Update snippets';
-  constructor() {}
 }
 
 export class SetActiveSnippet {
@@ -26,7 +25,7 @@ export class RemoveSnippet {
  */
 export class UpdateSnippetFilter {
   static readonly type = '[Snippet] Update snippet filter';
-  constructor(public filter: {}, public reload = true) {}
+  constructor(public filter: Record<string, unknown>, public reload = true) {}
 }
 
 export class UpdateSnippetSearchFilter {

@@ -1,19 +1,25 @@
-<div class="row" style="padding-bottom: 8px; padding-top: 8px;">
-  <div class="col-6" style="padding-top: 0;">
+<div class="row" style="padding-bottom: 8px; padding-top: 8px">
+  <div class="col-6" style="padding-top: 0">
     <div class="form-group" [formGroup]="snippetSearchForm">
-      <input type="text" class="form-control form-control-sm" formControlName="search" id="search" placeholder="Search for snippets">
+      <input type="text" class="form-control form-control-sm" formControlName="search" id="search" placeholder="Search for snippets" />
     </div>
   </div>
-  <div class="col-6 text-end" style="padding-top: 0;">
-
+  <div class="col-6 text-end" style="padding-top: 0">
     <div ngbDropdown class="d-inline-block" placement="bottom-right" #myDrop="ngbDropdown">
       <button class="btn btn-sm btn-outline-info" id="dropdownBasic1" ngbDropdownToggle>{{ currentUser.username }}</button>
       <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-        <div class="card" style="border-radius: 0; border: none;">
-            <div class="card-body text-center" style="border-bottom: 1px solid #ddd; padding: 0; margin-bottom: 10px;">
-                <p><img class="img-fluid" [src]="'https://www.gravatar.com/avatar/' + currentUser.pk +'?d=identicon&f=y&s=200'" alt="card image" style="border-radius: 50%; max-width: 50%;"></p>
-                <h4 class="card-title">{{ currentUser.username }}</h4>
-            </div>
+        <div class="card" style="border-radius: 0; border: none">
+          <div class="card-body text-center" style="border-bottom: 1px solid #ddd; padding: 0; margin-bottom: 10px">
+            <p>
+              <img
+                class="img-fluid"
+                [src]="'https://www.gravatar.com/avatar/' + currentUser.pk + '?d=identicon&f=y&s=200'"
+                alt="card image"
+                style="border-radius: 50%; max-width: 50%"
+              />
+            </p>
+            <h4 class="card-title">{{ currentUser.username }}</h4>
+          </div>
         </div>
         <button class="dropdown-item" (click)="openHelp()">Help</button>
         <button class="dropdown-item" (click)="doLogout()">Logout</button>

@@ -1,27 +1,28 @@
 <div *ngIf="activeSnippet">
   <div class="label-list" *ngIf="labels.length">
     <span *ngFor="let label of activeSnippet.labels">
-      <span class="badge bg-info" *ngIf="(labels | filterBy: ['pk']: label)[0]">
-        {{ (labels | filterBy: ['pk']: label)[0].name }}
+      <span class="badge bg-info" *ngIf="(labels | filterBy: ['pk']:label)[0]">
+        {{ (labels | filterBy: ['pk']:label)[0].name }}
       </span>
     </span>
   </div>
 
-  <div style="padding: 15px;">
+  <div style="padding: 15px">
     {{ activeSnippet.description }}
   </div>
 
-  <div *ngFor="let file of files" style="margin: 30px;">
+  <div *ngFor="let file of files" style="margin: 30px">
     <ngb-accordion #acc="ngbAccordion" [activeIds]="'file-' + file.pk">
       <ngb-panel [id]="'file-' + file.pk" [title]="file.name">
         <ng-template ngbPanelContent>
           <ngx-monaco-editor
-            style="height: 400px;"
-            [options]="{theme: 'vs-dark', language: 'python', readOnly: true, scrollBeyondLastLine: false}"
+            style="height: 400px"
+            [options]="{ theme: 'vs-dark', language: 'python', readOnly: true, scrollBeyondLastLine: false }"
             [(ngModel)]="file.content"
           ></ngx-monaco-editor>
         </ng-template>
       </ngb-panel>
     </ngb-accordion>
   </div>
-<div>
+  <div></div>
+</div>

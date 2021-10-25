@@ -6,12 +6,13 @@ describe('RegisterCompleteComponent', () => {
   let component: RegisterCompleteComponent;
   let fixture: ComponentFixture<RegisterCompleteComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ RegisterCompleteComponent ]
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [RegisterCompleteComponent],
+      }).compileComponents();
     })
-    .compileComponents();
-  }));
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(RegisterCompleteComponent);

@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -14,13 +14,13 @@ import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { MonacoEditorModule } from 'ngx-monaco-editor';
 import { NgPipesModule } from 'ngx-pipes';
-import { ToastrModule } from "ngx-toastr";
-import { NgxAnxFormsModule } from "ngx-anx-forms";
+import { ToastrModule } from 'ngx-toastr';
+import { NgxAnxFormsModule } from 'ngx-anx-forms';
 
 import { ServicesModule } from './services/services.module';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
-  suppressScrollX: true
+  suppressScrollX: true,
 };
 
 import { AppComponent } from './app.component';
@@ -45,11 +45,11 @@ import { ViewInfoComponent } from './components/view-info/view-info.component';
 import { ViewSwitchComponent } from './components/view-switch/view-switch.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { ContentComponent } from './layout/content/content.component';
-import { JwtInterceptor } from "./helpers/jwt.interceptor";
+import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { BaseComponent } from './layout/base/base.component';
 import { BootstrapSwitchComponent } from './components/bootstrap-switch/bootstrap-switch.component';
 import { LoadingScreenComponent } from './components/loading-screen/loading-screen.component';
-import { LoadingScreenInterceptor } from "./helpers/loading.interceptor";
+import { LoadingScreenInterceptor } from './helpers/loading.interceptor';
 import { TeamMembersComponent } from './components/team-members/team-members.component';
 
 import { SnippetModalComponent } from './modals/snippet-modal/snippet-modal.component';
@@ -65,19 +65,19 @@ import { RegisterComponent } from './components/auth/register/register.component
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterCompleteComponent } from './components/auth/register-complete/register-complete.component';
 import { AuthActivateComponent } from './components/auth-activate/auth-activate.component';
-import {NgxsModule} from "@ngxs/store";
-import {ScopeState} from "./state/scope/scope.state";
+import { NgxsModule } from '@ngxs/store';
+import { ScopeState } from './state/scope/scope.state';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
-import {NgxsSelectSnapshotModule} from "@ngxs-labs/select-snapshot";
-import { LanguageState } from "./state/language/language.state";
-import { LabelState } from "./state/label/label.state";
-import { SnippetState } from "./state/snippet/snippet.state";
+import { NgxsSelectSnapshotModule } from '@ngxs-labs/select-snapshot';
+import { LanguageState } from './state/language/language.state';
+import { LabelState } from './state/label/label.state';
+import { SnippetState } from './state/snippet/snippet.state';
 
 const appRoutes: Routes = [
   {
     path: 'dashboard',
     component: BaseComponent,
-    children: []
+    children: [],
   },
   {
     path: 'verify-user',
@@ -86,14 +86,13 @@ const appRoutes: Routes = [
   {
     path: '',
     redirectTo: 'dashboard',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: '**',
     redirectTo: '',
-  }
+  },
 ];
-
 
 @NgModule({
   declarations: [
@@ -164,23 +163,22 @@ const appRoutes: Routes = [
   providers: [
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
-      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
     },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,
-      multi: true
+      multi: true,
     },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: LoadingScreenInterceptor,
-      multi: true
-    }
+      multi: true,
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {
-
   constructor(library: FaIconLibrary) {
     library.addIcons(
       fas.faCoffee,
@@ -198,8 +196,7 @@ export class AppModule {
       far.faStar,
       fas.faTrash,
       fas.faCircle,
-      fas.faHashtag,
+      fas.faHashtag
     );
   }
-
 }

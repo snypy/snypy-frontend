@@ -1,13 +1,12 @@
 <div class="list-group list-group-flush" id="list-tab" role="tablist">
-
   <a
     *ngFor="let navigation of navigations"
-    [ngClass]="{active: activeFilter.area === 'main' && activeFilter.value === navigation.value}"
+    [ngClass]="{ active: activeFilter.area === 'main' && activeFilter.value === navigation.value }"
     (click)="updateActiveFilter(navigation.value)"
     class="list-group-item list-group-item-action"
     id="list-home-list"
-    role="tab">
+    role="tab"
+  >
     <fa-icon class="icon" [icon]="navigation.icon" size="sm"></fa-icon> {{ navigation.name }}
   </a>
-
 </div>

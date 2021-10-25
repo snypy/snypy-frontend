@@ -12,31 +12,31 @@ import { AuthResource } from './resources/auth.resource';
 import { UserTeamResource } from './resources/userteam.resource';
 import { SnippetLabelResource } from './resources/snippetlabel.resource';
 
-
 @NgModule({
-    imports: [],
-    exports: [],
-    declarations: [],
-    providers: [/* declare in `forRoot()` */],
+  imports: [],
+  exports: [],
+  declarations: [],
+  providers: [
+    /* declare in `forRoot()` */
+  ],
 })
 export class ServicesModule {
+  static forRoot(): ModuleWithProviders<ServicesModule> {
+    return {
+      ngModule: ServicesModule,
+      providers: [
+        AuthResource,
+        UserResource,
+        LabelResource,
+        LanguageResource,
+        SnippetResource,
+        FileResource,
+        TeamResource,
+        UserTeamResource,
+        SnippetLabelResource,
 
-    static forRoot(): ModuleWithProviders<ServicesModule> {
-        return {
-            ngModule: ServicesModule,
-            providers: [
-                AuthResource,
-                UserResource,
-                LabelResource,
-                LanguageResource,
-                SnippetResource,
-                FileResource,
-                TeamResource,
-                UserTeamResource,
-                SnippetLabelResource,
-
-                ActiveFilterService,
-            ]
-        };
-    }
+        ActiveFilterService,
+      ],
+    };
+  }
 }
