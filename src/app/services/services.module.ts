@@ -11,6 +11,7 @@ import { ActiveFilterService } from './navigation/activeFilter.service';
 import { AuthResource } from './resources/auth.resource';
 import { UserTeamResource } from './resources/userteam.resource';
 import { SnippetLabelResource } from './resources/snippetlabel.resource';
+import { PasswordResetResource } from './resources/passwordreset.resource';
 
 @NgModule({
   imports: [],
@@ -34,7 +35,7 @@ export class ServicesModule {
         TeamResource,
         UserTeamResource,
         SnippetLabelResource,
-
+        PasswordResetResource,
         ActiveFilterService,
       ],
     };

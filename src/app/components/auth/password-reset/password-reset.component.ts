@@ -2,15 +2,15 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { mapFormErrors } from 'ngx-anx-forms';
 import { ToastrService } from 'ngx-toastr';
-import { RegisterPayload } from '../../../services/resources/auth.resource';
+import { PasswordResetPayload } from '../../../services/resources/passwordreset.resource';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss'],
+  selector: 'app-password-reset',
+  templateUrl: './password-reset.component.html',
+  styleUrls: ['./password-reset.component.scss'],
 })
-export class RegisterComponent implements OnInit, OnChanges {
-  @Output() register = new EventEmitter<RegisterPayload>();
+export class PasswordResetComponent implements OnInit, OnChanges {
+  @Output() passwordReset = new EventEmitter<PasswordResetPayload>();
   @Input() errors = null;
 
   form: FormGroup;
@@ -19,12 +19,7 @@ export class RegisterComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      username: new FormControl(null, Validators.required, null),
-      first_name: new FormControl(null, Validators.required, null),
-      last_name: new FormControl(null, Validators.required, null),
       email: new FormControl(null, [Validators.required, Validators.email], null),
-      password: new FormControl(null, Validators.required, null),
-      password_confirm: new FormControl(null, Validators.required, null),
     });
   }
 
@@ -44,7 +39,7 @@ export class RegisterComponent implements OnInit, OnChanges {
     }
   }
 
-  doRegister(): void {
-    this.register.emit(this.form.value);
+  doPasswordReset(): void {
+    this.passwordReset.emit(this.form.value);
   }
 }
