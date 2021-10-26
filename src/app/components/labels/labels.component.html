@@ -3,11 +3,13 @@
   <fa-icon class="float-end add-label" icon="plus" (click)="addLabel()"></fa-icon>
 </div>
 <div class="list-group list-group-flush" id="list-tab" role="tablist">
-  <span *ngFor="let label of labels"
-        [ngClass]="{active: activeFilter.area === 'labels' && activeFilter.value === label.pk}"
-        class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
-        id="list-profile-list"
-        role="tab">
+  <span
+    *ngFor="let label of labels"
+    [ngClass]="{ active: activeFilter.area === 'labels' && activeFilter.value === label.pk }"
+    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+    id="list-profile-list"
+    role="tab"
+  >
     <span class="icon remove-button" (click)="deleteLabel(label)">
       <fa-icon icon="circle" size="sm"></fa-icon>
     </span>

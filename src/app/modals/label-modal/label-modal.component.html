@@ -1,5 +1,4 @@
 <div class="modal-header">
-  
   <h4 class="modal-title" *ngIf="!label">Add label</h4>
   <h4 class="modal-title" *ngIf="label">Edit label</h4>
 
@@ -10,10 +9,7 @@
 <div class="modal-body">
   <form [formGroup]="labelForm">
     <span>Name</span>
-    <anx-forms-input
-      formControlName="name"
-      [errors]="labelForm.get('name').errors"
-    ></anx-forms-input>
+    <anx-forms-input formControlName="name" [errors]="labelForm.get('name').errors"></anx-forms-input>
   </form>
 </div>
 <div class="modal-footer">

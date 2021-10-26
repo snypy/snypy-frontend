@@ -6,12 +6,13 @@ describe('BootstrapSwitchComponent', () => {
   let component: BootstrapSwitchComponent;
   let fixture: ComponentFixture<BootstrapSwitchComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ BootstrapSwitchComponent ]
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [BootstrapSwitchComponent],
+      }).compileComponents();
     })
-    .compileComponents();
-  }));
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(BootstrapSwitchComponent);

@@ -1,16 +1,12 @@
 <form class="form" role="form" autocomplete="off" id="formLogin" novalidate="" [formGroup]="authForm">
-    <anx-forms-input
-        formControlName="username"
-        [errors]="authForm.get('username').errors"
-        [placeholder]="'Username'"
-    ></anx-forms-input>
+  <anx-forms-input formControlName="username" [errors]="authForm.get('username').errors" [placeholder]="'Username'"></anx-forms-input>
 
-    <anx-forms-input
-        formControlName="password"
-        [errors]="authForm.get('password').errors"
-        [placeholder]="'Password'"
-        [type]="'password'"
-    ></anx-forms-input>
+  <anx-forms-input
+    formControlName="password"
+    [errors]="authForm.get('password').errors"
+    [placeholder]="'Password'"
+    [type]="'password'"
+  ></anx-forms-input>
 
-    <button type="submit" class="btn btn-primary" id="btnLogin" (click)="doLogin()">Login</button>
+  <button type="submit" class="btn btn-primary" id="btnLogin" (click)="doLogin()">Login</button>
 </form>

@@ -6,12 +6,13 @@ describe('TeamMemberDeleteModalComponent', () => {
   let component: TeamMemberDeleteModalComponent;
   let fixture: ComponentFixture<TeamMemberDeleteModalComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ TeamMemberDeleteModalComponent ]
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [TeamMemberDeleteModalComponent],
+      }).compileComponents();
     })
-    .compileComponents();
-  }));
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TeamMemberDeleteModalComponent);

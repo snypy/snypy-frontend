@@ -1,9 +1,8 @@
-import { Directive, Input, TemplateRef, ViewContainerRef, OnChanges } from '@angular/core';
-import { ResourceModel } from "ngx-resource-factory/resource/resource-model";
-import { ROLES, UserTeam } from "../../services/resources/userteam.resource";
-import { Snippet } from "../../services/resources/snippet.resource";
-import { User } from "../../services/resources/user.resource";
-
+import { Directive, Input, OnChanges, TemplateRef, ViewContainerRef } from '@angular/core';
+import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
+import { Snippet } from '../../services/resources/snippet.resource';
+import { User } from '../../services/resources/user.resource';
+import { ROLES, UserTeam } from '../../services/resources/userteam.resource';
 
 export enum PERMISSION {
   'cadAddTeamMember',
@@ -13,12 +12,10 @@ export enum PERMISSION {
   'canDeleteSnippet',
 }
 
-
 @Directive({
-  selector: '[appPerm]'
+  selector: '[appPerm]',
 })
 export class PermDirective implements OnChanges {
-
   permName: PERMISSION;
   permArgs: any[] = [];
   hasPerm: boolean;
@@ -26,7 +23,6 @@ export class PermDirective implements OnChanges {
   static checkPerm(permName: PERMISSION, args: any[]): boolean {
     return PermDirective[permName](...args);
   }
-
 
   /**
    * Permissions
@@ -43,7 +39,7 @@ export class PermDirective implements OnChanges {
     return PermDirective.cadAddTeamMember(userTeam);
   }
 
-  static canEditSnippet(user: ResourceModel<User>, snippet: ResourceModel<Snippet>) {
+  static canEditSnippet(user: ResourceModel<User>, snippet: ResourceModel<Snippet>): boolean {
     return snippet.user === user.pk;
 
     // To be implemented in 1.1, userTeam must be loaded from global state
@@ -59,16 +55,13 @@ export class PermDirective implements OnChanges {
     // }
   }
 
-  static canDeleteSnippet(user: ResourceModel<User>, snippet: ResourceModel<Snippet>) {
+  static canDeleteSnippet(user: ResourceModel<User>, snippet: ResourceModel<Snippet>): boolean {
     return PermDirective.canEditSnippet(user, snippet);
   }
 
-  constructor(
-    private templateRef: TemplateRef<any>,
-    private viewContainer: ViewContainerRef) {
-  }
+  constructor(private templateRef: TemplateRef<any>, private viewContainer: ViewContainerRef) {}
 
-  ngOnChanges() {
+  ngOnChanges(): void {
     this.viewContainer.clear();
 
     if (this.hasPerm) {

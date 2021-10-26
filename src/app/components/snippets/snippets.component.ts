@@ -1,20 +1,16 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-
-import { SnippetResource, Snippet } from '../../services/resources/snippet.resource';
-
+import { Select, Store } from '@ngxs/store';
 import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
-import { Observable, Subscription } from "rxjs";
-import { SetActiveSnippet } from "../../state/snippet/snippet.actions";
-import { Select, Store } from "@ngxs/store";
-
+import { Observable, Subscription } from 'rxjs';
+import { Snippet, SnippetResource } from '../../services/resources/snippet.resource';
+import { SetActiveSnippet } from '../../state/snippet/snippet.actions';
 
 @Component({
   selector: 'app-snippets',
   templateUrl: './snippets.component.html',
-  styleUrls: ['./snippets.component.scss']
+  styleUrls: ['./snippets.component.scss'],
 })
 export class SnippetsComponent implements OnInit, OnDestroy {
-
   activeSnippet: Snippet = null;
   snippets: Snippet[] = [];
 
@@ -25,21 +21,20 @@ export class SnippetsComponent implements OnInit, OnDestroy {
   @Select(state => state.snippet.activeSnippet) activeSnippet$: Observable<Snippet>;
   @Select(state => state.snippet.list) snippetList$: Observable<Snippet[]>;
 
-  constructor(private snippetResource: SnippetResource,
-              private store: Store) { }
+  constructor(private snippetResource: SnippetResource, private store: Store) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     /**
      * Initial load
      */
-    this.snippetsLoadedSubscription = this.snippetList$.subscribe((snippets) => {
+    this.snippetsLoadedSubscription = this.snippetList$.subscribe(snippets => {
       this.snippets = snippets;
     });
 
     /**
      * Snippet updated subscription
      */
-    this.activeSnippetSubscription = this.activeSnippet$.subscribe((snippet) => {
+    this.activeSnippetSubscription = this.activeSnippet$.subscribe(snippet => {
       this.activeSnippet = snippet;
 
       // Update snippet in list
@@ -52,11 +47,11 @@ export class SnippetsComponent implements OnInit, OnDestroy {
     });
   }
 
-  loadSnippet(snippet: ResourceModel<Snippet>) {
+  loadSnippet(snippet: ResourceModel<Snippet>): void {
     this.store.dispatch(new SetActiveSnippet(snippet));
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.snippetsLoadedSubscription.unsubscribe();
     this.activeSnippetSubscription.unsubscribe();
     this.activeSnippetDeletedSubscription.unsubscribe();

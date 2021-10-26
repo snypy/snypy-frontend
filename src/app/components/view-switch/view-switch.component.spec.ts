@@ -6,12 +6,13 @@ describe('ViewSwitchComponent', () => {
   let component: ViewSwitchComponent;
   let fixture: ComponentFixture<ViewSwitchComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ ViewSwitchComponent ]
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [ViewSwitchComponent],
+      }).compileComponents();
     })
-    .compileComponents();
-  }));
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ViewSwitchComponent);

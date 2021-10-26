@@ -1,14 +1,15 @@
 <div class="list-group-heading">
-    <b>Languages</b>
+  <b>Languages</b>
 </div>
 <div class="list-group list-group-flush" id="list-tab" role="tablist">
   <a
     *ngFor="let language of languages"
-    [ngClass]="{active: activeFilter.area === 'languages' && activeFilter.value === language.pk}"
+    [ngClass]="{ active: activeFilter.area === 'languages' && activeFilter.value === language.pk }"
     (click)="updateActiveFilter(language.pk)"
     class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
     id="list-profile-list"
-    role="tab">
+    role="tab"
+  >
     <span class="icon">
       <fa-icon icon="hashtag" size="sm"></fa-icon>
     </span>

@@ -1,24 +1,23 @@
-import { Component, OnInit, Output, EventEmitter, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { Validators, FormGroup, FormControl } from '@angular/forms';
-import { AuthCredentials } from '../../../services/resources/auth.resource';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { mapFormErrors } from 'ngx-anx-forms';
 import { ToastrService } from 'ngx-toastr';
+import { RegisterPayload } from '../../../services/resources/auth.resource';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit, OnChanges {
-
-  @Output() register = new EventEmitter<AuthCredentials>();
+  @Output() register = new EventEmitter<RegisterPayload>();
   @Input() errors = null;
 
   authForm: FormGroup;
 
-  constructor(private toastr: ToastrService) { }
+  constructor(private toastr: ToastrService) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.authForm = new FormGroup({
       username: new FormControl(null, Validators.required, null),
       first_name: new FormControl(null, Validators.required, null),
@@ -29,7 +28,7 @@ export class RegisterComponent implements OnInit, OnChanges {
     });
   }
 
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: SimpleChanges): void {
     if (changes['errors']) {
       const errors = changes['errors'].currentValue;
 
@@ -37,7 +36,7 @@ export class RegisterComponent implements OnInit, OnChanges {
         mapFormErrors(this.authForm, errors);
 
         if (errors['non_field_errors']) {
-          for (let error of errors['non_field_errors']) {
+          for (const error of errors['non_field_errors']) {
             this.toastr.error(error);
           }
         }
@@ -45,8 +44,7 @@ export class RegisterComponent implements OnInit, OnChanges {
     }
   }
 
-  doRegister() {
+  doRegister(): void {
     this.register.emit(this.authForm.value);
   }
-
 }

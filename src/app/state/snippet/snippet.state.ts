@@ -1,21 +1,21 @@
-import { Action, State, StateContext, Store } from "@ngxs/store";
-import { Injectable } from "@angular/core";
-import { SnippetModel } from "./snippet.model";
+import { Injectable } from '@angular/core';
+import { Action, State, StateContext, Store } from '@ngxs/store';
+import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
+import { SnippetResource } from '../../services/resources/snippet.resource';
+import { Team } from '../../services/resources/team.resource';
+import { User } from '../../services/resources/user.resource';
+import { ScopeModel } from '../scope/scope.model';
+import { ScopeState } from '../scope/scope.state';
 import {
-  AddSnippet, RemoveSnippet,
+  AddSnippet,
+  RemoveSnippet,
   SetActiveSnippet,
   UpdateSnippetFilter,
   UpdateSnippetOrderingFilter,
   UpdateSnippets,
-  UpdateSnippetSearchFilter
-} from "./snippet.actions";
-import { ScopeModel } from "../scope/scope.model";
-import { ScopeState } from "../scope/scope.state";
-import { ResourceModel } from "ngx-resource-factory/resource/resource-model";
-import { User } from "../../services/resources/user.resource";
-import { Team } from "../../services/resources/team.resource";
-import { SnippetResource } from "../../services/resources/snippet.resource";
-
+  UpdateSnippetSearchFilter,
+} from './snippet.actions';
+import { SnippetModel } from './snippet.model';
 
 @State<SnippetModel>({
   name: 'snippet',
@@ -25,38 +25,32 @@ import { SnippetResource } from "../../services/resources/snippet.resource";
     filter: null,
     searchFilter: '',
     ordering: null,
-  }
+  },
 })
 @Injectable()
 export class SnippetState {
-
-  constructor(private store: Store,
-              private snippetResource: SnippetResource) {
-  }
+  constructor(private store: Store, private snippetResource: SnippetResource) {}
 
   @Action(SetActiveSnippet)
-  setActiveSnippet(ctx: StateContext<SnippetModel>, action: SetActiveSnippet) {
+  setActiveSnippet(ctx: StateContext<SnippetModel>, action: SetActiveSnippet): void {
     ctx.patchState({
-      activeSnippet: action.snippet
+      activeSnippet: action.snippet,
     });
   }
 
   @Action(AddSnippet)
-  addSnippet(ctx: StateContext<SnippetModel>, action: AddSnippet) {
+  addSnippet(ctx: StateContext<SnippetModel>, action: AddSnippet): void {
     const state = ctx.getState();
 
     ctx.patchState({
-      list: [
-        action.snippet,
-        ...state.list
-      ]
+      list: [action.snippet, ...state.list],
     });
 
     this.store.dispatch(new SetActiveSnippet(action.snippet));
   }
 
   @Action(RemoveSnippet)
-  removeSnippet(ctx: StateContext<SnippetModel>, action: RemoveSnippet) {
+  removeSnippet(ctx: StateContext<SnippetModel>, action: RemoveSnippet): void {
     const snippetList = [...ctx.getState().list];
 
     const oldSnippet = snippetList.find(item => item.pk === action.snippet.pk);
@@ -65,7 +59,7 @@ export class SnippetState {
     }
 
     ctx.patchState({
-      list: snippetList
+      list: snippetList,
     });
 
     if (snippetList.length) {
@@ -75,47 +69,47 @@ export class SnippetState {
   }
 
   @Action(UpdateSnippetFilter)
-  updateSnippetFilter(ctx: StateContext<SnippetModel>, action: UpdateSnippetFilter) {
+  updateSnippetFilter(ctx: StateContext<SnippetModel>, action: UpdateSnippetFilter): void {
     ctx.patchState({
-      'filter': action.filter
-    })
+      filter: action.filter,
+    });
     if (action.reload) {
-      this.store.dispatch(new UpdateSnippets())
+      this.store.dispatch(new UpdateSnippets());
     }
   }
 
   @Action(UpdateSnippetOrderingFilter)
-  updateSnippetOrderingFilter(ctx: StateContext<SnippetModel>, action: UpdateSnippetOrderingFilter) {
+  updateSnippetOrderingFilter(ctx: StateContext<SnippetModel>, action: UpdateSnippetOrderingFilter): void {
     ctx.patchState({
-      'ordering': action.ordering
+      ordering: action.ordering,
     });
 
     this.updateOrdering(ctx.getState());
   }
 
   @Action(UpdateSnippetSearchFilter)
-  updateSnippetSearchFilter(ctx: StateContext<SnippetModel>, action: UpdateSnippetSearchFilter) {
+  updateSnippetSearchFilter(ctx: StateContext<SnippetModel>, action: UpdateSnippetSearchFilter): void {
     ctx.patchState({
-      'searchFilter': action.filter
+      searchFilter: action.filter,
     });
-    this.store.dispatch(new UpdateSnippets())
+    this.store.dispatch(new UpdateSnippets());
     // ToDo: consider using RefreshScope action to also change the counters in labels and language
   }
 
   @Action(UpdateSnippets)
-  async updateSnippets(ctx: StateContext<SnippetModel>) {
+  async updateSnippets(ctx: StateContext<SnippetModel>): Promise<void> {
     const state = ctx.getState();
     const scope = this.store.selectSnapshot<ScopeModel>(ScopeState);
-    let filter = {};
+    const filter = {};
 
     switch (scope.area) {
       case 'user':
-        let user = scope.value as ResourceModel<User>;
+        const user = scope.value as ResourceModel<User>;
         filter['user'] = user.pk;
         filter['team_is_null'] = 'True';
         break;
       case 'team':
-        let team = scope.value as ResourceModel<Team>;
+        const team = scope.value as ResourceModel<Team>;
         filter['team'] = team.pk;
         break;
     }
@@ -133,18 +127,16 @@ export class SnippetState {
     this.updateOrdering(state);
 
     ctx.patchState({
-      'list': snippets
-    })
+      list: snippets,
+    });
   }
 
   private updateOrdering(state: SnippetModel) {
-
     state.list.sort((a, b) => {
       const x = a[state.ordering.key];
       const y = b[state.ordering.key];
 
-      return ((x < y) ? -1 : ((x > y) ? 1 : 0)) * state.ordering.direction;
+      return (x < y ? -1 : x > y ? 1 : 0) * state.ordering.direction;
     });
   }
-
 }

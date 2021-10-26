@@ -6,12 +6,13 @@ describe('AuthActivateComponent', () => {
   let component: AuthActivateComponent;
   let fixture: ComponentFixture<AuthActivateComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ AuthActivateComponent ]
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [AuthActivateComponent],
+      }).compileComponents();
     })
-    .compileComponents();
-  }));
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AuthActivateComponent);

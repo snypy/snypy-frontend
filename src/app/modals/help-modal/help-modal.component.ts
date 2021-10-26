@@ -1,20 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
+import { Component } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-help-modal',
   templateUrl: './help-modal.component.html',
-  styleUrls: ['./help-modal.component.scss']
+  styleUrls: ['./help-modal.component.scss'],
 })
-export class HelpModalComponent implements OnInit {
+export class HelpModalComponent {
+  constructor(private activeModal: NgbActiveModal) {}
 
-  constructor(private activeModal: NgbActiveModal) { }
-
-  ngOnInit() {
-  }
-
-  closeAction(reason: string) {
+  closeAction(reason: string): void {
     this.activeModal.dismiss(reason);
   }
-
 }

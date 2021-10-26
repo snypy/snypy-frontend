@@ -6,12 +6,13 @@ describe('TeamMemberModalComponent', () => {
   let component: TeamMemberModalComponent;
   let fixture: ComponentFixture<TeamMemberModalComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ TeamMemberModalComponent ]
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [TeamMemberModalComponent],
+      }).compileComponents();
     })
-    .compileComponents();
-  }));
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TeamMemberModalComponent);

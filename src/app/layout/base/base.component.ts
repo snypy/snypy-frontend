@@ -1,14 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActiveFilterService } from "../../services/navigation/activeFilter.service";
-import { Observable, Subscription } from "rxjs";
+import { Select, Store } from '@ngxs/store';
+import { Observable, Subscription } from 'rxjs';
+import { ActiveFilterService } from '../../services/navigation/activeFilter.service';
 import { AuthResource } from '../../services/resources/auth.resource';
-import { Select, Store } from "@ngxs/store";
-import { RefreshScope, UpdateScope } from "../../state/scope/scope.actions";
-import { ScopeState } from "../../state/scope/scope.state";
-import { ScopeModel } from "../../state/scope/scope.model";
-import { UpdateLanguages } from "../../state/language/language.actions";
-import { UpdateLabels } from "../../state/label/label.actions";
-import { UpdateSnippets } from "../../state/snippet/snippet.actions";
+import { UpdateLabels } from '../../state/label/label.actions';
+import { UpdateLanguages } from '../../state/language/language.actions';
+import { RefreshScope, UpdateScope } from '../../state/scope/scope.actions';
+import { ScopeModel } from '../../state/scope/scope.model';
+import { ScopeState } from '../../state/scope/scope.state';
+import { UpdateSnippets } from '../../state/snippet/snippet.actions';
 
 @Component({
   selector: 'app-base',
@@ -16,19 +16,15 @@ import { UpdateSnippets } from "../../state/snippet/snippet.actions";
   styleUrls: ['./base.component.scss'],
 })
 export class BaseComponent implements OnInit, OnDestroy {
-
-  isLoggedIn: boolean = false;
+  isLoggedIn = false;
 
   scopeSubscription: Subscription;
 
   @Select(ScopeState) scope$: Observable<ScopeModel>;
 
-  constructor(private store: Store,
-              private authResource: AuthResource,
-              private activeFilterService: ActiveFilterService,) {
-  }
+  constructor(private store: Store, private authResource: AuthResource, private activeFilterService: ActiveFilterService) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     /**
      * Refresh snippets on scope changes
      */
@@ -47,7 +43,7 @@ export class BaseComponent implements OnInit, OnDestroy {
     /**
      * Subscribe for user status changes
      */
-    this.authResource.loginStatusUpdates.subscribe((value) => {
+    this.authResource.loginStatusUpdates.subscribe(value => {
       let scope: ScopeModel;
 
       this.isLoggedIn = value;
@@ -69,8 +65,7 @@ export class BaseComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.scopeSubscription.unsubscribe();
   }
-
 }
