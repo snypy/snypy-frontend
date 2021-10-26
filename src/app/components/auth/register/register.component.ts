@@ -13,12 +13,12 @@ export class RegisterComponent implements OnInit, OnChanges {
   @Output() register = new EventEmitter<RegisterPayload>();
   @Input() errors = null;
 
-  authForm: FormGroup;
+  form: FormGroup;
 
   constructor(private toastr: ToastrService) {}
 
   ngOnInit(): void {
-    this.authForm = new FormGroup({
+    this.form = new FormGroup({
       username: new FormControl(null, Validators.required, null),
       first_name: new FormControl(null, Validators.required, null),
       last_name: new FormControl(null, Validators.required, null),
@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit, OnChanges {
       const errors = changes['errors'].currentValue;
 
       if (errors) {
-        mapFormErrors(this.authForm, errors);
+        mapFormErrors(this.form, errors);
 
         if (errors['non_field_errors']) {
           for (const error of errors['non_field_errors']) {
@@ -45,6 +45,6 @@ export class RegisterComponent implements OnInit, OnChanges {
   }
 
   doRegister(): void {
-    this.register.emit(this.authForm.value);
+    this.register.emit(this.form.value);
   }
 }

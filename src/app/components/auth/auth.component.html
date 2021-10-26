@@ -11,11 +11,12 @@
               <app-login *ngIf="ACTIVE_STATE == STATE_LOGIN" (login)="doLogin($event)"></app-login>
               <app-register *ngIf="ACTIVE_STATE == STATE_REGISTER" (register)="doRegister($event)" [errors]="server_errors"></app-register>
               <app-register-complete *ngIf="ACTIVE_STATE == STATE_REGISTER_COMPLETE"></app-register-complete>
+              <app-password-reset *ngIf="ACTIVE_STATE == STATE_PASSWORD_FORGOT" (passwordReset)="doPasswordReset($event)"></app-password-reset>
             </div>
 
             <div class="card-footer" *ngIf="ACTIVE_STATE == STATE_LOGIN">
               <button type="button" class="btn btn-outline-info btn-sm float-end" (click)="setActiveState(STATE_REGISTER)">Register</button>
-              <!-- <button type="button" class="btn btn-outline-info btn-sm" (click)="setActiveState(STATE_PASSWORD_FORGOT)">Password forgot</button> -->
+              <button type="button" class="btn btn-outline-info btn-sm" (click)="setActiveState(STATE_PASSWORD_FORGOT)">Password forgot</button>
             </div>
 
             <div class="card-footer" *ngIf="ACTIVE_STATE != STATE_LOGIN">

@@ -1,9 +1,9 @@
-<form class="form" role="form" autocomplete="off" id="formLogin" novalidate="" [formGroup]="authForm">
-  <anx-forms-input formControlName="username" [errors]="authForm.get('username').errors" [placeholder]="'Username'"></anx-forms-input>
+<form class="form" role="form" autocomplete="off" id="formLogin" novalidate="" [formGroup]="form">
+  <anx-forms-input formControlName="username" [errors]="form.get('username').errors" [placeholder]="'Username'"></anx-forms-input>
 
   <anx-forms-input
     formControlName="password"
-    [errors]="authForm.get('password').errors"
+    [errors]="form.get('password').errors"
     [placeholder]="'Password'"
     [type]="'password'"
   ></anx-forms-input>

@@ -10,16 +10,16 @@ import { AuthCredentials } from '../../../services/resources/auth.resource';
 export class LoginComponent implements OnInit {
   @Output() login = new EventEmitter<AuthCredentials>();
 
-  authForm: FormGroup;
+  form: FormGroup;
 
   ngOnInit(): void {
-    this.authForm = new FormGroup({
+    this.form = new FormGroup({
       username: new FormControl(null, Validators.required, null),
       password: new FormControl(null, Validators.required, null),
     });
   }
 
   doLogin(): void {
-    this.login.emit(this.authForm.value);
+    this.login.emit(this.form.value);
   }
 }

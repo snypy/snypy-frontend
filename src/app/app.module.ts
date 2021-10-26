@@ -72,6 +72,7 @@ import { NgxsSelectSnapshotModule } from '@ngxs-labs/select-snapshot';
 import { LanguageState } from './state/language/language.state';
 import { LabelState } from './state/label/label.state';
 import { SnippetState } from './state/snippet/snippet.state';
+import { PasswordResetComponent } from './components/auth/password-reset/password-reset.component';
 
 const appRoutes: Routes = [
   {
@@ -128,6 +129,7 @@ const appRoutes: Routes = [
     RegisterComponent,
     RegisterCompleteComponent,
     AuthActivateComponent,
+    PasswordResetComponent,
   ],
   entryComponents: [
     SnippetModalComponent,

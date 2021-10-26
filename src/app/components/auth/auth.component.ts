@@ -24,8 +24,8 @@ export class AuthComponent implements OnInit {
     this.ACTIVE_STATE = this.STATE_LOGIN;
   }
 
-  doLogin(event: AuthCredentials): void {
-    this.authResource.login(event);
+  doLogin(authCredentials: AuthCredentials): void {
+    this.authResource.login(authCredentials);
   }
 
   doRegister(registerPayload: RegisterPayload): void {
@@ -40,6 +40,10 @@ export class AuthComponent implements OnInit {
         console.log(reason);
         this.server_errors = reason.error;
       });
+  }
+
+  doPasswordReset(event: any): void {
+    console.log(event);
   }
 
   setActiveState(newState: string): void {
