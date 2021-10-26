@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AuthCredentials, AuthResource, RegisterPayload } from '../../services/resources/auth.resource';
+import { PasswordResetPayload, PasswordResetResource } from '../../services/resources/passwordreset.resource';
 
 @Component({
   selector: 'app-auth',
@@ -11,6 +12,7 @@ export class AuthComponent implements OnInit {
   STATE_REGISTER = 'REGISTER';
   STATE_REGISTER_COMPLETE = 'REGISTER_COMPLETE';
   STATE_PASSWORD_FORGOT = 'PASSWORD_FORGOT';
+  STATE_PASSWORD_FORGOT_COMPLETE = 'PASSWORD_FORGOT_COMPLETE';
 
   ACTIVE_STATE: string = null;
 
@@ -18,7 +20,7 @@ export class AuthComponent implements OnInit {
 
   server_errors = null;
 
-  constructor(private authResource: AuthResource) {}
+  constructor(private authResource: AuthResource, private passwordResetResource: PasswordResetResource) {}
 
   ngOnInit(): void {
     this.ACTIVE_STATE = this.STATE_LOGIN;
@@ -42,8 +44,18 @@ export class AuthComponent implements OnInit {
       });
   }
 
-  doPasswordReset(event: any): void {
-    console.log(event);
+  doPasswordReset(passwordResetPayload: PasswordResetPayload): void {
+    this.passwordResetResource
+      .save({}, passwordResetPayload)
+      .$promise.then(() => {
+        console.log('Password reset requested');
+        this.setActiveState(this.STATE_PASSWORD_FORGOT_COMPLETE);
+      })
+      .catch(reason => {
+        console.log('Cannot reset password');
+        console.log(reason);
+        this.server_errors = reason.error;
+      });
   }
 
   setActiveState(newState: string): void {
