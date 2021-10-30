@@ -19,7 +19,7 @@ export interface PasswordResetPayload {
 })
 export class PasswordResetResource extends Resource<any> {
   @ResourceAction({
-    method: ResourceActionHttpMethod.GET,
+    method: ResourceActionHttpMethod.POST,
     isList: false,
     invalidateCache: true,
     urlSuffix: 'validate_token/',
@@ -27,7 +27,7 @@ export class PasswordResetResource extends Resource<any> {
   validate_token: ResourceActionMethod<Record<string, unknown>, any, any>;
 
   @ResourceAction({
-    method: ResourceActionHttpMethod.GET,
+    method: ResourceActionHttpMethod.POST,
     isList: false,
     invalidateCache: true,
     urlSuffix: 'confirm/',
