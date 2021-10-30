@@ -74,6 +74,7 @@ import { LabelState } from './state/label/label.state';
 import { SnippetState } from './state/snippet/snippet.state';
 import { PasswordResetComponent } from './components/auth/password-reset/password-reset.component';
 import { PasswordResetCompleteComponent } from './components/auth/password-reset-complete/password-reset-complete.component';
+import { SetPasswordComponent } from './components/set-password/set-password.component';
 
 const appRoutes: Routes = [
   {
@@ -84,6 +85,10 @@ const appRoutes: Routes = [
   {
     path: 'verify-user',
     component: AuthActivateComponent,
+  },
+  {
+    path: 'set-password',
+    component: SetPasswordComponent,
   },
   {
     path: '',
@@ -132,6 +137,7 @@ const appRoutes: Routes = [
     AuthActivateComponent,
     PasswordResetComponent,
     PasswordResetCompleteComponent,
+    SetPasswordComponent,
   ],
   entryComponents: [
     SnippetModalComponent,
