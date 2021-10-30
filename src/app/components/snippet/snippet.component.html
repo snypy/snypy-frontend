@@ -17,7 +17,7 @@
         <ng-template ngbPanelContent>
           <ngx-monaco-editor
             style="height: 400px"
-            [options]="{ theme: 'vs-dark', language: 'python', readOnly: true, scrollBeyondLastLine: false }"
+            [options]="{ theme: 'vs-dark', language: 'python', readOnly: true, scrollBeyondLastLine: false, scrollbar: { alwaysConsumeMouseWheel: false } }"
             [(ngModel)]="file.content"
           ></ngx-monaco-editor>
         </ng-template>
