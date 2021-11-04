@@ -1,18 +1,23 @@
+import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-
+import { NgxsModule } from '@ngxs/store';
+import { NgxResourceFactoryModule } from 'ngx-resource-factory';
+import { ActiveFilterService } from '../../services/navigation/activeFilter.service';
+import { AuthResource } from '../../services/resources/auth.resource';
+import { UserResource } from '../../services/resources/user.resource';
 import { BaseComponent } from './base.component';
 
 describe('BaseComponent', () => {
   let component: BaseComponent;
   let fixture: ComponentFixture<BaseComponent>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [BaseComponent],
-      }).compileComponents();
-    })
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [BaseComponent],
+      imports: [NgxsModule.forRoot(), NgxResourceFactoryModule.forRoot(), HttpClientModule],
+      providers: [AuthResource, UserResource, ActiveFilterService],
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(BaseComponent);
