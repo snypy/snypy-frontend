@@ -1,11 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { SelectSnapshot } from '@ngxs-labs/select-snapshot';
 import { Select } from '@ngxs/store';
 import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 import { Observable, Subscription } from 'rxjs';
 import { FileResource } from '../../services/resources/file.resource';
 import { Label } from '../../services/resources/label.resource';
+import { Language } from '../../services/resources/language.resource';
 import { Snippet } from '../../services/resources/snippet.resource';
 import { LabelState } from '../../state/label/label.state';
+import { LanguageState } from '../../state/language/language.state';
 
 @Component({
   selector: 'app-snippet',
@@ -22,6 +25,9 @@ export class SnippetComponent implements OnInit, OnDestroy {
 
   @Select(LabelState) labels$: Observable<Label[]>;
   @Select(state => state.snippet.activeSnippet) activeSnippet$: Observable<Snippet>;
+
+  @SelectSnapshot(LanguageState)
+  public languages: Language[];
 
   constructor(private fileResource: FileResource) {}
 
@@ -49,5 +55,13 @@ export class SnippetComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.availableLabelsSubscription.unsubscribe();
     this.snippetLoaderSubscription.unsubscribe();
+  }
+
+  getLanguageName(langugaeId: number): string {
+    const language = this.languages.find(language => language.pk === langugaeId);
+    if (language) {
+      return language.name;
+    }
+    return 'default';
   }
 }

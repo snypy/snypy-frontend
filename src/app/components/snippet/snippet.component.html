@@ -19,7 +19,7 @@
             style="height: 400px"
             [options]="{
               theme: 'vs-dark',
-              language: 'python',
+              language: getLanguageName(file.language),
               readOnly: true,
               scrollBeyondLastLine: false,
               scrollbar: { alwaysConsumeMouseWheel: false }
