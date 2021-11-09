@@ -1,8 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Select, Store } from '@ngxs/store';
 import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { LabelDeleteModalComponent } from '../../modals/label-delete-modal/label-delete-modal.component';
 import { LabelModalComponent } from '../../modals/label-modal/label-modal.component';
 import { ActiveFilterService, Filter } from '../../services/navigation/activeFilter.service';
@@ -14,27 +15,23 @@ import { LabelState } from '../../state/label/label.state';
   selector: 'app-labels',
   templateUrl: './labels.component.html',
   styleUrls: ['./labels.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LabelsComponent implements OnInit, OnDestroy {
-  labels: Label[] = [];
-
-  activeFilter: Filter;
-
-  activeFilterSubscription: Subscription;
-  availableLabelsSubscription: Subscription;
+export class LabelsComponent {
+  activeFilter$: Observable<Filter>;
+  activeFilterValue$: Observable<string | number>;
+  activeFilterArea$: Observable<string>;
 
   @Select(LabelState) labels$: Observable<Label[]>;
 
-  constructor(private activeFilterService: ActiveFilterService, private modalService: NgbModal, private store: Store) {}
+  constructor(private activeFilterService: ActiveFilterService, private modalService: NgbModal, private store: Store) {
+    this.activeFilter$ = this.activeFilterService.filterUpdated.pipe(map(filter => filter));
+    this.activeFilterValue$ = this.activeFilter$.pipe(map(filter => filter.value));
+    this.activeFilterArea$ = this.activeFilter$.pipe(map(filter => filter.area));
+  }
 
-  ngOnInit(): void {
-    this.activeFilterSubscription = this.activeFilterService.filterUpdated.subscribe(filter => {
-      this.activeFilter = filter;
-    });
-
-    this.availableLabelsSubscription = this.labels$.subscribe(data => {
-      this.labels = data;
-    });
+  trackByFn(index: number, label: Label): number {
+    return label.pk;
   }
 
   updateActiveFilter(value: number): void {
@@ -81,10 +78,5 @@ export class LabelsComponent implements OnInit, OnDestroy {
         console.log(`Dismissed: ${reason}`);
       }
     );
-  }
-
-  ngOnDestroy(): void {
-    this.activeFilterSubscription.unsubscribe();
-    this.availableLabelsSubscription.unsubscribe();
   }
 }
