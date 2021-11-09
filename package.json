@@ -50,7 +50,7 @@
     "@angular-eslint/eslint-plugin": "~12.6.1",
     "@angular-eslint/eslint-plugin-template": "~12.6.1",
     "@angular-eslint/schematics": "^12.4.1",
-    "@angular-eslint/template-parser": "~12.3.0",
+    "@angular-eslint/template-parser": "~12.6.1",
     "@angular-eslint/utils": "^12.4.1",
     "@angular/cli": "^11.2.14",
     "@angular/compiler-cli": "^11.2.14",
