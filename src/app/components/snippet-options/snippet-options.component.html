@@ -1,4 +1,4 @@
-<div class="row" *ngIf="activeSnippet">
+<div class="row" *ngIf="activeSnippet$ | async as activeSnippet">
   <div class="col-9" style="padding-top: 0">
     <!-- ToDo: Implement in 1.1
         <fa-icon class="icon" [icon]="['far', 'star']" size="sm"></fa-icon>
@@ -42,7 +42,7 @@
             <app-bootstrap-switch
               class="label-toggle"
               (click)="$event.stopPropagation(); myDrop.open()"
-              *ngFor="let label of labels"
+              *ngFor="let label of labels$ | async; trackBy: trackByFn"
               size="sm"
               [label]="label.name"
               [ngModel]="activeLabels.indexOf(label.pk) > -1"
