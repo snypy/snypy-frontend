@@ -139,15 +139,6 @@ const appRoutes: Routes = [
     PasswordResetCompleteComponent,
     SetPasswordComponent,
   ],
-  entryComponents: [
-    SnippetModalComponent,
-    LabelModalComponent,
-    TeamModalComponent,
-    HelpModalComponent,
-    TeamMemberModalComponent,
-    TeamMemberDeleteModalComponent,
-    LabelDeleteModalComponent,
-  ],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -167,7 +158,6 @@ const appRoutes: Routes = [
     NgxsModule.forRoot([ScopeState, LanguageState, LabelState, SnippetState]),
     NgxsSelectSnapshotModule.forRoot(),
     NgxsReduxDevtoolsPluginModule.forRoot(),
-
     ServicesModule.forRoot(),
   ],
   providers: [
