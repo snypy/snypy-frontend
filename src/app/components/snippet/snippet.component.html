@@ -11,9 +11,24 @@
     <markdown ngPreserveWhitespaces [data]="activeSnippet.description"></markdown>
   </div>
 
-  <div *ngFor="let file of files" style="margin: 30px">
+  <div *ngFor="let file of files" style="margin: 20px" #container>
+    <button
+      *ngIf="copiedFile !== file"
+      ngxClipboard
+      class="btn btn-sm btn-outline-primary ms-2 copy-button"
+      [cbContent]="file.content"
+      [container]="container"
+      (cbOnSuccess)="fileCopied(file)"
+    >
+      copy
+    </button>
+    <button *ngIf="copiedFile === file" class="btn btn-sm btn-outline-success ms-2 copy-button disabled">coppied</button>
+
     <ngb-accordion #acc="ngbAccordion" [activeIds]="'file-' + file.pk">
       <ngb-panel [id]="'file-' + file.pk" [title]="file.name">
+        <ng-template ngbPanelHeader>
+          <button ngbPanelToggle class="accordion-button" [ngClass]="{ coppied: copiedFile === file }">{{ file.name }}</button>
+        </ng-template>
         <ng-template ngbPanelContent>
           <ngx-monaco-editor
             style="height: 400px"
