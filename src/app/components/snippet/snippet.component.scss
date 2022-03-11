@@ -20,6 +20,10 @@ ngb-accordion {
         .card-body {
             padding: 0;
         }
+
+        .accordion-body {
+            padding: 0 !important;
+        }
     }
 }
 
