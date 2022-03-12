@@ -76,6 +76,7 @@ import { SnippetState } from './state/snippet/snippet.state';
 import { PasswordResetComponent } from './components/auth/password-reset/password-reset.component';
 import { PasswordResetCompleteComponent } from './components/auth/password-reset-complete/password-reset-complete.component';
 import { SetPasswordComponent } from './components/set-password/set-password.component';
+import { RemoveMarkdownPipe } from './pipes/removeMarkdownPipe';
 
 const appRoutes: Routes = [
   {
@@ -139,6 +140,7 @@ const appRoutes: Routes = [
     PasswordResetComponent,
     PasswordResetCompleteComponent,
     SetPasswordComponent,
+    RemoveMarkdownPipe,
   ],
   imports: [
     BrowserModule,
