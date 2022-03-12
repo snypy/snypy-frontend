@@ -16,6 +16,7 @@ import { MonacoEditorModule } from 'ngx-monaco-editor';
 import { NgPipesModule } from 'ngx-pipes';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxAnxFormsModule } from 'ngx-anx-forms';
+import { MarkdownModule } from 'ngx-markdown';
 
 import { ServicesModule } from './services/services.module';
 
@@ -159,6 +160,7 @@ const appRoutes: Routes = [
     NgxsSelectSnapshotModule.forRoot(),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     ServicesModule.forRoot(),
+    MarkdownModule.forRoot(),
   ],
   providers: [
     {

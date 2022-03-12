@@ -11,9 +11,6 @@
     <span>Title</span>
     <anx-forms-input formControlName="title" [errors]="snippetForm.get('title').errors"></anx-forms-input>
 
-    <span>Description</span>
-    <anx-forms-input-textarea formControlName="description" [errors]="snippetForm.get('description').errors"></anx-forms-input-textarea>
-
     <span>Labels</span>
     <anx-forms-input-select
       bindLabel="name"
@@ -23,6 +20,9 @@
       formControlName="labels"
       [errors]="snippetForm.get('labels').errors"
     ></anx-forms-input-select>
+
+    <span>Description</span>
+    <anx-forms-input-textarea formControlName="description" [errors]="snippetForm.get('description').errors"></anx-forms-input-textarea>
 
     <span>Visibility</span>
     <anx-forms-input-select

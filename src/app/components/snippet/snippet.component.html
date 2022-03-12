@@ -8,7 +8,7 @@
   </div>
 
   <div style="padding: 15px">
-    {{ activeSnippet.description }}
+    <markdown ngPreserveWhitespaces [data]="activeSnippet.description"></markdown>
   </div>
 
   <div *ngFor="let file of files" style="margin: 30px">
