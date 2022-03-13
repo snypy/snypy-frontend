@@ -12,7 +12,7 @@ import { SnippetLabelResource } from '../../services/resources/snippetlabel.reso
 import { User } from '../../services/resources/user.resource';
 import { UpdateLabels } from '../../state/label/label.actions';
 import { LabelState } from '../../state/label/label.state';
-import { RemoveSnippet, SetActiveSnippet } from '../../state/snippet/snippet.actions';
+import { RemoveSnippet } from '../../state/snippet/snippet.actions';
 
 @UntilDestroy()
 @Component({
@@ -58,8 +58,8 @@ export class SnippetOptionsComponent implements OnInit {
     modalRef.componentInstance.snippet = this.activeSnippetResource;
 
     modalRef.result.then(
-      result => {
-        this.store.dispatch(new SetActiveSnippet(result));
+      () => {
+        console.log('Snippet saved');
       },
       reason => {
         console.log(`Dismissed: ${reason}`);
