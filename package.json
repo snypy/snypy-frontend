@@ -71,7 +71,7 @@
     "karma-coverage-istanbul-reporter": "~3.0.2",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.7.0",
-    "monaco-editor": "^0.32.1",
+    "monaco-editor": "^0.33.0",
     "ngx-monaco-editor": "^12.0.0",
     "prettier": "^2.5.1",
     "protractor": "~7.0.0",
