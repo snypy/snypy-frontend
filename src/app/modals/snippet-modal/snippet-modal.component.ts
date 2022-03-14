@@ -16,6 +16,7 @@ import { UpdateLanguages } from '../../state/language/language.actions';
 import { LanguageState } from '../../state/language/language.state';
 import { ScopeModel } from '../../state/scope/scope.model';
 import { ScopeState } from '../../state/scope/scope.state';
+import { SetActiveSnippet } from '../../state/snippet/snippet.actions';
 
 @Component({
   selector: 'app-snippet-modal',
@@ -125,7 +126,7 @@ export class SnippetModalComponent implements OnInit {
     );
   }
 
-  confirmAction(): void {
+  confirmAction(closeModal: boolean): void {
     let promise, message, errorMessage;
 
     if (this.snippet) {
@@ -142,9 +143,10 @@ export class SnippetModalComponent implements OnInit {
       .then(data => {
         this.store.dispatch(new UpdateLabels());
         this.store.dispatch(new UpdateLanguages());
+        this.store.dispatch(new SetActiveSnippet(data));
 
         this.toastr.success(message);
-        this.activeModal.close(data);
+        if (closeModal) this.activeModal.close();
       })
       .catch(error => {
         console.log(error);
