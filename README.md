@@ -1,5 +1,6 @@
 [![Known Vulnerabilities](https://snyk.io/test/github/nezhar/snypy-frontend/badge.svg?targetFile=package.json)](https://snyk.io/test/github/nezhar/snypy-frontend?targetFile=package.json)
 [![codebeat badge](https://codebeat.co/badges/67b00218-063a-42c9-9790-4e1b67bbc9f8)](https://codebeat.co/projects/github-com-nezhar-snypy-frontend-master)
+[![codecov](https://codecov.io/gh/snypy/snypy-frontend/branch/master/graph/badge.svg?token=OvVAixHuiA)](https://codecov.io/gh/snypy/snypy-frontend)
 
 # SnyPy Frontend
 
