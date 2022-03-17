@@ -17,6 +17,7 @@ import { NgPipesModule } from 'ngx-pipes';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxAnxFormsModule } from 'ngx-anx-forms';
 import { MarkdownModule } from 'ngx-markdown';
+import { ClipboardModule } from 'ngx-clipboard';
 
 import { ServicesModule } from './services/services.module';
 
@@ -163,6 +164,7 @@ const appRoutes: Routes = [
     NgxsReduxDevtoolsPluginModule.forRoot(),
     ServicesModule.forRoot(),
     MarkdownModule.forRoot(),
+    ClipboardModule,
   ],
   providers: [
     {

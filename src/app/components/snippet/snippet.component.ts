@@ -19,6 +19,8 @@ export class SnippetComponent implements OnInit, OnDestroy {
   activeSnippet: Snippet = null;
   files: ResourceModel<File>[] = [];
   labels: Label[] = [];
+  copiedFile: File | null = null;
+  timer = null;
 
   availableLabelsSubscription: Subscription;
   snippetLoaderSubscription: Subscription;
@@ -63,5 +65,13 @@ export class SnippetComponent implements OnInit, OnDestroy {
       return language.name;
     }
     return 'default';
+  }
+
+  fileCopied(file: File) {
+    this.copiedFile = file;
+    clearTimeout(this.timer);
+    this.timer = setTimeout(() => {
+      this.copiedFile = null;
+    }, 2500);
   }
 }

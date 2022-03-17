@@ -24,7 +24,21 @@ ngb-accordion {
         .accordion-body {
             padding: 0 !important;
         }
+
+        .accordion-button {
+            &.coppied {
+                padding-left: 80px
+            }
+
+            padding-left: 60px
+        }
     }
+}
+
+.copy-button {
+    position: relative;
+    top: 45px;
+    z-index: 100
 }
 
 handy-syntax-highlighter {
