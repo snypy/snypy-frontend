@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-
+import { ToastrModule } from 'ngx-toastr';
 import { RegisterComponent } from './register.component';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
   let fixture: ComponentFixture<RegisterComponent>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [RegisterComponent],
-      }).compileComponents();
-    })
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [RegisterComponent],
+      imports: [ToastrModule.forRoot({})],
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(RegisterComponent);
