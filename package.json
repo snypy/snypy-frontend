@@ -14,7 +14,7 @@
   "dependencies": {
     "@angular-devkit/architect": "^0.1302.6",
     "@angular/animations": "^13.2.6",
-    "@angular/common": "^13.2.6",
+    "@angular/common": "^13.3.0",
     "@angular/compiler": "^13.2.4",
     "@angular/core": "^13.2.6",
     "@angular/forms": "^13.3.0",
