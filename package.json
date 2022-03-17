@@ -12,7 +12,7 @@
   },
   "private": true,
   "dependencies": {
-    "@angular-devkit/architect": "^0.1302.6",
+    "@angular-devkit/architect": "^0.1303.0",
     "@angular/animations": "^13.2.6",
     "@angular/common": "^13.2.6",
     "@angular/compiler": "^13.2.4",
