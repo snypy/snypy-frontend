@@ -11,17 +11,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-
       - name: Install Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '16'
-
       - name: Install dependencies
         run: npm install
         env:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Run linter
         run: npm run lint
 
@@ -29,19 +26,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-
       - name: Install Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '16'
-
       - name: Install dependencies
         run: npm install
         env:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Run test
-        run: npm run test
+      - name: Run test with coverage
+        run: npm run coverage
+      - name: Codecov
+        uses: codecov/codecov-action@v2
 
   build:
     runs-on: ubuntu-latest
