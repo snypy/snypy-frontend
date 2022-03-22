@@ -1,10 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Select, Store } from '@ngxs/store';
 import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 import { Observable, Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
 import { Snippet, SnippetResource } from '../../services/resources/snippet.resource';
 import { SetActiveSnippet } from '../../state/snippet/snippet.actions';
 
+@UntilDestroy()
 @Component({
   selector: 'app-snippets',
   templateUrl: './snippets.component.html',
@@ -27,14 +30,14 @@ export class SnippetsComponent implements OnInit, OnDestroy {
     /**
      * Initial load
      */
-    this.snippetsLoadedSubscription = this.snippetList$.subscribe(snippets => {
+    this.snippetsLoadedSubscription = this.snippetList$.pipe(untilDestroyed(this)).subscribe(snippets => {
       this.snippets = snippets;
     });
 
     /**
      * Snippet updated subscription
      */
-    this.activeSnippetSubscription = this.activeSnippet$.subscribe(snippet => {
+    this.activeSnippetSubscription = this.activeSnippet$.pipe(untilDestroyed(this), filter(Boolean)).subscribe(snippet => {
       this.activeSnippet = snippet;
 
       // Update snippet in list

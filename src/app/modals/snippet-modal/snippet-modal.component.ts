@@ -146,7 +146,7 @@ export class SnippetModalComponent implements OnInit {
         this.store.dispatch(new SetActiveSnippet(data));
 
         this.toastr.success(message);
-        if (closeModal) this.activeModal.close();
+        if (closeModal) this.activeModal.close(data);
       })
       .catch(error => {
         console.log(error);
