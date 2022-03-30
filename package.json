@@ -74,7 +74,7 @@
     "karma": "^6.3.17",
     "karma-chrome-launcher": "~3.1.1",
     "karma-coverage-istanbul-reporter": "~3.0.2",
-    "karma-jasmine": "~4.0.0",
+    "karma-jasmine": "~4.0.2",
     "karma-jasmine-html-reporter": "^1.7.0",
     "monaco-editor": "^0.33.0",
     "ngx-monaco-editor": "^12.0.0",
