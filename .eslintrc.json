@@ -1,8 +1,8 @@
 {
   "root": true,
   "ignorePatterns": [
-    "projects/**/*",
-    "index.html"
+    "index.html",
+    "src/environments/version.ts"
   ],
   "extends": ["prettier"],
   "plugins": [

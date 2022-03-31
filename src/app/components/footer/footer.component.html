@@ -1,3 +1,6 @@
 <div class="footer text-end">
-  <small> <b>V1.0-beta.7</b> | <a target="_BLANK" href="https://github.com/snypy/snypy-frontend">Contribute</a> </small>
+  <small>
+    <b>{{ version.tag }}</b> <small *ngIf="version.distance > 0">({{ version.suffix }})</small> |
+    <a target="_BLANK" href="https://github.com/snypy/snypy-frontend">Contribute</a>
+  </small>
 </div>
