@@ -14,7 +14,6 @@ export class LanguagesComponent implements OnInit, OnDestroy {
   activeFilter: Filter;
 
   activeFilterSubscription: Subscription;
-  availableLanguagesSubscription: Subscription;
 
   @SelectSnapshot(LanguageState)
   public languages: Language[];
@@ -33,6 +32,5 @@ export class LanguagesComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.activeFilterSubscription.unsubscribe();
-    this.availableLanguagesSubscription.unsubscribe();
   }
 }
