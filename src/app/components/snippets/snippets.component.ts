@@ -19,7 +19,6 @@ export class SnippetsComponent implements OnInit, OnDestroy {
 
   snippetsLoadedSubscription: Subscription;
   activeSnippetSubscription: Subscription;
-  activeSnippetDeletedSubscription: Subscription;
 
   @Select(state => state.snippet.activeSnippet) activeSnippet$: Observable<Snippet>;
   @Select(state => state.snippet.list) snippetList$: Observable<Snippet[]>;
@@ -57,6 +56,5 @@ export class SnippetsComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.snippetsLoadedSubscription.unsubscribe();
     this.activeSnippetSubscription.unsubscribe();
-    this.activeSnippetDeletedSubscription.unsubscribe();
   }
 }
