@@ -60,7 +60,7 @@
     "@angular-eslint/utils": "^13.1.0",
     "@angular/cli": "^13.3.1",
     "@angular/compiler-cli": "^13.3.1",
-    "@angular/language-service": "^13.3.1",
+    "@angular/language-service": "^13.3.2",
     "@ngxs/devtools-plugin": "^3.7.3",
     "@types/jasmine": "~4.0.2",
     "@types/jasminewd2": "~2.0.10",
