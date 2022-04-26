@@ -28,4 +28,31 @@ describe('AuthComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should have login as active state on init', () => {
+    expect(component.ACTIVE_STATE).toBe('LOGIN');
+  });
+
+  it('should change the state', () => {
+    component.setActiveState(component.STATE_REGISTER);
+    expect(component.ACTIVE_STATE).toBe('REGISTER');
+  });
+
+  it('should call doLogin()', () => {
+    const spy = spyOn(component, 'doLogin');
+    component.doLogin({ username: 'username', password: 'password' });
+    expect(spy).toHaveBeenCalled();
+  });
+
+  it('should call doRegister()', () => {
+    const spy = spyOn(component, 'doRegister');
+    component.doRegister({ email: '', first_name: '', last_name: '', password: '', password_confirm: '', username: '' });
+    expect(spy).toHaveBeenCalled();
+  });
+
+  it('should call doPasswordReset()', () => {
+    const spy = spyOn(component, 'doPasswordReset');
+    component.doPasswordReset({ email: 'email' });
+    expect(spy).toHaveBeenCalled();
+  });
 });

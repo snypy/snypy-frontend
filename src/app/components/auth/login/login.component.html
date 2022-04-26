@@ -1,12 +1,9 @@
 <form class="form" role="form" autocomplete="off" id="formLogin" novalidate="" [formGroup]="form">
-  <anx-forms-input formControlName="username" [errors]="form.get('username').errors" [placeholder]="'Username'"></anx-forms-input>
-
-  <anx-forms-input
-    formControlName="password"
-    [errors]="form.get('password').errors"
-    [placeholder]="'Password'"
-    [type]="'password'"
-  ></anx-forms-input>
-
-  <button type="submit" class="btn btn-primary" id="btnLogin" (click)="doLogin()">Login</button>
+  <anglify-form-field label="Username" type="outlined" hide-details>
+    <input anglifyInput name="username" formControlName="username" />
+  </anglify-form-field>
+  <anglify-form-field label="Password" type="outlined" hide-details>
+    <input anglifyInput type="password" name="username" formControlName="password" />
+  </anglify-form-field>
+  <button anglifyButton type="submit" class="btn btn-primary" id="btnLogin" (click)="doLogin()">Login</button>
 </form>

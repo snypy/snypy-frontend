@@ -1,1 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+@use 'node_modules/@anglify/components/styles' as *;
+@use 'node_modules/@anglify/components/styles/themes/light' as *;
+@use 'node_modules/@anglify/components/modules/overlay' as *;
+@import 'theme/variables';
+
+:root {
+  --anglify-form-field-outlined-label-color-focused: #{$primary-color};
+  --anglify-form-field-outlined-border-color-focused: #{$primary-color};
+  --anglify-form-field-outlined-border-radius: 0px;
+
+  --anglify-button-filled-border-radius: 0px;
+  --anglify-button-filled-background: #{$primary-color};
+  --anglify-button-text-border-radius: 0px;
+
+  --anglify-button-text-label-color: #{$primary-color};
+}
