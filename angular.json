@@ -31,9 +31,10 @@
               "node_modules/ngx-toastr/toastr.css",
               "src/styles.scss"
             ],
-            "scripts": [
-              "node_modules/marked/marked.min.js"
-            ],
+            "stylePreprocessorOptions": {
+              "includePaths": ["node_modules/bootstrap/scss/"]
+            },
+            "scripts": ["node_modules/marked/marked.min.js"],
             "vendorChunk": true,
             "extractLicenses": false,
             "buildOptimizer": false,
@@ -96,6 +97,9 @@
               "node_modules/@ng-select/ng-select/themes/default.theme.css",
               "src/styles.scss"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": ["node_modules/bootstrap/scss/"]
+            },
             "assets": [
               "src/assets",
               "src/favicon.ico",
@@ -110,10 +114,7 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "src/**/*.ts",
-              "src/**/*.html"
-            ]
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
           }
         }
       }

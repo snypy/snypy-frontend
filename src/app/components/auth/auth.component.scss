@@ -1,6 +1,45 @@
+@import '../../../theme/variables';
+@import 'mixins';
+@import 'functions';
+@import 'variables';
+
 :host {
-    background: #142F43;
-    height: 100vh;
-    width: 100%;
-    display: inline-block;
+  background: #142f43;
+  height: 100vh;
+  width: 100%;
+  display: inline-block;
+
+  .auth-page-container {
+    display: grid;
+    grid-template-areas: 'info auth';
+    grid-template-columns: 250px 1fr;
+
+    @include media-breakpoint-down(sm) {
+      grid-template-areas: 'auth' 'info';
+      grid-template-columns: 1fr;
+    }
+
+    .application-info {
+      padding-bottom: 20px;
+      grid-area: info;
+      background-color: $secondary-color;
+      color: #ffffff;
+    }
+
+    .auth-content {
+      grid-area: auth;
+    }
+
+    .icons {
+      --anglify-icon-inactive-color: #ffffff;
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+
+      a {
+        text-decoration: none;
+      }
+    }
+  }
 }
