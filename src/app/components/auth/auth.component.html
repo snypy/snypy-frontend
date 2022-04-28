@@ -2,10 +2,24 @@
   <div class="row">
     <div class="col-md-12">
       <div class="row">
-        <div class="col-md-6 mx-auto">
-          <div class="card rounded-0">
+        <div class="col-lg-8 col-md-10 col-sm-12 mx-auto auth-page-container">
+          <div class="application-info text-center">
+            <h1 class="mt-5">SnyPy</h1>
+            <div>Open source on-prem code snippet manager</div>
+            <div class="icons">
+              <a href="https://github.com/snypy/snypy-frontend" target="_blank"
+                ><anglify-icon icon="mdi-github" size="x-large"></anglify-icon
+              ></a>
+              <a href="https://snypy.com" target="_blank"> <anglify-icon icon="mdi-earth" size="x-large"></anglify-icon></a>
+            </div>
+          </div>
+          <div class="card rounded-0 auth-content">
             <div class="card-header text-center">
-              <h1 class="mb-3 mt-3">SnyPy</h1>
+              <h2 class="mb-3 mt-3">
+                <ng-container *ngIf="ACTIVE_STATE === STATE_LOGIN">Login</ng-container>
+                <ng-container *ngIf="ACTIVE_STATE === STATE_REGISTER">Register</ng-container>
+                <ng-container *ngIf="ACTIVE_STATE === STATE_PASSWORD_FORGOT">Password forgot</ng-container>
+              </h2>
             </div>
             <div class="card-body">
               <app-login *ngIf="ACTIVE_STATE === STATE_LOGIN" (login)="doLogin($event)"></app-login>
@@ -21,10 +35,8 @@
             </div>
 
             <div class="card-footer" *ngIf="ACTIVE_STATE === STATE_LOGIN">
-              <button type="button" class="btn btn-outline-info btn-sm float-end" (click)="setActiveState(STATE_REGISTER)">Register</button>
-              <button type="button" class="btn btn-outline-info btn-sm" (click)="setActiveState(STATE_PASSWORD_FORGOT)">
-                Password forgot
-              </button>
+              <button anglifyButton type="button" appearance="text" (click)="setActiveState(STATE_REGISTER)">Register</button>
+              <button anglifyButton type="button" appearance="text" (click)="setActiveState(STATE_PASSWORD_FORGOT)">Password forgot</button>
             </div>
 
             <div class="card-footer" *ngIf="ACTIVE_STATE !== STATE_LOGIN">

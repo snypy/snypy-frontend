@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AuthCredentials, AuthResource, RegisterPayload } from '../../services/resources/auth.resource';
 import { PasswordResetPayload, PasswordResetResource } from '../../services/resources/passwordreset.resource';
 
@@ -6,31 +6,32 @@ import { PasswordResetPayload, PasswordResetResource } from '../../services/reso
   selector: 'app-auth',
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuthComponent implements OnInit {
-  STATE_LOGIN = 'LOGIN';
-  STATE_REGISTER = 'REGISTER';
-  STATE_REGISTER_COMPLETE = 'REGISTER_COMPLETE';
-  STATE_PASSWORD_FORGOT = 'PASSWORD_FORGOT';
-  STATE_PASSWORD_FORGOT_COMPLETE = 'PASSWORD_FORGOT_COMPLETE';
+  public STATE_LOGIN = 'LOGIN';
+  public STATE_REGISTER = 'REGISTER';
+  public STATE_REGISTER_COMPLETE = 'REGISTER_COMPLETE';
+  public STATE_PASSWORD_FORGOT = 'PASSWORD_FORGOT';
+  public STATE_PASSWORD_FORGOT_COMPLETE = 'PASSWORD_FORGOT_COMPLETE';
 
-  ACTIVE_STATE: string = null;
+  public ACTIVE_STATE: string = null;
 
-  @Output() login = new EventEmitter<AuthCredentials>();
+  @Output() public login = new EventEmitter<AuthCredentials>();
 
-  server_errors = null;
+  public server_errors = null;
 
-  constructor(private authResource: AuthResource, private passwordResetResource: PasswordResetResource) {}
+  public constructor(private readonly authResource: AuthResource, private readonly passwordResetResource: PasswordResetResource) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.ACTIVE_STATE = this.STATE_LOGIN;
   }
 
-  doLogin(authCredentials: AuthCredentials): void {
+  public doLogin(authCredentials: AuthCredentials): void {
     this.authResource.login(authCredentials);
   }
 
-  doRegister(registerPayload: RegisterPayload): void {
+  public doRegister(registerPayload: RegisterPayload): void {
     this.authResource
       .register({}, registerPayload)
       .$promise.then(() => {
@@ -44,7 +45,7 @@ export class AuthComponent implements OnInit {
       });
   }
 
-  doPasswordReset(passwordResetPayload: PasswordResetPayload): void {
+  public doPasswordReset(passwordResetPayload: PasswordResetPayload): void {
     this.passwordResetResource
       .save({}, passwordResetPayload)
       .$promise.then(() => {
@@ -58,7 +59,7 @@ export class AuthComponent implements OnInit {
       });
   }
 
-  setActiveState(newState: string): void {
+  public setActiveState(newState: string): void {
     this.ACTIVE_STATE = newState;
   }
 }
