@@ -26,6 +26,11 @@ export class BaseComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     /**
+     * Initialize auth for already authenticated users
+     */
+    this.authResource.init();
+
+    /**
      * Refresh snippets on scope changes
      */
     this.scope$.toPromise().then(() => {

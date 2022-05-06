@@ -16,7 +16,13 @@ describe('SnippetOptionsComponent', () => {
     TestBed.configureTestingModule({
       declarations: [SnippetOptionsComponent],
       imports: [NgxResourceFactoryModule.forRoot(), HttpClientModule, NgxsModule.forRoot()],
-      providers: [SnippetLabelResource, AuthResource, UserResource, SnippetResource],
+      providers: [
+        SnippetLabelResource,
+        AuthResource,
+        UserResource,
+        SnippetResource,
+        { provide: Window, useValue: { location: { host: 'localhost', protocol: 'http' } } },
+      ],
     }).compileComponents();
   }));
 

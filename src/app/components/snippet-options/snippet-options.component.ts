@@ -25,6 +25,7 @@ export class SnippetOptionsComponent implements OnInit {
   activeSnippetResource: ResourceModel<Snippet> = null;
   activeLabels: number[] = [];
   currentUser: ResourceModel<User>;
+  permalink = '';
 
   @Select(LabelState) labels$: Observable<Label[]>;
   @Select(state => state.snippet.activeSnippet) activeSnippet$: Observable<Snippet>;
@@ -34,7 +35,8 @@ export class SnippetOptionsComponent implements OnInit {
     private authResource: AuthResource,
     private modalService: NgbModal,
     private snippetResource: SnippetResource,
-    private store: Store
+    private store: Store,
+    private window: Window
   ) {}
 
   trackByFn(index: number, label: Label): number {
@@ -48,6 +50,8 @@ export class SnippetOptionsComponent implements OnInit {
       if (snippet) {
         this.activeSnippetResource = this.snippetResource.create(snippet);
         this.activeLabels = this.activeSnippetResource.labels;
+
+        this.permalink = this.window.location.protocol + '//' + this.window.location.host + '/snippet/' + snippet.pk;
       }
     });
   }

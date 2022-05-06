@@ -1,0 +1,30 @@
+<div class="content" *ngIf="!snippetError">
+  <div class="container-fluid">
+    <div class="row justify-content-end">
+      <button [routerLink]="'/'" anglifyButton appearance="text">
+        <anglify-icon icon="mdi-home" size="small" left></anglify-icon>
+        Dashboard
+      </button>
+    </div>
+    <div class="row">
+      <div class="col-12 full-height remove-side-padding">
+        <app-snippet-options></app-snippet-options>
+        <perfect-scrollbar style="max-height: calc(100vh - 220px); padding-right: 15px">
+          <app-snippet></app-snippet>
+        </perfect-scrollbar>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="snippetError" class="page-wrap d-flex flex-row align-items-center error404">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-12 text-center">
+        <span class="display-1 d-block">404</span>
+        <div class="mb-4 lead">The snippet you are looking for was not found.</div>
+        <a [routerLink]="'/'" class="btn btn-link">Back to Home</a>
+      </div>
+    </div>
+  </div>
+</div>

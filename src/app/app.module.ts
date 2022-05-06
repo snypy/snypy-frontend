@@ -67,6 +67,7 @@ import { LabelState } from './state/label/label.state';
 import { LanguageState } from './state/language/language.state';
 import { ScopeState } from './state/scope/scope.state';
 import { SnippetState } from './state/snippet/snippet.state';
+import { FullscreenComponent } from './layout/fullscreen/fullscreen.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -77,6 +78,10 @@ const appRoutes: Routes = [
     path: 'dashboard',
     component: BaseComponent,
     children: [],
+  },
+  {
+    path: 'snippet/:id',
+    component: FullscreenComponent,
   },
   {
     path: 'verify-user',
@@ -135,6 +140,7 @@ const appRoutes: Routes = [
     PasswordResetCompleteComponent,
     SetPasswordComponent,
     RemoveMarkdownPipe,
+    FullscreenComponent,
   ],
   imports: [
     BrowserModule,
@@ -177,6 +183,7 @@ const appRoutes: Routes = [
       useClass: LoadingScreenInterceptor,
       multi: true,
     },
+    { provide: Window, useValue: window },
   ],
   bootstrap: [AppComponent],
 })
@@ -198,7 +205,8 @@ export class AppModule {
       far.faStar,
       fas.faTrash,
       fas.faCircle,
-      fas.faHashtag
+      fas.faHashtag,
+      far.faCopy
     );
   }
 }
