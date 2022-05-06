@@ -1,0 +1,32 @@
+:host {
+    background: #142f43;
+    height: 100vh;
+    width: 100%;
+    display: inline-block;
+}
+
+.content {
+    background: #ffffff;
+    max-width: 1000px;
+    height: 100vh;
+    left: 50%;
+    transform: translate(-50%, 0);
+    position: relative;
+    justify-content: center;
+}
+
+.row > [class^=col-] {
+    padding-top: 0;
+}
+
+.error404 {
+
+    position: relative;
+    top: 50%;
+    transform: translate(0, -50%);
+
+    .container {
+        background: #ffffff;
+        max-width: 1000px;
+    }
+}

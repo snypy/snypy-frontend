@@ -11,6 +11,16 @@
       <small><b>Created</b> {{ activeSnippet.created_date | date: 'medium' }}</small
       ><br />
       <small><b>Last update</b> {{ activeSnippet.modified_date | date: 'medium' }}</small>
+      <br />
+      <small><b>Visibility</b> {{ activeSnippet.visibility }}</small>
+      <br />
+      <small>
+        <b>Share URL</b>
+        <code class="p-1">{{ permalink }}</code>
+        <button anglifyButton appearance="icon" ngxClipboard [cbContent]="permalink" size="small">
+          <fa-icon class="icon button" [icon]="['far', 'copy']"></fa-icon>
+        </button>
+      </small>
     </div>
     <div class="col-3 text-end" style="padding-top: 0">
       <div class="btn-group" role="group" aria-label="Basic example">
@@ -22,9 +32,6 @@
         >
           Edit
         </button>
-        <!-- ToDo: Implement in 1.1
-              <button type="button" class="btn btn-sm btn-link" (click)="shareSnippet()">Share</button>
-              -->
         <button
           type="button"
           class="btn btn-sm btn-link"

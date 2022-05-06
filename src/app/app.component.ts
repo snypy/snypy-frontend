@@ -1,18 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthResource } from './services/resources/auth.resource';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
-  constructor(private authResource: AuthResource) {}
-
-  ngOnInit(): void {
-    /**
-     * Initialize auth for already authenticated users
-     */
-    this.authResource.init();
-  }
-}
+export class AppComponent {}
