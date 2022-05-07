@@ -1,8 +1,8 @@
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NgxsModule } from '@ngxs/store';
+import { ApiModule } from '@snypy/rest-client';
 import { NgxResourceFactoryModule } from 'ngx-resource-factory';
-import { FileResource } from '../../services/resources/file.resource';
 import { SnippetComponent } from './snippet.component';
 
 describe('SnippetComponent', () => {
@@ -12,8 +12,8 @@ describe('SnippetComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [SnippetComponent],
-      imports: [NgxResourceFactoryModule.forRoot(), HttpClientModule, NgxsModule.forRoot()],
-      providers: [FileResource],
+      imports: [NgxResourceFactoryModule.forRoot(), HttpClientModule, NgxsModule.forRoot(), ApiModule],
+      providers: [],
     }).compileComponents();
   }));
 

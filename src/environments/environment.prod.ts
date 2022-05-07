@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'REST_API_URL',
+  basePath: 'REST_API_URL',
+  apiUrl: 'REST_API_URL/api/v1/',
 };

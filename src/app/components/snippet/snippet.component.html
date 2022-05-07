@@ -11,7 +11,7 @@
     <markdown ngPreserveWhitespaces [data]="activeSnippet.description"></markdown>
   </div>
 
-  <div *ngFor="let file of files" style="margin: 20px" #container>
+  <div *ngFor="let file of files$ | async" style="margin: 20px" #container>
     <button
       *ngIf="copiedFile !== file"
       ngxClipboard

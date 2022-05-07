@@ -68,6 +68,8 @@ import { LanguageState } from './state/language/language.state';
 import { ScopeState } from './state/scope/scope.state';
 import { SnippetState } from './state/snippet/snippet.state';
 import { FullscreenComponent } from './layout/fullscreen/fullscreen.component';
+import { ApiModule, Configuration, ConfigurationParameters } from '@snypy/rest-client';
+import { environment } from '../environments/environment';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -101,6 +103,13 @@ const appRoutes: Routes = [
     redirectTo: '',
   },
 ];
+
+export function apiConfigFactory(): Configuration {
+  const params: ConfigurationParameters = {
+    basePath: environment.basePath,
+  };
+  return new Configuration(params);
+}
 
 @NgModule({
   declarations: [
@@ -143,6 +152,7 @@ const appRoutes: Routes = [
     FullscreenComponent,
   ],
   imports: [
+    ApiModule.forRoot(apiConfigFactory),
     BrowserModule,
     HttpClientModule,
     NgxResourceFactoryModule.forRoot(),
