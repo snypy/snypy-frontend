@@ -1,0 +1,29 @@
+name: Version bump
+on:
+  release:
+    types: [published]
+
+jobs:
+  openapi:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        repository: 'https://github.com/snypy/snypy-docker'
+        token: ${{ secrets.WORKFLOW_GIT_ACCESS_TOKEN }}
+
+    - name: Update env file
+      run: |
+        cat .env
+        export $(cat .env | xargs)
+        export UI_VERSION=${{ github.event.release.tag_name }}
+        envsubst < .env.template > .env
+        cat .env
+
+    - name: Create commit
+      run: |
+        git config --global user.name "Continuous Integration"
+        git config --global user.email "username@users.noreply.github.com"
+        git add .env
+        git commit -m "Bump UI_VERSION to ${{ github.event.release.tag_name }}"
+        git push
