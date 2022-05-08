@@ -1,8 +1,8 @@
 <div *ngIf="activeSnippet">
-  <div class="label-list" *ngIf="labels.length">
+  <div class="label-list">
     <span *ngFor="let label of activeSnippet.labels">
-      <span class="badge bg-info" *ngIf="(labels | filterBy: ['pk']:label:[true])[0]">
-        {{ (labels | filterBy: ['pk']:label:[true])[0].name }}
+      <span class="badge bg-info" *ngIf="(labels$ | async | filterBy: ['pk']:label:[true])[0]">
+        {{ (labels$ | async | filterBy: ['pk']:label:[true])[0].name }}
       </span>
     </span>
   </div>
@@ -11,7 +11,7 @@
     <markdown ngPreserveWhitespaces [data]="activeSnippet.description"></markdown>
   </div>
 
-  <div *ngFor="let file of files" style="margin: 20px" #container>
+  <div *ngFor="let file of files$ | async" style="margin: 20px" #container>
     <button
       *ngIf="copiedFile !== file"
       ngxClipboard

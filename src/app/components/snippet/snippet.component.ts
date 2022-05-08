@@ -1,9 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SelectSnapshot } from '@ngxs-labs/select-snapshot';
 import { Select } from '@ngxs/store';
-import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
+import { FileService } from '@snypy/rest-client';
 import { Observable, Subscription } from 'rxjs';
-import { FileResource } from '../../services/resources/file.resource';
 import { Label } from '../../services/resources/label.resource';
 import { Language } from '../../services/resources/language.resource';
 import { Snippet } from '../../services/resources/snippet.resource';
@@ -17,13 +16,11 @@ import { LanguageState } from '../../state/language/language.state';
 })
 export class SnippetComponent implements OnInit, OnDestroy {
   activeSnippet: Snippet = null;
-  files: ResourceModel<File>[] = [];
-  labels: Label[] = [];
   copiedFile: File | null = null;
   timer = null;
 
-  availableLabelsSubscription: Subscription;
-  snippetLoaderSubscription: Subscription;
+  files$: Observable<File[]> = null;
+  activeSnippetSubscription: Subscription;
 
   @Select(LabelState) labels$: Observable<Label[]>;
   @Select(state => state.snippet.activeSnippet) activeSnippet$: Observable<Snippet>;
@@ -31,32 +28,19 @@ export class SnippetComponent implements OnInit, OnDestroy {
   @SelectSnapshot(LanguageState)
   public languages: Language[];
 
-  constructor(private fileResource: FileResource) {}
+  constructor(private fileService: FileService) {}
 
   ngOnInit(): void {
-    this.availableLabelsSubscription = this.activeSnippet$.subscribe(snippet => {
-      if (snippet) {
-        this.activeSnippet = snippet;
-
-        this.fileResource
-          .query({ snippet: snippet.pk })
-          .$promise.then(data => {
-            this.files = data;
-          })
-          .catch(error => {
-            console.log(error);
-          });
+    this.activeSnippetSubscription = this.activeSnippet$.subscribe(activeSnippet => {
+      if (activeSnippet) {
+        this.activeSnippet = activeSnippet;
+        this.files$ = this.fileService.fileList({ snippet: activeSnippet.pk });
       }
-    });
-
-    this.snippetLoaderSubscription = this.labels$.subscribe(data => {
-      this.labels = data;
     });
   }
 
   ngOnDestroy(): void {
-    this.availableLabelsSubscription.unsubscribe();
-    this.snippetLoaderSubscription.unsubscribe();
+    this.activeSnippetSubscription.unsubscribe();
   }
 
   getLanguageName(langugaeId: number): string {
