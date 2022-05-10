@@ -1,13 +1,15 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { mapFormErrors } from 'ngx-anx-forms';
 import { ToastrService } from 'ngx-toastr';
+import { Validators } from '../../../helpers/validators';
 import { RegisterPayload } from '../../../services/resources/auth.resource';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegisterComponent implements OnInit, OnChanges {
   @Output() register = new EventEmitter<RegisterPayload>();
