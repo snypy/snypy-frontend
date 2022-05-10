@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { mapFormErrors } from 'ngx-anx-forms';
 import { ToastrService } from 'ngx-toastr';
+import { Validators } from '../../../helpers/validators';
 import { PasswordResetPayload } from '../../../services/resources/passwordreset.resource';
 
 @Component({

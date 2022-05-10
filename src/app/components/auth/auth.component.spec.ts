@@ -2,6 +2,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NgxsModule } from '@ngxs/store';
 import { NgxResourceFactoryModule } from 'ngx-resource-factory';
+import { firstValueFrom } from 'rxjs';
 import { AuthResource } from '../../services/resources/auth.resource';
 import { PasswordResetResource } from '../../services/resources/passwordreset.resource';
 import { UserResource } from '../../services/resources/user.resource';
@@ -29,13 +30,13 @@ describe('AuthComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should have login as active state on init', () => {
-    expect(component.ACTIVE_STATE).toBe('LOGIN');
+  it('should have login as active state on init', async () => {
+    expect(await firstValueFrom(component.activeState$)).toBe('LOGIN');
   });
 
-  it('should change the state', () => {
+  it('should change the state', async () => {
     component.setActiveState(component.STATE_REGISTER);
-    expect(component.ACTIVE_STATE).toBe('REGISTER');
+    expect(await firstValueFrom(component.activeState$)).toBe('REGISTER');
   });
 
   it('should call doLogin()', () => {

@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { AuthCredentials, AuthResource, RegisterPayload } from '../../services/resources/auth.resource';
 import { PasswordResetPayload, PasswordResetResource } from '../../services/resources/passwordreset.resource';
 
@@ -8,24 +9,21 @@ import { PasswordResetPayload, PasswordResetResource } from '../../services/reso
   styleUrls: ['./auth.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AuthComponent implements OnInit {
+export class AuthComponent {
   public STATE_LOGIN = 'LOGIN';
   public STATE_REGISTER = 'REGISTER';
   public STATE_REGISTER_COMPLETE = 'REGISTER_COMPLETE';
   public STATE_PASSWORD_FORGOT = 'PASSWORD_FORGOT';
   public STATE_PASSWORD_FORGOT_COMPLETE = 'PASSWORD_FORGOT_COMPLETE';
 
-  public ACTIVE_STATE: string = null;
+  private activeStateSubject = new BehaviorSubject<string>(this.STATE_LOGIN);
+  public activeState$: Observable<string> = this.activeStateSubject.asObservable();
 
   @Output() public login = new EventEmitter<AuthCredentials>();
 
   public server_errors = null;
 
   public constructor(private readonly authResource: AuthResource, private readonly passwordResetResource: PasswordResetResource) {}
-
-  public ngOnInit(): void {
-    this.ACTIVE_STATE = this.STATE_LOGIN;
-  }
 
   public doLogin(authCredentials: AuthCredentials): void {
     this.authResource.login(authCredentials);
@@ -60,6 +58,6 @@ export class AuthComponent implements OnInit {
   }
 
   public setActiveState(newState: string): void {
-    this.ACTIVE_STATE = newState;
+    this.activeStateSubject.next(newState);
   }
 }

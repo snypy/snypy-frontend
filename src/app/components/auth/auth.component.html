@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="activeState$ | async as activeState">
   <div class="row">
     <div class="col-md-12">
       <div class="row">
@@ -16,31 +16,31 @@
           <div class="card rounded-0 auth-content">
             <div class="card-header text-center">
               <h2 class="mb-3 mt-3">
-                <ng-container *ngIf="ACTIVE_STATE === STATE_LOGIN">Login</ng-container>
-                <ng-container *ngIf="ACTIVE_STATE === STATE_REGISTER">Register</ng-container>
-                <ng-container *ngIf="ACTIVE_STATE === STATE_PASSWORD_FORGOT">Password forgot</ng-container>
+                <ng-container *ngIf="activeState === STATE_LOGIN">Login</ng-container>
+                <ng-container *ngIf="activeState === STATE_REGISTER">Register</ng-container>
+                <ng-container *ngIf="activeState === STATE_PASSWORD_FORGOT">Password forgot</ng-container>
               </h2>
             </div>
             <div class="card-body">
-              <app-login *ngIf="ACTIVE_STATE === STATE_LOGIN" (login)="doLogin($event)"></app-login>
-              <app-register *ngIf="ACTIVE_STATE === STATE_REGISTER" (register)="doRegister($event)" [errors]="server_errors"></app-register>
+              <app-login *ngIf="activeState === STATE_LOGIN" (login)="doLogin($event)"></app-login>
+              <app-register *ngIf="activeState === STATE_REGISTER" (register)="doRegister($event)" [errors]="server_errors"></app-register>
               <app-password-reset
-                *ngIf="ACTIVE_STATE === STATE_PASSWORD_FORGOT"
+                *ngIf="activeState === STATE_PASSWORD_FORGOT"
                 (passwordReset)="doPasswordReset($event)"
                 [errors]="server_errors"
               ></app-password-reset>
 
-              <app-register-complete *ngIf="ACTIVE_STATE === STATE_REGISTER_COMPLETE"></app-register-complete>
-              <app-password-reset-complete *ngIf="ACTIVE_STATE === STATE_PASSWORD_FORGOT_COMPLETE"></app-password-reset-complete>
+              <app-register-complete *ngIf="activeState === STATE_REGISTER_COMPLETE"></app-register-complete>
+              <app-password-reset-complete *ngIf="activeState === STATE_PASSWORD_FORGOT_COMPLETE"></app-password-reset-complete>
             </div>
 
-            <div class="card-footer" *ngIf="ACTIVE_STATE === STATE_LOGIN">
+            <div class="card-footer" *ngIf="activeState === STATE_LOGIN">
               <button anglifyButton type="button" appearance="text" (click)="setActiveState(STATE_REGISTER)">Register</button>
               <button anglifyButton type="button" appearance="text" (click)="setActiveState(STATE_PASSWORD_FORGOT)">Password forgot</button>
             </div>
 
-            <div class="card-footer" *ngIf="ACTIVE_STATE !== STATE_LOGIN">
-              <button type="button" class="btn btn-outline-info btn-sm float-end" (click)="setActiveState(STATE_LOGIN)">Login</button>
+            <div class="card-footer" *ngIf="activeState !== STATE_LOGIN">
+              <button anglifyButton type="button" appearance="text" (click)="setActiveState(STATE_LOGIN)">Login</button>
             </div>
           </div>
         </div>
