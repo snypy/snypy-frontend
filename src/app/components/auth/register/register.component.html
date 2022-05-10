@@ -1,25 +1,21 @@
-<form class="form" role="form" autocomplete="off" id="formRegister" novalidate="" [formGroup]="form">
-  <anx-forms-input formControlName="username" [errors]="form.get('username').errors" [placeholder]="'Username'"></anx-forms-input>
-
-  <anx-forms-input formControlName="first_name" [errors]="form.get('first_name').errors" [placeholder]="'First name'"></anx-forms-input>
-
-  <anx-forms-input formControlName="last_name" [errors]="form.get('last_name').errors" [placeholder]="'Last name'"></anx-forms-input>
-
-  <anx-forms-input formControlName="email" [errors]="form.get('email').errors" [placeholder]="'Email'"></anx-forms-input>
-
-  <anx-forms-input
-    formControlName="password"
-    [errors]="form.get('password').errors"
-    [placeholder]="'Password'"
-    [type]="'password'"
-  ></anx-forms-input>
-
-  <anx-forms-input
-    formControlName="password_confirm"
-    [errors]="form.get('password_confirm').errors"
-    [placeholder]="'Password confirm'"
-    [type]="'password'"
-  ></anx-forms-input>
-
-  <button type="submit" class="btn btn-success" id="btnRegister" (click)="doRegister()">Register</button>
+<form class="form" role="form" autocomplete="off" id="formRegister" novalidate="" [formGroup]="form" (submit)="doRegister()">
+  <anglify-form-field label="Username" type="outlined">
+    <input anglifyInput name="username" formControlName="username" />
+  </anglify-form-field>
+  <anglify-form-field label="First name" type="outlined">
+    <input anglifyInput name="firstname" formControlName="first_name" />
+  </anglify-form-field>
+  <anglify-form-field label="Last name" type="outlined">
+    <input anglifyInput name="lastname" formControlName="last_name" />
+  </anglify-form-field>
+  <anglify-form-field label="Email" type="outlined">
+    <input anglifyInput name="email" formControlName="email" />
+  </anglify-form-field>
+  <anglify-form-field label="Password" type="outlined">
+    <input anglifyInput name="password" formControlName="password" type="password" />
+  </anglify-form-field>
+  <anglify-form-field label="Password confirm" type="outlined">
+    <input anglifyInput name="password" formControlName="password_confirm" type="password" />
+  </anglify-form-field>
+  <button anglifyButton type="submit" id="btnRegister">Register</button>
 </form>

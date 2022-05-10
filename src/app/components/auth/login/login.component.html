@@ -1,8 +1,8 @@
 <form class="form" role="form" autocomplete="off" id="formLogin" novalidate="" [formGroup]="form">
-  <anglify-form-field label="Username" type="outlined" hide-details>
+  <anglify-form-field label="Username" type="outlined">
     <input anglifyInput name="username" formControlName="username" />
   </anglify-form-field>
-  <anglify-form-field label="Password" type="outlined" hide-details>
+  <anglify-form-field label="Password" type="outlined">
     <input anglifyInput type="password" name="username" formControlName="password" />
   </anglify-form-field>
   <button anglifyButton type="submit" class="btn btn-primary" id="btnLogin" (click)="doLogin()">Login</button>
