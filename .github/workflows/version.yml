@@ -9,7 +9,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
-        repository: 'https://github.com/snypy/snypy-docker'
+        repository: 'snypy/snypy-docker'
         token: ${{ secrets.WORKFLOW_GIT_ACCESS_TOKEN }}
 
     - name: Update env file
