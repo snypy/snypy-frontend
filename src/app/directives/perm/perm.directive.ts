@@ -40,8 +40,11 @@ export class PermDirective implements OnChanges {
   }
 
   static canEditSnippet(user: ResourceModel<User>, snippet: ResourceModel<Snippet>): boolean {
-    return snippet.user === user.pk;
+    if (user) {
+      return snippet.user === user.pk;
+    }
 
+    return false;
     // To be implemented in 1.1, userTeam must be loaded from global state
     //
     // if (!snippet.team && snippet.user === user.pk) {
