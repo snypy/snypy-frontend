@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngxs/store';
 import { SnippetResource } from '../../services/resources/snippet.resource';
+import { UpdateLabels } from '../../state/label/label.actions';
+import { UpdateLanguages } from '../../state/language/language.actions';
 import { SetActiveSnippet } from '../../state/snippet/snippet.actions';
 
 @Component({
@@ -21,6 +23,8 @@ export class FullscreenComponent implements OnInit {
       .get({ pk: snippetPk })
       .$promise.then(data => {
         this.store.dispatch(new SetActiveSnippet(data));
+        this.store.dispatch(new UpdateLabels());
+        this.store.dispatch(new UpdateLanguages());
       })
       .catch(() => {
         this.snippetError = true;
