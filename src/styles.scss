@@ -1,7 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @use 'node_modules/@anglify/components/styles' as *;
 @use 'node_modules/@anglify/components/styles/themes/light' as *;
-@use 'node_modules/@anglify/components/modules/overlay' as *;
 @import 'theme/variables';
 
 :root {
