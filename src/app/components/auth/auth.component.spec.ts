@@ -1,10 +1,11 @@
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { FormGroup } from '@angular/forms';
 import { NgxsModule } from '@ngxs/store';
 import { NgxResourceFactoryModule } from 'ngx-resource-factory';
+import { ToastrModule } from 'ngx-toastr';
 import { firstValueFrom } from 'rxjs';
 import { AuthResource } from '../../services/resources/auth.resource';
-import { PasswordResetResource } from '../../services/resources/passwordreset.resource';
 import { UserResource } from '../../services/resources/user.resource';
 import { AuthComponent } from './auth.component';
 
@@ -15,8 +16,8 @@ describe('AuthComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [AuthComponent],
-      imports: [NgxResourceFactoryModule.forRoot(), HttpClientModule, NgxsModule.forRoot()],
-      providers: [AuthResource, UserResource, PasswordResetResource],
+      imports: [NgxResourceFactoryModule.forRoot(), HttpClientModule, NgxsModule.forRoot(), ToastrModule.forRoot({})],
+      providers: [AuthResource, UserResource],
     }).compileComponents();
   }));
 
@@ -53,7 +54,7 @@ describe('AuthComponent', () => {
 
   it('should call doPasswordReset()', () => {
     const spy = spyOn(component, 'doPasswordReset');
-    component.doPasswordReset({ email: 'email' });
+    component.doPasswordReset({ email: 'email', formGroup: new FormGroup({}) });
     expect(spy).toHaveBeenCalled();
   });
 });

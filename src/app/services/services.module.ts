@@ -1,16 +1,13 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
-
-import { UserResource } from './resources/user.resource';
+import { ActiveFilterService } from './navigation/activeFilter.service';
+import { AuthResource } from './resources/auth.resource';
 import { LabelResource } from './resources/label.resource';
 import { LanguageResource } from './resources/language.resource';
 import { SnippetResource } from './resources/snippet.resource';
-import { TeamResource } from './resources/team.resource';
-
-import { ActiveFilterService } from './navigation/activeFilter.service';
-import { AuthResource } from './resources/auth.resource';
-import { UserTeamResource } from './resources/userteam.resource';
 import { SnippetLabelResource } from './resources/snippetlabel.resource';
-import { PasswordResetResource } from './resources/passwordreset.resource';
+import { TeamResource } from './resources/team.resource';
+import { UserResource } from './resources/user.resource';
+import { UserTeamResource } from './resources/userteam.resource';
 
 @NgModule({
   imports: [],
@@ -33,7 +30,6 @@ export class ServicesModule {
         TeamResource,
         UserTeamResource,
         SnippetLabelResource,
-        PasswordResetResource,
         ActiveFilterService,
       ],
     };
