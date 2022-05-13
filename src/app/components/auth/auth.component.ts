@@ -1,15 +1,21 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { PasswordResetService } from '@snypy/rest-client';
+import { ToastrService } from 'ngx-toastr';
+import { BehaviorSubject, EMPTY, Observable, Subject } from 'rxjs';
+import { catchError, switchMap } from 'rxjs/operators';
+import { Errors } from '../../helpers/errors';
 import { AuthCredentials, AuthResource, RegisterPayload } from '../../services/resources/auth.resource';
-import { PasswordResetPayload, PasswordResetResource } from '../../services/resources/passwordreset.resource';
 
+@UntilDestroy()
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AuthComponent {
+export class AuthComponent implements OnInit {
   public STATE_LOGIN = 'LOGIN';
   public STATE_REGISTER = 'REGISTER';
   public STATE_REGISTER_COMPLETE = 'REGISTER_COMPLETE';
@@ -19,11 +25,38 @@ export class AuthComponent {
   private activeStateSubject = new BehaviorSubject<string>(this.STATE_LOGIN);
   public activeState$: Observable<string> = this.activeStateSubject.asObservable();
 
+  private readonly createPasswordResetSubject = new Subject<{ email: string; formGroup: FormGroup }>();
+  private readonly passwordResetCreated$ = this.createPasswordResetSubject.asObservable().pipe(
+    switchMap(subject =>
+      this.passwordResetService.passwordResetCreate({ emailRequest: { email: subject.email } }).pipe(
+        catchError(reason => {
+          Errors.handleFormError(subject.formGroup, reason);
+          if (reason['non_field_errors']) {
+            for (const error of reason['non_field_errors']) {
+              this.toastr.error(error);
+            }
+          }
+          return EMPTY;
+        })
+      )
+    )
+  );
+
   @Output() public login = new EventEmitter<AuthCredentials>();
 
   public server_errors = null;
 
-  public constructor(private readonly authResource: AuthResource, private readonly passwordResetResource: PasswordResetResource) {}
+  public constructor(
+    private readonly authResource: AuthResource,
+    private readonly passwordResetService: PasswordResetService,
+    private readonly toastr: ToastrService
+  ) {}
+
+  public ngOnInit(): void {
+    this.passwordResetCreated$.pipe(untilDestroyed(this)).subscribe(() => {
+      this.setActiveState(this.STATE_PASSWORD_FORGOT_COMPLETE);
+    });
+  }
 
   public doLogin(authCredentials: AuthCredentials): void {
     this.authResource.login(authCredentials);
@@ -43,18 +76,8 @@ export class AuthComponent {
       });
   }
 
-  public doPasswordReset(passwordResetPayload: PasswordResetPayload): void {
-    this.passwordResetResource
-      .save({}, passwordResetPayload)
-      .$promise.then(() => {
-        console.log('Password reset requested');
-        this.setActiveState(this.STATE_PASSWORD_FORGOT_COMPLETE);
-      })
-      .catch(reason => {
-        console.log('Cannot reset password');
-        console.log(reason);
-        this.server_errors = reason.error;
-      });
+  public doPasswordReset(passwordResetSubject: { email: string; formGroup: FormGroup }): void {
+    this.createPasswordResetSubject.next(passwordResetSubject);
   }
 
   public setActiveState(newState: string): void {
