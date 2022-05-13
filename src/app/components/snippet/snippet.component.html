@@ -22,12 +22,12 @@
     >
       copy
     </button>
-    <button *ngIf="copiedFile === file" class="btn btn-sm btn-outline-success ms-2 copy-button disabled">coppied</button>
+    <button *ngIf="copiedFile === file" class="btn btn-sm btn-outline-success ms-2 copy-button disabled">copied</button>
 
     <ngb-accordion #acc="ngbAccordion" [activeIds]="'file-' + file.pk">
       <ngb-panel [id]="'file-' + file.pk" [title]="file.name">
         <ng-template ngbPanelHeader>
-          <button ngbPanelToggle class="accordion-button" [ngClass]="{ coppied: copiedFile === file }">{{ file.name }}</button>
+          <button ngbPanelToggle class="accordion-button" [ngClass]="{ copied: copiedFile === file }">{{ file.name }}</button>
         </ng-template>
         <ng-template ngbPanelContent>
           <ngx-monaco-editor
