@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Action, State, StateContext, Store } from '@ngxs/store';
+import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 import { SnippetResource } from '../../services/resources/snippet.resource';
 import { Team } from '../../services/resources/team.resource';
@@ -30,6 +30,11 @@ import { SnippetModel } from './snippet.model';
 @Injectable()
 export class SnippetState {
   constructor(private store: Store, private snippetResource: SnippetResource) {}
+
+  @Selector()
+  static getFilter(state: SnippetModel) {
+    return state.filter;
+  }
 
   @Action(SetActiveSnippet)
   setActiveSnippet(ctx: StateContext<SnippetModel>, action: SetActiveSnippet): void {

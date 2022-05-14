@@ -1,11 +1,14 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { SelectSnapshot } from '@ngxs-labs/select-snapshot';
-import { Store } from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
 import { mapFormErrors } from 'ngx-anx-forms';
 import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
+import { filter, map, take } from 'rxjs/operators';
 import { Label } from '../../services/resources/label.resource';
 import { Language } from '../../services/resources/language.resource';
 import { Snippet, SnippetResource } from '../../services/resources/snippet.resource';
@@ -17,16 +20,19 @@ import { LanguageState } from '../../state/language/language.state';
 import { ScopeModel } from '../../state/scope/scope.model';
 import { ScopeState } from '../../state/scope/scope.state';
 import { SetActiveSnippet } from '../../state/snippet/snippet.actions';
+import { SnippetState } from '../../state/snippet/snippet.state';
 
+@UntilDestroy()
 @Component({
   selector: 'app-snippet-modal',
   templateUrl: './snippet-modal.component.html',
   styleUrls: ['./snippet-modal.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SnippetModalComponent implements OnInit {
-  @Input() snippet: ResourceModel<Snippet> = null;
+  @Input() public snippet: ResourceModel<Snippet> = null;
 
-  snippetForm: FormGroup;
+  public snippetForm: FormGroup;
 
   @SelectSnapshot(ScopeState)
   public scope: ScopeModel;
@@ -36,6 +42,13 @@ export class SnippetModalComponent implements OnInit {
 
   @SelectSnapshot(LabelState)
   public labels: Label[];
+
+  @Select(SnippetState.getFilter) private readonly filter$!: Observable<Record<string, unknown>>;
+
+  private readonly activeLabel$ = this.filter$.pipe(
+    filter(Boolean),
+    map(filter => filter.labels)
+  );
 
   public visibilities = [
     {
@@ -48,14 +61,14 @@ export class SnippetModalComponent implements OnInit {
     },
   ];
 
-  constructor(
+  public constructor(
     private activeModal: NgbActiveModal,
     private snippetResource: SnippetResource,
     private toastr: ToastrService,
     private store: Store
   ) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     /**
      * Setup snippet from
      *
@@ -110,13 +123,17 @@ export class SnippetModalComponent implements OnInit {
     } else {
       this.snippetForm.addControl('files', new FormArray([]));
     }
+
+    this.activeLabel$.pipe(untilDestroyed(this), take(1), filter(Boolean)).subscribe(label => {
+      this.snippetForm.get('labels').setValue([label]);
+    });
   }
 
-  removeFile(index: number): void {
+  public removeFile(index: number): void {
     (<FormArray>this.snippetForm.get('files')).removeAt(index);
   }
 
-  addFile(): void {
+  public addFile(): void {
     (<FormArray>this.snippetForm.get('files')).push(
       new FormGroup({
         name: new FormControl(null),
@@ -126,7 +143,7 @@ export class SnippetModalComponent implements OnInit {
     );
   }
 
-  confirmAction(closeModal: boolean): void {
+  public confirmAction(closeModal: boolean): void {
     let promise, message, errorMessage;
 
     if (this.snippet) {
@@ -155,7 +172,7 @@ export class SnippetModalComponent implements OnInit {
       });
   }
 
-  closeAction(reason: string): void {
+  public closeAction(reason: string): void {
     this.activeModal.dismiss(reason);
   }
 }
