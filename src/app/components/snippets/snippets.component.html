@@ -1,6 +1,6 @@
 <div class="card" *ngFor="let snippet of snippets" (click)="loadSnippet(snippet)" [ngClass]="{ active: snippet.pk === activeSnippet.pk }">
   <div class="card-body">
-    <img class="user-badge" [src]="'https://www.gravatar.com/avatar/' + snippet.user + '?d=identicon&f=y&s=200'" alt="card image" />
+    <img class="user-badge" [src]="snippet.user_avatar" alt="card image" />
     <div class="snippet">
       <h6 class="card-title">
         {{ snippet.title | slice: 0:30 }}

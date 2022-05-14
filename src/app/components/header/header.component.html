@@ -11,12 +11,7 @@
         <div class="card" style="border-radius: 0; border: none">
           <div class="card-body text-center" style="border-bottom: 1px solid #ddd; padding: 0; margin-bottom: 10px">
             <p>
-              <img
-                class="img-fluid"
-                [src]="'https://www.gravatar.com/avatar/' + currentUser.pk + '?d=identicon&f=y&s=200'"
-                alt="card image"
-                style="border-radius: 50%; max-width: 50%"
-              />
+              <img class="img-fluid" [src]="currentUser.avatar" alt="card image" style="border-radius: 50%; max-width: 50%" />
             </p>
             <h4 class="card-title">{{ currentUser.username }}</h4>
           </div>
