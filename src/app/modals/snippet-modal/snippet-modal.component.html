@@ -11,15 +11,18 @@
     <span>Title</span>
     <anx-forms-input formControlName="title" [errors]="snippetForm.get('title').errors"></anx-forms-input>
 
-    <span>Labels</span>
-    <anx-forms-input-select
-      bindLabel="name"
-      bindValue="pk"
-      [options]="labels"
-      [multiple]="true"
-      formControlName="labels"
-      [errors]="snippetForm.get('labels').errors"
-    ></anx-forms-input-select>
+    <ng-container *ngIf="labels?.length">
+      <span>Labels</span>
+      <anx-forms-input-select
+        bindLabel="name"
+        bindValue="pk"
+        [options]="labels"
+        [multiple]="true"
+        formControlName="labels"
+        *ngIf="scope && (scope.area === 'team' || scope.area === 'user')"
+        [errors]="snippetForm.get('labels').errors"
+      ></anx-forms-input-select>
+    </ng-container>
 
     <span>Description</span>
     <anx-forms-input-textarea formControlName="description" [errors]="snippetForm.get('description').errors"></anx-forms-input-textarea>
