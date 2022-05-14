@@ -16,7 +16,7 @@
             <app-view-info></app-view-info>
             <perfect-scrollbar style="max-height: calc(100vh - 87px - 0.75rem)" class="navigation">
               <app-menu></app-menu>
-              <app-labels></app-labels>
+              <app-labels *ngIf="scope && (scope.area === 'team' || scope.area === 'user')"></app-labels>
               <app-languages></app-languages>
               <app-team-members *ngIf="scope && scope.area === 'team'"></app-team-members>
             </perfect-scrollbar>

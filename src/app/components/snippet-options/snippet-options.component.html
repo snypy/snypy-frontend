@@ -42,24 +42,28 @@
         </button>
       </div>
 
-      <div style="margin-top: 15px" *appPerm="'canEditSnippet'; args: [currentUser, activeSnippet]">
-        <div ngbDropdown class="d-inline-block" placement="bottom-right" #myDrop="ngbDropdown">
-          <button class="btn btn-sm btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Labels</button>
-          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-            <perfect-scrollbar style="max-height: 40vh">
-              <app-bootstrap-switch
-                class="label-toggle"
-                (click)="$event.stopPropagation(); myDrop.open()"
-                *ngFor="let label of labels$ | async; trackBy: trackByFn"
-                size="sm"
-                [label]="label.name"
-                [ngModel]="activeLabels.indexOf(label.pk) > -1"
-                (ngModelChange)="toggleLabel(label)"
-              ></app-bootstrap-switch>
-            </perfect-scrollbar>
+      <ng-container *ngIf="labels$ | async as loadedLabels">
+        <ng-container *ngIf="loadedLabels.length">
+          <div style="margin-top: 15px" *appPerm="'canEditSnippet'; args: [currentUser, activeSnippet]">
+            <div ngbDropdown class="d-inline-block" placement="bottom-right" #myDrop="ngbDropdown">
+              <button class="btn btn-sm btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Labels</button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <perfect-scrollbar style="max-height: 40vh">
+                  <app-bootstrap-switch
+                    class="label-toggle"
+                    (click)="$event.stopPropagation(); myDrop.open()"
+                    *ngFor="let label of loadedLabels; trackBy: trackByFn"
+                    size="sm"
+                    [label]="label.name"
+                    [ngModel]="activeLabels.indexOf(label.pk) > -1"
+                    (ngModelChange)="toggleLabel(label)"
+                  ></app-bootstrap-switch>
+                </perfect-scrollbar>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        </ng-container>
+      </ng-container>
     </div>
   </div>
 

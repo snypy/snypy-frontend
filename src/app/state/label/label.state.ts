@@ -37,6 +37,9 @@ export class LabelState {
         const team = scope.value as ResourceModel<Team>;
         payload['team'] = team.pk;
         break;
+      case 'global':
+        ctx.setState([]);
+        return;
     }
 
     ctx.setState(await this.labelResource.query({ ...payload }).$promise);
