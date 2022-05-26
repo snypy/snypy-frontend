@@ -22,7 +22,7 @@
     "@angular/core": "^13.3.9",
     "@angular/forms": "^13.3.10",
     "@angular/localize": "^13.3.9",
-    "@angular/platform-browser": "^13.3.7",
+    "@angular/platform-browser": "^13.3.10",
     "@angular/platform-browser-dynamic": "^13.3.9",
     "@angular/router": "^13.3.9",
     "@fortawesome/angular-fontawesome": "^0.10.2",
