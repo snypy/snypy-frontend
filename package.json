@@ -24,7 +24,7 @@
     "@angular/localize": "^13.3.10",
     "@angular/platform-browser": "^13.3.10",
     "@angular/platform-browser-dynamic": "^13.3.10",
-    "@angular/router": "^13.3.9",
+    "@angular/router": "^13.3.10",
     "@fortawesome/angular-fontawesome": "^0.10.2",
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
     "@fortawesome/free-regular-svg-icons": "^6.1.1",
