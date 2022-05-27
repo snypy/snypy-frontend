@@ -40,26 +40,11 @@ export class PermDirective implements OnChanges {
   }
 
   static canEditSnippet(user: ResourceModel<User>, snippet: ResourceModel<Snippet>): boolean {
-    if (user) {
-      return snippet.user === user.pk;
-    }
-
-    return false;
-    // To be implemented in 1.1, userTeam must be loaded from global state
-    //
-    // if (!snippet.team && snippet.user === user.pk) {
-    //   return true;
-    // }
-    // else if (snippet.team && userTeam.role == ROLES.CONTRIBUTOR) {
-    //   return true;
-    // }
-    // else if (snippet.team && userTeam.role == ROLES.EDITOR) {
-    //   return true;
-    // }
+    return snippet.editable;
   }
 
   static canDeleteSnippet(user: ResourceModel<User>, snippet: ResourceModel<Snippet>): boolean {
-    return PermDirective.canEditSnippet(user, snippet);
+    return snippet.deletable;
   }
 
   constructor(private templateRef: TemplateRef<any>, private viewContainer: ViewContainerRef) {}
