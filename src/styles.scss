@@ -8,9 +8,10 @@
   --anglify-form-field-outlined-border-color-focused: #{$primary-color};
   --anglify-form-field-outlined-border-radius: 0px;
 
-  --anglify-button-filled-border-radius: 0px;
-  --anglify-button-filled-background: #{$primary-color};
+  --anglify-button-contained-border-radius: 0px;
+  --anglify-button-contained-background: #{$primary-color};
   --anglify-button-text-border-radius: 0px;
+  --anglify-button-contained-label-color: #ffffff;
 
   --anglify-button-text-label-color: #{$primary-color};
 }
