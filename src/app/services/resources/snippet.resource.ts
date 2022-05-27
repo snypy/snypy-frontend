@@ -27,6 +27,8 @@ export class Snippet extends ResourceInstance {
   user_display: string;
   created_date: string;
   modified_date: string;
+  editable: boolean;
+  deletable: boolean;
 }
 
 @Injectable()
