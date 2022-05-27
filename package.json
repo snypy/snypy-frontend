@@ -14,7 +14,7 @@
   },
   "private": true,
   "dependencies": {
-    "@anglify/components": "^0.20.1",
+    "@anglify/components": "^0.20.2",
     "@angular-devkit/architect": "^0.1303.7",
     "@angular/animations": "^13.3.9",
     "@angular/common": "^13.3.10",
@@ -29,6 +29,7 @@
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
     "@fortawesome/free-regular-svg-icons": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
+    "@mdi/js": "^6.7.96",
     "@ng-bootstrap/ng-bootstrap": "^12.1.2",
     "@ng-select/ng-select": "^8.1.1",
     "@ngneat/until-destroy": "^9.2.0",
