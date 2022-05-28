@@ -2,10 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { SelectSnapshot } from '@ngxs-labs/select-snapshot';
+import { Team } from '@snypy/rest-client';
 import { mapFormErrors } from 'ngx-anx-forms';
 import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 import { ToastrService } from 'ngx-toastr';
-import { Team } from '../../services/resources/team.resource';
 import { User, UserResource } from '../../services/resources/user.resource';
 import { ROLES, UserTeam, UserTeamResource } from '../../services/resources/userteam.resource';
 import { ScopeModel } from '../../state/scope/scope.model';
@@ -42,7 +42,7 @@ export class TeamMemberModalComponent implements OnInit {
     const scope = this.scope;
 
     if (scope.area == 'team') {
-      const team = scope.value as ResourceModel<Team>;
+      const team = scope.value as Team;
 
       this.userTeamForm = new FormGroup({
         pk: new FormControl(null, null),
