@@ -70,6 +70,7 @@ import { SnippetState } from './state/snippet/snippet.state';
 import { FullscreenComponent } from './layout/fullscreen/fullscreen.component';
 import { ApiModule, Configuration, ConfigurationParameters } from '@snypy/rest-client';
 import { environment } from '../environments/environment';
+import { TeamState } from './state/team/team.state';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -171,7 +172,7 @@ export function apiConfigFactory(): Configuration {
     ToastrModule.forRoot(),
     NgxAnxFormsModule.forRoot(),
     RouterModule.forRoot(appRoutes, { relativeLinkResolution: 'legacy' }),
-    NgxsModule.forRoot([ScopeState, LanguageState, LabelState, SnippetState]),
+    NgxsModule.forRoot([ScopeState, LanguageState, LabelState, SnippetState, TeamState]),
     NgxsSelectSnapshotModule.forRoot(),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     ServicesModule.forRoot(),
@@ -216,7 +217,8 @@ export class AppModule {
       fas.faTrash,
       fas.faCircle,
       fas.faHashtag,
-      far.faCopy
+      far.faCopy,
+      fas.faPen
     );
   }
 }

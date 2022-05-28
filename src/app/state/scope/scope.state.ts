@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Action, State, StateContext } from '@ngxs/store';
-import { RefreshScope, UpdateScope } from './scope.actions';
+import { RefreshScope, UpdateScope, UpdateScopeValue } from './scope.actions';
 import { ScopeModel } from './scope.model';
 
 @State<ScopeModel>({
@@ -15,6 +15,13 @@ export class ScopeState {
   @Action(UpdateScope)
   updateScope(ctx: StateContext<ScopeModel>, action: UpdateScope): void {
     ctx.patchState(action.scope);
+  }
+
+  @Action(UpdateScopeValue)
+  updateScopeValue(ctx: StateContext<ScopeModel>, action: UpdateScopeValue): void {
+    ctx.patchState({
+      value: action.value,
+    });
   }
 
   @Action(RefreshScope)

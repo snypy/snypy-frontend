@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { SelectSnapshot } from '@ngxs-labs/select-snapshot';
 import { Action, State, StateContext } from '@ngxs/store';
+import { Team } from '@snypy/rest-client';
 import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 import { Language, LanguageResource } from '../../services/resources/language.resource';
-import { Team } from '../../services/resources/team.resource';
 import { User } from '../../services/resources/user.resource';
 import { ScopeModel } from '../scope/scope.model';
 import { ScopeState } from '../scope/scope.state';
@@ -34,7 +34,7 @@ export class LanguageState {
         payload['user'] = user.pk;
         break;
       case 'team':
-        const team = scope.value as ResourceModel<Team>;
+        const team = scope.value as Team;
         payload['team'] = team.pk;
         break;
     }

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
-import { Observable, Subscription } from 'rxjs';
+import { firstValueFrom, Observable, Subscription } from 'rxjs';
 import { ActiveFilterService } from '../../services/navigation/activeFilter.service';
 import { AuthResource } from '../../services/resources/auth.resource';
 import { UpdateLabels } from '../../state/label/label.actions';
@@ -9,6 +9,7 @@ import { RefreshScope, UpdateScope } from '../../state/scope/scope.actions';
 import { ScopeModel } from '../../state/scope/scope.model';
 import { ScopeState } from '../../state/scope/scope.state';
 import { UpdateSnippets } from '../../state/snippet/snippet.actions';
+import { UpdateTeams } from '../../state/team/team.actions';
 
 @Component({
   selector: 'app-base',
@@ -33,13 +34,14 @@ export class BaseComponent implements OnInit, OnDestroy {
     /**
      * Refresh snippets on scope changes
      */
-    this.scope$.toPromise().then(() => {
+    firstValueFrom(this.scope$).then(() => {
       this.activeFilterService.updateFilter('main', 'all');
     });
     this.scopeSubscription = this.scope$.subscribe((scope: ScopeModel) => {
       if (scope && scope.area) {
         this.store.dispatch(new UpdateSnippets());
         this.store.dispatch(new UpdateLabels());
+        this.store.dispatch(new UpdateTeams());
         this.store.dispatch(new UpdateLanguages());
       }
     });

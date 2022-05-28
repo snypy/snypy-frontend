@@ -3,13 +3,13 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { SelectSnapshot } from '@ngxs-labs/select-snapshot';
 import { Store } from '@ngxs/store';
+import { Team } from '@snypy/rest-client';
 import { mapFormErrors } from 'ngx-anx-forms';
 import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 import { ToastrService } from 'ngx-toastr';
 import { Label } from '../../services/resources/label.resource';
 import { Language } from '../../services/resources/language.resource';
 import { Snippet, SnippetResource } from '../../services/resources/snippet.resource';
-import { Team } from '../../services/resources/team.resource';
 import { UpdateLabels } from '../../state/label/label.actions';
 import { LabelState } from '../../state/label/label.state';
 import { UpdateLanguages } from '../../state/language/language.actions';
@@ -74,7 +74,7 @@ export class SnippetModalComponent implements OnInit {
      * Set team value from scope
      */
     if (this.scope.area == 'team') {
-      const team = this.scope.value as ResourceModel<Team>;
+      const team = this.scope.value as Team;
       this.snippetForm.get('team').setValue(team.pk);
     }
 
