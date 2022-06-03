@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Validators } from '../../../helpers/validators';
 import { AuthCredentials } from '../../../services/resources/auth.resource';
 
 @Component({
