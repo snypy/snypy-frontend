@@ -2,6 +2,7 @@
   <span>
     <b>{{ heading }}</b>
     <fa-icon class="float-end" icon="sync-alt" (click)="triggerReload()"></fa-icon>
+    <fa-icon class="float-end m-2 mt-0" icon="pen" (click)="editTeam()" *ngIf="scope.area === 'team'"></fa-icon>
   </span>
 
   <button (click)="addSnippet()" type="button" class="btn btn-sm btn-success btn-block m-3 ms-0 text-uppercase fw-bold">New Snippet</button>

@@ -4,7 +4,6 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxsModule } from '@ngxs/store';
 import { NgxResourceFactoryModule } from 'ngx-resource-factory';
 import { ToastrModule } from 'ngx-toastr';
-import { TeamResource } from '../../services/resources/team.resource';
 import { TeamModalComponent } from './team-modal.component';
 
 describe('TeamModalComponent', () => {
@@ -15,7 +14,7 @@ describe('TeamModalComponent', () => {
     TestBed.configureTestingModule({
       declarations: [TeamModalComponent],
       imports: [NgxResourceFactoryModule.forRoot(), HttpClientModule, NgxsModule.forRoot(), ToastrModule.forRoot({})],
-      providers: [NgbActiveModal, TeamResource],
+      providers: [NgbActiveModal],
     }).compileComponents();
   }));
 

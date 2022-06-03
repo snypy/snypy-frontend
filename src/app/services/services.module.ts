@@ -5,7 +5,6 @@ import { LabelResource } from './resources/label.resource';
 import { LanguageResource } from './resources/language.resource';
 import { SnippetResource } from './resources/snippet.resource';
 import { SnippetLabelResource } from './resources/snippetlabel.resource';
-import { TeamResource } from './resources/team.resource';
 import { UserResource } from './resources/user.resource';
 import { UserTeamResource } from './resources/userteam.resource';
 
@@ -27,7 +26,6 @@ export class ServicesModule {
         LabelResource,
         LanguageResource,
         SnippetResource,
-        TeamResource,
         UserTeamResource,
         SnippetLabelResource,
         ActiveFilterService,

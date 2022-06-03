@@ -7,8 +7,8 @@
   </div>
 </div>
 <div class="modal-body">
-  <form [formGroup]="teamForm">
-    <anx-forms-input formControlName="name" [errors]="teamForm.get('name').errors"></anx-forms-input>
+  <form [formGroup]="teamForm.get('teamRequest')">
+    <anx-forms-input formControlName="name" [errors]="teamForm.get('teamRequest').get('name').errors"></anx-forms-input>
   </form>
 </div>
 <div class="modal-footer">
