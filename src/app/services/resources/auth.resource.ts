@@ -7,6 +7,7 @@ import { ResourceActionMethod } from 'ngx-resource-factory/resource/resource-act
 import { ResourceConfiguration } from 'ngx-resource-factory/resource/resource-configuration';
 import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 import { ResourceRegistry } from 'ngx-resource-factory/resource/resource-registry';
+import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { User, UserResource } from './user.resource';
@@ -40,7 +41,7 @@ export class AuthResource extends Resource<User> {
   currentUser: ResourceModel<User> = null;
   loginStatusUpdates: Subject<boolean> = new Subject<boolean>();
 
-  constructor(registry: ResourceRegistry, http: HttpClient, private userResource: UserResource) {
+  constructor(registry: ResourceRegistry, http: HttpClient, private userResource: UserResource, private toastr: ToastrService) {
     super(registry, http);
   }
 
@@ -96,6 +97,12 @@ export class AuthResource extends Resource<User> {
       .catch(reason => {
         console.log('Cannot authenticate!');
         console.log(reason);
+
+        if (reason.error['non_field_errors']) {
+          for (const error of reason.error['non_field_errors']) {
+            this.toastr.error(error);
+          }
+        }
       });
 
     return promise;
