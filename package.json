@@ -34,7 +34,7 @@
     "@ng-select/ng-select": "^8.3.0",
     "@ngneat/until-destroy": "^9.2.0",
     "@ngxs-labs/select-snapshot": "^4.0.0",
-    "@ngxs/store": "^3.7.3",
+    "@ngxs/store": "^3.7.4",
     "@popperjs/core": "^2.11.5",
     "@snypy/rest-client": "^1.2.1",
     "bootstrap": "^5.1.3",
