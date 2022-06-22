@@ -26,4 +26,9 @@ describe('SnippetComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should calculate the height for the editor', () => {
+    expect(component.calculateEditorHeight('Test \n Test \n')).toBe('60px');
+    expect(component.calculateEditorHeight('Test \n Test \n Test \n')).toBe('80px');
+  });
 });

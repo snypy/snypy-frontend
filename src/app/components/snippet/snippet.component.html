@@ -1,4 +1,4 @@
-<div *ngIf="activeSnippet">
+<div *ngIf="activeSnippet$ | async as activeSnippet">
   <div class="label-list">
     <span *ngFor="let label of activeSnippet.labels">
       <span class="badge bg-info" *ngIf="(labels$ | async | filterBy: ['pk']:label:[true])[0]">
@@ -31,7 +31,8 @@
         </ng-template>
         <ng-template ngbPanelContent>
           <ngx-monaco-editor
-            style="height: 400px"
+            [style.height]="calculateEditorHeight(file.content)"
+            style="min-height: 50px; max-height: 400px"
             [options]="{
               theme: 'vs-dark',
               language: getLanguageName(file.language),
