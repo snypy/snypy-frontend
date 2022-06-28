@@ -72,7 +72,7 @@
     "@typescript-eslint/parser": "~5.27.1",
     "eslint": "^8.17.0",
     "eslint-config-prettier": "8.5.0",
-    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-prettier": "^4.1.0",
     "git-describe": "^4.1.1",
     "jasmine-core": "~4.1.1",
     "jasmine-spec-reporter": "~7.0.0",
