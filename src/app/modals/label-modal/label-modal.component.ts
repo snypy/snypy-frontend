@@ -34,9 +34,11 @@ export class LabelModalComponent implements OnInit {
      * @type {FormGroup}
      */
     this.labelForm = new FormGroup({
-      pk: new FormControl(null, null),
-      name: new FormControl('', Validators.required),
-      team: new FormControl(null, null),
+      id: new FormControl(null, null),
+      labelRequest: new FormGroup({
+        name: new FormControl('', Validators.required),
+        team: new FormControl(null, null),
+      })
     });
 
     /**
@@ -44,15 +46,15 @@ export class LabelModalComponent implements OnInit {
      */
     if (scope.area == 'team') {
       const team = scope.value as Team;
-      this.labelForm.get('team').setValue(team.pk);
+      this.labelForm.get('labelRequest.team').setValue(team.pk);
     }
 
     /**
      * Load data from given label
      */
     if (this.label) {
-      this.labelForm.get('pk').setValue(this.label.pk);
-      this.labelForm.get('name').setValue(this.label.name);
+      this.labelForm.get('id').setValue(this.label.pk);
+      this.labelForm.get('labelRequest.name').setValue(this.label.name);
     }
   }
 
@@ -64,7 +66,7 @@ export class LabelModalComponent implements OnInit {
       message = 'Label updated!';
       errorMessage = 'Cannot update label!';
     } else {
-      promise = firstValueFrom(this.labelService.labelCreate({"labelRequest": this.labelForm.value}));
+      promise = firstValueFrom(this.labelService.labelCreate(this.labelForm.value));
       message = 'Label added!';
       errorMessage = 'Cannot add label!';
     }

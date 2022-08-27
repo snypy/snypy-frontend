@@ -2,7 +2,8 @@ import { Component, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 import { ToastrService } from 'ngx-toastr';
-import { Label } from '@snypy/rest-client';
+import { Label, LabelService } from '@snypy/rest-client';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-label-delete-modal',
@@ -12,12 +13,11 @@ import { Label } from '@snypy/rest-client';
 export class LabelDeleteModalComponent {
   @Input() label: ResourceModel<Label> = null;
 
-  constructor(private activeModal: NgbActiveModal, private toastr: ToastrService) {}
+  constructor(private activeModal: NgbActiveModal, private toastr: ToastrService, private labelService: LabelService) {}
 
   confirmAction(): void {
-    this.label
-      .$remove()
-      .$promise.then(() => {
+    firstValueFrom(this.labelService.labelDestroy({id: this.label.pk}))
+      .then(() => {
         this.toastr.success('Label deleted!');
         this.activeModal.close();
       })

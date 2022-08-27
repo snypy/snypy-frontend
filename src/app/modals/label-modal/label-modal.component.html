@@ -8,8 +8,10 @@
 </div>
 <div class="modal-body">
   <form [formGroup]="labelForm">
-    <span>Name</span>
-    <anx-forms-input formControlName="name" [errors]="labelForm.get('name').errors"></anx-forms-input>
+    <ng-container formGroupName="labelRequest">
+      <span>Name</span>
+      <anx-forms-input formControlName="name" [errors]="labelForm.get('labelRequest.name').errors"></anx-forms-input>
+    </ng-container>
   </form>
 </div>
 <div class="modal-footer">
