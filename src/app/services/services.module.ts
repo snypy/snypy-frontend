@@ -3,7 +3,6 @@ import { ActiveFilterService } from './navigation/activeFilter.service';
 import { AuthResource } from './resources/auth.resource';
 import { SnippetResource } from './resources/snippet.resource';
 import { UserResource } from './resources/user.resource';
-import { UserTeamResource } from './resources/userteam.resource';
 
 @NgModule({
   imports: [],
@@ -21,7 +20,6 @@ export class ServicesModule {
         AuthResource,
         UserResource,
         SnippetResource,
-        UserTeamResource,
         ActiveFilterService,
       ],
     };

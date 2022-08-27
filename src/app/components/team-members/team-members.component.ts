@@ -3,14 +3,14 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Select } from '@ngxs/store';
 import { Team } from '@snypy/rest-client';
 import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
-import { Observable, Subscription } from 'rxjs';
+import { firstValueFrom, Observable, Subscription } from 'rxjs';
 import { TeamMemberDeleteModalComponent } from '../../modals/team-member-delete-modal/team-member-delete-modal.component';
 import { TeamMemberModalComponent } from '../../modals/team-member-modal/team-member-modal.component';
 import { ActiveFilterService, Filter } from '../../services/navigation/activeFilter.service';
 import { AuthResource } from '../../services/resources/auth.resource';
-import { UserTeam, UserTeamResource } from '../../services/resources/userteam.resource';
 import { ScopeModel } from '../../state/scope/scope.model';
 import { ScopeState } from '../../state/scope/scope.state';
+import { UserTeam, UserteamService } from '@snypy/rest-client';
 
 @Component({
   selector: 'app-team-members',
@@ -19,8 +19,8 @@ import { ScopeState } from '../../state/scope/scope.state';
 })
 export class TeamMembersComponent implements OnInit, OnDestroy {
   activeFilter: Filter;
-  members: ResourceModel<UserTeam>[] = [];
-  currentUserTeamMembership: ResourceModel<UserTeam>;
+  members: UserTeam[] = [];
+  currentUserTeamMembership: UserTeam;
 
   filterSubscription: Subscription;
   scopeSubscription: Subscription;
@@ -31,7 +31,7 @@ export class TeamMembersComponent implements OnInit, OnDestroy {
 
   constructor(
     private activeFilterService: ActiveFilterService,
-    private userTeamResource: UserTeamResource,
+    private userteamService: UserteamService,
     private modalService: NgbModal,
     private authResource: AuthResource
   ) {}
@@ -54,9 +54,8 @@ export class TeamMembersComponent implements OnInit, OnDestroy {
     if (this.scope.area == 'team') {
       const team = this.scope.value as Team;
 
-      this.userTeamResource
-        .query({ team: team.pk })
-        .$promise.then(data => {
+      firstValueFrom(this.userteamService.userteamList({ team: team.pk }))
+        .then(data => {
           this.members = data;
           this.currentUserTeamMembership = this.members.find(member => member.user == this.authResource.currentUser.pk);
         })

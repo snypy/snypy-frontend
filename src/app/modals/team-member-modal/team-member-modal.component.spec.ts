@@ -5,7 +5,6 @@ import { NgxsModule } from '@ngxs/store';
 import { NgxResourceFactoryModule } from 'ngx-resource-factory';
 import { ToastrModule } from 'ngx-toastr';
 import { UserResource } from '../../services/resources/user.resource';
-import { UserTeamResource } from '../../services/resources/userteam.resource';
 import { TeamMemberModalComponent } from './team-member-modal.component';
 
 describe('TeamMemberModalComponent', () => {
@@ -16,7 +15,7 @@ describe('TeamMemberModalComponent', () => {
     TestBed.configureTestingModule({
       declarations: [TeamMemberModalComponent],
       imports: [NgxResourceFactoryModule.forRoot(), HttpClientModule, NgxsModule.forRoot(), ToastrModule.forRoot({})],
-      providers: [NgbActiveModal, UserResource, UserTeamResource],
+      providers: [NgbActiveModal, UserResource],
     }).compileComponents();
   }));
 

@@ -2,7 +2,7 @@ import { Directive, Input, OnChanges, TemplateRef, ViewContainerRef } from '@ang
 import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 import { Snippet } from '../../services/resources/snippet.resource';
 import { User } from '../../services/resources/user.resource';
-import { ROLES, UserTeam } from '../../services/resources/userteam.resource';
+import { UserTeam, RoleEnum } from '@snypy/rest-client';
 
 export enum PERMISSION {
   'cadAddTeamMember',
@@ -28,7 +28,7 @@ export class PermDirective implements OnChanges {
    * Permissions
    */
   static cadAddTeamMember(userTeam: ResourceModel<UserTeam>): boolean {
-    return userTeam && userTeam.role === ROLES.EDITOR;
+    return userTeam && userTeam.role === RoleEnum.Editor;
   }
 
   static canEditTeamMember(userTeam: ResourceModel<UserTeam>): boolean {

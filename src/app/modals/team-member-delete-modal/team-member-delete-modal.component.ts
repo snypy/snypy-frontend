@@ -2,7 +2,8 @@ import { Component, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 import { ToastrService } from 'ngx-toastr';
-import { UserTeam } from '../../services/resources/userteam.resource';
+import { UserTeam, UserteamService } from '@snypy/rest-client';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-team-member-delete-modal',
@@ -12,12 +13,11 @@ import { UserTeam } from '../../services/resources/userteam.resource';
 export class TeamMemberDeleteModalComponent {
   @Input() userTeam: ResourceModel<UserTeam> = null;
 
-  constructor(private activeModal: NgbActiveModal, private toastr: ToastrService) {}
+  constructor(private activeModal: NgbActiveModal, private toastr: ToastrService, private userteamService: UserteamService) {}
 
   confirmAction(): void {
-    this.userTeam
-      .$remove()
-      .$promise.then(() => {
+    firstValueFrom(this.userteamService.userteamDestroy({id: this.userTeam.pk}))
+      .then(() => {
         this.toastr.success('Team deleted!');
         this.activeModal.close();
       })

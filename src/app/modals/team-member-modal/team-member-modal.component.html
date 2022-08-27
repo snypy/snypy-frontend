@@ -8,29 +8,31 @@
 </div>
 <div class="modal-body">
   <form [formGroup]="userTeamForm">
-    <div *ngIf="!userTeam; else userIsSet">
-      <label>User</label>
+    <ng-container formGroupName="userTeamRequest">
+      <div *ngIf="!userTeam; else userIsSet">
+        <label>User</label>
+        <anx-forms-input-select
+          formControlName="user"
+          [options]="users"
+          bindLabel="username"
+          bindValue="pk"
+          [multiple]="false"
+          [errors]="userTeamForm.get('userTeamRequest.user').errors"
+        >
+        </anx-forms-input-select>
+      </div>
+
+      <label>Role</label>
       <anx-forms-input-select
-        formControlName="user"
-        [options]="users"
-        bindLabel="username"
+        formControlName="role"
+        [options]="roles"
+        bindLabel="label"
         bindValue="pk"
         [multiple]="false"
-        [errors]="userTeamForm.get('user').errors"
+        [errors]="userTeamForm.get('userTeamRequest.role').errors"
       >
       </anx-forms-input-select>
-    </div>
-
-    <label>Role</label>
-    <anx-forms-input-select
-      formControlName="role"
-      [options]="roles"
-      bindLabel="label"
-      bindValue="pk"
-      [multiple]="false"
-      [errors]="userTeamForm.get('role').errors"
-    >
-    </anx-forms-input-select>
+    </ng-container>
   </form>
 </div>
 <div class="modal-footer">
