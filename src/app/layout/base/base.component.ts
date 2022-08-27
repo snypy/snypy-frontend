@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
-import { firstValueFrom, Observable, Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { ActiveFilterService } from '../../services/navigation/activeFilter.service';
 import { AuthResource } from '../../services/resources/auth.resource';
 import { UpdateLabels } from '../../state/label/label.actions';
@@ -34,9 +34,6 @@ export class BaseComponent implements OnInit, OnDestroy {
     /**
      * Refresh snippets on scope changes
      */
-    firstValueFrom(this.scope$).then(() => {
-      this.activeFilterService.updateFilter('main', 'all');
-    });
     this.scopeSubscription = this.scope$.subscribe((scope: ScopeModel) => {
       if (scope && scope.area) {
         this.store.dispatch(new UpdateSnippets());
