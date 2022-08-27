@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 import { ToastrService } from 'ngx-toastr';
-import { Label } from '../../services/resources/label.resource';
+import { Label } from '@snypy/rest-client';
 
 @Component({
   selector: 'app-label-delete-modal',

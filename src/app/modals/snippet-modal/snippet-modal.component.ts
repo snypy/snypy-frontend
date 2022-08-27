@@ -10,7 +10,7 @@ import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
-import { Label } from '../../services/resources/label.resource';
+import { Label } from '@snypy/rest-client';
 import { Language } from '@snypy/rest-client';
 import { Snippet, SnippetResource } from '../../services/resources/snippet.resource';
 import { UpdateLabels } from '../../state/label/label.actions';

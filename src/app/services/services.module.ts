@@ -1,7 +1,6 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { ActiveFilterService } from './navigation/activeFilter.service';
 import { AuthResource } from './resources/auth.resource';
-import { LabelResource } from './resources/label.resource';
 import { SnippetResource } from './resources/snippet.resource';
 import { UserResource } from './resources/user.resource';
 import { UserTeamResource } from './resources/userteam.resource';
@@ -21,7 +20,6 @@ export class ServicesModule {
       providers: [
         AuthResource,
         UserResource,
-        LabelResource,
         SnippetResource,
         UserTeamResource,
         ActiveFilterService,

@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
 import { LabelDeleteModalComponent } from '../../modals/label-delete-modal/label-delete-modal.component';
 import { LabelModalComponent } from '../../modals/label-modal/label-modal.component';
 import { ActiveFilterService, Filter } from '../../services/navigation/activeFilter.service';
-import { Label } from '../../services/resources/label.resource';
+import { Label } from '@snypy/rest-client';
 import { AddLabel, RemoveLabel, UpdateLabel } from '../../state/label/label.actions';
 import { LabelState } from '../../state/label/label.state';
 

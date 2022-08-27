@@ -2,13 +2,13 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { SelectSnapshot } from '@ngxs-labs/select-snapshot';
-import { Team } from '@snypy/rest-client';
 import { mapFormErrors } from 'ngx-anx-forms';
 import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 import { ToastrService } from 'ngx-toastr';
-import { Label, LabelResource } from '../../services/resources/label.resource';
 import { ScopeModel } from '../../state/scope/scope.model';
 import { ScopeState } from '../../state/scope/scope.state';
+import { Team, Label, LabelService } from '@snypy/rest-client';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-label-modal',
@@ -23,7 +23,7 @@ export class LabelModalComponent implements OnInit {
   @SelectSnapshot(ScopeState)
   public scope: ScopeModel;
 
-  constructor(private activeModal: NgbActiveModal, private labelResource: LabelResource, private toastr: ToastrService) {}
+  constructor(private activeModal: NgbActiveModal, private labelService: LabelService, private toastr: ToastrService) {}
 
   ngOnInit(): void {
     const scope = this.scope;
@@ -60,11 +60,11 @@ export class LabelModalComponent implements OnInit {
     let promise, message, errorMessage;
 
     if (this.label) {
-      promise = this.labelResource.update({}, this.labelForm.value).$promise;
+      promise = firstValueFrom(this.labelService.labelUpdate(this.labelForm.value));
       message = 'Label updated!';
       errorMessage = 'Cannot update label!';
     } else {
-      promise = this.labelResource.save({}, this.labelForm.value).$promise;
+      promise = firstValueFrom(this.labelService.labelCreate({"labelRequest": this.labelForm.value}));
       message = 'Label added!';
       errorMessage = 'Cannot add label!';
     }

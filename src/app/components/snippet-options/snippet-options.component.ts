@@ -6,7 +6,7 @@ import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 import { firstValueFrom, Observable } from 'rxjs';
 import { SnippetModalComponent } from '../../modals/snippet-modal/snippet-modal.component';
 import { AuthResource } from '../../services/resources/auth.resource';
-import { Label } from '../../services/resources/label.resource';
+import { Label } from '@snypy/rest-client';
 import { Snippet, SnippetResource } from '../../services/resources/snippet.resource';
 import { User } from '../../services/resources/user.resource';
 import { UpdateLabels } from '../../state/label/label.actions';
