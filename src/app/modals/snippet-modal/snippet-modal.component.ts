@@ -11,7 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
 import { Label } from '../../services/resources/label.resource';
-import { Language } from '../../services/resources/language.resource';
+import { Language } from '@snypy/rest-client';
 import { Snippet, SnippetResource } from '../../services/resources/snippet.resource';
 import { UpdateLabels } from '../../state/label/label.actions';
 import { LabelState } from '../../state/label/label.state';

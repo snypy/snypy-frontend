@@ -5,7 +5,7 @@ import { Select } from '@ngxs/store';
 import { FileService } from '@snypy/rest-client';
 import { Observable } from 'rxjs';
 import { Label } from '../../services/resources/label.resource';
-import { Language } from '../../services/resources/language.resource';
+import { Language } from '@snypy/rest-client';
 import { Snippet } from '../../services/resources/snippet.resource';
 import { LabelState } from '../../state/label/label.state';
 import { LanguageState } from '../../state/language/language.state';

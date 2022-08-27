@@ -3,11 +3,12 @@ import { SelectSnapshot } from '@ngxs-labs/select-snapshot';
 import { Action, State, StateContext } from '@ngxs/store';
 import { Team } from '@snypy/rest-client';
 import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
-import { Language, LanguageResource } from '../../services/resources/language.resource';
 import { User } from '../../services/resources/user.resource';
 import { ScopeModel } from '../scope/scope.model';
 import { ScopeState } from '../scope/scope.state';
 import { UpdateLanguages } from './language.actions';
+import { LanguageService, Language } from '@snypy/rest-client';
+import { firstValueFrom, Observable } from 'rxjs';
 
 @State<Language[]>({
   name: 'languages',
@@ -15,7 +16,7 @@ import { UpdateLanguages } from './language.actions';
 })
 @Injectable()
 export class LanguageState {
-  constructor(private languageResource: LanguageResource) {}
+  constructor(private languageService: LanguageService) {}
 
   @SelectSnapshot(ScopeState)
   private scope: ScopeModel;
@@ -39,6 +40,10 @@ export class LanguageState {
         break;
     }
 
-    ctx.setState(await this.languageResource.query({ ...payload }).$promise);
+    ctx.setState(
+      await firstValueFrom(
+        this.languageService.languageList({ ...payload })
+      )
+    );
   }
 }
