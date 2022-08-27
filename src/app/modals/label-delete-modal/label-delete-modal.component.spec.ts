@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
@@ -10,7 +11,7 @@ describe('LabelDeleteModalComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [LabelDeleteModalComponent],
-      imports: [NgbModule, ToastrModule.forRoot({})],
+      imports: [NgbModule, ToastrModule.forRoot({}), HttpClientModule],
       providers: [NgbActiveModal],
     }).compileComponents();
   }));

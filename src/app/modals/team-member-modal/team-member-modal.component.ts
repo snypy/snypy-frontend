@@ -51,7 +51,7 @@ export class TeamMemberModalComponent implements OnInit {
           user: new FormControl(null, Validators.required),
           team: new FormControl(team.pk, Validators.required),
           role: new FormControl(null, Validators.required),
-        })
+        }),
       });
 
       if (this.userTeam) {

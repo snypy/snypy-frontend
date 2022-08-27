@@ -8,7 +8,7 @@ import { ScopeModel } from '../scope/scope.model';
 import { ScopeState } from '../scope/scope.state';
 import { UpdateLanguages } from './language.actions';
 import { LanguageService, Language } from '@snypy/rest-client';
-import { firstValueFrom, Observable } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 
 @State<Language[]>({
   name: 'languages',
@@ -40,10 +40,6 @@ export class LanguageState {
         break;
     }
 
-    ctx.setState(
-      await firstValueFrom(
-        this.languageService.languageList({ ...payload })
-      )
-    );
+    ctx.setState(await firstValueFrom(this.languageService.languageList({ ...payload })));
   }
 }

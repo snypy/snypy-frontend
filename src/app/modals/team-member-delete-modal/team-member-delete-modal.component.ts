@@ -16,7 +16,7 @@ export class TeamMemberDeleteModalComponent {
   constructor(private activeModal: NgbActiveModal, private toastr: ToastrService, private userteamService: UserteamService) {}
 
   confirmAction(): void {
-    firstValueFrom(this.userteamService.userteamDestroy({id: this.userTeam.pk}))
+    firstValueFrom(this.userteamService.userteamDestroy({ id: this.userTeam.pk }))
       .then(() => {
         this.toastr.success('Team deleted!');
         this.activeModal.close();

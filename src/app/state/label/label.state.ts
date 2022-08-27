@@ -42,11 +42,7 @@ export class LabelState {
         return;
     }
 
-    ctx.setState(
-      await firstValueFrom(
-        this.labelService.labelList({ ...payload })
-      )
-    );
+    ctx.setState(await firstValueFrom(this.labelService.labelList({ ...payload })));
   }
 
   @Action(AddLabel)

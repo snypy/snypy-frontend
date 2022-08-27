@@ -16,7 +16,7 @@ export class LabelDeleteModalComponent {
   constructor(private activeModal: NgbActiveModal, private toastr: ToastrService, private labelService: LabelService) {}
 
   confirmAction(): void {
-    firstValueFrom(this.labelService.labelDestroy({id: this.label.pk}))
+    firstValueFrom(this.labelService.labelDestroy({ id: this.label.pk }))
       .then(() => {
         this.toastr.success('Label deleted!');
         this.activeModal.close();

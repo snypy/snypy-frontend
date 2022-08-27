@@ -38,7 +38,7 @@ export class LabelModalComponent implements OnInit {
       labelRequest: new FormGroup({
         name: new FormControl('', Validators.required),
         team: new FormControl(null, null),
-      })
+      }),
     });
 
     /**

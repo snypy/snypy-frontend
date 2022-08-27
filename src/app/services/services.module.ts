@@ -16,12 +16,7 @@ export class ServicesModule {
   static forRoot(): ModuleWithProviders<ServicesModule> {
     return {
       ngModule: ServicesModule,
-      providers: [
-        AuthResource,
-        UserResource,
-        SnippetResource,
-        ActiveFilterService,
-      ],
+      providers: [AuthResource, UserResource, SnippetResource, ActiveFilterService],
     };
   }
 }

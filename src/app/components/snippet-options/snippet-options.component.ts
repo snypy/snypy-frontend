@@ -96,12 +96,15 @@ export class SnippetOptionsComponent implements OnInit {
     const index = this.activeLabels.indexOf(label.pk);
 
     if (index > -1) {
-      firstValueFrom(this.snippetlabelService.snippetlabelList({
-        snippet: this.activeSnippetResource.pk, label: label.pk 
-      }))
+      firstValueFrom(
+        this.snippetlabelService.snippetlabelList({
+          snippet: this.activeSnippetResource.pk,
+          label: label.pk,
+        })
+      )
         .then(data => {
           if (data.length >= 1) {
-            firstValueFrom(this.snippetlabelService.snippetlabelDestroy({id: data[0].pk}))
+            firstValueFrom(this.snippetlabelService.snippetlabelDestroy({ id: data[0].pk }))
               .then(() => {
                 this.activeLabels.splice(index, 1);
                 this.store.dispatch(new UpdateLabels());
@@ -119,9 +122,11 @@ export class SnippetOptionsComponent implements OnInit {
           console.log(reason);
         });
     } else {
-      firstValueFrom(this.snippetlabelService.snippetlabelCreate({
-        'snippetLabelRequest': {snippet: this.activeSnippetResource.pk, label: label.pk }
-      }))
+      firstValueFrom(
+        this.snippetlabelService.snippetlabelCreate({
+          snippetLabelRequest: { snippet: this.activeSnippetResource.pk, label: label.pk },
+        })
+      )
         .then(() => {
           this.activeLabels.push(label.pk);
           this.store.dispatch(new UpdateLabels());
