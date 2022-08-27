@@ -4,7 +4,6 @@ import { AuthResource } from './resources/auth.resource';
 import { LabelResource } from './resources/label.resource';
 import { LanguageResource } from './resources/language.resource';
 import { SnippetResource } from './resources/snippet.resource';
-import { SnippetLabelResource } from './resources/snippetlabel.resource';
 import { UserResource } from './resources/user.resource';
 import { UserTeamResource } from './resources/userteam.resource';
 
@@ -27,7 +26,6 @@ export class ServicesModule {
         LanguageResource,
         SnippetResource,
         UserTeamResource,
-        SnippetLabelResource,
         ActiveFilterService,
       ],
     };

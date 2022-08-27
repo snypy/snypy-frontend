@@ -3,17 +3,16 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Select, Store } from '@ngxs/store';
 import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
-import { Observable } from 'rxjs';
+import { firstValueFrom, Observable } from 'rxjs';
 import { SnippetModalComponent } from '../../modals/snippet-modal/snippet-modal.component';
 import { AuthResource } from '../../services/resources/auth.resource';
 import { Label } from '../../services/resources/label.resource';
 import { Snippet, SnippetResource } from '../../services/resources/snippet.resource';
-import { SnippetLabelResource } from '../../services/resources/snippetlabel.resource';
 import { User } from '../../services/resources/user.resource';
 import { UpdateLabels } from '../../state/label/label.actions';
 import { LabelState } from '../../state/label/label.state';
 import { RemoveSnippet } from '../../state/snippet/snippet.actions';
-
+import { SnippetlabelService } from '@snypy/rest-client';
 @UntilDestroy()
 @Component({
   selector: 'app-snippet-options',
@@ -31,7 +30,7 @@ export class SnippetOptionsComponent implements OnInit {
   @Select(state => state.snippet.activeSnippet) activeSnippet$: Observable<Snippet>;
 
   constructor(
-    private snippetLabelResource: SnippetLabelResource,
+    private snippetlabelService: SnippetlabelService,
     private authResource: AuthResource,
     private modalService: NgbModal,
     private snippetResource: SnippetResource,
@@ -95,14 +94,15 @@ export class SnippetOptionsComponent implements OnInit {
 
   toggleLabel(label: ResourceModel<Label>): void {
     const index = this.activeLabels.indexOf(label.pk);
+
     if (index > -1) {
-      this.snippetLabelResource
-        .query({ snippet: this.activeSnippetResource.pk, label: label.pk })
-        .$promise.then(data => {
-          if (data.length == 1) {
-            data[0]
-              .$remove()
-              .$promise.then(() => {
+      firstValueFrom(this.snippetlabelService.snippetlabelList({
+        snippet: this.activeSnippetResource.pk, label: label.pk 
+      }))
+        .then(data => {
+          if (data.length >= 1) {
+            firstValueFrom(this.snippetlabelService.snippetlabelDestroy({id: data[0].pk}))
+              .then(() => {
                 this.activeLabels.splice(index, 1);
                 this.store.dispatch(new UpdateLabels());
               })
@@ -119,9 +119,10 @@ export class SnippetOptionsComponent implements OnInit {
           console.log(reason);
         });
     } else {
-      this.snippetLabelResource
-        .save({}, { snippet: this.activeSnippetResource.pk, label: label.pk })
-        .$promise.then(() => {
+      firstValueFrom(this.snippetlabelService.snippetlabelCreate({
+        'snippetLabelRequest': {snippet: this.activeSnippetResource.pk, label: label.pk }
+      }))
+        .then(() => {
           this.activeLabels.push(label.pk);
           this.store.dispatch(new UpdateLabels());
         })
