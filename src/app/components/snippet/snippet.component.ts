@@ -1,49 +1,45 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { SelectSnapshot } from '@ngxs-labs/select-snapshot';
 import { Select } from '@ngxs/store';
 import { FileService } from '@snypy/rest-client';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Label } from '../../services/resources/label.resource';
 import { Language } from '../../services/resources/language.resource';
 import { Snippet } from '../../services/resources/snippet.resource';
 import { LabelState } from '../../state/label/label.state';
 import { LanguageState } from '../../state/language/language.state';
 
+@UntilDestroy()
 @Component({
   selector: 'app-snippet',
   templateUrl: './snippet.component.html',
   styleUrls: ['./snippet.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SnippetComponent implements OnInit, OnDestroy {
-  activeSnippet: Snippet = null;
-  copiedFile: File | null = null;
-  timer = null;
+export class SnippetComponent implements OnInit {
+  public copiedFile: File | null = null;
+  public timer = null;
 
-  files$: Observable<File[]> = null;
-  activeSnippetSubscription: Subscription;
+  public files$: Observable<File[]> = null;
 
-  @Select(LabelState) labels$: Observable<Label[]>;
-  @Select(state => state.snippet.activeSnippet) activeSnippet$: Observable<Snippet>;
+  @Select(LabelState) public labels$: Observable<Label[]>;
+  @Select(state => state.snippet.activeSnippet) public activeSnippet$: Observable<Snippet>;
 
   @SelectSnapshot(LanguageState)
   public languages: Language[];
 
-  constructor(private fileService: FileService) {}
+  public constructor(private fileService: FileService) {}
 
-  ngOnInit(): void {
-    this.activeSnippetSubscription = this.activeSnippet$.subscribe(activeSnippet => {
+  public ngOnInit(): void {
+    this.activeSnippet$.pipe(untilDestroyed(this)).subscribe(activeSnippet => {
       if (activeSnippet) {
-        this.activeSnippet = activeSnippet;
         this.files$ = this.fileService.fileList({ snippet: activeSnippet.pk });
       }
     });
   }
 
-  ngOnDestroy(): void {
-    this.activeSnippetSubscription.unsubscribe();
-  }
-
-  getLanguageName(langugaeId: number): string {
+  public getLanguageName(langugaeId: number): string {
     const language = this.languages.find(language => language.pk === langugaeId);
     if (language) {
       return language.name;
@@ -51,11 +47,16 @@ export class SnippetComponent implements OnInit, OnDestroy {
     return 'default';
   }
 
-  fileCopied(file: File) {
+  public fileCopied(file: File): void {
     this.copiedFile = file;
     clearTimeout(this.timer);
     this.timer = setTimeout(() => {
       this.copiedFile = null;
     }, 2500);
+  }
+
+  public calculateEditorHeight(content: string): string {
+    const newLinesCount = content.split('\n').length;
+    return `${newLinesCount * 20}px`;
   }
 }
