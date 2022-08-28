@@ -4,13 +4,12 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { SelectSnapshot } from '@ngxs-labs/select-snapshot';
 import { Team } from '@snypy/rest-client';
 import { mapFormErrors } from 'ngx-anx-forms';
-import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 import { ToastrService } from 'ngx-toastr';
-import { User, UserResource } from '../../services/resources/user.resource';
 import { ScopeModel } from '../../state/scope/scope.model';
 import { ScopeState } from '../../state/scope/scope.state';
 import { UserTeam, UserteamService, RoleEnum } from '@snypy/rest-client';
 import { firstValueFrom } from 'rxjs';
+import { UserService, User } from '@snypy/rest-client';
 
 @Component({
   selector: 'app-team-member-modal',
@@ -21,7 +20,7 @@ export class TeamMemberModalComponent implements OnInit {
   @Input() userTeam: UserTeam = null;
 
   userTeamForm: FormGroup;
-  users: ResourceModel<User>[] = [];
+  users: User[] = [];
 
   roles = [
     { pk: RoleEnum.Subscriber, label: 'Subscriber' },
@@ -34,7 +33,7 @@ export class TeamMemberModalComponent implements OnInit {
 
   constructor(
     private activeModal: NgbActiveModal,
-    private userResource: UserResource,
+    private userService: UserService,
     private userteamService: UserteamService,
     private toastr: ToastrService
   ) {}
@@ -60,9 +59,8 @@ export class TeamMemberModalComponent implements OnInit {
         this.userTeamForm.get('userTeamRequest.role').setValue(this.userTeam.role);
       }
 
-      this.userResource
-        .query({ exclude_team: scope.value })
-        .$promise.then(data => {
+      firstValueFrom(this.userService.userList({}))
+        .then(data => {
           this.users = data;
         })
         .catch(reason => {

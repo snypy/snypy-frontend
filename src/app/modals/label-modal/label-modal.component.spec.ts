@@ -3,7 +3,6 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxsSelectSnapshotModule } from '@ngxs-labs/select-snapshot';
 import { NgxsModule } from '@ngxs/store';
-import { NgxResourceFactoryModule } from 'ngx-resource-factory';
 import { ToastrModule } from 'ngx-toastr';
 import { LabelModalComponent } from './label-modal.component';
 
@@ -14,14 +13,7 @@ describe('LabelModalComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [LabelModalComponent],
-      imports: [
-        NgbModule,
-        NgxResourceFactoryModule.forRoot(),
-        HttpClientModule,
-        NgxsModule.forRoot(),
-        ToastrModule.forRoot({}),
-        NgxsSelectSnapshotModule.forRoot(),
-      ],
+      imports: [NgbModule, HttpClientModule, NgxsModule.forRoot(), ToastrModule.forRoot({}), NgxsSelectSnapshotModule.forRoot()],
       providers: [NgbActiveModal],
     }).compileComponents();
   }));

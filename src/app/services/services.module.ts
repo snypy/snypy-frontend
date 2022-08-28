@@ -1,7 +1,6 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { ActiveFilterService } from './navigation/activeFilter.service';
 import { AuthResource } from './resources/auth.resource';
-import { UserResource } from './resources/user.resource';
 
 @NgModule({
   imports: [],
@@ -15,7 +14,7 @@ export class ServicesModule {
   static forRoot(): ModuleWithProviders<ServicesModule> {
     return {
       ngModule: ServicesModule,
-      providers: [AuthResource, UserResource, ActiveFilterService],
+      providers: [AuthResource, ActiveFilterService],
     };
   }
 }

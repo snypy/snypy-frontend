@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
-import { Team } from '@snypy/rest-client';
-import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
+import { Team, User } from '@snypy/rest-client';
 import { SnippetService } from '@snypy/rest-client';
-import { User } from '../../services/resources/user.resource';
 import { ScopeModel } from '../scope/scope.model';
 import { ScopeState } from '../scope/scope.state';
 import {
@@ -110,7 +108,7 @@ export class SnippetState {
 
     switch (scope.area) {
       case 'user':
-        const user = scope.value as ResourceModel<User>;
+        const user = scope.value as User;
         filter['user'] = user.pk;
         filter['teamIsNull'] = 'True';
         break;

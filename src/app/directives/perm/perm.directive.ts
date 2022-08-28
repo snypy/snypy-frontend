@@ -1,7 +1,5 @@
 import { Directive, Input, OnChanges, TemplateRef, ViewContainerRef } from '@angular/core';
-import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
-import { User } from '../../services/resources/user.resource';
-import { UserTeam, RoleEnum, Snippet } from '@snypy/rest-client';
+import { UserTeam, RoleEnum, Snippet, User } from '@snypy/rest-client';
 
 export enum PERMISSION {
   'cadAddTeamMember',
@@ -38,11 +36,11 @@ export class PermDirective implements OnChanges {
     return PermDirective.cadAddTeamMember(userTeam);
   }
 
-  static canEditSnippet(user: ResourceModel<User>, snippet: Snippet): boolean {
+  static canEditSnippet(user: User, snippet: Snippet): boolean {
     return !!snippet.editable;
   }
 
-  static canDeleteSnippet(user: ResourceModel<User>, snippet: Snippet): boolean {
+  static canDeleteSnippet(user: User, snippet: Snippet): boolean {
     return !!snippet.deletable;
   }
 

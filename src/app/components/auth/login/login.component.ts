@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Validators } from '../../../helpers/validators';
-import { AuthCredentials } from '../../../services/resources/auth.resource';
+import { AuthTokenLoginCreateRequestParams } from '@snypy/rest-client';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +10,7 @@ import { AuthCredentials } from '../../../services/resources/auth.resource';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent implements OnInit {
-  @Output() login = new EventEmitter<AuthCredentials>();
+  @Output() login = new EventEmitter<AuthTokenLoginCreateRequestParams>();
 
   form: FormGroup;
 

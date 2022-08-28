@@ -1,4 +1,4 @@
-import { User } from '../../services/resources/user.resource';
+import { User } from '@snypy/rest-client';
 
 export interface AuthStateModel {
   token: string;

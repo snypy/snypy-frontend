@@ -88,7 +88,7 @@ export class SnippetModalComponent implements OnInit {
      */
     if (this.scope.area == 'team') {
       const team = this.scope.value as Team;
-      this.snippetForm.get('team').setValue(team.pk);
+      this.snippetForm.get('snippetRequest.team').setValue(team.pk);
     }
 
     /**

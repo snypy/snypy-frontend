@@ -2,12 +2,10 @@ import { ChangeDetectionStrategy, Component, ElementRef, OnInit, TemplateRef } f
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Select, Store } from '@ngxs/store';
-import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 import { firstValueFrom, Observable } from 'rxjs';
 import { SnippetModalComponent } from '../../modals/snippet-modal/snippet-modal.component';
 import { AuthResource } from '../../services/resources/auth.resource';
-import { Label } from '@snypy/rest-client';
-import { User } from '../../services/resources/user.resource';
+import { Label, User } from '@snypy/rest-client';
 import { UpdateLabels } from '../../state/label/label.actions';
 import { LabelState } from '../../state/label/label.state';
 import { RemoveSnippet } from '../../state/snippet/snippet.actions';
@@ -23,7 +21,7 @@ import { Snippet, SnippetService } from '@snypy/rest-client';
 export class SnippetOptionsComponent implements OnInit {
   activeSnippet: Snippet = null;
   activeLabels: number[] = [];
-  currentUser: ResourceModel<User>;
+  currentUser: User;
   permalink = '';
 
   @Select(LabelState) labels$: Observable<Label[]>;

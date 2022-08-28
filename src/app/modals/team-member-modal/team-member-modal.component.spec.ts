@@ -2,9 +2,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxsModule } from '@ngxs/store';
-import { NgxResourceFactoryModule } from 'ngx-resource-factory';
 import { ToastrModule } from 'ngx-toastr';
-import { UserResource } from '../../services/resources/user.resource';
 import { TeamMemberModalComponent } from './team-member-modal.component';
 
 describe('TeamMemberModalComponent', () => {
@@ -14,8 +12,8 @@ describe('TeamMemberModalComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [TeamMemberModalComponent],
-      imports: [NgxResourceFactoryModule.forRoot(), HttpClientModule, NgxsModule.forRoot(), ToastrModule.forRoot({})],
-      providers: [NgbActiveModal, UserResource],
+      imports: [HttpClientModule, NgxsModule.forRoot(), ToastrModule.forRoot({})],
+      providers: [NgbActiveModal],
     }).compileComponents();
   }));
 

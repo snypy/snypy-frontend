@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Select, Store } from '@ngxs/store';
 import { Team } from '@snypy/rest-client';
-import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 import { Observable } from 'rxjs';
 import { TeamModalComponent } from '../../modals/team-modal/team-modal.component';
 import { ActiveFilterService } from '../../services/navigation/activeFilter.service';
@@ -16,7 +15,7 @@ import { TeamState } from '../../state/team/team.state';
   styleUrls: ['./teams.component.scss'],
 })
 export class TeamsComponent {
-  teams: ResourceModel<Team>[] = [];
+  teams: Team[] = [];
 
   @Select(TeamState) teams$: Observable<Team[]>;
 

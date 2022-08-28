@@ -4,7 +4,6 @@ import { FormArray } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxsSelectSnapshotModule } from '@ngxs-labs/select-snapshot';
 import { NgxsModule } from '@ngxs/store';
-import { NgxResourceFactoryModule } from 'ngx-resource-factory';
 import { ToastrModule } from 'ngx-toastr';
 import { SnippetModalComponent } from './snippet-modal.component';
 
@@ -15,13 +14,7 @@ describe('SnippetModalComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [SnippetModalComponent],
-      imports: [
-        NgxsModule.forRoot(),
-        NgxResourceFactoryModule.forRoot(),
-        HttpClientModule,
-        ToastrModule.forRoot({}),
-        NgxsSelectSnapshotModule.forRoot(),
-      ],
+      imports: [NgxsModule.forRoot(), HttpClientModule, ToastrModule.forRoot({}), NgxsSelectSnapshotModule.forRoot()],
       providers: [NgbActiveModal],
     }).compileComponents();
   }));
@@ -39,19 +32,19 @@ describe('SnippetModalComponent', () => {
   });
 
   it('form should be invalid', () => {
-    component.snippetForm.controls['title'].setValue('');
+    component.snippetForm.get('snippetRequest.title').setValue('');
     expect(component.snippetForm.valid).toBe(false);
   });
 
   it('form should be valid', () => {
-    component.snippetForm.controls['title'].setValue('title');
-    component.snippetForm.controls['description'].setValue('description');
+    component.snippetForm.get('snippetRequest.title').setValue('title');
+    component.snippetForm.get('snippetRequest.description').setValue('description');
     expect(component.snippetForm.valid).toBe(true);
   });
 
   it('should add file', () => {
     component.addFile();
-    const files = component.snippetForm.controls['files'] as FormArray;
+    const files = component.snippetForm.get('snippetRequest.files') as FormArray;
     expect(files.length).toBe(1);
     component.addFile();
     expect(files.length).toBe(2);
@@ -59,7 +52,7 @@ describe('SnippetModalComponent', () => {
 
   it('should remove file', () => {
     component.addFile();
-    const files = component.snippetForm.controls['files'] as FormArray;
+    const files = component.snippetForm.get('snippetRequest.files') as FormArray;
     expect(files.length).toBe(1);
     component.removeFile(0);
     expect(files.length).toBe(0);

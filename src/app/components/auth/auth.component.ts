@@ -1,12 +1,13 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { PasswordResetService } from '@snypy/rest-client';
+import { PasswordResetService, AuthService } from '@snypy/rest-client';
 import { ToastrService } from 'ngx-toastr';
-import { BehaviorSubject, EMPTY, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, EMPTY, Observable, Subject, firstValueFrom } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
 import { Errors } from '../../helpers/errors';
-import { AuthCredentials, AuthResource, RegisterPayload } from '../../services/resources/auth.resource';
+import { AuthResource, RegisterPayload } from '../../services/resources/auth.resource';
+import { AuthTokenLoginCreateRequestParams } from '@snypy/rest-client';
 
 @UntilDestroy()
 @Component({
@@ -42,14 +43,15 @@ export class AuthComponent implements OnInit {
     )
   );
 
-  @Output() public login = new EventEmitter<AuthCredentials>();
+  @Output() public login = new EventEmitter<AuthTokenLoginCreateRequestParams>();
 
   public server_errors = null;
 
   public constructor(
     private readonly authResource: AuthResource,
     private readonly passwordResetService: PasswordResetService,
-    private readonly toastr: ToastrService
+    private readonly toastr: ToastrService,
+    private readonly authService: AuthService
   ) {}
 
   public ngOnInit(): void {
@@ -58,14 +60,13 @@ export class AuthComponent implements OnInit {
     });
   }
 
-  public doLogin(authCredentials: AuthCredentials): void {
+  public doLogin(authCredentials: AuthTokenLoginCreateRequestParams): void {
     this.authResource.login(authCredentials);
   }
 
   public doRegister(registerPayload: RegisterPayload): void {
-    this.authResource
-      .register({}, registerPayload)
-      .$promise.then(() => {
+    firstValueFrom(this.authService.authRegisterCreate({ defaultRegisterUserRequest: registerPayload }))
+      .then(() => {
         console.log('User registered');
         this.setActiveState(this.STATE_REGISTER_COMPLETE);
       })
