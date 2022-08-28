@@ -1,8 +1,7 @@
 import { Directive, Input, OnChanges, TemplateRef, ViewContainerRef } from '@angular/core';
 import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
-import { Snippet } from '../../services/resources/snippet.resource';
 import { User } from '../../services/resources/user.resource';
-import { UserTeam, RoleEnum } from '@snypy/rest-client';
+import { UserTeam, RoleEnum, Snippet } from '@snypy/rest-client';
 
 export enum PERMISSION {
   'cadAddTeamMember',
@@ -27,24 +26,24 @@ export class PermDirective implements OnChanges {
   /**
    * Permissions
    */
-  static cadAddTeamMember(userTeam: ResourceModel<UserTeam>): boolean {
+  static cadAddTeamMember(userTeam: UserTeam): boolean {
     return userTeam && userTeam.role === RoleEnum.Editor;
   }
 
-  static canEditTeamMember(userTeam: ResourceModel<UserTeam>): boolean {
+  static canEditTeamMember(userTeam: UserTeam): boolean {
     return PermDirective.cadAddTeamMember(userTeam);
   }
 
-  static canDeleteTeamMember(userTeam: ResourceModel<UserTeam>): boolean {
+  static canDeleteTeamMember(userTeam: UserTeam): boolean {
     return PermDirective.cadAddTeamMember(userTeam);
   }
 
-  static canEditSnippet(user: ResourceModel<User>, snippet: ResourceModel<Snippet>): boolean {
-    return snippet.editable;
+  static canEditSnippet(user: ResourceModel<User>, snippet: Snippet): boolean {
+    return !!snippet.editable;
   }
 
-  static canDeleteSnippet(user: ResourceModel<User>, snippet: ResourceModel<Snippet>): boolean {
-    return snippet.deletable;
+  static canDeleteSnippet(user: ResourceModel<User>, snippet: Snippet): boolean {
+    return !!snippet.deletable;
   }
 
   constructor(private templateRef: TemplateRef<any>, private viewContainer: ViewContainerRef) {}

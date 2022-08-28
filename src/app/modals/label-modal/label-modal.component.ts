@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { SelectSnapshot } from '@ngxs-labs/select-snapshot';
 import { mapFormErrors } from 'ngx-anx-forms';
-import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 import { ToastrService } from 'ngx-toastr';
 import { ScopeModel } from '../../state/scope/scope.model';
 import { ScopeState } from '../../state/scope/scope.state';
@@ -16,7 +15,7 @@ import { firstValueFrom } from 'rxjs';
   styleUrls: ['./label-modal.component.scss'],
 })
 export class LabelModalComponent implements OnInit {
-  @Input() label: ResourceModel<Label> = null;
+  @Input() label: Label = null;
 
   labelForm: FormGroup;
 

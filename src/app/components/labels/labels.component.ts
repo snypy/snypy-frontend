@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Select, Store } from '@ngxs/store';
-import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LabelDeleteModalComponent } from '../../modals/label-delete-modal/label-delete-modal.component';
@@ -52,7 +51,7 @@ export class LabelsComponent {
     );
   }
 
-  editLabel(label: ResourceModel<Label>): void {
+  editLabel(label: Label): void {
     const modalRef = this.modalService.open(LabelModalComponent, { size: 'sm' });
     modalRef.componentInstance.label = label;
 
@@ -66,7 +65,7 @@ export class LabelsComponent {
     );
   }
 
-  deleteLabel(label: ResourceModel<Label>): void {
+  deleteLabel(label: Label): void {
     const modalRef = this.modalService.open(LabelDeleteModalComponent, { size: 'sm' });
     modalRef.componentInstance.label = label;
 

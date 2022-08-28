@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 import { ToastrService } from 'ngx-toastr';
 import { Label, LabelService } from '@snypy/rest-client';
 import { firstValueFrom } from 'rxjs';
@@ -11,7 +10,7 @@ import { firstValueFrom } from 'rxjs';
   styleUrls: ['./label-delete-modal.component.scss'],
 })
 export class LabelDeleteModalComponent {
-  @Input() label: ResourceModel<Label> = null;
+  @Input() label: Label = null;
 
   constructor(private activeModal: NgbActiveModal, private toastr: ToastrService, private labelService: LabelService) {}
 

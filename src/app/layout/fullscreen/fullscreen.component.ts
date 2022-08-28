@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngxs/store';
-import { SnippetResource } from '../../services/resources/snippet.resource';
 import { UpdateLabels } from '../../state/label/label.actions';
 import { UpdateLanguages } from '../../state/language/language.actions';
 import { SetActiveSnippet } from '../../state/snippet/snippet.actions';
+import { SnippetService } from '@snypy/rest-client';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-fullscreen',
@@ -14,14 +15,13 @@ import { SetActiveSnippet } from '../../state/snippet/snippet.actions';
 export class FullscreenComponent implements OnInit {
   snippetError = false;
 
-  constructor(private route: ActivatedRoute, private snippetResource: SnippetResource, private store: Store) {}
+  constructor(private route: ActivatedRoute, private snippetService: SnippetService, private store: Store) {}
 
   ngOnInit(): void {
     const snippetPk = this.route.snapshot.params.id;
 
-    this.snippetResource
-      .get({ pk: snippetPk })
-      .$promise.then(data => {
+    firstValueFrom(this.snippetService.snippetRetrieve({ id: snippetPk }))
+      .then(data => {
         this.store.dispatch(new SetActiveSnippet(data));
         this.store.dispatch(new UpdateLabels());
         this.store.dispatch(new UpdateLanguages());

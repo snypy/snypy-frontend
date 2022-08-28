@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Select } from '@ngxs/store';
 import { Team } from '@snypy/rest-client';
-import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 import { firstValueFrom, Observable, Subscription } from 'rxjs';
 import { TeamMemberDeleteModalComponent } from '../../modals/team-member-delete-modal/team-member-delete-modal.component';
 import { TeamMemberModalComponent } from '../../modals/team-member-modal/team-member-modal.component';
@@ -83,7 +82,7 @@ export class TeamMembersComponent implements OnInit, OnDestroy {
     );
   }
 
-  editMember(member: ResourceModel<UserTeam>): void {
+  editMember(member: UserTeam): void {
     const modalRef = this.modalService.open(TeamMemberModalComponent, { size: 'sm' });
     modalRef.componentInstance.userTeam = member;
 
@@ -97,7 +96,7 @@ export class TeamMembersComponent implements OnInit, OnDestroy {
     );
   }
 
-  deleteMember(member: ResourceModel<UserTeam>): void {
+  deleteMember(member: UserTeam): void {
     const modalRef = this.modalService.open(TeamMemberDeleteModalComponent, { size: 'sm' });
     modalRef.componentInstance.userTeam = member;
 

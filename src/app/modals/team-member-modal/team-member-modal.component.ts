@@ -18,7 +18,7 @@ import { firstValueFrom } from 'rxjs';
   styleUrls: ['./team-member-modal.component.scss'],
 })
 export class TeamMemberModalComponent implements OnInit {
-  @Input() userTeam: ResourceModel<UserTeam> = null;
+  @Input() userTeam: UserTeam = null;
 
   userTeamForm: FormGroup;
   users: ResourceModel<User>[] = [];

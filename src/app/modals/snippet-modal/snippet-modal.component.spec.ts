@@ -6,7 +6,6 @@ import { NgxsSelectSnapshotModule } from '@ngxs-labs/select-snapshot';
 import { NgxsModule } from '@ngxs/store';
 import { NgxResourceFactoryModule } from 'ngx-resource-factory';
 import { ToastrModule } from 'ngx-toastr';
-import { SnippetResource } from '../../services/resources/snippet.resource';
 import { SnippetModalComponent } from './snippet-modal.component';
 
 describe('SnippetModalComponent', () => {
@@ -23,7 +22,7 @@ describe('SnippetModalComponent', () => {
         ToastrModule.forRoot({}),
         NgxsSelectSnapshotModule.forRoot(),
       ],
-      providers: [NgbActiveModal, SnippetResource],
+      providers: [NgbActiveModal],
     }).compileComponents();
   }));
 

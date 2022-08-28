@@ -1,4 +1,4 @@
-import { Snippet } from '../../services/resources/snippet.resource';
+import { Snippet } from '@snypy/rest-client';
 
 export interface OrderingModel {
   key: string;

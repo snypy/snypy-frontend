@@ -1,10 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Select, Store } from '@ngxs/store';
-import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 import { Observable, Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
-import { Snippet, SnippetResource } from '../../services/resources/snippet.resource';
+import { Snippet } from '@snypy/rest-client';
 import { SetActiveSnippet } from '../../state/snippet/snippet.actions';
 
 @UntilDestroy()
@@ -23,7 +22,7 @@ export class SnippetsComponent implements OnInit, OnDestroy {
   @Select(state => state.snippet.activeSnippet) activeSnippet$: Observable<Snippet>;
   @Select(state => state.snippet.list) snippetList$: Observable<Snippet[]>;
 
-  constructor(private snippetResource: SnippetResource, private store: Store) {}
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
     /**
@@ -43,13 +42,13 @@ export class SnippetsComponent implements OnInit, OnDestroy {
       if (snippet) {
         const oldSnippet = this.snippets.find(item => item.pk === snippet.pk);
         if (oldSnippet) {
-          this.snippets.splice(this.snippets.indexOf(oldSnippet), 1, this.snippetResource.create(snippet));
+          this.snippets.splice(this.snippets.indexOf(oldSnippet), 1, snippet);
         }
       }
     });
   }
 
-  loadSnippet(snippet: ResourceModel<Snippet>): void {
+  loadSnippet(snippet: Snippet): void {
     this.store.dispatch(new SetActiveSnippet(snippet));
   }
 

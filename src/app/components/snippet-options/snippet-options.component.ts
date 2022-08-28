@@ -7,12 +7,12 @@ import { firstValueFrom, Observable } from 'rxjs';
 import { SnippetModalComponent } from '../../modals/snippet-modal/snippet-modal.component';
 import { AuthResource } from '../../services/resources/auth.resource';
 import { Label } from '@snypy/rest-client';
-import { Snippet, SnippetResource } from '../../services/resources/snippet.resource';
 import { User } from '../../services/resources/user.resource';
 import { UpdateLabels } from '../../state/label/label.actions';
 import { LabelState } from '../../state/label/label.state';
 import { RemoveSnippet } from '../../state/snippet/snippet.actions';
 import { SnippetlabelService } from '@snypy/rest-client';
+import { Snippet, SnippetService } from '@snypy/rest-client';
 @UntilDestroy()
 @Component({
   selector: 'app-snippet-options',
@@ -21,7 +21,7 @@ import { SnippetlabelService } from '@snypy/rest-client';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SnippetOptionsComponent implements OnInit {
-  activeSnippetResource: ResourceModel<Snippet> = null;
+  activeSnippet: Snippet = null;
   activeLabels: number[] = [];
   currentUser: ResourceModel<User>;
   permalink = '';
@@ -33,7 +33,7 @@ export class SnippetOptionsComponent implements OnInit {
     private snippetlabelService: SnippetlabelService,
     private authResource: AuthResource,
     private modalService: NgbModal,
-    private snippetResource: SnippetResource,
+    private snippetService: SnippetService,
     private store: Store,
     private window: Window
   ) {}
@@ -47,9 +47,8 @@ export class SnippetOptionsComponent implements OnInit {
 
     this.activeSnippet$.pipe(untilDestroyed(this)).subscribe(snippet => {
       if (snippet) {
-        this.activeSnippetResource = this.snippetResource.create(snippet);
-        this.activeLabels = this.activeSnippetResource.labels;
-
+        this.activeSnippet = snippet;
+        this.activeLabels = this.activeSnippet.labels;
         this.permalink = this.window.location.protocol + '//' + this.window.location.host + '/snippet/' + snippet.pk;
       }
     });
@@ -58,7 +57,7 @@ export class SnippetOptionsComponent implements OnInit {
   editSnippet(): void {
     const modalRef = this.modalService.open(SnippetModalComponent, { size: 'lg' });
 
-    modalRef.componentInstance.snippet = this.activeSnippetResource;
+    modalRef.componentInstance.snippet = this.activeSnippet;
 
     modalRef.result.then(
       () => {
@@ -71,10 +70,9 @@ export class SnippetOptionsComponent implements OnInit {
   }
 
   deleteSnippet(): void {
-    this.activeSnippetResource
-      .$remove()
-      .$promise.then(() => {
-        this.store.dispatch(new RemoveSnippet(this.activeSnippetResource));
+    firstValueFrom(this.snippetService.snippetDestroy({ id: this.activeSnippet.pk }))
+      .then(() => {
+        this.store.dispatch(new RemoveSnippet(this.activeSnippet));
       })
       .catch(error => {
         console.log(error);
@@ -92,13 +90,13 @@ export class SnippetOptionsComponent implements OnInit {
     );
   }
 
-  toggleLabel(label: ResourceModel<Label>): void {
+  toggleLabel(label: Label): void {
     const index = this.activeLabels.indexOf(label.pk);
 
     if (index > -1) {
       firstValueFrom(
         this.snippetlabelService.snippetlabelList({
-          snippet: this.activeSnippetResource.pk,
+          snippet: this.activeSnippet.pk,
           label: label.pk,
         })
       )
@@ -124,7 +122,7 @@ export class SnippetOptionsComponent implements OnInit {
     } else {
       firstValueFrom(
         this.snippetlabelService.snippetlabelCreate({
-          snippetLabelRequest: { snippet: this.activeSnippetResource.pk, label: label.pk },
+          snippetLabelRequest: { snippet: this.activeSnippet.pk, label: label.pk },
         })
       )
         .then(() => {
