@@ -36,7 +36,7 @@
     "@ngxs-labs/select-snapshot": "^4.0.0",
     "@ngxs/store": "3.7.3",
     "@popperjs/core": "^2.11.6",
-    "@snypy/rest-client": "^1.2.1",
+    "@snypy/rest-client": "^1.2.2",
     "bootstrap": "^5.2.0",
     "core-js": "^3.25.0",
     "karma-coverage": "^2.2.0",
