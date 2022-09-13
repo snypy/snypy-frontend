@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
-import { Team } from '@snypy/rest-client';
-import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
-import { SnippetResource } from '../../services/resources/snippet.resource';
-import { User } from '../../services/resources/user.resource';
+import { Team, User } from '@snypy/rest-client';
+import { SnippetService } from '@snypy/rest-client';
 import { ScopeModel } from '../scope/scope.model';
 import { ScopeState } from '../scope/scope.state';
 import {
@@ -16,6 +14,7 @@ import {
   UpdateSnippetSearchFilter,
 } from './snippet.actions';
 import { SnippetModel } from './snippet.model';
+import { firstValueFrom } from 'rxjs';
 
 @State<SnippetModel>({
   name: 'snippet',
@@ -29,7 +28,7 @@ import { SnippetModel } from './snippet.model';
 })
 @Injectable()
 export class SnippetState {
-  constructor(private store: Store, private snippetResource: SnippetResource) {}
+  constructor(private store: Store, private snippetService: SnippetService) {}
 
   @Selector()
   static getFilter(state: SnippetModel) {
@@ -109,9 +108,9 @@ export class SnippetState {
 
     switch (scope.area) {
       case 'user':
-        const user = scope.value as ResourceModel<User>;
+        const user = scope.value as User;
         filter['user'] = user.pk;
-        filter['team_is_null'] = 'True';
+        filter['teamIsNull'] = 'True';
         break;
       case 'team':
         const team = scope.value as Team;
@@ -119,11 +118,13 @@ export class SnippetState {
         break;
     }
 
-    const snippets = await this.snippetResource.query({
-      ...filter,
-      ...state.filter,
-      search: state.searchFilter,
-    }).$promise;
+    const snippets = await firstValueFrom(
+      this.snippetService.snippetList({
+        ...filter,
+        ...state.filter,
+        search: state.searchFilter,
+      })
+    );
 
     if (snippets.length) {
       this.store.dispatch(new SetActiveSnippet(snippets[0]));

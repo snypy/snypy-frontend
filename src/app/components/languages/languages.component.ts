@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SelectSnapshot } from '@ngxs-labs/select-snapshot';
 import { Subscription } from 'rxjs';
 import { ActiveFilterService, Filter } from '../../services/navigation/activeFilter.service';
-import { Language } from '../../services/resources/language.resource';
+import { Language } from '@snypy/rest-client';
 import { LanguageState } from '../../state/language/language.state';
 
 @Component({

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthResource } from '../../services/resources/auth.resource';
+import { AuthService } from '@snypy/rest-client';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-auth-activate',
@@ -8,15 +9,22 @@ import { AuthResource } from '../../services/resources/auth.resource';
   styleUrls: ['./auth-activate.component.scss'],
 })
 export class AuthActivateComponent implements OnInit {
-  constructor(private activatedRoute: ActivatedRoute, private authResource: AuthResource, private router: Router) {}
+  constructor(private activatedRoute: ActivatedRoute, private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    this.authResource.logout();
+    this.authService.authTokenLogoutCreate();
 
     this.activatedRoute.queryParams.subscribe(params => {
-      this.authResource
-        .verify({}, params)
-        .$promise.then(() => {
+      firstValueFrom(
+        this.authService.authVerifyRegistrationCreate({
+          verifyRegistrationRequest: {
+            user_id: params['user_id'],
+            timestamp: params['timestamp'],
+            signature: params['signature'],
+          },
+        })
+      )
+        .then(() => {
           console.log('User activated');
           this.router.navigateByUrl('');
         })

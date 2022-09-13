@@ -1,4 +1,4 @@
-import { Snippet } from '../../services/resources/snippet.resource';
+import { Snippet } from '@snypy/rest-client';
 import { OrderingModel } from './snippet.model';
 
 export class UpdateSnippets {

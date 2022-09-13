@@ -2,12 +2,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngxs/store';
-import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 import { Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { HelpModalComponent } from '../../modals/help-modal/help-modal.component';
 import { AuthResource } from '../../services/resources/auth.resource';
-import { User } from '../../services/resources/user.resource';
+import { User } from '@snypy/rest-client';
 import { UpdateSnippetSearchFilter } from '../../state/snippet/snippet.actions';
 
 @Component({
@@ -16,7 +15,7 @@ import { UpdateSnippetSearchFilter } from '../../state/snippet/snippet.actions';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  currentUser: ResourceModel<User>;
+  currentUser: User;
 
   snippetSearchForm: FormGroup;
   snippetSearchFormSubscription: Subscription;

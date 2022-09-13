@@ -1,12 +1,8 @@
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NgxsModule } from '@ngxs/store';
-import { NgxResourceFactoryModule } from 'ngx-resource-factory';
 import { ToastrModule } from 'ngx-toastr';
 import { AuthResource } from '../../services/resources/auth.resource';
-import { SnippetResource } from '../../services/resources/snippet.resource';
-import { SnippetLabelResource } from '../../services/resources/snippetlabel.resource';
-import { UserResource } from '../../services/resources/user.resource';
 import { SnippetOptionsComponent } from './snippet-options.component';
 
 describe('SnippetOptionsComponent', () => {
@@ -16,14 +12,8 @@ describe('SnippetOptionsComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [SnippetOptionsComponent],
-      imports: [NgxResourceFactoryModule.forRoot(), HttpClientModule, NgxsModule.forRoot(), ToastrModule.forRoot({})],
-      providers: [
-        SnippetLabelResource,
-        AuthResource,
-        UserResource,
-        SnippetResource,
-        { provide: Window, useValue: { location: { host: 'localhost', protocol: 'http' } } },
-      ],
+      imports: [HttpClientModule, NgxsModule.forRoot(), ToastrModule.forRoot({})],
+      providers: [AuthResource, { provide: Window, useValue: { location: { host: 'localhost', protocol: 'http' } } }],
     }).compileComponents();
   }));
 

@@ -1,24 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Resource } from 'ngx-resource-factory/resource/resource';
-import { ResourceAction } from 'ngx-resource-factory/resource/resource-action';
-import { ResourceActionHttpMethod } from 'ngx-resource-factory/resource/resource-action-http-method';
-import { ResourceActionMethod } from 'ngx-resource-factory/resource/resource-action-method';
-import { ResourceConfiguration } from 'ngx-resource-factory/resource/resource-configuration';
-import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
-import { ResourceRegistry } from 'ngx-resource-factory/resource/resource-registry';
 import { ToastrService } from 'ngx-toastr';
-import { Subject } from 'rxjs';
-import { environment } from '../../../environments/environment';
-import { User, UserResource } from './user.resource';
+import { firstValueFrom, Subject } from 'rxjs';
+import { UserService, User, AuthService } from '@snypy/rest-client';
+import { AuthTokenLoginCreateRequestParams } from '@snypy/rest-client';
 
 const AUTH_TOKEN = 'auth.token';
-
-export interface AuthCredentials {
-  username: string;
-  password: string;
-}
-
+``;
 export interface RegisterPayload {
   username: string;
   first_name: string;
@@ -29,53 +17,12 @@ export interface RegisterPayload {
 }
 
 @Injectable()
-@ResourceConfiguration({
-  name: 'AuthResource',
-  url: environment.apiUrl + 'auth/token/:pk/',
-  pkAttr: 'pk',
-  instanceClass: User,
-  stripTrailingSlashes: false,
-})
-export class AuthResource extends Resource<User> {
+export class AuthResource {
   isLoggedId = false;
-  currentUser: ResourceModel<User> = null;
+  currentUser: User = null;
   loginStatusUpdates: Subject<boolean> = new Subject<boolean>();
 
-  constructor(registry: ResourceRegistry, http: HttpClient, private userResource: UserResource, private toastr: ToastrService) {
-    super(registry, http);
-  }
-
-  @ResourceAction({
-    method: ResourceActionHttpMethod.POST,
-    isList: false,
-    invalidateCache: true,
-    urlSuffix: 'login/',
-  })
-  _login: ResourceActionMethod<Record<string, unknown>, AuthCredentials, { token: string }>;
-
-  @ResourceAction({
-    method: ResourceActionHttpMethod.POST,
-    isList: false,
-    invalidateCache: true,
-    urlSuffix: 'logout/',
-  })
-  _logout: ResourceActionMethod<Record<string, unknown>, any, any>;
-
-  @ResourceAction({
-    method: ResourceActionHttpMethod.POST,
-    isList: false,
-    invalidateCache: true,
-    url: environment.apiUrl + 'auth/register/',
-  })
-  register: ResourceActionMethod<Record<string, unknown>, RegisterPayload, any>;
-
-  @ResourceAction({
-    method: ResourceActionHttpMethod.POST,
-    isList: false,
-    invalidateCache: true,
-    url: environment.apiUrl + 'auth/verify-registration/',
-  })
-  verify: ResourceActionMethod<Record<string, unknown>, Record<string, string>, any>;
+  constructor(http: HttpClient, private userService: UserService, private toastr: ToastrService, private authService: AuthService) {}
 
   /**
    * This method is used in the main app component to load an active user during the bootstrap process
@@ -86,8 +33,8 @@ export class AuthResource extends Resource<User> {
     }
   }
 
-  public login(credentials: AuthCredentials): Promise<{ token: string }> {
-    const promise = this._login({}, credentials).$promise;
+  public login(credentials: AuthTokenLoginCreateRequestParams): Promise<{ token: string }> {
+    const promise = firstValueFrom(this.authService.authTokenLoginCreate(credentials));
 
     promise
       .then(data => {
@@ -110,8 +57,8 @@ export class AuthResource extends Resource<User> {
 
   public logout(): void {
     if (this.isLoggedId) {
-      this._logout()
-        .$promise.then()
+      firstValueFrom(this.authService.authTokenLogoutCreate())
+        .then()
         .catch(reason => {
           console.log('Cannot remove token');
           console.log(reason);
@@ -142,9 +89,8 @@ export class AuthResource extends Resource<User> {
 
   private loadCurrentUser() {
     console.log('Load current user');
-    this.userResource
-      .current()
-      .$promise.then(data => {
+    firstValueFrom(this.userService.userCurrentRetrieve())
+      .then(data => {
         this.currentUser = data;
         this.updateLoginStatus(true);
       })

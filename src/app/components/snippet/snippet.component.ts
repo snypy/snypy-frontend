@@ -4,9 +4,8 @@ import { SelectSnapshot } from '@ngxs-labs/select-snapshot';
 import { Select } from '@ngxs/store';
 import { FileService } from '@snypy/rest-client';
 import { Observable } from 'rxjs';
-import { Label } from '../../services/resources/label.resource';
-import { Language } from '../../services/resources/language.resource';
-import { Snippet } from '../../services/resources/snippet.resource';
+import { Label } from '@snypy/rest-client';
+import { Language, Snippet } from '@snypy/rest-client';
 import { LabelState } from '../../state/label/label.state';
 import { LanguageState } from '../../state/language/language.state';
 

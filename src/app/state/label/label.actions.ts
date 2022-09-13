@@ -1,4 +1,4 @@
-import { Label } from '../../services/resources/label.resource';
+import { Label } from '@snypy/rest-client';
 
 export class UpdateLabels {
   static readonly type = '[Labels] Update Labels';

@@ -1,8 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NgxsModule } from '@ngxs/store';
-import { NgxResourceFactoryModule } from 'ngx-resource-factory';
-import { SnippetResource } from '../../services/resources/snippet.resource';
 import { SnippetsComponent } from './snippets.component';
 
 describe('SnippetsComponent', () => {
@@ -12,8 +10,8 @@ describe('SnippetsComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [SnippetsComponent],
-      imports: [NgxResourceFactoryModule.forRoot(), HttpClientModule, NgxsModule.forRoot()],
-      providers: [SnippetResource],
+      imports: [HttpClientModule, NgxsModule.forRoot()],
+      providers: [],
     }).compileComponents();
   }));
 

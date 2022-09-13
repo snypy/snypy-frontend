@@ -22,7 +22,6 @@ import { MarkdownModule } from 'ngx-markdown';
 import { MonacoEditorModule } from 'ngx-monaco-editor';
 import { PerfectScrollbarConfigInterface, PerfectScrollbarModule, PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { NgPipesModule } from 'ngx-pipes';
-import { NgxResourceFactoryModule } from 'ngx-resource-factory';
 import { ToastrModule } from 'ngx-toastr';
 import { AppComponent } from './app.component';
 import { AuthActivateComponent } from './components/auth-activate/auth-activate.component';
@@ -156,7 +155,6 @@ export function apiConfigFactory(): Configuration {
     ApiModule.forRoot(apiConfigFactory),
     BrowserModule,
     HttpClientModule,
-    NgxResourceFactoryModule.forRoot(),
     NgbModule,
     FontAwesomeModule,
     PerfectScrollbarModule,

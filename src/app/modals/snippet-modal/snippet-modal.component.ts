@@ -6,13 +6,11 @@ import { SelectSnapshot } from '@ngxs-labs/select-snapshot';
 import { Select, Store } from '@ngxs/store';
 import { Team } from '@snypy/rest-client';
 import { mapFormErrors } from 'ngx-anx-forms';
-import { ResourceModel } from 'ngx-resource-factory/resource/resource-model';
 import { ToastrService } from 'ngx-toastr';
-import { Observable } from 'rxjs';
+import { firstValueFrom, Observable } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
-import { Label } from '../../services/resources/label.resource';
-import { Language } from '../../services/resources/language.resource';
-import { Snippet, SnippetResource } from '../../services/resources/snippet.resource';
+import { Label } from '@snypy/rest-client';
+import { Language, Snippet, SnippetService } from '@snypy/rest-client';
 import { UpdateLabels } from '../../state/label/label.actions';
 import { LabelState } from '../../state/label/label.state';
 import { UpdateLanguages } from '../../state/language/language.actions';
@@ -30,7 +28,7 @@ import { SnippetState } from '../../state/snippet/snippet.state';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SnippetModalComponent implements OnInit {
-  @Input() public snippet: ResourceModel<Snippet> = null;
+  @Input() public snippet: Snippet = null;
 
   public snippetForm: FormGroup;
 
@@ -63,7 +61,7 @@ export class SnippetModalComponent implements OnInit {
 
   public constructor(
     private activeModal: NgbActiveModal,
-    private snippetResource: SnippetResource,
+    private snippetService: SnippetService,
     private toastr: ToastrService,
     private store: Store
   ) {}
@@ -75,12 +73,14 @@ export class SnippetModalComponent implements OnInit {
      * @type {FormGroup}
      */
     this.snippetForm = new FormGroup({
-      pk: new FormControl(null),
-      title: new FormControl('', Validators.required),
-      description: new FormControl('', Validators.required),
-      labels: new FormControl([]),
-      visibility: new FormControl('PRIVATE'),
-      team: new FormControl(null),
+      id: new FormControl(null),
+      snippetRequest: new FormGroup({
+        title: new FormControl('', Validators.required),
+        description: new FormControl('', Validators.required),
+        labels: new FormControl([]),
+        visibility: new FormControl('PRIVATE'),
+        team: new FormControl(null),
+      }),
     });
 
     /**
@@ -88,26 +88,26 @@ export class SnippetModalComponent implements OnInit {
      */
     if (this.scope.area == 'team') {
       const team = this.scope.value as Team;
-      this.snippetForm.get('team').setValue(team.pk);
+      this.snippetForm.get('snippetRequest.team').setValue(team.pk);
     }
 
     /**
      * Set snippet values from given snippet
      */
     if (this.snippet) {
-      this.snippetForm.get('pk').setValue(this.snippet.pk);
-      this.snippetForm.get('title').setValue(this.snippet.title);
-      this.snippetForm.get('description').setValue(this.snippet.description);
-      this.snippetForm.get('labels').setValue(this.snippet.labels);
-      this.snippetForm.get('visibility').setValue(this.snippet.visibility);
-      this.snippetForm.get('team').setValue(this.snippet.team);
+      this.snippetForm.get('id').setValue(this.snippet.pk);
+      this.snippetForm.get('snippetRequest.title').setValue(this.snippet.title);
+      this.snippetForm.get('snippetRequest.description').setValue(this.snippet.description);
+      this.snippetForm.get('snippetRequest.labels').setValue(this.snippet.labels);
+      this.snippetForm.get('snippetRequest.visibility').setValue(this.snippet.visibility);
+      this.snippetForm.get('snippetRequest.team').setValue(this.snippet.team);
     }
 
     /**
      * Snippet files
      */
+    const files = new FormArray([]);
     if (this.snippet) {
-      const files = new FormArray([]);
       for (const snippetFile of this.snippet.files) {
         files.push(
           new FormGroup({
@@ -118,11 +118,8 @@ export class SnippetModalComponent implements OnInit {
           })
         );
       }
-
-      this.snippetForm.addControl('files', files);
-    } else {
-      this.snippetForm.addControl('files', new FormArray([]));
     }
+    (this.snippetForm.controls.snippetRequest as FormGroup).addControl('files', files);
 
     this.activeLabel$.pipe(untilDestroyed(this), take(1), filter(Boolean)).subscribe(label => {
       this.snippetForm.get('labels').setValue([label]);
@@ -130,11 +127,11 @@ export class SnippetModalComponent implements OnInit {
   }
 
   public removeFile(index: number): void {
-    (<FormArray>this.snippetForm.get('files')).removeAt(index);
+    (<FormArray>this.snippetForm.get('snippetRequest.files')).removeAt(index);
   }
 
   public addFile(): void {
-    (<FormArray>this.snippetForm.get('files')).push(
+    (<FormArray>this.snippetForm.get('snippetRequest.files')).push(
       new FormGroup({
         name: new FormControl(null),
         language: new FormControl(null),
@@ -147,11 +144,11 @@ export class SnippetModalComponent implements OnInit {
     let promise, message, errorMessage;
 
     if (this.snippet) {
-      promise = this.snippetResource.update({}, this.snippetForm.value).$promise;
+      promise = firstValueFrom(this.snippetService.snippetUpdate(this.snippetForm.value));
       message = 'Snippet updated!';
       errorMessage = 'Cannot update snippet!';
     } else {
-      promise = this.snippetResource.save({}, this.snippetForm.value).$promise;
+      promise = firstValueFrom(this.snippetService.snippetCreate(this.snippetForm.value));
       message = 'Snippet added!';
       errorMessage = 'Cannot add snippet!';
     }
