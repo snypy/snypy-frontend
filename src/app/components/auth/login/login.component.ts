@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { Validators } from '../../../helpers/validators';
 import { AuthTokenLoginCreateRequestParams } from '@snypy/rest-client';
 
@@ -12,12 +12,12 @@ import { AuthTokenLoginCreateRequestParams } from '@snypy/rest-client';
 export class LoginComponent implements OnInit {
   @Output() login = new EventEmitter<AuthTokenLoginCreateRequestParams>();
 
-  form: FormGroup;
+  form: UntypedFormGroup;
 
   ngOnInit(): void {
-    this.form = new FormGroup({
-      username: new FormControl(null, Validators.required, null),
-      password: new FormControl(null, Validators.required, null),
+    this.form = new UntypedFormGroup({
+      username: new UntypedFormControl(null, Validators.required, null),
+      password: new UntypedFormControl(null, Validators.required, null),
     });
   }
 

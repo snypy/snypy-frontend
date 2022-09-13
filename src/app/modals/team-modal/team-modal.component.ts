@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Team, TeamService } from '@snypy/rest-client';
 import { mapFormErrors } from 'ngx-anx-forms';
@@ -14,15 +14,15 @@ import { firstValueFrom } from 'rxjs';
 export class TeamModalComponent implements OnInit {
   @Input() team: Team = null;
 
-  teamForm: FormGroup;
+  teamForm: UntypedFormGroup;
 
   constructor(private activeModal: NgbActiveModal, private teamService: TeamService, private toastr: ToastrService) {}
 
   ngOnInit(): void {
-    this.teamForm = new FormGroup({
-      id: new FormControl(null, null),
-      teamRequest: new FormGroup({
-        name: new FormControl(null, Validators.required),
+    this.teamForm = new UntypedFormGroup({
+      id: new UntypedFormControl(null, null),
+      teamRequest: new UntypedFormGroup({
+        name: new UntypedFormControl(null, Validators.required),
       }),
     });
 

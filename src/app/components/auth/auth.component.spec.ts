@@ -1,6 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { NgxsModule } from '@ngxs/store';
 import { ToastrModule } from 'ngx-toastr';
 import { firstValueFrom } from 'rxjs';
@@ -52,7 +52,7 @@ describe('AuthComponent', () => {
 
   it('should call doPasswordReset()', () => {
     const spy = spyOn(component, 'doPasswordReset');
-    component.doPasswordReset({ email: 'email', formGroup: new FormGroup({}) });
+    component.doPasswordReset({ email: 'email', formGroup: new UntypedFormGroup({}) });
     expect(spy).toHaveBeenCalled();
   });
 });

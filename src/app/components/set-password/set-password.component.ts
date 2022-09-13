@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { PasswordResetService } from '@snypy/rest-client';
@@ -42,7 +42,7 @@ export class SetPasswordComponent implements OnInit {
     )
   );
 
-  public form: FormGroup;
+  public form: UntypedFormGroup;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -71,10 +71,10 @@ export class SetPasswordComponent implements OnInit {
   }
 
   public createForm() {
-    this.form = new FormGroup(
+    this.form = new UntypedFormGroup(
       {
-        password: new FormControl(null, Validators.required, null),
-        password_confirm: new FormControl(null, Validators.required, null),
+        password: new UntypedFormControl(null, Validators.required, null),
+        password_confirm: new UntypedFormControl(null, Validators.required, null),
       },
       { validators: Validators.matchPassword('password', 'password_confirm') }
     );

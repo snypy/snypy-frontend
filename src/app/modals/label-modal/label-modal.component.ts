@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { SelectSnapshot } from '@ngxs-labs/select-snapshot';
 import { mapFormErrors } from 'ngx-anx-forms';
@@ -17,7 +17,7 @@ import { firstValueFrom } from 'rxjs';
 export class LabelModalComponent implements OnInit {
   @Input() label: Label = null;
 
-  labelForm: FormGroup;
+  labelForm: UntypedFormGroup;
 
   @SelectSnapshot(ScopeState)
   public scope: ScopeModel;
@@ -32,11 +32,11 @@ export class LabelModalComponent implements OnInit {
      *
      * @type {FormGroup}
      */
-    this.labelForm = new FormGroup({
-      id: new FormControl(null, null),
-      labelRequest: new FormGroup({
-        name: new FormControl('', Validators.required),
-        team: new FormControl(null, null),
+    this.labelForm = new UntypedFormGroup({
+      id: new UntypedFormControl(null, null),
+      labelRequest: new UntypedFormGroup({
+        name: new UntypedFormControl('', Validators.required),
+        team: new UntypedFormControl(null, null),
       }),
     });
 

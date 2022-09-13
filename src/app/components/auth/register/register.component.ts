@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { mapFormErrors } from 'ngx-anx-forms';
 import { ToastrService } from 'ngx-toastr';
 import { Validators } from '../../../helpers/validators';
@@ -15,18 +15,18 @@ export class RegisterComponent implements OnInit, OnChanges {
   @Output() register = new EventEmitter<RegisterPayload>();
   @Input() errors = null;
 
-  form: FormGroup;
+  form: UntypedFormGroup;
 
   constructor(private toastr: ToastrService) {}
 
   ngOnInit(): void {
-    this.form = new FormGroup({
-      username: new FormControl(null, Validators.required, null),
-      first_name: new FormControl(null, Validators.required, null),
-      last_name: new FormControl(null, Validators.required, null),
-      email: new FormControl(null, [Validators.required, Validators.email], null),
-      password: new FormControl(null, Validators.required, null),
-      password_confirm: new FormControl(null, Validators.required, null),
+    this.form = new UntypedFormGroup({
+      username: new UntypedFormControl(null, Validators.required, null),
+      first_name: new UntypedFormControl(null, Validators.required, null),
+      last_name: new UntypedFormControl(null, Validators.required, null),
+      email: new UntypedFormControl(null, [Validators.required, Validators.email], null),
+      password: new UntypedFormControl(null, Validators.required, null),
+      password_confirm: new UntypedFormControl(null, Validators.required, null),
     });
   }
 

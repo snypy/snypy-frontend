@@ -1,6 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { FormArray } from '@angular/forms';
+import { UntypedFormArray } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxsSelectSnapshotModule } from '@ngxs-labs/select-snapshot';
 import { NgxsModule } from '@ngxs/store';
@@ -44,7 +44,7 @@ describe('SnippetModalComponent', () => {
 
   it('should add file', () => {
     component.addFile();
-    const files = component.snippetForm.get('snippetRequest.files') as FormArray;
+    const files = component.snippetForm.get('snippetRequest.files') as UntypedFormArray;
     expect(files.length).toBe(1);
     component.addFile();
     expect(files.length).toBe(2);
@@ -52,7 +52,7 @@ describe('SnippetModalComponent', () => {
 
   it('should remove file', () => {
     component.addFile();
-    const files = component.snippetForm.get('snippetRequest.files') as FormArray;
+    const files = component.snippetForm.get('snippetRequest.files') as UntypedFormArray;
     expect(files.length).toBe(1);
     component.removeFile(0);
     expect(files.length).toBe(0);

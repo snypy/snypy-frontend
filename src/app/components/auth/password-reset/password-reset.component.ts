@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { Validators } from '../../../helpers/validators';
 
 @Component({
@@ -9,13 +9,13 @@ import { Validators } from '../../../helpers/validators';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PasswordResetComponent implements OnInit {
-  @Output() public passwordReset = new EventEmitter<{ email: string; formGroup: FormGroup }>();
+  @Output() public passwordReset = new EventEmitter<{ email: string; formGroup: UntypedFormGroup }>();
 
-  public form: FormGroup;
+  public form: UntypedFormGroup;
 
   public ngOnInit(): void {
-    this.form = new FormGroup({
-      email: new FormControl(null, [Validators.required, Validators.email], null),
+    this.form = new UntypedFormGroup({
+      email: new UntypedFormControl(null, [Validators.required, Validators.email], null),
     });
   }
 

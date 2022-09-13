@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { SelectSnapshot } from '@ngxs-labs/select-snapshot';
 import { Team } from '@snypy/rest-client';
@@ -19,7 +19,7 @@ import { UserService, User } from '@snypy/rest-client';
 export class TeamMemberModalComponent implements OnInit {
   @Input() userTeam: UserTeam = null;
 
-  userTeamForm: FormGroup;
+  userTeamForm: UntypedFormGroup;
   users: User[] = [];
 
   roles = [
@@ -44,12 +44,12 @@ export class TeamMemberModalComponent implements OnInit {
     if (scope.area == 'team') {
       const team = scope.value as Team;
 
-      this.userTeamForm = new FormGroup({
-        id: new FormControl(null, null),
-        userTeamRequest: new FormGroup({
-          user: new FormControl(null, Validators.required),
-          team: new FormControl(team.pk, Validators.required),
-          role: new FormControl(null, Validators.required),
+      this.userTeamForm = new UntypedFormGroup({
+        id: new UntypedFormControl(null, null),
+        userTeamRequest: new UntypedFormGroup({
+          user: new UntypedFormControl(null, Validators.required),
+          team: new UntypedFormControl(team.pk, Validators.required),
+          role: new UntypedFormControl(null, Validators.required),
         }),
       });
 

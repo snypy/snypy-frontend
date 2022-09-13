@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { PasswordResetService, AuthService } from '@snypy/rest-client';
 import { ToastrService } from 'ngx-toastr';
@@ -26,7 +26,7 @@ export class AuthComponent implements OnInit {
   private activeStateSubject = new BehaviorSubject<string>(this.STATE_LOGIN);
   public activeState$: Observable<string> = this.activeStateSubject.asObservable();
 
-  private readonly createPasswordResetSubject = new Subject<{ email: string; formGroup: FormGroup }>();
+  private readonly createPasswordResetSubject = new Subject<{ email: string; formGroup: UntypedFormGroup }>();
   private readonly passwordResetCreated$ = this.createPasswordResetSubject.asObservable().pipe(
     switchMap(subject =>
       this.passwordResetService.passwordResetCreate({ emailRequest: { email: subject.email } }).pipe(
@@ -77,7 +77,7 @@ export class AuthComponent implements OnInit {
       });
   }
 
-  public doPasswordReset(passwordResetSubject: { email: string; formGroup: FormGroup }): void {
+  public doPasswordReset(passwordResetSubject: { email: string; formGroup: UntypedFormGroup }): void {
     this.createPasswordResetSubject.next(passwordResetSubject);
   }
 

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormArray, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { SelectSnapshot } from '@ngxs-labs/select-snapshot';
@@ -30,7 +30,7 @@ import { SnippetState } from '../../state/snippet/snippet.state';
 export class SnippetModalComponent implements OnInit {
   @Input() public snippet: Snippet = null;
 
-  public snippetForm: FormGroup;
+  public snippetForm: UntypedFormGroup;
 
   @SelectSnapshot(ScopeState)
   public scope: ScopeModel;
@@ -72,14 +72,14 @@ export class SnippetModalComponent implements OnInit {
      *
      * @type {FormGroup}
      */
-    this.snippetForm = new FormGroup({
-      id: new FormControl(null),
-      snippetRequest: new FormGroup({
-        title: new FormControl('', Validators.required),
-        description: new FormControl('', Validators.required),
-        labels: new FormControl([]),
-        visibility: new FormControl('PRIVATE'),
-        team: new FormControl(null),
+    this.snippetForm = new UntypedFormGroup({
+      id: new UntypedFormControl(null),
+      snippetRequest: new UntypedFormGroup({
+        title: new UntypedFormControl('', Validators.required),
+        description: new UntypedFormControl('', Validators.required),
+        labels: new UntypedFormControl([]),
+        visibility: new UntypedFormControl('PRIVATE'),
+        team: new UntypedFormControl(null),
       }),
     });
 
@@ -106,20 +106,20 @@ export class SnippetModalComponent implements OnInit {
     /**
      * Snippet files
      */
-    const files = new FormArray([]);
+    const files = new UntypedFormArray([]);
     if (this.snippet) {
       for (const snippetFile of this.snippet.files) {
         files.push(
-          new FormGroup({
-            pk: new FormControl(snippetFile.pk),
-            name: new FormControl(snippetFile.name),
-            language: new FormControl(snippetFile.language),
-            content: new FormControl(snippetFile.content),
+          new UntypedFormGroup({
+            pk: new UntypedFormControl(snippetFile.pk),
+            name: new UntypedFormControl(snippetFile.name),
+            language: new UntypedFormControl(snippetFile.language),
+            content: new UntypedFormControl(snippetFile.content),
           })
         );
       }
     }
-    (this.snippetForm.controls.snippetRequest as FormGroup).addControl('files', files);
+    (this.snippetForm.controls.snippetRequest as UntypedFormGroup).addControl('files', files);
 
     this.activeLabel$.pipe(untilDestroyed(this), take(1), filter(Boolean)).subscribe(label => {
       this.snippetForm.get('labels').setValue([label]);
@@ -127,15 +127,15 @@ export class SnippetModalComponent implements OnInit {
   }
 
   public removeFile(index: number): void {
-    (<FormArray>this.snippetForm.get('snippetRequest.files')).removeAt(index);
+    (<UntypedFormArray>this.snippetForm.get('snippetRequest.files')).removeAt(index);
   }
 
   public addFile(): void {
-    (<FormArray>this.snippetForm.get('snippetRequest.files')).push(
-      new FormGroup({
-        name: new FormControl(null),
-        language: new FormControl(null),
-        content: new FormControl(null),
+    (<UntypedFormArray>this.snippetForm.get('snippetRequest.files')).push(
+      new UntypedFormGroup({
+        name: new UntypedFormControl(null),
+        language: new UntypedFormControl(null),
+        content: new UntypedFormControl(null),
       })
     );
   }

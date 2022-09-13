@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngxs/store';
 import { Subscription } from 'rxjs';
@@ -17,7 +17,7 @@ import { UpdateSnippetSearchFilter } from '../../state/snippet/snippet.actions';
 export class HeaderComponent implements OnInit, OnDestroy {
   currentUser: User;
 
-  snippetSearchForm: FormGroup;
+  snippetSearchForm: UntypedFormGroup;
   snippetSearchFormSubscription: Subscription;
 
   constructor(private store: Store, private authResource: AuthResource, private modalService: NgbModal) {}
@@ -25,8 +25,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.currentUser = this.authResource.currentUser;
 
-    this.snippetSearchForm = new FormGroup({
-      search: new FormControl(''),
+    this.snippetSearchForm = new UntypedFormGroup({
+      search: new UntypedFormControl(''),
     });
 
     this.snippetSearchFormSubscription = this.snippetSearchForm
