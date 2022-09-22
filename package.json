@@ -57,7 +57,7 @@
     "@angular-eslint/builder": "^14.1.2",
     "@angular-eslint/eslint-plugin": "~14.1.2",
     "@angular-eslint/eslint-plugin-template": "~14.1.2",
-    "@angular-eslint/schematics": "^13.2.1",
+    "@angular-eslint/schematics": "^14.1.2",
     "@angular-eslint/template-parser": "~14.1.2",
     "@angular-eslint/utils": "^14.1.2",
     "@angular/cli": "^13.3.7",
