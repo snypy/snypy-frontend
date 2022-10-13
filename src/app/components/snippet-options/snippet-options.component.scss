@@ -1,25 +1,64 @@
+@import 'theme/variables';
+
 :host {
-    padding: .75rem 0;
-    background: #fff;
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-    display: inline-block;
-    width: 100%;
+  padding: 0.75rem 0;
+  background: #fff;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  display: inline-block;
+  width: 100%;
+
+  .snippet-info {
+    padding-top: 0;
+    padding-bottom: 0;
+
+    .metadata {
+      font-size: 0.8rem;
+      margin-top: 5px;
+
+      div {
+        display: flex;
+        align-items: center;
+        gap: 2px;
+      }
+    }
+
+    .share-url {
+      font-size: 0.8rem;
+      margin-top: 5px;
+
+      div {
+        align-self: center;
+      }
+
+      .label {
+        margin-right: 0.5rem;
+      }
+
+      .link {
+        border: 1px solid #{$primary-color};
+        padding: 0px 10px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
 }
 
 .row {
-    margin: 0;
+  margin: 0;
 }
 
 .label-toggle {
-    display: block;
-    width: 100%;
-    padding: .15rem 1.5rem;
-    clear: both;
-    font-weight: 400;
-    color: #212529;
-    text-align: inherit;
-    white-space: nowrap;
-    background-color: transparent;
-    border: 0;
+  display: block;
+  width: 100%;
+  padding: 0.15rem 1.5rem;
+  clear: both;
+  font-weight: 400;
+  color: #212529;
+  text-align: inherit;
+  white-space: nowrap;
+  background-color: transparent;
+  border: 0;
 }
