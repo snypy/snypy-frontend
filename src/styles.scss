@@ -4,9 +4,9 @@
 @import 'theme/variables';
 
 :root {
-  --anglify-form-field-outlined-label-color-focused: #{$primary-color};
-  --anglify-form-field-outlined-border-color-focused: #{$primary-color};
-  --anglify-form-field-outlined-border-radius: 0px;
+  --anglify-input-outlined-label-color-focused: #{$primary-color};
+  --anglify-input-outlined-border-color-focused: #{$primary-color};
+  --anglify-notched-outline-border-radius: 0px;
 
   --anglify-button-contained-border-radius: 0px;
   --anglify-button-contained-background: #{$primary-color};
