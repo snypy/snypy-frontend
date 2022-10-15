@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Validators } from '../../../helpers/validators';
 import { AuthTokenLoginCreateRequestParams } from '@snypy/rest-client';
+import { Validators } from '../../../helpers/validators';
 
 @Component({
   selector: 'app-login',

@@ -1,10 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Team, TeamService } from '@snypy/rest-client';
-import { mapFormErrors } from 'ngx-anx-forms';
 import { ToastrService } from 'ngx-toastr';
 import { firstValueFrom } from 'rxjs';
+import { mapFormErrors } from '../../helpers/form-error-mapper';
+import { Validators } from '../../helpers/validators';
 
 @Component({
   selector: 'app-team-modal',

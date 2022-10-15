@@ -1,4 +1,4 @@
-import { ButtonModule, FormFieldModule, IconModule } from '@anglify/components';
+import { ButtonComponent, IconComponent, InputDirective, TextFieldComponent, TextAreaComponent } from '@anglify/components';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -16,13 +16,14 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxsSelectSnapshotModule } from '@ngxs-labs/select-snapshot';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsModule } from '@ngxs/store';
-import { NgxAnxFormsModule } from 'ngx-anx-forms';
+import { ApiModule, Configuration, ConfigurationParameters } from '@snypy/rest-client';
 import { ClipboardModule } from 'ngx-clipboard';
 import { MarkdownModule } from 'ngx-markdown';
 import { MonacoEditorModule } from 'ngx-monaco-editor';
 import { PerfectScrollbarConfigInterface, PerfectScrollbarModule, PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { NgPipesModule } from 'ngx-pipes';
 import { ToastrModule } from 'ngx-toastr';
+import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { AuthActivateComponent } from './components/auth-activate/auth-activate.component';
 import { AuthComponent } from './components/auth/auth.component';
@@ -52,6 +53,7 @@ import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { LoadingScreenInterceptor } from './helpers/loading.interceptor';
 import { BaseComponent } from './layout/base/base.component';
 import { ContentComponent } from './layout/content/content.component';
+import { FullscreenComponent } from './layout/fullscreen/fullscreen.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { HelpModalComponent } from './modals/help-modal/help-modal.component';
 import { LabelDeleteModalComponent } from './modals/label-delete-modal/label-delete-modal.component';
@@ -66,9 +68,6 @@ import { LabelState } from './state/label/label.state';
 import { LanguageState } from './state/language/language.state';
 import { ScopeState } from './state/scope/scope.state';
 import { SnippetState } from './state/snippet/snippet.state';
-import { FullscreenComponent } from './layout/fullscreen/fullscreen.component';
-import { ApiModule, Configuration, ConfigurationParameters } from '@snypy/rest-client';
-import { environment } from '../environments/environment';
 import { TeamState } from './state/team/team.state';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -161,14 +160,10 @@ export function apiConfigFactory(): Configuration {
     NgSelectModule,
     FormsModule,
     ReactiveFormsModule,
-    FormFieldModule,
-    ButtonModule,
-    IconModule,
     MonacoEditorModule.forRoot(),
     NgPipesModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    NgxAnxFormsModule.forRoot(),
     RouterModule.forRoot(appRoutes, { relativeLinkResolution: 'legacy' }),
     NgxsModule.forRoot([ScopeState, LanguageState, LabelState, SnippetState, TeamState]),
     NgxsSelectSnapshotModule.forRoot(),
@@ -176,6 +171,11 @@ export function apiConfigFactory(): Configuration {
     ServicesModule.forRoot(),
     MarkdownModule.forRoot(),
     ClipboardModule,
+    TextFieldComponent,
+    ButtonComponent,
+    InputDirective,
+    IconComponent,
+    TextAreaComponent,
   ],
   providers: [
     {

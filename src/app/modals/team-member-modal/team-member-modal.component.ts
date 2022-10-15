@@ -3,13 +3,13 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { SelectSnapshot } from '@ngxs-labs/select-snapshot';
 import { Team } from '@snypy/rest-client';
-import { mapFormErrors } from 'ngx-anx-forms';
 import { ToastrService } from 'ngx-toastr';
 import { ScopeModel } from '../../state/scope/scope.model';
 import { ScopeState } from '../../state/scope/scope.state';
 import { UserTeam, UserteamService, RoleEnum } from '@snypy/rest-client';
 import { firstValueFrom } from 'rxjs';
 import { UserService, User } from '@snypy/rest-client';
+import { mapFormErrors } from '../../helpers/form-error-mapper';
 
 @Component({
   selector: 'app-team-member-modal',

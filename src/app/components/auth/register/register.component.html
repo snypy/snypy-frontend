@@ -1,21 +1,21 @@
 <form class="form" role="form" autocomplete="off" id="formRegister" novalidate="" [formGroup]="form" (submit)="doRegister()">
-  <anglify-form-field label="Username" type="outlined">
+  <anglify-text-field label="Username" appearance="outlined">
     <input anglifyInput name="username" formControlName="username" />
-  </anglify-form-field>
-  <anglify-form-field label="First name" type="outlined">
+  </anglify-text-field>
+  <anglify-text-field label="First name" appearance="outlined">
     <input anglifyInput name="firstname" formControlName="first_name" />
-  </anglify-form-field>
-  <anglify-form-field label="Last name" type="outlined">
+  </anglify-text-field>
+  <anglify-text-field label="Last name" appearance="outlined">
     <input anglifyInput name="lastname" formControlName="last_name" />
-  </anglify-form-field>
-  <anglify-form-field label="Email" type="outlined">
+  </anglify-text-field>
+  <anglify-text-field label="Email" appearance="outlined">
     <input anglifyInput name="email" formControlName="email" />
-  </anglify-form-field>
-  <anglify-form-field label="Password" type="outlined">
+  </anglify-text-field>
+  <anglify-text-field label="Password" appearance="outlined">
     <input anglifyInput name="password" formControlName="password" type="password" />
-  </anglify-form-field>
-  <anglify-form-field label="Password confirm" type="outlined">
+  </anglify-text-field>
+  <anglify-text-field label="Password confirm" appearance="outlined">
     <input anglifyInput name="password" formControlName="password_confirm" type="password" />
-  </anglify-form-field>
+  </anglify-text-field>
   <button anglifyButton type="submit" id="btnRegister">Register</button>
 </form>

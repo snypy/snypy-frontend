@@ -5,7 +5,6 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { SelectSnapshot } from '@ngxs-labs/select-snapshot';
 import { Select, Store } from '@ngxs/store';
 import { Team } from '@snypy/rest-client';
-import { mapFormErrors } from 'ngx-anx-forms';
 import { ToastrService } from 'ngx-toastr';
 import { firstValueFrom, Observable } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
@@ -19,6 +18,7 @@ import { ScopeModel } from '../../state/scope/scope.model';
 import { ScopeState } from '../../state/scope/scope.state';
 import { SetActiveSnippet } from '../../state/snippet/snippet.actions';
 import { SnippetState } from '../../state/snippet/snippet.state';
+import { mapFormErrors } from '../../helpers/form-error-mapper';
 
 @UntilDestroy()
 @Component({

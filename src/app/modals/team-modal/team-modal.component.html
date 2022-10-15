@@ -7,8 +7,10 @@
   </div>
 </div>
 <div class="modal-body">
-  <form [formGroup]="teamForm.get('teamRequest')">
-    <anx-forms-input formControlName="name" [errors]="teamForm.get('teamRequest').get('name').errors"></anx-forms-input>
+  <form class="form" role="form" autocomplete="off" [formGroup]="teamForm.get('teamRequest')">
+    <anglify-text-field label="Name" appearance="outlined">
+      <input anglifyInput name="name" formControlName="name" />
+    </anglify-text-field>
   </form>
 </div>
 <div class="modal-footer">
