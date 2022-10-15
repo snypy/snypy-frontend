@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { mapFormErrors } from 'ngx-anx-forms';
 import { ToastrService } from 'ngx-toastr';
+import { mapFormErrors } from '../../../helpers/form-error-mapper';
 import { Validators } from '../../../helpers/validators';
 import { RegisterPayload } from '../../../services/resources/auth.resource';
 

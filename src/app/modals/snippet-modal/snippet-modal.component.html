@@ -9,37 +9,37 @@
 <div class="modal-body">
   <form [formGroup]="snippetForm">
     <ng-container formGroupName="snippetRequest">
-      <span>Title</span>
-      <anx-forms-input formControlName="title" [errors]="snippetForm.get('snippetRequest.title').errors"></anx-forms-input>
+      <anglify-text-field label="Title" appearance="outlined">
+        <input anglifyInput name="title" formControlName="title" />
+      </anglify-text-field>
 
-      <ng-container *ngIf="labels?.length"
-        >snippetRequest.files
+      <ng-container *ngIf="labels?.length">
         <span>Labels</span>
-        <anx-forms-input-select
+        <ng-select
+          style="padding-bottom: 10px"
           bindLabel="name"
           bindValue="pk"
-          [options]="labels"
+          [items]="labels"
           [multiple]="true"
           formControlName="labels"
           *ngIf="scope && (scope.area === 'team' || scope.area === 'user')"
           [errors]="snippetForm.get('snippetRequest.labels').errors"
-        ></anx-forms-input-select>
+        >
+        </ng-select>
       </ng-container>
 
-      <span>Description</span>
-      <anx-forms-input-textarea
-        formControlName="description"
-        [errors]="snippetForm.get('snippetRequest.description').errors"
-      ></anx-forms-input-textarea>
+      <anglify-text-area label="Description" appearance="outlined">
+        <textarea anglifyInput name="description" formControlName="description"></textarea>
+      </anglify-text-area>
 
       <span>Visibility</span>
-      <anx-forms-input-select
+      <ng-select
+        style="padding-bottom: 10px"
         bindLabel="name"
         bindValue="key"
-        [options]="visibilities"
+        [items]="visibilities"
         formControlName="visibility"
-        [errors]="snippetForm.get('snippetRequest.visibility').errors"
-      ></anx-forms-input-select>
+      ></ng-select>
 
       <div
         *ngFor="let file of snippetForm.get('snippetRequest.files')['controls']; let i = index"

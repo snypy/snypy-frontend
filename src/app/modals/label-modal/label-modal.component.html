@@ -7,10 +7,11 @@
   </div>
 </div>
 <div class="modal-body">
-  <form [formGroup]="labelForm">
+  <form class="form" role="form" autocomplete="off" [formGroup]="labelForm">
     <ng-container formGroupName="labelRequest">
-      <span>Name</span>
-      <anx-forms-input formControlName="name" [errors]="labelForm.get('labelRequest.name').errors"></anx-forms-input>
+      <anglify-text-field label="Name" appearance="outlined">
+        <input anglifyInput name="name" formControlName="name" />
+      </anglify-text-field>
     </ng-container>
   </form>
 </div>

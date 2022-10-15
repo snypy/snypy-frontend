@@ -7,14 +7,14 @@
     "start": "ng serve",
     "build": "ng build --configuration production",
     "test": "ng test --watch=false",
-    "coverage": "ng test --codeCoverage=true --watch=false",
+    "coverage": "ng test --code-coverage --watch=false",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "postinstall": "node helpers/version.js"
   },
   "private": true,
   "dependencies": {
-    "@anglify/components": "^0.36.3",
+    "@anglify/components": "^0.36.4",
     "@angular-devkit/architect": "^0.1402.6",
     "@angular/animations": "^14.2.3",
     "@angular/common": "^14.2.3",
@@ -30,18 +30,17 @@
     "@fortawesome/free-regular-svg-icons": "^6.2.0",
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
     "@mdi/js": "^7.0.96",
-    "@ng-bootstrap/ng-bootstrap": "^12.1.2",
-    "@ng-select/ng-select": "^8.3.0",
+    "@ng-bootstrap/ng-bootstrap": "^13.0.0",
+    "@ng-select/ng-select": "^9.0.2",
     "@ngneat/until-destroy": "^9.2.2",
     "@ngxs-labs/select-snapshot": "^4.0.0",
     "@ngxs/store": "3.7.3",
     "@popperjs/core": "^2.11.6",
-    "@snypy/rest-client": "^1.2.2",
+    "@snypy/rest-client": "^1.2.3",
     "bootstrap": "^5.2.2",
     "core-js": "^3.25.5",
     "karma-coverage": "^2.2.0",
     "markdown-to-text": "^0.1.1",
-    "ngx-anx-forms": "^0.3.2",
     "ngx-clipboard": "^15.1.0",
     "ngx-markdown": "^13.1.0",
     "ngx-perfect-scrollbar": "^10.1.1",
@@ -86,11 +85,30 @@
     "ts-node": "^10.9.1",
     "typescript": "^4.6.4"
   },
-  "overrides": { 
-    "ngx-monaco-editor": { 
-      "@angular/common": "$@angular/common", 
+  "overrides": {
+    "ngx-monaco-editor": {
+      "@angular/common": "$@angular/common",
       "@angular/core": "$@angular/core",
       "monaco-editor": "^0.33.0"
-    } 
+    },
+    "@anglify/components": {
+      "@angular/common": "$@angular/common",
+      "@angular/forms": "$@angular/forms",
+      "@angular/platform-browser": "$@angular/platform-browser",
+      "@angular/router": "$@angular/router"
+    },
+    "@ngxs/store": {
+      "@angular/common": "$@angular/common",
+      "@angular/core": "$@angular/forms"
+    },
+    "@ngxs/devtools-plugin": {
+      "@angular/common": "$@angular/common",
+      "@angular/core": "$@angular/core"
+    },
+    "ngx-markdown": {
+      "@angular/common": "$@angular/common",
+      "@angular/core": "$@angular/forms",
+      "@angular/platform-browser": "$@angular/platform-browser"
+    }
   }
 }

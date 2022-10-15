@@ -1,4 +1,4 @@
-import { ButtonComponent, IconComponent, InputDirective, TextFieldComponent } from '@anglify/components';
+import { ButtonComponent, IconComponent, InputDirective, TextFieldComponent, TextAreaComponent } from '@anglify/components';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -17,7 +17,6 @@ import { NgxsSelectSnapshotModule } from '@ngxs-labs/select-snapshot';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsModule } from '@ngxs/store';
 import { ApiModule, Configuration, ConfigurationParameters } from '@snypy/rest-client';
-import { NgxAnxFormsModule } from 'ngx-anx-forms';
 import { ClipboardModule } from 'ngx-clipboard';
 import { MarkdownModule } from 'ngx-markdown';
 import { MonacoEditorModule } from 'ngx-monaco-editor';
@@ -165,7 +164,6 @@ export function apiConfigFactory(): Configuration {
     NgPipesModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    NgxAnxFormsModule.forRoot(),
     RouterModule.forRoot(appRoutes, { relativeLinkResolution: 'legacy' }),
     NgxsModule.forRoot([ScopeState, LanguageState, LabelState, SnippetState, TeamState]),
     NgxsSelectSnapshotModule.forRoot(),
@@ -177,6 +175,7 @@ export function apiConfigFactory(): Configuration {
     ButtonComponent,
     InputDirective,
     IconComponent,
+    TextAreaComponent,
   ],
   providers: [
     {

@@ -11,27 +11,20 @@
     <ng-container formGroupName="userTeamRequest">
       <div *ngIf="!userTeam; else userIsSet">
         <label>User</label>
-        <anx-forms-input-select
+        <ng-select
+          style="padding-bottom: 10px"
           formControlName="user"
-          [options]="users"
+          [items]="users"
           bindLabel="username"
           bindValue="pk"
           [multiple]="false"
-          [errors]="userTeamForm.get('userTeamRequest.user').errors"
         >
-        </anx-forms-input-select>
+        </ng-select>
       </div>
 
       <label>Role</label>
-      <anx-forms-input-select
-        formControlName="role"
-        [options]="roles"
-        bindLabel="label"
-        bindValue="pk"
-        [multiple]="false"
-        [errors]="userTeamForm.get('userTeamRequest.role').errors"
-      >
-      </anx-forms-input-select>
+      <ng-select style="padding-bottom: 10px" formControlName="role" [items]="roles" bindLabel="label" bindValue="pk" [multiple]="false">
+      </ng-select>
     </ng-container>
   </form>
 </div>
