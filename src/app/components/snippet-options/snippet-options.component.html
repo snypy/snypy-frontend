@@ -42,16 +42,19 @@
   <ng-template #deleteModal let-c="close" let-d="dismiss">
     <div class="modal-header">
       <h4 class="modal-title">Delete Snippet</h4>
-      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-        <span aria-hidden="true">&times;</span>
+      <button anglifyButton appearance="icon" aria-label="Close" (click)="d('Cross click')">
+        <anglify-icon icon="mdi-close" size="small"></anglify-icon>
       </button>
     </div>
     <div class="modal-body">
-      <p>Are you sure you want to delete the current snippet »{{ activeSnippet.title }}«?</p>
+      <p>
+        Are you sure you want to delete the current snippet "<strong>{{ activeSnippet.title }}</strong
+        >"?
+      </p>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-secondary btn-outline-dark" (click)="d('Cancel click')">Cancel</button>
-      <button type="button" class="btn btn-danger btn-outline-dark" (click)="c('Delete click')">Delete</button>
+      <button anglifyButton appearance="text" (click)="d('Cancel click')">Cancel</button>
+      <button anglifyButton (click)="c('Delete click')">Delete</button>
     </div>
   </ng-template>
 </ng-container>
