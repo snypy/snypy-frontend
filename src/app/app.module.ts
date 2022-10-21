@@ -1,4 +1,12 @@
-import { ButtonComponent, IconComponent, InputDirective, TextFieldComponent, TextAreaComponent } from '@anglify/components';
+import {
+  ButtonComponent,
+  IconComponent,
+  InputDirective,
+  SlotDirective,
+  TextAreaComponent,
+  TextFieldComponent,
+  TooltipDirective,
+} from '@anglify/components';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -176,6 +184,8 @@ export function apiConfigFactory(): Configuration {
     InputDirective,
     IconComponent,
     TextAreaComponent,
+    SlotDirective,
+    TooltipDirective,
   ],
   providers: [
     {

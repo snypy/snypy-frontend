@@ -2,15 +2,12 @@ import { ChangeDetectionStrategy, Component, ElementRef, OnInit, TemplateRef } f
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Select, Store } from '@ngxs/store';
+import { Label, Snippet, SnippetService, User } from '@snypy/rest-client';
 import { firstValueFrom, Observable } from 'rxjs';
 import { SnippetModalComponent } from '../../modals/snippet-modal/snippet-modal.component';
 import { AuthResource } from '../../services/resources/auth.resource';
-import { Label, User } from '@snypy/rest-client';
-import { UpdateLabels } from '../../state/label/label.actions';
 import { LabelState } from '../../state/label/label.state';
 import { RemoveSnippet } from '../../state/snippet/snippet.actions';
-import { SnippetlabelService } from '@snypy/rest-client';
-import { Snippet, SnippetService } from '@snypy/rest-client';
 @UntilDestroy()
 @Component({
   selector: 'app-snippet-options',
@@ -28,7 +25,6 @@ export class SnippetOptionsComponent implements OnInit {
   @Select(state => state.snippet.activeSnippet) activeSnippet$: Observable<Snippet>;
 
   constructor(
-    private snippetlabelService: SnippetlabelService,
     private authResource: AuthResource,
     private modalService: NgbModal,
     private snippetService: SnippetService,
@@ -86,51 +82,5 @@ export class SnippetOptionsComponent implements OnInit {
         console.log(`Dismissed ${reason}`);
       }
     );
-  }
-
-  toggleLabel(label: Label): void {
-    const index = this.activeLabels.indexOf(label.pk);
-
-    if (index > -1) {
-      firstValueFrom(
-        this.snippetlabelService.snippetlabelList({
-          snippet: this.activeSnippet.pk,
-          label: label.pk,
-        })
-      )
-        .then(data => {
-          if (data.length >= 1) {
-            firstValueFrom(this.snippetlabelService.snippetlabelDestroy({ id: data[0].pk }))
-              .then(() => {
-                this.activeLabels.splice(index, 1);
-                this.store.dispatch(new UpdateLabels());
-              })
-              .catch(reason => {
-                console.log('Cannot delete snippet label');
-                console.log(reason);
-              });
-          } else {
-            console.log('Snippet label not found');
-          }
-        })
-        .catch(reason => {
-          console.log('Cannot fetch snippet label');
-          console.log(reason);
-        });
-    } else {
-      firstValueFrom(
-        this.snippetlabelService.snippetlabelCreate({
-          snippetLabelRequest: { snippet: this.activeSnippet.pk, label: label.pk },
-        })
-      )
-        .then(() => {
-          this.activeLabels.push(label.pk);
-          this.store.dispatch(new UpdateLabels());
-        })
-        .catch(reason => {
-          console.log('Cannot add snippet label');
-          console.log(reason);
-        });
-    }
   }
 }

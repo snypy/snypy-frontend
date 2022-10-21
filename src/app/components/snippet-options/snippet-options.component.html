@@ -1,69 +1,41 @@
 <ng-container *ngIf="activeSnippet$ | async as activeSnippet">
   <div class="row">
-    <div class="col-9" style="padding-top: 0">
+    <div class="col-9 snippet-info">
       <!-- ToDo: Implement in 1.1
           <fa-icon class="icon" [icon]="['far', 'star']" size="sm"></fa-icon>
           !-->
-      <span class="title">{{ activeSnippet.title }}</span
-      ><br />
-      <small><b>By</b> {{ activeSnippet.user_display || 'Anonymous' }}</small
-      ><br />
-      <small><b>Created</b> {{ activeSnippet.created_date | date: 'medium' }}</small
-      ><br />
-      <small><b>Last update</b> {{ activeSnippet.modified_date | date: 'medium' }}</small>
-      <br />
-      <small><b>Visibility</b> {{ activeSnippet.visibility }}</small>
-      <br />
-      <small>
-        <b>Share URL</b>
-        <code class="p-1">{{ permalink }}</code>
-        <button anglifyButton appearance="icon" ngxClipboard [cbContent]="permalink" size="small">
-          <fa-icon class="icon button" [icon]="['far', 'copy']"></fa-icon>
+      <div class="title">{{ activeSnippet.title }}</div>
+      <div class="d-flex gap-2 metadata">
+        <div anglifyTooltip="Author">
+          <anglify-icon icon="mdi-account" size="x-small"></anglify-icon> {{ activeSnippet.user_display || 'Anonymous' }}
+        </div>
+        <div anglifyTooltip="Last modified">
+          <anglify-icon icon="mdi-calendar" size="x-small"></anglify-icon> {{ activeSnippet.modified_date | date: 'medium' }}
+        </div>
+        <div anglifyTooltip="Visibility"><anglify-icon icon="mdi-eye" size="x-small"></anglify-icon> {{ activeSnippet.visibility }}</div>
+      </div>
+      <div class="d-flex share-url">
+        <div class="label"><b>Share URL</b></div>
+        <div class="link">{{ permalink }}</div>
+        <button anglifyButton appearance="contained" ngxClipboard [cbContent]="permalink">
+          <anglify-icon icon="mdi-content-copy" size="x-small"></anglify-icon>
         </button>
-      </small>
+      </div>
     </div>
     <div class="col-3 text-end" style="padding-top: 0">
       <div class="btn-group" role="group" aria-label="Basic example">
-        <button
-          type="button"
-          class="btn btn-sm btn-link"
-          (click)="editSnippet()"
-          *appPerm="'canEditSnippet'; args: [currentUser, activeSnippet]"
-        >
-          Edit
+        <button anglifyButton appearance="icon" (click)="editSnippet()" *appPerm="'canEditSnippet'; args: [currentUser, activeSnippet]">
+          <anglify-icon icon="mdi-pencil" size="x-small"></anglify-icon>
         </button>
         <button
-          type="button"
-          class="btn btn-sm btn-link"
+          anglifyButton
+          appearance="icon"
           (click)="openDeleteModal(deleteModal)"
           *appPerm="'canDeleteSnippet'; args: [currentUser, activeSnippet]"
         >
-          Delete
+          <anglify-icon icon="mdi-delete" size="x-small"></anglify-icon>
         </button>
       </div>
-
-      <ng-container *ngIf="labels$ | async as loadedLabels">
-        <ng-container *ngIf="loadedLabels.length">
-          <div style="margin-top: 15px" *appPerm="'canEditSnippet'; args: [currentUser, activeSnippet]">
-            <div ngbDropdown class="d-inline-block" placement="bottom-right" #myDrop="ngbDropdown">
-              <button class="btn btn-sm btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Labels</button>
-              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                <perfect-scrollbar style="max-height: 40vh">
-                  <app-bootstrap-switch
-                    class="label-toggle"
-                    (click)="$event.stopPropagation(); myDrop.open()"
-                    *ngFor="let label of loadedLabels; trackBy: trackByFn"
-                    size="sm"
-                    [label]="label.name"
-                    [ngModel]="activeLabels.indexOf(label.pk) > -1"
-                    (ngModelChange)="toggleLabel(label)"
-                  ></app-bootstrap-switch>
-                </perfect-scrollbar>
-              </div>
-            </div>
-          </div>
-        </ng-container>
-      </ng-container>
     </div>
   </div>
 

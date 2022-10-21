@@ -4,6 +4,8 @@
 @import 'theme/variables';
 
 :root {
+  @include light-theme;
+
   --anglify-input-outlined-label-color-focused: #{$primary-color};
   --anglify-input-outlined-border-color-focused: #{$primary-color};
   --anglify-notched-outline-border-radius: 0px;
