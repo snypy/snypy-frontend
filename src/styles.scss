@@ -16,4 +16,9 @@
   --anglify-button-contained-label-color: #ffffff;
 
   --anglify-button-text-label-color: #{$primary-color};
+
+  // change border radius of bootstrap modal
+  .modal-content {
+    border-radius: 0px;
+  }
 }
