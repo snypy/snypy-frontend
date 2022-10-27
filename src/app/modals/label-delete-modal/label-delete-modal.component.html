@@ -1,17 +1,16 @@
 <div class="modal-header">
-  <h4 class="modal-title">Delete member</h4>
-
-  <div class="close" aria-label="Close" (click)="closeAction('Cross click')">
-    <span aria-hidden="true">&times;</span>
-  </div>
+  <h4 class="modal-title">Delete label</h4>
+  <button anglifyButton appearance="icon" aria-label="Close" (click)="closeAction('Cross click')">
+    <anglify-icon icon="mdi-close" size="small"></anglify-icon>
+  </button>
 </div>
 <div class="modal-body">
   <p>
-    Are you sure you want to remove the label <b>{{ label.name }}</b
-    >?
+    Are you sure you want to remove the label "<strong>{{ label.name }}</strong
+    >"?
   </p>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-outline-dark" (click)="closeAction('Cancel click')">Cancel</button>
-  <button type="button" class="btn btn-danger btn-outline-dark" (click)="confirmAction()">Yes</button>
+  <button anglifyButton appearance="text" (click)="closeAction('Cancel click')">Cancel</button>
+  <button anglifyButton (click)="confirmAction()">Delete</button>
 </div>
