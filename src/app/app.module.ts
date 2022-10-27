@@ -1,7 +1,10 @@
 import {
   ButtonComponent,
+  ChipComponent,
   IconComponent,
   InputDirective,
+  MenuComponent as AnglifyMenuComponent,
+  SelectComponent,
   SlotDirective,
   TextAreaComponent,
   TextFieldComponent,
@@ -205,6 +208,9 @@ export function apiConfigFactory(): Configuration {
     TextAreaComponent,
     SlotDirective,
     TooltipDirective,
+    SelectComponent,
+    AnglifyMenuComponent,
+    ChipComponent,
   ],
   providers: [
     {
