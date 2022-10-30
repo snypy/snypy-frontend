@@ -31,7 +31,7 @@ export class ActiveFilterService {
             this.store.dispatch(new UpdateSnippetFilter({}, reload));
             break;
           case 'favorites':
-            console.log('Not implemented');
+            this.store.dispatch(new UpdateSnippetFilter({ favorite: 'True' }, reload));
             break;
           case 'unlabeled':
             this.store.dispatch(new UpdateSnippetFilter({ labeled: 'False' }, reload));
