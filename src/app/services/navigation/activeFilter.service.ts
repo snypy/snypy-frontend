@@ -54,10 +54,10 @@ export class ActiveFilterService {
         }
         break;
       case 'labels':
-        this.store.dispatch(new UpdateSnippetFilter({ labels: value }, reload));
+        this.store.dispatch(new UpdateSnippetFilter({ labels: [value] }, reload));
         break;
       case 'languages':
-        this.store.dispatch(new UpdateSnippetFilter({ files__language: value }, reload));
+        this.store.dispatch(new UpdateSnippetFilter({ filesLanguage: value }, reload));
         break;
       case 'members':
         this.store.dispatch(new UpdateSnippetFilter({ user: value }, reload));
