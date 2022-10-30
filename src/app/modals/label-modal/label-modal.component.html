@@ -1,10 +1,9 @@
 <div class="modal-header">
   <h4 class="modal-title" *ngIf="!label">Add label</h4>
   <h4 class="modal-title" *ngIf="label">Edit label</h4>
-
-  <div class="close" aria-label="Close" (click)="closeAction('Cross click')">
-    <span aria-hidden="true">&times;</span>
-  </div>
+  <button anglifyButton appearance="icon" aria-label="Close" (click)="closeAction('Cross click')">
+    <anglify-icon icon="mdi-close" size="small"></anglify-icon>
+  </button>
 </div>
 <div class="modal-body">
   <form class="form" role="form" autocomplete="off" [formGroup]="labelForm">
@@ -16,6 +15,6 @@
   </form>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-outline-dark" (click)="closeAction('Cancel click')">Cancel</button>
-  <button type="button" class="btn btn-primary btn-outline-dark" (click)="confirmAction()">Save</button>
+  <button anglifyButton appearance="text" (click)="closeAction('Cancel click')">Cancel</button>
+  <button anglifyButton (click)="confirmAction()">Save</button>
 </div>
