@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '@snypy/rest-client';
+import { ToastrService } from 'ngx-toastr';
 import { firstValueFrom } from 'rxjs';
 
 @Component({
@@ -9,7 +10,12 @@ import { firstValueFrom } from 'rxjs';
   styleUrls: ['./auth-activate.component.scss'],
 })
 export class AuthActivateComponent implements OnInit {
-  constructor(private activatedRoute: ActivatedRoute, private authService: AuthService, private router: Router) {}
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private authService: AuthService,
+    private router: Router,
+    private readonly toastr: ToastrService
+  ) {}
 
   ngOnInit(): void {
     this.authService.authTokenLogoutCreate();
@@ -25,11 +31,11 @@ export class AuthActivateComponent implements OnInit {
         })
       )
         .then(() => {
-          console.log('User activated');
+          this.toastr.success('User activated. Please login.');
           this.router.navigateByUrl('');
         })
         .catch(() => {
-          console.log('User activation failed');
+          this.toastr.error('User activation failed!');
           this.router.navigateByUrl('');
         });
     });
