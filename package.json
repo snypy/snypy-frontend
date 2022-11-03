@@ -17,7 +17,7 @@
     "@anglify/components": "^0.39.0",
     "@angular-devkit/architect": "^0.1402.8",
     "@angular/animations": "^14.2.3",
-    "@angular/common": "^14.2.3",
+    "@angular/common": "^14.2.8",
     "@angular/compiler": "^14.2.3",
     "@angular/core": "^14.2.3",
     "@angular/forms": "^14.2.3",
