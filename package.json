@@ -14,7 +14,7 @@
   },
   "private": true,
   "dependencies": {
-    "@anglify/components": "^0.39.0",
+    "@anglify/components": "^0.40.0",
     "@angular-devkit/architect": "^0.1402.9",
     "@angular/animations": "^14.2.3",
     "@angular/common": "^14.2.3",
