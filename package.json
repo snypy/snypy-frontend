@@ -59,7 +59,7 @@
     "@angular-eslint/schematics": "^14.1.2",
     "@angular-eslint/template-parser": "~14.1.2",
     "@angular-eslint/utils": "^14.1.2",
-    "@angular/cli": "^14.2.8",
+    "@angular/cli": "^14.2.9",
     "@angular/compiler-cli": "^14.2.3",
     "@angular/language-service": "^14.2.10",
     "@ngxs/devtools-plugin": "3.7.3",
