@@ -15,16 +15,15 @@ export class MenuComponent implements OnInit, OnDestroy {
       value: 'all',
       icon: 'globe',
     },
-    // ToDo: Implement in 1.1
-    // {
-    //   name: 'Favorites',
-    //   value: 'favorites',
-    //   icon: 'star'
-    // },
     {
       name: 'Unlabeled',
       value: 'unlabeled',
       icon: 'tag',
+    },
+    {
+      name: 'Favorites',
+      value: 'favorites',
+      icon: 'star',
     },
     {
       name: 'Public',
