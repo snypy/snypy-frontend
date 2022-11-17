@@ -44,6 +44,10 @@ export class PermDirective implements OnChanges {
     return !!snippet.deletable;
   }
 
+  static canToggleFavorite(user: User, snippet: Snippet): boolean {
+    return !!snippet.pk;
+  }
+
   constructor(private templateRef: TemplateRef<any>, private viewContainer: ViewContainerRef) {}
 
   ngOnChanges(): void {
