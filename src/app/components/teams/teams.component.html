@@ -3,11 +3,11 @@
     <fa-icon icon="plus"></fa-icon>
   </span>
 
-  <span
+  <a
     *ngFor="let team of teams$ | async"
     [title]="team.name"
     class="team"
     [ngStyle]="{ 'background-image': 'url(https://www.gravatar.com/avatar/' + team.pk + '?d=wavatar&f=y&s=50)' }"
-    (click)="loadTeam(team)"
-  ></span>
+    [routerLink]="['/team', team.pk]"
+  ></a>
 </div>
