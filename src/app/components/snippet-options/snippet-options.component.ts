@@ -7,7 +7,7 @@ import { firstValueFrom, Observable } from 'rxjs';
 import { SnippetModalComponent } from '../../modals/snippet-modal/snippet-modal.component';
 import { AuthResource } from '../../services/resources/auth.resource';
 import { LabelState } from '../../state/label/label.state';
-import { RemoveSnippet } from '../../state/snippet/snippet.actions';
+import { RemoveSnippet, SetActiveSnippet } from '../../state/snippet/snippet.actions';
 @UntilDestroy()
 @Component({
   selector: 'app-snippet-options',
@@ -71,6 +71,11 @@ export class SnippetOptionsComponent implements OnInit {
       .catch(error => {
         console.log(error);
       });
+  }
+
+  async toggleFavorite(snippet: Snippet) {
+    await firstValueFrom(this.snippetService.snippetFavoriteCreate({ id: snippet.pk }));
+    this.store.dispatch(new SetActiveSnippet(await firstValueFrom(this.snippetService.snippetRetrieve({ id: snippet.pk }))));
   }
 
   openDeleteModal(content: TemplateRef<ElementRef>): void {
