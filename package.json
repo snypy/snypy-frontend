@@ -44,7 +44,7 @@
     "ngx-clipboard": "^15.1.0",
     "ngx-markdown": "^14.0.1",
     "ngx-perfect-scrollbar": "^10.1.1",
-    "ngx-pipes": "^3.0.0",
+    "ngx-pipes": "^3.2.0",
     "ngx-toastr": "^15.2.2",
     "rxjs": "^7.6.0",
     "rxjs-compat": "^6.6.7",
