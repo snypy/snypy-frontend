@@ -1,11 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Select, Store } from '@ngxs/store';
-import { Observable, Subscription } from 'rxjs';
+import { TeamRetrieveRequestParams, TeamService } from '@snypy/rest-client';
+import { firstValueFrom, Observable, skip, Subscription } from 'rxjs';
 import { ActiveFilterService } from '../../services/navigation/activeFilter.service';
 import { AuthResource } from '../../services/resources/auth.resource';
 import { UpdateLabels } from '../../state/label/label.actions';
 import { UpdateLanguages } from '../../state/language/language.actions';
-import { RefreshScope, UpdateScope } from '../../state/scope/scope.actions';
+import { UpdateScope } from '../../state/scope/scope.actions';
 import { ScopeModel } from '../../state/scope/scope.model';
 import { ScopeState } from '../../state/scope/scope.state';
 import { UpdateSnippets } from '../../state/snippet/snippet.actions';
@@ -20,10 +22,18 @@ export class BaseComponent implements OnInit, OnDestroy {
   isLoggedIn = false;
 
   scopeSubscription: Subscription;
+  authSubscription: Subscription;
+  routeSubscription: Subscription;
 
   @Select(ScopeState) scope$: Observable<ScopeModel>;
 
-  constructor(private store: Store, private authResource: AuthResource, private activeFilterService: ActiveFilterService) {}
+  constructor(
+    protected store: Store,
+    protected authResource: AuthResource,
+    protected activeFilterService: ActiveFilterService,
+    protected route: ActivatedRoute,
+    protected teamService: TeamService
+  ) {}
 
   ngOnInit(): void {
     /**
@@ -42,34 +52,62 @@ export class BaseComponent implements OnInit, OnDestroy {
         this.store.dispatch(new UpdateLanguages());
       }
     });
-    this.store.dispatch(new RefreshScope());
 
     /**
      * Subscribe for user status changes
      */
-    this.authResource.loginStatusUpdates.subscribe(value => {
-      let scope: ScopeModel;
-
+    this.authSubscription = this.authResource.loginStatusUpdates.subscribe(value => {
       this.isLoggedIn = value;
+      this.setScopeData();
+    });
 
-      // Update scope for loading data
-      if (value) {
-        scope = {
-          area: 'user',
-          value: this.authResource.currentUser,
-        };
-      } else {
-        scope = {
-          area: null,
-          value: null,
-        };
-      }
-
-      this.store.dispatch(new UpdateScope(scope));
+    /**
+     * Subscribe for route param changes
+     */
+    this.routeSubscription = this.route.params.pipe(skip(1)).subscribe(() => {
+      this.setScopeData();
     });
   }
 
   ngOnDestroy(): void {
     this.scopeSubscription.unsubscribe();
+    this.authSubscription.unsubscribe();
+    this.routeSubscription.unsubscribe();
+  }
+
+  setScopeData(): void {
+    console.log(this.route.snapshot.data.scope);
+
+    if (this.isLoggedIn) {
+      switch (this.route.snapshot.data.scope) {
+        case 'team': {
+          this.setScopeTeam(this.route.snapshot.params as TeamRetrieveRequestParams);
+          break;
+        }
+        case 'user': {
+          this.store.dispatch(new UpdateScope({ area: 'user', value: this.authResource.currentUser }));
+          break;
+        }
+        default: {
+          this.store.dispatch(new UpdateScope({ area: null, value: null }));
+          break;
+        }
+      }
+    }
+  }
+
+  setScopeTeam(value: TeamRetrieveRequestParams) {
+    firstValueFrom(this.teamService.teamRetrieve(value))
+      .then(team => {
+        this.store.dispatch(
+          new UpdateScope({
+            area: 'team',
+            value: team,
+          })
+        );
+      })
+      .catch(() => {
+        console.log('Failed to load Team');
+      });
   }
 }

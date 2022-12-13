@@ -4,8 +4,6 @@ import { Select, Store } from '@ngxs/store';
 import { Team } from '@snypy/rest-client';
 import { Observable } from 'rxjs';
 import { TeamModalComponent } from '../../modals/team-modal/team-modal.component';
-import { ActiveFilterService } from '../../services/navigation/activeFilter.service';
-import { UpdateScope } from '../../state/scope/scope.actions';
 import { AddTeam } from '../../state/team/team.actions';
 import { TeamState } from '../../state/team/team.state';
 
@@ -19,7 +17,7 @@ export class TeamsComponent {
 
   @Select(TeamState) teams$: Observable<Team[]>;
 
-  constructor(private store: Store, private modalService: NgbModal, private activeFilterService: ActiveFilterService) {}
+  constructor(private store: Store, private modalService: NgbModal) {}
 
   addTeam(): void {
     const modalRef = this.modalService.open(TeamModalComponent, { size: 'sm' });
@@ -31,17 +29,6 @@ export class TeamsComponent {
       reason => {
         console.log(`Dismissed: ${reason}`);
       }
-    );
-  }
-
-  loadTeam(team: Team): void {
-    console.log('Loading team!');
-    this.activeFilterService.updateFilter('main', 'all', false);
-    this.store.dispatch(
-      new UpdateScope({
-        area: 'team',
-        value: team,
-      })
     );
   }
 }

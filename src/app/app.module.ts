@@ -87,6 +87,17 @@ const appRoutes: Routes = [
     path: 'dashboard',
     component: BaseComponent,
     children: [],
+    data: {
+      scope: 'user',
+    },
+  },
+  {
+    path: 'team/:id',
+    component: BaseComponent,
+    children: [],
+    data: {
+      scope: 'team',
+    },
   },
   {
     path: 'snippet/:id',
