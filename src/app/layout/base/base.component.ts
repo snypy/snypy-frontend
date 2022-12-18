@@ -44,7 +44,7 @@ export class BaseComponent implements OnInit, OnDestroy {
     /**
      * Refresh snippets on scope changes
      */
-    this.scopeSubscription = this.scope$.subscribe((scope: ScopeModel) => {
+    this.scopeSubscription = this.scope$.pipe(skip(1)).subscribe((scope: ScopeModel) => {
       if (scope && scope.area) {
         this.store.dispatch(new UpdateSnippets());
         this.store.dispatch(new UpdateLabels());
@@ -87,6 +87,9 @@ export class BaseComponent implements OnInit, OnDestroy {
         case 'user': {
           this.store.dispatch(new UpdateScope({ area: 'user', value: this.authResource.currentUser }));
           break;
+        }
+        case 'global': {
+          this.store.dispatch(new UpdateScope({ area: 'global', value: null }));
         }
         default: {
           this.store.dispatch(new UpdateScope({ area: null, value: null }));
