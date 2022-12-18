@@ -84,11 +84,19 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 
 const appRoutes: Routes = [
   {
-    path: 'dashboard',
+    path: 'user',
     component: BaseComponent,
     children: [],
     data: {
       scope: 'user',
+    },
+  },
+  {
+    path: 'global',
+    component: BaseComponent,
+    children: [],
+    data: {
+      scope: 'global',
     },
   },
   {
@@ -113,7 +121,7 @@ const appRoutes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'user',
     pathMatch: 'full',
   },
   {
