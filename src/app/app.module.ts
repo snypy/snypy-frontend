@@ -191,7 +191,7 @@ export function apiConfigFactory(): Configuration {
     NgPipesModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    RouterModule.forRoot(appRoutes, { relativeLinkResolution: 'legacy' }),
+    RouterModule.forRoot(appRoutes, {}),
     NgxsModule.forRoot([ScopeState, LanguageState, LabelState, SnippetState, TeamState]),
     NgxsSelectSnapshotModule.forRoot(),
     NgxsReduxDevtoolsPluginModule.forRoot(),

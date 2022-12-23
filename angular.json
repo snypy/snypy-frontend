@@ -32,9 +32,13 @@
               "src/styles.scss"
             ],
             "stylePreprocessorOptions": {
-              "includePaths": ["node_modules/bootstrap/scss/"]
+              "includePaths": [
+                "node_modules/bootstrap/scss/"
+              ]
             },
-            "scripts": ["node_modules/marked/marked.min.js"],
+            "scripts": [
+              "node_modules/marked/marked.min.js"
+            ],
             "vendorChunk": true,
             "extractLicenses": false,
             "buildOptimizer": false,
@@ -98,7 +102,9 @@
               "src/styles.scss"
             ],
             "stylePreprocessorOptions": {
-              "includePaths": ["node_modules/bootstrap/scss/"]
+              "includePaths": [
+                "node_modules/bootstrap/scss/"
+              ]
             },
             "assets": [
               "src/assets",
@@ -114,7 +120,10 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
           }
         }
       }
@@ -128,6 +137,12 @@
     },
     "@schematics/angular:directive": {
       "prefix": "app"
+    },
+    "@angular-eslint/schematics:application": {
+      "setParserOptionsProject": true
+    },
+    "@angular-eslint/schematics:library": {
+      "setParserOptionsProject": true
     }
   },
   "cli": {
