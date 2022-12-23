@@ -7,7 +7,7 @@
           <anglify-icon icon="mdi-account" size="x-small"></anglify-icon> {{ activeSnippet.user_display || 'Anonymous' }}
         </div>
         <div anglifyTooltip="Last modified">
-          <anglify-icon icon="mdi-calendar" size="x-small"></anglify-icon> {{ activeSnippet.modified_date | date: 'medium' }}
+          <anglify-icon icon="mdi-calendar" size="x-small"></anglify-icon> {{ activeSnippet.modified_date | date : 'medium' }}
         </div>
         <div anglifyTooltip="Visibility"><anglify-icon icon="mdi-eye" size="x-small"></anglify-icon> {{ activeSnippet.visibility }}</div>
       </div>
