@@ -1,8 +1,8 @@
 <div *ngIf="activeSnippet$ | async as activeSnippet">
   <div class="label-list">
     <span *ngFor="let label of activeSnippet.labels">
-      <span class="badge bg-info" *ngIf="(labels$ | async | filterBy: ['pk']:label:[true])[0]">
-        {{ (labels$ | async | filterBy: ['pk']:label:[true])[0].name }}
+      <span class="badge bg-info" *ngIf="(labels$ | async | filterBy : ['pk'] : label : [true])[0]">
+        {{ (labels$ | async | filterBy : ['pk'] : label : [true])[0].name }}
       </span>
     </span>
   </div>
