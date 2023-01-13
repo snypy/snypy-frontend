@@ -32,7 +32,7 @@
     "@mdi/js": "^7.1.96",
     "@ng-bootstrap/ng-bootstrap": "^14.0.1",
     "@ng-select/ng-select": "^10.0.3",
-    "@ngneat/until-destroy": "^9.2.2",
+    "@ngneat/until-destroy": "^9.2.3",
     "@ngxs-labs/select-snapshot": "^4.0.0",
     "@ngxs/store": "3.7.3",
     "@popperjs/core": "^2.11.6",
