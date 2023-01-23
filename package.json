@@ -16,7 +16,7 @@
   "dependencies": {
     "@anglify/components": "^0.46.0",
     "@angular-devkit/architect": "^0.1501.1",
-    "@angular/animations": "^15.0.4",
+    "@angular/animations": "^15.1.1",
     "@angular/common": "^15.0.4",
     "@angular/compiler": "^15.0.4",
     "@angular/core": "^15.0.4",
