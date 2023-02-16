@@ -18,7 +18,7 @@
     "@angular-devkit/architect": "^0.1501.6",
     "@angular/animations": "^15.0.4",
     "@angular/common": "^15.0.4",
-    "@angular/compiler": "^15.0.4",
+    "@angular/compiler": "^15.1.5",
     "@angular/core": "^15.0.4",
     "@angular/forms": "^15.0.4",
     "@angular/localize": "^15.0.4",
