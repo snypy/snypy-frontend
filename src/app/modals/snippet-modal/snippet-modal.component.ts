@@ -4,12 +4,11 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { SelectSnapshot } from '@ngxs-labs/select-snapshot';
 import { Select, Store } from '@ngxs/store';
-import { Team } from '@snypy/rest-client';
+import { Label, Language, Snippet, SnippetService, Team } from '@snypy/rest-client';
 import { ToastrService } from 'ngx-toastr';
 import { firstValueFrom, Observable } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
-import { Label } from '@snypy/rest-client';
-import { Language, Snippet, SnippetService } from '@snypy/rest-client';
+import { mapFormErrors } from '../../helpers/form-error-mapper';
 import { UpdateLabels } from '../../state/label/label.actions';
 import { LabelState } from '../../state/label/label.state';
 import { UpdateLanguages } from '../../state/language/language.actions';
@@ -18,7 +17,6 @@ import { ScopeModel } from '../../state/scope/scope.model';
 import { ScopeState } from '../../state/scope/scope.state';
 import { SetActiveSnippet } from '../../state/snippet/snippet.actions';
 import { SnippetState } from '../../state/snippet/snippet.state';
-import { mapFormErrors } from '../../helpers/form-error-mapper';
 
 @UntilDestroy()
 @Component({
@@ -40,6 +38,10 @@ export class SnippetModalComponent implements OnInit {
 
   @SelectSnapshot(LabelState)
   public labels: Label[];
+
+  @Select(LabelState) public readonly labels$!: Observable<Label[]>;
+
+  @Select(LanguageState) public readonly languages$!: Observable<Language[]>;
 
   @Select(SnippetState.getFilter) private readonly filter$!: Observable<Record<string, unknown>>;
 
