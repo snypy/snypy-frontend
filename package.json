@@ -60,7 +60,7 @@
     "@angular-eslint/template-parser": "~15.2.1",
     "@angular-eslint/utils": "^15.2.0",
     "@angular/cli": "^15.2.4",
-    "@angular/compiler-cli": "^15.2.3",
+    "@angular/compiler-cli": "^15.2.5",
     "@angular/language-service": "^15.2.5",
     "@ngxs/devtools-plugin": "3.7.3",
     "@types/jasmine": "~4.3.1",
