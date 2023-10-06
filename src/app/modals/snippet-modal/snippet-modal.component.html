@@ -13,20 +13,17 @@
       </anglify-text-field>
 
       <ng-container *ngIf="labels$ | async as labels">
-        <anglify-select
+        <label for="labels">Labels</label>
+        <ng-select
+          class="input-field mb-4"
           [multiple]="true"
-          label="Labels"
-          appearance="outlined"
+          id="labels"
           [items]="labels"
-          itemTextKey="name"
-          itemValueKey="pk"
+          bindLabel="name"
+          bindValue="pk"
           formControlName="labels"
-          [clearable]="true"
         >
-          <ng-template slot="selection" let-context>
-            <anglify-chip *ngFor="let item of context.selectedItems">{{ item.name }}</anglify-chip>
-          </ng-template>
-        </anglify-select>
+        </ng-select>
       </ng-container>
 
       <anglify-text-area label="Description" appearance="outlined">
