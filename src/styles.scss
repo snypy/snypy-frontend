@@ -1,21 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
 @use 'node_modules/@anglify/components/styles/index' as *;
 @use 'node_modules/@anglify/components/styles/themes/light' as *;
+@import '~@ng-select/ng-select/themes/default.theme.css';
 @import 'theme/variables';
 
 :root {
   @include light-theme;
 
-  --anglify-input-outlined-label-color-focused: #{$primary-color};
-  --anglify-input-outlined-border-color-focused: #{$primary-color};
+  --anglify-input-outlined-label-color-focused: #{$primary-color-950};
+  --anglify-input-outlined-border-color-focused: #{$primary-color-950};
   --anglify-notched-outline-border-radius: 0px;
 
   --anglify-button-contained-border-radius: 0px;
-  --anglify-button-contained-background: #{$primary-color};
+  --anglify-button-contained-background: #{$primary-color-950};
   --anglify-button-text-border-radius: 0px;
   --anglify-button-contained-label-color: #ffffff;
 
-  --anglify-button-text-label-color: #{$primary-color};
+  --anglify-button-text-label-color: #{$primary-color-950};
 
   // change border radius of bootstrap modal
   .modal-content {
@@ -24,5 +25,24 @@
 
   anglify-legacy-menu .dropdown-menu {
     display: block;
+  }
+
+  .ng-select.input-field {
+    .ng-select-container {
+      min-height: 54px;
+      border-radius: 0;
+
+      .ng-value {
+        background-color: #{$secondary-color-200} !important;
+      }
+    }
+    .ng-dropdown-panel-items {
+      .ng-option-selected {
+        background-color: #{$secondary-color-200} !important;
+      }
+      .ng-option-marked {
+        background-color: #{$secondary-color-50} !important;
+      }
+    }
   }
 }
