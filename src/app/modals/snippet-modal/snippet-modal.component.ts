@@ -1,15 +1,16 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgSelectComponent } from '@ng-select/ng-select';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { SelectSnapshot } from '@ngxs-labs/select-snapshot';
 import { Select, Store } from '@ngxs/store';
-import { Label, Language, Snippet, SnippetService, Team } from '@snypy/rest-client';
+import { Label, LabelService, Language, Snippet, SnippetService, Team } from '@snypy/rest-client';
 import { ToastrService } from 'ngx-toastr';
-import { firstValueFrom, Observable } from 'rxjs';
+import { Observable, firstValueFrom } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
 import { mapFormErrors } from '../../helpers/form-error-mapper';
-import { UpdateLabels } from '../../state/label/label.actions';
+import { AddLabel, UpdateLabels } from '../../state/label/label.actions';
 import { LabelState } from '../../state/label/label.state';
 import { UpdateLanguages } from '../../state/language/language.actions';
 import { LanguageState } from '../../state/language/language.state';
@@ -26,6 +27,9 @@ import { SnippetState } from '../../state/snippet/snippet.state';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SnippetModalComponent implements OnInit {
+  @ViewChild('labelselect')
+  public labelSelectComponent: NgSelectComponent;
+
   @Input() public snippet: Snippet = null;
 
   public snippetForm: FormGroup;
@@ -62,10 +66,11 @@ export class SnippetModalComponent implements OnInit {
   ];
 
   public constructor(
-    private activeModal: NgbActiveModal,
-    private snippetService: SnippetService,
-    private toastr: ToastrService,
-    private store: Store
+    private readonly activeModal: NgbActiveModal,
+    private readonly snippetService: SnippetService,
+    private readonly labelService: LabelService,
+    private readonly toastr: ToastrService,
+    private readonly store: Store
   ) {}
 
   public ngOnInit(): void {
@@ -174,4 +179,13 @@ export class SnippetModalComponent implements OnInit {
   public closeAction(reason: string): void {
     this.activeModal.dismiss(reason);
   }
+
+  protected createNewLabel = (label: string) => {
+    firstValueFrom(this.labelService.labelCreate({ labelRequest: { name: label } })).then(response => {
+      this.store.dispatch(new AddLabel(response));
+      this.snippetForm.get('snippetRequest.labels').setValue([...this.snippetForm.get('snippetRequest.labels').value, response.pk]);
+      this.labelSelectComponent.searchTerm = null;
+      this.toastr.success('Label added!');
+    });
+  };
 }
