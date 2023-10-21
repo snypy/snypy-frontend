@@ -31,7 +31,7 @@ import { ApiModule, Configuration, ConfigurationParameters } from '@snypy/rest-c
 import { ClipboardModule } from 'ngx-clipboard';
 import { MarkdownModule } from 'ngx-markdown';
 import { MonacoEditorModule } from 'ngx-monaco-editor';
-import { PerfectScrollbarConfigInterface, PerfectScrollbarModule, PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
+import { NgScrollbarModule } from 'ngx-scrollbar';
 import { NgPipesModule } from 'ngx-pipes';
 import { ToastrModule } from 'ngx-toastr';
 import { environment } from '../environments/environment';
@@ -80,10 +80,6 @@ import { LanguageState } from './state/language/language.state';
 import { ScopeState } from './state/scope/scope.state';
 import { SnippetState } from './state/snippet/snippet.state';
 import { TeamState } from './state/team/team.state';
-
-const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
-  suppressScrollX: true,
-};
 
 const appRoutes: Routes = [
   {
@@ -186,7 +182,7 @@ export function apiConfigFactory(): Configuration {
     HttpClientModule,
     NgbModule,
     FontAwesomeModule,
-    PerfectScrollbarModule,
+    NgScrollbarModule,
     NgSelectModule,
     FormsModule,
     ReactiveFormsModule,
@@ -213,10 +209,6 @@ export function apiConfigFactory(): Configuration {
     ChipComponent,
   ],
   providers: [
-    {
-      provide: PERFECT_SCROLLBAR_CONFIG,
-      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
-    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,
