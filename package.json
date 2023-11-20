@@ -39,7 +39,7 @@
     "@popperjs/core": "^2.11.8",
     "@snypy/rest-client": "^1.4.0",
     "bootstrap": "^5.3.2",
-    "core-js": "^3.33.2",
+    "core-js": "^3.33.3",
     "karma-coverage": "^2.2.1",
     "markdown-to-text": "^0.1.1",
     "ngx-clipboard": "^16.0.0",
