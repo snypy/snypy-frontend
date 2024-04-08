@@ -2,7 +2,7 @@ import { AbstractControl, FormArray, FormControl, FormGroup } from '@angular/for
 
 function mapFormControlErrors(formControl: FormControl, apiErrors: string[]) {
   if (apiErrors && apiErrors.length) {
-    formControl.setErrors({ serverErrors: apiErrors });
+    formControl.setErrors({ server: { message: apiErrors } });
   }
 }
 
@@ -11,7 +11,7 @@ function mapFormGroupErrors(formGroup: FormGroup, apiErrors: any) {
     Object.keys(formGroup.controls).forEach(controlName => {
       mapFormErrors(formGroup.get(controlName), apiErrors[controlName]);
     });
-    formGroup.setErrors({ serverErrors: apiErrors });
+    formGroup.setErrors({ server: { message: apiErrors } });
   }
 }
 
@@ -20,7 +20,7 @@ function mapFormArrayErrors(formArray: FormArray, apiErrors: any[]) {
     formArray.controls.forEach((formControl, index) => {
       mapFormErrors(formControl, apiErrors[index]);
     });
-    formArray.setErrors({ serverErrors: apiErrors });
+    formArray.setErrors({ server: { mesage: apiErrors } });
   }
 }
 

@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { mapFormErrors } from '../../../helpers/form-error-mapper';
-import { Validators } from '../../../helpers/validators';
 import { RegisterPayload } from '../../../services/resources/auth.resource';
+import { FormlyFieldConfig } from '@ngx-formly/core';
 
 @Component({
   selector: 'app-register',
@@ -11,24 +11,70 @@ import { RegisterPayload } from '../../../services/resources/auth.resource';
   styleUrls: ['./register.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RegisterComponent implements OnInit, OnChanges {
+export class RegisterComponent implements OnChanges {
   @Output() register = new EventEmitter<RegisterPayload>();
   @Input() errors = null;
 
-  form: FormGroup;
+  form: FormGroup = new FormGroup([]);
+  model = {
+    username: '',
+    first_name: '',
+    last_name: '',
+    email: '',
+    password: '',
+    password_confirm: '',
+  };
+  fields: FormlyFieldConfig[] = [
+    {
+      key: 'username',
+      type: 'input',
+      props: {
+        label: 'Username',
+        placeholder: 'Enter username',
+        required: true,
+      },
+    },
+    {
+      key: 'first_name',
+      type: 'input',
+      props: {
+        label: 'First name',
+        placeholder: 'Enter first name',
+        required: true,
+      },
+    },
+    {
+      key: 'last_name',
+      type: 'input',
+      props: {
+        label: 'Last name',
+        placeholder: 'Enter last name',
+        required: true,
+      },
+    },
+    {
+      key: 'email',
+      type: 'input',
+      props: {
+        type: 'email',
+        label: 'Email',
+        placeholder: 'Enter email',
+        required: true,
+      },
+    },
+    {
+      key: 'password',
+      type: 'input',
+      props: {
+        type: 'password',
+        label: 'Password',
+        placeholder: 'Enter password',
+        required: true,
+      },
+    },
+  ];
 
   constructor(private toastr: ToastrService) {}
-
-  ngOnInit(): void {
-    this.form = new FormGroup({
-      username: new FormControl(null, Validators.required, null),
-      first_name: new FormControl(null, Validators.required, null),
-      last_name: new FormControl(null, Validators.required, null),
-      email: new FormControl(null, [Validators.required, Validators.email], null),
-      password: new FormControl(null, Validators.required, null),
-      password_confirm: new FormControl(null, Validators.required, null),
-    });
-  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['errors']) {

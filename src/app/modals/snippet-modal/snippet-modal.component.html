@@ -1,109 +1,65 @@
 <div class="modal-header">
   <h4 class="modal-title" *ngIf="!snippet">Add snippet</h4>
   <h4 class="modal-title" *ngIf="snippet">Edit snippet</h4>
-  <button anglifyButton appearance="icon" aria-label="Close" (click)="closeAction('Cross click')">
-    <anglify-icon icon="mdi-close" size="small"></anglify-icon>
-  </button>
 </div>
 <div class="modal-body">
-  <form [formGroup]="snippetForm">
-    <ng-container formGroupName="snippetRequest">
-      <anglify-text-field label="Title" appearance="outlined">
-        <input anglifyInput name="title" formControlName="title" />
-      </anglify-text-field>
+  <form>
+    <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
 
-      <ng-container *ngIf="labels$ | async as labels">
-        <label for="labels">Labels</label>
-        <ng-select
-          #labelselect
-          class="input-field mb-4"
-          [multiple]="true"
-          id="labels"
-          [items]="labels"
-          bindLabel="name"
-          bindValue="pk"
-          formControlName="labels"
-          addTagText="Add new label"
-          [addTag]="createNewLabel"
-        >
-        </ng-select>
-      </ng-container>
-
-      <anglify-text-area label="Description" appearance="outlined">
-        <textarea anglifyInput name="description" formControlName="description"></textarea>
-      </anglify-text-area>
-
-      <anglify-select
-        label="Visibility"
-        appearance="outlined"
-        [items]="visibilities"
-        itemTextKey="name"
-        itemValueKey="key"
-        formControlName="visibility"
-      ></anglify-select>
-
-      <div
-        *ngFor="let file of snippetForm.get('snippetRequest.files')['controls']; let i = index"
-        formArrayName="files"
-        style="margin-top: 0.75rem"
-      >
-        <div [formGroupName]="i">
-          <div class="card" style="border: none">
-            <div class="card-head" style="border: 1px solid rgba(0, 0, 0, 0.125)">
-              <div class="row">
-                <div class="col-4">
-                  <div class="form-group" style="margin: 0.75rem">
-                    <anglify-text-field appearance="outlined">
-                      <input anglifyInput formControlName="name" [id]="'input-title-' + i" />
-                    </anglify-text-field>
-                  </div>
+    <div *ngFor="let file of filesForm.controls; let i = index" [formArray]="filesForm" style="margin-top: 0.75rem">
+      <div [formGroup]="filesForm.controls[i]">
+        <div class="card" style="border: none">
+          <div class="card-head" style="border: 1px solid rgba(0, 0, 0, 0.125)">
+            <div class="row">
+              <div class="col-4">
+                <div class="form-group" style="margin: 0.75rem">
+                  <input class="form-control" formControlName="name" [id]="'input-title-' + i" />
                 </div>
-                <div class="col-4">
-                  <div class="form-group" style="margin: 0.75rem">
-                    <ng-container *ngIf="languages$ | async as languages"
-                      ><anglify-select
-                        appearance="outlined"
-                        [items]="languages"
-                        itemTextKey="name"
-                        itemValueKey="pk"
-                        formControlName="language"
-                      ></anglify-select
-                    ></ng-container>
-                  </div>
+              </div>
+              <div class="col-4">
+                <div class="form-group" style="margin: 0.75rem">
+                  <ng-select
+                    [items]="languages$ | async"
+                    bindLabel="name"
+                    bindValue="pk"
+                    formControlName="language"
+                    clearable="false"
+                    placeholder="Select language"
+                  ></ng-select>
                 </div>
-                <div class="col-4 text-end">
-                  <div class="form-group" style="margin: 0.75rem">
-                    <button anglifyButton appearance="icon" aria-label="Close" (click)="removeFile(i)">
-                      <anglify-icon icon="mdi-delete" size="small"></anglify-icon>
-                    </button>
-                  </div>
+              </div>
+              <div class="col-4 text-end">
+                <div class="form-group" style="margin: 0.75rem">
+                  <button class="btn btn-link" aria-label="Remove" (click)="removeFile(i)">
+                    <fa-icon [icon]="['fas', 'trash']" size="sm"></fa-icon>
+                  </button>
                 </div>
               </div>
             </div>
-            <div *ngIf="(languages | filterBy : ['pk'] : file.get('language').value : [true]).length">
-              <ngx-monaco-editor
-                style="height: 400px"
-                [options]="{
-                  theme: 'vs-dark',
-                  language: (languages | filterBy : ['pk'] : file.get('language').value : [true])[0].name,
-                  scrollBeyondLastLine: false,
-                  scrollbar: { alwaysConsumeMouseWheel: false }
-                }"
-                formControlName="content"
-              ></ngx-monaco-editor>
-            </div>
+          </div>
+          <div *ngIf="(languages | filterBy : ['pk'] : file.get('language').value : [true]).length">
+            <ngx-monaco-editor
+              style="height: 400px"
+              [options]="{
+                theme: 'vs-dark',
+                language: (languages | filterBy : ['pk'] : file.get('language').value : [true])[0].name,
+                scrollBeyondLastLine: false,
+                scrollbar: { alwaysConsumeMouseWheel: false }
+              }"
+              formControlName="content"
+            ></ngx-monaco-editor>
           </div>
         </div>
       </div>
+    </div>
 
-      <div style="margin-top: 0.75rem">
-        <button anglifyButton appearance="text" (click)="addFile()">Add code</button>
-      </div>
-    </ng-container>
+    <div style="margin-top: 0.75rem">
+      <button class="btn btn-link" (click)="addFile()">Add code</button>
+    </div>
   </form>
 </div>
 <div class="modal-footer">
-  <button anglifyButton appearance="text" (click)="closeAction('Cancel click')">Cancel</button>
-  <button anglifyButton (click)="confirmAction(false)">Save</button>
-  <button anglifyButton (click)="confirmAction(true)">Save & Close</button>
+  <button class="btn btn-secondary" (click)="closeAction('Cancel click')">Cancel</button>
+  <button class="btn btn-primary" (click)="confirmAction(false)">Save</button>
+  <button class="btn btn-primary" (click)="confirmAction(true)">Save & Close</button>
 </div>

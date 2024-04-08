@@ -1,21 +1,4 @@
 <form class="form" role="form" autocomplete="off" id="formRegister" novalidate="" [formGroup]="form" (submit)="doRegister()">
-  <anglify-text-field label="Username" appearance="outlined">
-    <input anglifyInput name="username" formControlName="username" />
-  </anglify-text-field>
-  <anglify-text-field label="First name" appearance="outlined">
-    <input anglifyInput name="firstname" formControlName="first_name" />
-  </anglify-text-field>
-  <anglify-text-field label="Last name" appearance="outlined">
-    <input anglifyInput name="lastname" formControlName="last_name" />
-  </anglify-text-field>
-  <anglify-text-field label="Email" appearance="outlined">
-    <input anglifyInput name="email" formControlName="email" />
-  </anglify-text-field>
-  <anglify-text-field label="Password" appearance="outlined">
-    <input anglifyInput name="password" formControlName="password" type="password" />
-  </anglify-text-field>
-  <anglify-text-field label="Password confirm" appearance="outlined">
-    <input anglifyInput name="password" formControlName="password_confirm" type="password" />
-  </anglify-text-field>
-  <button anglifyButton type="submit" id="btnRegister">Register</button>
+  <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
+  <button class="btn btn-primary" type="submit" id="btnRegister">Register</button>
 </form>

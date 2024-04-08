@@ -1,15 +1,3 @@
-import {
-  ButtonComponent,
-  ChipComponent,
-  IconComponent,
-  InputDirective,
-  MenuComponent as AnglifyMenuComponent,
-  SelectComponent,
-  SlotDirective,
-  TextAreaComponent,
-  TextFieldComponent,
-  TooltipDirective,
-} from '@anglify/components';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -18,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { far } from '@fortawesome/free-regular-svg-icons';
+import { fab } from '@fortawesome/free-brands-svg-icons';
 /**
  * Icons
  */
@@ -80,6 +69,8 @@ import { LanguageState } from './state/language/language.state';
 import { ScopeState } from './state/scope/scope.state';
 import { SnippetState } from './state/snippet/snippet.state';
 import { TeamState } from './state/team/team.state';
+import { FormlyModule } from '@ngx-formly/core';
+import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
 
 const appRoutes: Routes = [
   {
@@ -197,16 +188,10 @@ export function apiConfigFactory(): Configuration {
     ServicesModule.forRoot(),
     MarkdownModule.forRoot(),
     ClipboardModule,
-    TextFieldComponent,
-    ButtonComponent,
-    InputDirective,
-    IconComponent,
-    TextAreaComponent,
-    SlotDirective,
-    TooltipDirective,
-    SelectComponent,
-    AnglifyMenuComponent,
-    ChipComponent,
+    FormlyModule.forRoot({
+      validationMessages: [{ name: 'required', message: 'This field is required' }],
+    }),
+    FormlyBootstrapModule,
   ],
   providers: [
     {
@@ -243,7 +228,13 @@ export class AppModule {
       fas.faCircle,
       fas.faHashtag,
       far.faCopy,
-      fas.faPen
+      fas.faPen,
+      fab.faGithub,
+      far.faCalendar,
+      fas.faTimes,
+      far.faCopy,
+      fas.faEdit,
+      fas.faHome
     );
   }
 }

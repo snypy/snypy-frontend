@@ -14,7 +14,6 @@
   },
   "private": true,
   "dependencies": {
-    "@anglify/components": "^0.46.3",
     "@angular-devkit/architect": "^0.1703.3",
     "@angular/animations": "^15.2.3",
     "@angular/cdk": "^15.2.3",
@@ -28,12 +27,15 @@
     "@angular/router": "^15.2.8",
     "@fortawesome/angular-fontawesome": "^0.12.1",
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
+    "@fortawesome/free-brands-svg-icons": "^6.5.2",
     "@fortawesome/free-regular-svg-icons": "^6.5.2",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@mdi/js": "^7.4.47",
     "@ng-bootstrap/ng-bootstrap": "^14.2.0",
     "@ng-select/ng-select": "^10.0.4",
     "@ngneat/until-destroy": "^10.0.0",
+    "@ngx-formly/bootstrap": "^6.0.0",
+    "@ngx-formly/core": "^6.0.0",
     "@ngxs-labs/select-snapshot": "^5.0.0",
     "@ngxs/store": "3.7.3",
     "@popperjs/core": "^2.11.8",
@@ -63,6 +65,7 @@
     "@angular/cli": "^15.2.7",
     "@angular/compiler-cli": "^15.2.3",
     "@angular/language-service": "^17.3.3",
+    "@ngx-formly/schematics": "^6.3.0",
     "@ngxs/devtools-plugin": "3.7.3",
     "@types/jasmine": "~5.1.4",
     "@types/jasminewd2": "~2.0.13",
@@ -91,13 +94,6 @@
       "@angular/common": "$@angular/common",
       "@angular/core": "$@angular/core",
       "monaco-editor": "^0.34.0"
-    },
-    "@anglify/components": {
-      "@angular/core": "$@angular/core",
-      "@angular/common": "$@angular/common",
-      "@angular/forms": "$@angular/forms",
-      "@angular/platform-browser": "$@angular/platform-browser",
-      "@angular/router": "$@angular/router"
     },
     "@ngxs/store": {
       "@angular/common": "$@angular/common",

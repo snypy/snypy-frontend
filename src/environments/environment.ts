@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  basePath: 'http://localhost:8000',
+  basePath: 'https://api.snypy.com/',
 };
