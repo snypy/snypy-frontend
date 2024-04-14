@@ -19,7 +19,7 @@ import { NgxsModule } from '@ngxs/store';
 import { ApiModule, Configuration, ConfigurationParameters } from '@snypy/rest-client';
 import { ClipboardModule } from 'ngx-clipboard';
 import { MarkdownModule } from 'ngx-markdown';
-import { MonacoEditorModule } from 'ngx-monaco-editor';
+import { MonacoEditorModule } from 'ngx-monaco-editor-v2';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { NgPipesModule } from 'ngx-pipes';
 import { ToastrModule } from 'ngx-toastr';
