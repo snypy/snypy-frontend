@@ -91,11 +91,6 @@
     "typescript": "^4.9.5"
   },
   "overrides": {
-    "ngx-markdown": {
-      "@angular/common": "$@angular/common",
-      "@angular/core": "$@angular/forms",
-      "@angular/platform-browser": "$@angular/platform-browser"
-    },
     "@snypy/rest-client": {
       "@angular/core": "$@angular/core"
     }
