@@ -3,44 +3,40 @@
     <div class="col-9 snippet-info">
       <div class="title">{{ activeSnippet.title }}</div>
       <div class="d-flex gap-2 metadata">
-        <div anglifyTooltip="Author">
-          <anglify-icon icon="mdi-account" size="x-small"></anglify-icon> {{ activeSnippet.user_display || 'Anonymous' }}
+        <div title="Author"><fa-icon [icon]="['fas', 'user']" size="xs"></fa-icon> {{ activeSnippet.user_display || 'Anonymous' }}</div>
+        <div title="Last modified">
+          <fa-icon [icon]="['far', 'calendar']" size="xs"></fa-icon> {{ activeSnippet.modified_date | date : 'medium' }}
         </div>
-        <div anglifyTooltip="Last modified">
-          <anglify-icon icon="mdi-calendar" size="x-small"></anglify-icon> {{ activeSnippet.modified_date | date : 'medium' }}
-        </div>
-        <div anglifyTooltip="Visibility"><anglify-icon icon="mdi-eye" size="x-small"></anglify-icon> {{ activeSnippet.visibility }}</div>
+        <div title="Visibility"><fa-icon [icon]="['fas', 'eye']" size="xs"></fa-icon> {{ activeSnippet.visibility }}</div>
       </div>
       <div class="d-flex share-url">
         <div class="label"><b>Share URL</b></div>
         <div class="link">{{ permalink }}</div>
-        <button anglifyButton appearance="contained" ngxClipboard [cbContent]="permalink">
-          <anglify-icon icon="mdi-content-copy" size="x-small"></anglify-icon>
+        <button class="btn btn-secondary" ngxClipboard [cbContent]="permalink">
+          <fa-icon [icon]="['far', 'copy']" size="s"></fa-icon>
         </button>
       </div>
     </div>
     <div class="col-3 text-end" style="padding-top: 0">
       <div class="btn-group" role="group" aria-label="Basic example">
         <button
-          anglifyButton
-          appearance="icon"
+          class="btn btn-link"
           (click)="toggleFavorite(activeSnippet)"
           *appPerm="'canToggleFavorite'; args: [currentUser, activeSnippet]"
         >
-          <anglify-icon *ngIf="!activeSnippet.favorite" icon="mdi-star-outline" size="x-small"></anglify-icon>
-          <anglify-icon *ngIf="activeSnippet.favorite" icon="mdi-star" size="x-small"></anglify-icon>
+          <fa-icon *ngIf="!activeSnippet.favorite" [icon]="['far', 'star']" size="xs"></fa-icon>
+          <fa-icon *ngIf="activeSnippet.favorite" [icon]="['fas', 'star']" size="xs"></fa-icon>
         </button>
 
-        <button anglifyButton appearance="icon" (click)="editSnippet()" *appPerm="'canEditSnippet'; args: [currentUser, activeSnippet]">
-          <anglify-icon icon="mdi-pencil" size="x-small"></anglify-icon>
+        <button class="btn btn-link" (click)="editSnippet()" *appPerm="'canEditSnippet'; args: [currentUser, activeSnippet]">
+          <fa-icon [icon]="['fas', 'edit']" size="xs"></fa-icon>
         </button>
         <button
-          anglifyButton
-          appearance="icon"
+          class="btn btn-link"
           (click)="openDeleteModal(deleteModal)"
           *appPerm="'canDeleteSnippet'; args: [currentUser, activeSnippet]"
         >
-          <anglify-icon icon="mdi-delete" size="x-small"></anglify-icon>
+          <fa-icon [icon]="['fas', 'trash']" size="xs"></fa-icon>
         </button>
       </div>
     </div>
@@ -49,9 +45,6 @@
   <ng-template #deleteModal let-c="close" let-d="dismiss">
     <div class="modal-header">
       <h4 class="modal-title">Delete Snippet</h4>
-      <button anglifyButton appearance="icon" aria-label="Close" (click)="d('Cross click')">
-        <anglify-icon icon="mdi-close" size="small"></anglify-icon>
-      </button>
     </div>
     <div class="modal-body">
       <p>
@@ -60,8 +53,8 @@
       </p>
     </div>
     <div class="modal-footer">
-      <button anglifyButton appearance="text" (click)="d('Cancel click')">Cancel</button>
-      <button anglifyButton (click)="c('Delete click')">Delete</button>
+      <button class="btn btn-secondary" appearance="text" (click)="d('Cancel click')">Cancel</button>
+      <button class="btn btn-danger" (click)="c('Delete click')">Delete</button>
     </div>
   </ng-template>
 </ng-container>

@@ -1,14 +1,14 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgSelectComponent } from '@ng-select/ng-select';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { UntilDestroy } from '@ngneat/until-destroy';
 import { SelectSnapshot } from '@ngxs-labs/select-snapshot';
 import { Select, Store } from '@ngxs/store';
-import { Label, LabelService, Language, Snippet, SnippetService, Team } from '@snypy/rest-client';
+import { Label, LabelService, Language, Snippet, SnippetService, VisibilityEnum } from '@snypy/rest-client';
 import { ToastrService } from 'ngx-toastr';
 import { Observable, firstValueFrom } from 'rxjs';
-import { filter, map, take } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 import { mapFormErrors } from '../../helpers/form-error-mapper';
 import { AddLabel, UpdateLabels } from '../../state/label/label.actions';
 import { LabelState } from '../../state/label/label.state';
@@ -18,6 +18,7 @@ import { ScopeModel } from '../../state/scope/scope.model';
 import { ScopeState } from '../../state/scope/scope.state';
 import { SetActiveSnippet } from '../../state/snippet/snippet.actions';
 import { SnippetState } from '../../state/snippet/snippet.state';
+import { FormlyFieldConfig } from '@ngx-formly/core';
 
 @UntilDestroy()
 @Component({
@@ -31,8 +32,6 @@ export class SnippetModalComponent implements OnInit {
   public labelSelectComponent: NgSelectComponent;
 
   @Input() public snippet: Snippet = null;
-
-  public snippetForm: FormGroup;
 
   @SelectSnapshot(ScopeState)
   public scope: ScopeModel;
@@ -49,21 +48,73 @@ export class SnippetModalComponent implements OnInit {
 
   @Select(SnippetState.getFilter) private readonly filter$!: Observable<Record<string, unknown>>;
 
+  form: FormGroup = new FormGroup([]);
+  filesForm = new FormArray([]);
+  model = {
+    title: null,
+    description: '',
+    visibility: VisibilityEnum.Private,
+    labels: [],
+    files: [],
+    team: null,
+  };
+  fields: FormlyFieldConfig[] = [
+    {
+      key: 'title',
+      type: 'input',
+      props: {
+        label: 'Title',
+        placeholder: 'Enter title',
+        required: true,
+      },
+    },
+    {
+      key: 'description',
+      type: 'textarea',
+      props: {
+        label: 'Description',
+        placeholder: 'Enter description',
+        required: true,
+        rows: 5,
+        autosize: true,
+      },
+    },
+    {
+      key: 'labels',
+      type: 'select',
+      props: {
+        type: 'text',
+        label: 'Labels',
+        placeholder: 'Enter labels',
+        options: this.labels$,
+        valueProp: 'pk',
+        labelProp: 'name',
+        multiple: true,
+      },
+    },
+    {
+      key: 'visibility',
+      type: 'select',
+      props: {
+        label: 'Visibility',
+        options: [
+          {
+            value: 'PRIVATE',
+            label: 'Private',
+          },
+          {
+            value: 'PUBLIC',
+            label: 'Public',
+          },
+        ],
+      },
+    },
+  ];
+
   private readonly activeLabel$ = this.filter$.pipe(
     filter(Boolean),
     map(filter => filter.labels)
   );
-
-  public visibilities = [
-    {
-      key: 'PRIVATE',
-      name: 'Private',
-    },
-    {
-      key: 'PUBLIC',
-      name: 'Public',
-    },
-  ];
 
   public constructor(
     private readonly activeModal: NgbActiveModal,
@@ -75,48 +126,25 @@ export class SnippetModalComponent implements OnInit {
 
   public ngOnInit(): void {
     /**
-     * Setup snippet from
-     *
-     * @type {FormGroup}
-     */
-    this.snippetForm = new FormGroup({
-      id: new FormControl(null),
-      snippetRequest: new FormGroup({
-        title: new FormControl('', Validators.required),
-        description: new FormControl('', Validators.required),
-        labels: new FormControl([]),
-        visibility: new FormControl('PRIVATE'),
-        team: new FormControl(null),
-      }),
-    });
-
-    /**
-     * Set team value from scope
-     */
-    if (this.scope.area == 'team') {
-      const team = this.scope.value as Team;
-      this.snippetForm.get('snippetRequest.team').setValue(team.pk);
-    }
-
-    /**
      * Set snippet values from given snippet
      */
     if (this.snippet) {
-      this.snippetForm.get('id').setValue(this.snippet.pk);
-      this.snippetForm.get('snippetRequest.title').setValue(this.snippet.title);
-      this.snippetForm.get('snippetRequest.description').setValue(this.snippet.description);
-      this.snippetForm.get('snippetRequest.labels').setValue(this.snippet.labels);
-      this.snippetForm.get('snippetRequest.visibility').setValue(this.snippet.visibility);
-      this.snippetForm.get('snippetRequest.team').setValue(this.snippet.team);
+      this.model = {
+        title: this.snippet.title,
+        description: this.snippet.description,
+        visibility: this.snippet.visibility,
+        labels: this.snippet.labels,
+        team: this.snippet.team,
+        files: this.snippet.files,
+      };
     }
 
     /**
      * Snippet files
      */
-    const files = new FormArray([]);
     if (this.snippet) {
       for (const snippetFile of this.snippet.files) {
-        files.push(
+        this.filesForm.push(
           new FormGroup({
             pk: new FormControl(snippetFile.pk),
             name: new FormControl(snippetFile.name),
@@ -126,19 +154,14 @@ export class SnippetModalComponent implements OnInit {
         );
       }
     }
-    (this.snippetForm.controls.snippetRequest as FormGroup).addControl('files', files);
-
-    this.activeLabel$.pipe(untilDestroyed(this), take(1), filter(Boolean)).subscribe(label => {
-      this.snippetForm.get('labels').setValue([label]);
-    });
   }
 
   public removeFile(index: number): void {
-    (<FormArray>this.snippetForm.get('snippetRequest.files')).removeAt(index);
+    this.filesForm.removeAt(index);
   }
 
   public addFile(): void {
-    (<FormArray>this.snippetForm.get('snippetRequest.files')).push(
+    this.filesForm.push(
       new FormGroup({
         name: new FormControl(null),
         language: new FormControl(null),
@@ -150,12 +173,19 @@ export class SnippetModalComponent implements OnInit {
   public confirmAction(closeModal: boolean): void {
     let promise, message, errorMessage;
 
+    this.model.files = this.filesForm.value;
+
     if (this.snippet) {
-      promise = firstValueFrom(this.snippetService.snippetUpdate(this.snippetForm.value));
+      promise = firstValueFrom(
+        this.snippetService.snippetUpdate({
+          id: this.snippet.pk,
+          snippetRequest: this.model,
+        })
+      );
       message = 'Snippet updated!';
       errorMessage = 'Cannot update snippet!';
     } else {
-      promise = firstValueFrom(this.snippetService.snippetCreate(this.snippetForm.value));
+      promise = firstValueFrom(this.snippetService.snippetCreate({ snippetRequest: this.model }));
       message = 'Snippet added!';
       errorMessage = 'Cannot add snippet!';
     }
@@ -172,7 +202,7 @@ export class SnippetModalComponent implements OnInit {
       .catch(error => {
         console.log(error);
         this.toastr.error(errorMessage);
-        mapFormErrors(this.snippetForm, error.error);
+        mapFormErrors(this.form, error.error);
       });
   }
 
@@ -183,7 +213,7 @@ export class SnippetModalComponent implements OnInit {
   protected createNewLabel = (label: string) => {
     firstValueFrom(this.labelService.labelCreate({ labelRequest: { name: label } })).then(response => {
       this.store.dispatch(new AddLabel(response));
-      this.snippetForm.get('snippetRequest.labels').setValue([...this.snippetForm.get('snippetRequest.labels').value, response.pk]);
+      // this.snippetForm.get('snippetRequest.labels').setValue([...this.snippetForm.get('snippetRequest.labels').value, response.pk]);
       this.labelSelectComponent.searchTerm = null;
       this.toastr.success('Label added!');
     });

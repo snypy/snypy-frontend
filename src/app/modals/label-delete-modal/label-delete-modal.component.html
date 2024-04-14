@@ -1,8 +1,5 @@
 <div class="modal-header">
   <h4 class="modal-title">Delete label</h4>
-  <button anglifyButton appearance="icon" aria-label="Close" (click)="closeAction('Cross click')">
-    <anglify-icon icon="mdi-close" size="small"></anglify-icon>
-  </button>
 </div>
 <div class="modal-body">
   <p>
@@ -11,6 +8,6 @@
   </p>
 </div>
 <div class="modal-footer">
-  <button anglifyButton appearance="text" (click)="closeAction('Cancel click')">Cancel</button>
-  <button anglifyButton (click)="confirmAction()">Delete</button>
+  <button class="btn btn-secondary" appearance="text" (click)="closeAction('Cancel click')">Cancel</button>
+  <button class="btn btn-danger" (click)="confirmAction()">Delete</button>
 </div>

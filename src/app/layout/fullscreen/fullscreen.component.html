@@ -1,8 +1,8 @@
 <div class="content" *ngIf="!snippetError">
   <div class="container-fluid">
     <div class="row justify-content-end">
-      <button [routerLink]="'/'" anglifyButton appearance="text">
-        <anglify-icon icon="mdi-home" size="small" left></anglify-icon>
+      <button [routerLink]="'/'" class="btn btn-link">
+        <fa-icon [icon]="['fas', 'home']" size="sm" class="mr-1"></fa-icon>
         Dashboard
       </button>
     </div>

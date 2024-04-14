@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { Validators } from '../../../helpers/validators';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { FormlyFieldConfig } from '@ngx-formly/core';
 
 @Component({
   selector: 'app-password-reset',
@@ -8,16 +8,23 @@ import { Validators } from '../../../helpers/validators';
   styleUrls: ['./password-reset.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PasswordResetComponent implements OnInit {
+export class PasswordResetComponent {
   @Output() public passwordReset = new EventEmitter<{ email: string; formGroup: FormGroup }>();
 
-  public form: FormGroup;
-
-  public ngOnInit(): void {
-    this.form = new FormGroup({
-      email: new FormControl(null, [Validators.required, Validators.email], null),
-    });
-  }
+  form: FormGroup = new FormGroup([]);
+  model = { username: '', password: '' };
+  fields: FormlyFieldConfig[] = [
+    {
+      key: 'email',
+      type: 'input',
+      props: {
+        type: 'email',
+        label: 'Email',
+        placeholder: 'Enter email',
+        required: true,
+      },
+    },
+  ];
 
   public doPasswordReset(): void {
     this.passwordReset.emit({ email: this.form.get('email').value, formGroup: this.form });

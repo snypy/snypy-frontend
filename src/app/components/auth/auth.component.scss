@@ -33,13 +33,13 @@
     }
 
     .icons {
-      --anglify-icon-color: #ffffff;
       margin-top: 10px;
       display: flex;
       justify-content: center;
       gap: 16px;
 
       a {
+        color: #ffffff;
         text-decoration: none;
       }
     }

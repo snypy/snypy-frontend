@@ -7,10 +7,12 @@
             <h1 class="mt-5">SnyPy</h1>
             <div>Open source on-prem code snippet manager</div>
             <div class="icons">
-              <a href="https://github.com/snypy/snypy-frontend" target="_blank"
-                ><anglify-icon icon="mdi-github" size="x-large"></anglify-icon
-              ></a>
-              <a href="https://snypy.com" target="_blank"> <anglify-icon icon="mdi-earth" size="x-large"></anglify-icon></a>
+              <a href="https://github.com/snypy/snypy-frontend" target="_blank">
+                <fa-icon [icon]="['fab', 'github']" size="xl"></fa-icon>
+              </a>
+              <a href="https://snypy.com" target="_blank">
+                <fa-icon [icon]="['fas', 'globe']" size="xl"></fa-icon>
+              </a>
             </div>
           </div>
           <div class="card rounded-0 auth-content">
@@ -34,12 +36,12 @@
             </div>
 
             <div class="card-footer" *ngIf="activeState === STATE_LOGIN">
-              <button anglifyButton type="button" appearance="text" (click)="setActiveState(STATE_REGISTER)">Register</button>
-              <button anglifyButton type="button" appearance="text" (click)="setActiveState(STATE_PASSWORD_FORGOT)">Password forgot</button>
+              <button class="btn btn-link" type="button" (click)="setActiveState(STATE_REGISTER)">Register</button>
+              <button class="btn btn-link" type="button" (click)="setActiveState(STATE_PASSWORD_FORGOT)">Password forgot</button>
             </div>
 
             <div class="card-footer" *ngIf="activeState !== STATE_LOGIN">
-              <button anglifyButton type="button" appearance="text" (click)="setActiveState(STATE_LOGIN)">Login</button>
+              <button class="btn btn-link" type="button" (click)="setActiveState(STATE_LOGIN)">Login</button>
             </div>
           </div>
         </div>
