@@ -72,7 +72,7 @@
     "@ngxs/devtools-plugin": "3.8.2",
     "@types/jasmine": "~5.1.4",
     "@types/jasminewd2": "~2.0.13",
-    "@types/node": "^22.9.3",
+    "@types/node": "^22.10.0",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
     "eslint": "^8.57.1",
