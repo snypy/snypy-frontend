@@ -45,7 +45,7 @@
     "fs-extra": "^11.2.0",
     "karma-coverage": "^2.2.1",
     "markdown-to-text": "^0.1.1",
-    "monaco-editor": "^0.41.0",
+    "monaco-editor": "^0.52.0",
     "ngx-clipboard": "^16.0.0",
     "ngx-markdown": "^16.0.0",
     "ngx-monaco-editor-v2": "^16.0.1",
