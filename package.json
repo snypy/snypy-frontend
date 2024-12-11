@@ -68,7 +68,7 @@
     "@angular/cli": "^16.2.12",
     "@angular/compiler-cli": "^16.2.12",
     "@angular/language-service": "^19.0.3",
-    "@ngx-formly/schematics": "^6.3.11",
+    "@ngx-formly/schematics": "^6.3.12",
     "@ngxs/devtools-plugin": "3.8.2",
     "@types/jasmine": "~5.1.5",
     "@types/jasminewd2": "~2.0.13",
