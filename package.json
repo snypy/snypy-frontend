@@ -16,7 +16,7 @@
   "dependencies": {
     "@angular-devkit/architect": "^0.1900.5",
     "@angular/animations": "^16.2.12",
-    "@angular/cdk": "^16.2.12",
+    "@angular/cdk": "^19.0.3",
     "@angular/common": "^16.2.12",
     "@angular/compiler": "^16.2.12",
     "@angular/core": "^16.2.12",
