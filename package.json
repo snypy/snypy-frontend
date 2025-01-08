@@ -41,7 +41,7 @@
     "@popperjs/core": "^2.11.8",
     "@snypy/rest-client": "^1.5.2",
     "bootstrap": "^5.3.3",
-    "core-js": "^3.39.0",
+    "core-js": "^3.40.0",
     "fs-extra": "^11.2.0",
     "karma-coverage": "^2.2.1",
     "markdown-to-text": "^0.1.1",
