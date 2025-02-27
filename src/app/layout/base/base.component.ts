@@ -33,13 +33,16 @@ export class BaseComponent implements OnInit, OnDestroy {
     protected activeFilterService: ActiveFilterService,
     protected route: ActivatedRoute,
     protected teamService: TeamService
-  ) {}
+  ) {
+    // Set initial logged in state from auth resource
+    this.isLoggedIn = this.authResource.isLoggedId;
+  }
 
   ngOnInit(): void {
-    /**
-     * Initialize auth for already authenticated users
-     */
-    this.authResource.init();
+    // Initialize auth only if we're not already logged in
+    if (!this.isLoggedIn) {
+      this.authResource.init();
+    }
 
     /**
      * Refresh snippets on scope changes
@@ -58,14 +61,19 @@ export class BaseComponent implements OnInit, OnDestroy {
      */
     this.authSubscription = this.authResource.loginStatusUpdates.subscribe(value => {
       this.isLoggedIn = value;
-      this.setScopeData();
+      if (value) {
+        this.setScopeData();
+      }
     });
 
     /**
-     * Subscribe for route param changes
+     * Only set scope on route param changes if no scope is currently set
+     * Let the components manage scope changes directly otherwise
      */
     this.routeSubscription = this.route.params.pipe(skip(1)).subscribe(() => {
-      this.setScopeData();
+      if (this.isLoggedIn) {
+        this.setScopeData();
+      }
     });
   }
 

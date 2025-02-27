@@ -12,7 +12,7 @@ export class AutoLinkPipe implements PipeTransform {
     if (!text) {
       return '';
     }
-    
+
     // Replace URLs with HTML links and shorten the displayed text
     const linkedText = text.replace(this.urlRegex, url => {
       // Create a shortened version of the URL for display
@@ -22,10 +22,10 @@ export class AutoLinkPipe implements PipeTransform {
         const urlObj = new URL(url);
         const domain = urlObj.hostname;
         const protocol = urlObj.protocol + '//';
-        
+
         // Calculate how much space we have left after protocol and domain
         const remainingSpace = maxUrlLength - protocol.length - domain.length - 3; // 3 for "..."
-        
+
         if (remainingSpace > 5) {
           // We have enough space to show some of the path
           const path = urlObj.pathname + urlObj.search + urlObj.hash;
@@ -36,10 +36,10 @@ export class AutoLinkPipe implements PipeTransform {
           displayUrl = `${protocol}${domain}...`;
         }
       }
-      
+
       return `<a href="${url}" title="${url}" target="_blank">${displayUrl}</a>`;
     });
-    
+
     // Sanitize the HTML to prevent XSS
     return this.sanitizer.bypassSecurityTrustHtml(linkedText);
   }

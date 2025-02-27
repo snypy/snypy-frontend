@@ -8,6 +8,6 @@
     [title]="team.name"
     class="team"
     [ngStyle]="{ 'background-image': 'url(https://www.gravatar.com/avatar/' + team.pk + '?d=wavatar&f=y&s=50)' }"
-    [routerLink]="['/team', team.pk]"
+    (click)="navigateToTeam(team.pk)"
   ></a>
 </div>
