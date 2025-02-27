@@ -63,6 +63,7 @@ import { TeamMemberDeleteModalComponent } from './modals/team-member-delete-moda
 import { TeamMemberModalComponent } from './modals/team-member-modal/team-member-modal.component';
 import { TeamModalComponent } from './modals/team-modal/team-modal.component';
 import { RemoveMarkdownPipe } from './pipes/removeMarkdownPipe';
+import { AutoLinkPipe } from './pipes/autoLinkPipe';
 import { ServicesModule } from './services/services.module';
 import { LabelState } from './state/label/label.state';
 import { LanguageState } from './state/language/language.state';
@@ -165,6 +166,7 @@ export function apiConfigFactory(): Configuration {
     PasswordResetCompleteComponent,
     SetPasswordComponent,
     RemoveMarkdownPipe,
+    AutoLinkPipe,
     FullscreenComponent,
   ],
   imports: [
