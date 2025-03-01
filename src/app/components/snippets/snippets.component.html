@@ -10,7 +10,7 @@
   </div>
   <div class="card-text">
     <p style="line-height: 1; font-size: small">
-      {{ snippet.description | removemarkdown | slice : 0 : 120 }}
+      <span [innerHTML]="snippet.description | removemarkdown | slice : 0 : 120 | autolink"></span>
       <span *ngIf="snippet.description.length > 120">...</span>
     </p>
   </div>

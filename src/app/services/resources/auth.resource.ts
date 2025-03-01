@@ -24,12 +24,19 @@ export class AuthResource {
 
   constructor(http: HttpClient, private userService: UserService, private toastr: ToastrService, private authService: AuthService) {}
 
+  // Flag to track if initial user load has been done
+  private initialUserLoaded = false;
+
   /**
    * This method is used in the main app component to load an active user during the bootstrap process
    */
   public init(): void {
-    if (AuthResource.getToken()) {
+    if (AuthResource.getToken() && !this.initialUserLoaded) {
       this.loadCurrentUser();
+      this.initialUserLoaded = true;
+    } else if (AuthResource.getToken() && this.isLoggedId) {
+      // Already logged in, just use existing user data
+      this.updateLoginStatus(true);
     }
   }
 
