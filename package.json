@@ -50,7 +50,7 @@
     "ngx-markdown": "^16.0.0",
     "ngx-monaco-editor-v2": "^16.0.1",
     "ngx-pipes": "^3.2.2",
-    "ngx-scrollbar": "^13.0.3",
+    "ngx-scrollbar": "^18.0.0",
     "ngx-toastr": "^19.0.0",
     "rxjs": "^7.8.2",
     "rxjs-compat": "^6.6.7",
