@@ -15,7 +15,7 @@
   "private": true,
   "dependencies": {
     "@angular-devkit/architect": "^0.1902.9",
-    "@angular/animations": "^16.2.12",
+    "@angular/animations": "^19.2.8",
     "@angular/cdk": "^16.2.12",
     "@angular/common": "^16.2.12",
     "@angular/compiler": "^16.2.12",
