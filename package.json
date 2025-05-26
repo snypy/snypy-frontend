@@ -67,7 +67,7 @@
     "@angular-eslint/utils": "^19.4.0",
     "@angular/cli": "^16.2.12",
     "@angular/compiler-cli": "^16.2.12",
-    "@angular/language-service": "^19.2.11",
+    "@angular/language-service": "^19.2.13",
     "@ngx-formly/schematics": "^6.3.12",
     "@ngxs/devtools-plugin": "3.8.2",
     "@types/jasmine": "~5.1.8",
