@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 
@@ -10,6 +10,7 @@ import { FormlyFieldConfig } from '@ngx-formly/core';
 })
 export class PasswordResetComponent {
   @Output() public passwordReset = new EventEmitter<{ email: string; formGroup: FormGroup }>();
+  @Input() errors: any;
 
   form: FormGroup = new FormGroup([]);
   model = { username: '', password: '' };

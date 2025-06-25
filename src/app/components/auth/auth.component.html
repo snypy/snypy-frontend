@@ -29,6 +29,7 @@
               <app-password-reset
                 *ngIf="activeState === STATE_PASSWORD_FORGOT"
                 (passwordReset)="doPasswordReset($event)"
+                [errors]="passwordResetErrors"
               ></app-password-reset>
 
               <app-register-complete *ngIf="activeState === STATE_REGISTER_COMPLETE"></app-register-complete>

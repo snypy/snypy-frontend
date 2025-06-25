@@ -25,6 +25,7 @@ export class AuthComponent implements OnInit {
 
   private activeStateSubject = new BehaviorSubject<string>(this.STATE_LOGIN);
   public activeState$: Observable<string> = this.activeStateSubject.asObservable();
+  public passwordResetErrors: any = null;
 
   private readonly createPasswordResetSubject = new Subject<{ email: string; formGroup: FormGroup }>();
   private readonly passwordResetCreated$ = this.createPasswordResetSubject.asObservable().pipe(
@@ -32,10 +33,19 @@ export class AuthComponent implements OnInit {
       this.passwordResetService.passwordResetCreate({ emailRequest: { email: subject.email } }).pipe(
         catchError(reason => {
           Errors.handleFormError(subject.formGroup, reason);
-          if (reason['non_field_errors']) {
-            for (const error of reason['non_field_errors']) {
-              this.toastr.error(error);
-            }
+          if (reason.error && reason.error.non_field_errors) {
+            this.passwordResetErrors = reason.error;
+          } else {
+            // Fallback for unexpected error structures or if non_field_errors is not the primary source
+             this.passwordResetErrors = { non_field_errors: ['An unexpected error occurred. Please try again.'] };
+          }
+          // Optionally, still log to toastr for broader visibility if desired, or remove if form display is sufficient
+          if (reason.error && reason.error.non_field_errors) {
+            reason.error.non_field_errors.forEach(error => this.toastr.error(error));
+          } else if (reason.message) {
+            this.toastr.error(reason.message);
+          } else {
+            this.toastr.error('An unexpected error occurred during password reset.');
           }
           return EMPTY;
         })
@@ -78,10 +88,13 @@ export class AuthComponent implements OnInit {
   }
 
   public doPasswordReset(passwordResetSubject: { email: string; formGroup: FormGroup }): void {
+    this.passwordResetErrors = null;
     this.createPasswordResetSubject.next(passwordResetSubject);
   }
 
   public setActiveState(newState: string): void {
+    this.passwordResetErrors = null;
+    this.server_errors = null; // Also clear registration errors when changing state
     this.activeStateSubject.next(newState);
   }
 }
