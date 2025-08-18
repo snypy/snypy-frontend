@@ -70,7 +70,7 @@
     "@angular/language-service": "^20.1.6",
     "@ngx-formly/schematics": "^7.0.0",
     "@ngxs/devtools-plugin": "3.8.2",
-    "@types/jasmine": "~5.1.8",
+    "@types/jasmine": "~5.1.9",
     "@types/jasminewd2": "~2.0.13",
     "@types/node": "^24.2.0",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
