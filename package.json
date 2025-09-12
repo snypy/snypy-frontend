@@ -74,7 +74,7 @@
     "@types/jasminewd2": "~2.0.13",
     "@types/node": "^24.2.0",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
-    "@typescript-eslint/parser": "^5.62.0",
+    "@typescript-eslint/parser": "^8.43.0",
     "eslint": "^8.57.1",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-prettier": "^4.2.1",
