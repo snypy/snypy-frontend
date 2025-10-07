@@ -14,6 +14,7 @@ import { mapFormErrors } from '../../helpers/form-error-mapper';
   selector: 'app-label-modal',
   templateUrl: './label-modal.component.html',
   styleUrls: ['./label-modal.component.scss'],
+  standalone: false,
 })
 export class LabelModalComponent implements OnInit {
   @Input() label: Label = null;

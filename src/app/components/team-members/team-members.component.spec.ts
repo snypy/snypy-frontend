@@ -1,11 +1,12 @@
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxsModule } from '@ngxs/store';
 import { ToastrModule } from 'ngx-toastr';
+import { ALL_STATES } from '../../testing/ngxs-test-helper';
 import { ActiveFilterService } from '../../services/navigation/activeFilter.service';
 import { AuthResource } from '../../services/resources/auth.resource';
-import { ScopeState } from '../../state/scope/scope.state';
 import { TeamMembersComponent } from './team-members.component';
 
 describe('TeamMembersComponent', () => {
@@ -15,7 +16,7 @@ describe('TeamMembersComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [TeamMembersComponent],
-      imports: [HttpClientModule, NgxsModule.forRoot([ScopeState]), ToastrModule.forRoot({})],
+      imports: [HttpClientModule, NoopAnimationsModule, NgxsModule.forRoot(ALL_STATES), ToastrModule.forRoot({})],
       providers: [ActiveFilterService, NgbActiveModal, AuthResource],
     }).compileComponents();
   }));

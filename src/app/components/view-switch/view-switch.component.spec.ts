@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ViewSwitchComponent } from './view-switch.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxsModule } from '@ngxs/store';
@@ -13,7 +14,7 @@ describe('ViewSwitchComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ViewSwitchComponent],
-      imports: [HttpClientModule, NgxsModule.forRoot([ScopeState]), ToastrModule.forRoot({})],
+      imports: [HttpClientModule, NoopAnimationsModule, NgxsModule.forRoot([ScopeState]), ToastrModule.forRoot({})],
       providers: [AuthResource],
     }).compileComponents();
   }));

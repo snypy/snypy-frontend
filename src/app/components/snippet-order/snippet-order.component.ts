@@ -6,6 +6,7 @@ import { UpdateSnippetOrderingFilter } from '../../state/snippet/snippet.actions
   selector: 'app-snippet-order',
   templateUrl: './snippet-order.component.html',
   styleUrls: ['./snippet-order.component.scss'],
+  standalone: false,
 })
 export class SnippetOrderComponent implements OnInit {
   options: { pk: number; name: string; key: string; ordering: -1 | 1 }[] = [

@@ -8,6 +8,7 @@ import { firstValueFrom } from 'rxjs';
   selector: 'app-label-delete-modal',
   templateUrl: './label-delete-modal.component.html',
   styleUrls: ['./label-delete-modal.component.scss'],
+  standalone: false,
 })
 export class LabelDeleteModalComponent {
   @Input() label: Label = null;

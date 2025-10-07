@@ -15,6 +15,7 @@ import { UserTeam, UserteamService } from '@snypy/rest-client';
   selector: 'app-team-members',
   templateUrl: './team-members.component.html',
   styleUrls: ['./team-members.component.scss'],
+  standalone: false,
 })
 export class TeamMembersComponent implements OnInit, OnDestroy {
   activeFilter: Filter;

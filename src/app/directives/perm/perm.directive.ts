@@ -11,6 +11,7 @@ export enum PERMISSION {
 
 @Directive({
   selector: '[appPerm]',
+  standalone: false,
 })
 export class PermDirective implements OnChanges {
   permName: PERMISSION;

@@ -5,6 +5,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   selector: 'app-help-modal',
   templateUrl: './help-modal.component.html',
   styleUrls: ['./help-modal.component.scss'],
+  standalone: false,
 })
 export class HelpModalComponent {
   constructor(private activeModal: NgbActiveModal) {}

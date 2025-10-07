@@ -13,6 +13,7 @@ import { noop } from 'rxjs';
       multi: true,
     },
   ],
+  standalone: false,
 })
 export class BootstrapSwitchComponent implements ControlValueAccessor {
   @Input() size: 'sm' | 'md' | 'lg' = 'md';

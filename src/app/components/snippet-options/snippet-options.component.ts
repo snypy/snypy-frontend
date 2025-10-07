@@ -14,6 +14,7 @@ import { RemoveSnippet, SetActiveSnippet } from '../../state/snippet/snippet.act
   templateUrl: './snippet-options.component.html',
   styleUrls: ['./snippet-options.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class SnippetOptionsComponent implements OnInit {
   activeSnippet: Snippet = null;

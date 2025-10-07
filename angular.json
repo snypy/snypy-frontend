@@ -32,9 +32,7 @@
                 "node_modules/bootstrap/scss/"
               ]
             },
-            "scripts": [
-              "node_modules/marked/marked.min.js"
-            ],
+            "scripts": [],
             "vendorChunk": true,
             "extractLicenses": false,
             "buildOptimizer": false,
@@ -70,18 +68,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "sny-py:build"
+            "buildTarget": "sny-py:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "sny-py:build:production"
+              "buildTarget": "sny-py:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "sny-py:build"
+            "buildTarget": "sny-py:build"
           }
         },
         "test": {
@@ -124,7 +122,8 @@
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",
-      "style": "scss"
+      "style": "scss",
+      "standalone": false
     },
     "@schematics/angular:directive": {
       "prefix": "app"

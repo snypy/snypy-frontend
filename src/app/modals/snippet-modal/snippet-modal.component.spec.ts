@@ -1,9 +1,11 @@
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxsSelectSnapshotModule } from '@ngxs-labs/select-snapshot';
 import { NgxsModule } from '@ngxs/store';
 import { ToastrModule } from 'ngx-toastr';
+import { ALL_STATES } from '../../testing/ngxs-test-helper';
 import { SnippetModalComponent } from './snippet-modal.component';
 
 describe('SnippetModalComponent', () => {
@@ -13,7 +15,13 @@ describe('SnippetModalComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [SnippetModalComponent],
-      imports: [NgxsModule.forRoot(), HttpClientModule, ToastrModule.forRoot({}), NgxsSelectSnapshotModule.forRoot()],
+      imports: [
+        NgxsModule.forRoot(ALL_STATES),
+        HttpClientModule,
+        NoopAnimationsModule,
+        ToastrModule.forRoot({}),
+        NgxsSelectSnapshotModule.forRoot(),
+      ],
       providers: [NgbActiveModal],
     }).compileComponents();
   }));

@@ -15,6 +15,7 @@ import { UpdateTeam } from '../../state/team/team.actions';
   selector: 'app-view-info',
   templateUrl: './view-info.component.html',
   styleUrls: ['./view-info.component.scss'],
+  standalone: false,
 })
 export class ViewInfoComponent implements OnInit, OnDestroy {
   heading = 'My Snippets';

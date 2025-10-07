@@ -15,6 +15,7 @@ import { LanguageState } from '../../state/language/language.state';
   templateUrl: './snippet.component.html',
   styleUrls: ['./snippet.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class SnippetComponent implements OnInit {
   public copiedFile: File | null = null;

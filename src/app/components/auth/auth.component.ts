@@ -15,6 +15,7 @@ import { AuthTokenLoginCreateRequestParams } from '@snypy/rest-client';
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class AuthComponent implements OnInit {
   public STATE_LOGIN = 'LOGIN';

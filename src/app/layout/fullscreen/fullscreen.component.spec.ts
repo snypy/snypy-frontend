@@ -2,6 +2,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { NgxsModule } from '@ngxs/store';
+import { ALL_STATES } from '../../testing/ngxs-test-helper';
 
 import { FullscreenComponent } from './fullscreen.component';
 
@@ -12,7 +13,7 @@ describe('FullscreenComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [FullscreenComponent],
-      imports: [HttpClientModule, NgxsModule.forRoot()],
+      imports: [HttpClientModule, NgxsModule.forRoot(ALL_STATES)],
       providers: [
         {
           provide: ActivatedRoute,

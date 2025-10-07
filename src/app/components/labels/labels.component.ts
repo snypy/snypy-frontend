@@ -15,6 +15,7 @@ import { LabelState } from '../../state/label/label.state';
   templateUrl: './labels.component.html',
   styleUrls: ['./labels.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class LabelsComponent {
   activeFilter$: Observable<Filter>;

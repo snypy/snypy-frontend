@@ -8,6 +8,7 @@ import { UpdateScope } from '../../state/scope/scope.actions';
   selector: 'app-view-switch',
   templateUrl: './view-switch.component.html',
   styleUrls: ['./view-switch.component.scss'],
+  standalone: false,
 })
 export class ViewSwitchComponent {
   constructor(private router: Router, private store: Store, private authResource: AuthResource) {}

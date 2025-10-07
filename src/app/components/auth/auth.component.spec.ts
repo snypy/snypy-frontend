@@ -1,9 +1,11 @@
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormGroup } from '@angular/forms';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxsModule } from '@ngxs/store';
 import { ToastrModule } from 'ngx-toastr';
 import { firstValueFrom } from 'rxjs';
+import { ALL_STATES } from '../../testing/ngxs-test-helper';
 import { AuthResource } from '../../services/resources/auth.resource';
 import { AuthComponent } from './auth.component';
 
@@ -14,7 +16,7 @@ describe('AuthComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [AuthComponent],
-      imports: [HttpClientModule, NgxsModule.forRoot(), ToastrModule.forRoot({})],
+      imports: [HttpClientModule, NoopAnimationsModule, NgxsModule.forRoot(ALL_STATES), ToastrModule.forRoot({})],
       providers: [AuthResource],
     }).compileComponents();
   }));

@@ -17,6 +17,7 @@ import { UpdateTeams } from '../../state/team/team.actions';
   selector: 'app-base',
   templateUrl: './base.component.html',
   styleUrls: ['./base.component.scss'],
+  standalone: false,
 })
 export class BaseComponent implements OnInit, OnDestroy {
   isLoggedIn = false;

@@ -24,27 +24,29 @@
     </button>
     <button *ngIf="copiedFile === file" class="btn btn-sm btn-outline-success ms-2 copy-button disabled">copied</button>
 
-    <ngb-accordion #acc="ngbAccordion" [activeIds]="'file-' + file.pk">
-      <ngb-panel [id]="'file-' + file.pk" [title]="file.name">
-        <ng-template ngbPanelHeader>
-          <button ngbPanelToggle class="accordion-button" [ngClass]="{ copied: copiedFile === file }">{{ file.name }}</button>
-        </ng-template>
-        <ng-template ngbPanelContent>
-          <ngx-monaco-editor
-            [style.height]="calculateEditorHeight(file.content)"
-            style="min-height: 50px; max-height: 400px"
-            [options]="{
-              theme: 'vs-dark',
-              language: getLanguageName(file.language),
-              readOnly: true,
-              scrollBeyondLastLine: false,
-              scrollbar: { alwaysConsumeMouseWheel: false }
-            }"
-            [(ngModel)]="file.content"
-          ></ngx-monaco-editor>
-        </ng-template>
-      </ngb-panel>
-    </ngb-accordion>
+    <div ngbAccordion>
+      <div ngbAccordionItem [collapsed]="false">
+        <div ngbAccordionHeader>
+          <button ngbAccordionToggle class="accordion-button" [ngClass]="{ copied: copiedFile === file }">{{ file.name }}</button>
+        </div>
+        <div ngbAccordionCollapse>
+          <div ngbAccordionBody>
+            <ngx-monaco-editor
+              [style.height]="calculateEditorHeight(file.content)"
+              style="min-height: 50px; max-height: 400px"
+              [options]="{
+                theme: 'vs-dark',
+                language: getLanguageName(file.language),
+                readOnly: true,
+                scrollBeyondLastLine: false,
+                scrollbar: { alwaysConsumeMouseWheel: false }
+              }"
+              [(ngModel)]="file.content"
+            ></ngx-monaco-editor>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   <div></div>
 </div>

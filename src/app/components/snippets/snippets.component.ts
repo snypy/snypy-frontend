@@ -11,6 +11,7 @@ import { SetActiveSnippet } from '../../state/snippet/snippet.actions';
   selector: 'app-snippets',
   templateUrl: './snippets.component.html',
   styleUrls: ['./snippets.component.scss'],
+  standalone: false,
 })
 export class SnippetsComponent implements OnInit, OnDestroy {
   activeSnippet: Snippet = null;

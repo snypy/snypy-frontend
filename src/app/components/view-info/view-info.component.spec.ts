@@ -1,6 +1,8 @@
+import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NgxsModule } from '@ngxs/store';
 import { of } from 'rxjs';
+import { ALL_STATES } from '../../testing/ngxs-test-helper';
 import { ViewInfoComponent } from './view-info.component';
 
 describe('ViewInfoComponent', () => {
@@ -10,7 +12,7 @@ describe('ViewInfoComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ViewInfoComponent],
-      imports: [NgxsModule.forRoot()],
+      imports: [HttpClientModule, NgxsModule.forRoot(ALL_STATES)],
     }).compileComponents();
   }));
 

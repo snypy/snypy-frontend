@@ -10,6 +10,7 @@ import { FormlyFieldConfig } from '@ngx-formly/core';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class RegisterComponent implements OnChanges {
   @Output() register = new EventEmitter<RegisterPayload>();

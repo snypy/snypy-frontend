@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NgxsModule } from '@ngxs/store';
 import { ActiveFilterService } from '../../services/navigation/activeFilter.service';
 import { TeamsComponent } from './teams.component';
+import { ALL_STATES } from '../../testing/ngxs-test-helper';
 
 describe('TeamsComponent', () => {
   let component: TeamsComponent;
@@ -11,7 +12,7 @@ describe('TeamsComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [TeamsComponent],
-      imports: [NgxsModule.forRoot(), HttpClientModule],
+      imports: [NgxsModule.forRoot(ALL_STATES), HttpClientModule],
       providers: [ActiveFilterService],
     }).compileComponents();
   }));

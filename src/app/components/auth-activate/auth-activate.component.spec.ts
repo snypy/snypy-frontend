@@ -1,5 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ToastrModule } from 'ngx-toastr';
 import { AuthResource } from '../../services/resources/auth.resource';
@@ -12,7 +13,7 @@ describe('AuthActivateComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [AuthActivateComponent],
-      imports: [RouterTestingModule, HttpClientModule, ToastrModule.forRoot({})],
+      imports: [RouterTestingModule, HttpClientModule, NoopAnimationsModule, ToastrModule.forRoot({})],
       providers: [AuthResource],
     }).compileComponents();
   }));

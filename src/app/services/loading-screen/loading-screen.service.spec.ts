@@ -6,7 +6,7 @@ describe('LoadingScreenService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: LoadingScreenService = TestBed.get(LoadingScreenService);
+    const service: LoadingScreenService = TestBed.inject(LoadingScreenService);
     expect(service).toBeTruthy();
   });
 });

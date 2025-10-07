@@ -1,8 +1,10 @@
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxsModule } from '@ngxs/store';
 import { ToastrModule } from 'ngx-toastr';
+import { ALL_STATES } from '../../testing/ngxs-test-helper';
 import { TeamMemberModalComponent } from './team-member-modal.component';
 
 describe('TeamMemberModalComponent', () => {
@@ -12,7 +14,7 @@ describe('TeamMemberModalComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [TeamMemberModalComponent],
-      imports: [HttpClientModule, NgxsModule.forRoot(), ToastrModule.forRoot({})],
+      imports: [HttpClientModule, NoopAnimationsModule, NgxsModule.forRoot(ALL_STATES), ToastrModule.forRoot({})],
       providers: [NgbActiveModal],
     }).compileComponents();
   }));

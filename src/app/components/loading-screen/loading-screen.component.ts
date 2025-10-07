@@ -7,6 +7,7 @@ import { LoadingScreenService } from '../../services/loading-screen/loading-scre
   selector: 'app-loading-screen',
   templateUrl: './loading-screen.component.html',
   styleUrls: ['./loading-screen.component.scss'],
+  standalone: false,
 })
 export class LoadingScreenComponent implements AfterViewInit, OnDestroy {
   debounceTime = 200;
