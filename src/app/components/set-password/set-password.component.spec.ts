@@ -1,5 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ToastrModule } from 'ngx-toastr';
 import { SetPasswordComponent } from './set-password.component';
@@ -11,7 +12,7 @@ describe('SetPasswordComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [SetPasswordComponent],
-      imports: [RouterTestingModule, HttpClientModule, ToastrModule.forRoot({})],
+      imports: [RouterTestingModule, HttpClientModule, NoopAnimationsModule, ToastrModule.forRoot({})],
     }).compileComponents();
   });
 

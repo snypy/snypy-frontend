@@ -8,6 +8,7 @@ import { firstValueFrom } from 'rxjs';
   selector: 'app-auth-activate',
   templateUrl: './auth-activate.component.html',
   styleUrls: ['./auth-activate.component.scss'],
+  standalone: false,
 })
 export class AuthActivateComponent implements OnInit {
   constructor(

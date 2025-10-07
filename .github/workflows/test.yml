@@ -14,9 +14,9 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '16'
+          node-version: '22'
       - name: Install dependencies
-        run: npm install
+        run: npm install --legacy-peer-deps
         env:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Run linter
@@ -29,9 +29,9 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '16'
+          node-version: '22'
       - name: Install dependencies
-        run: npm install
+        run: npm install --legacy-peer-deps
         env:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Run test with coverage
@@ -46,9 +46,9 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "16"
+          node-version: "22"
       - name: Install dependencies
-        run: npm install
+        run: npm install --legacy-peer-deps
         env:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Build project

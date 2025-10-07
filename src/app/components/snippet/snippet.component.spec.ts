@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NgxsModule } from '@ngxs/store';
 import { ApiModule } from '@snypy/rest-client';
 import { SnippetComponent } from './snippet.component';
+import { ALL_STATES } from '../../testing/ngxs-test-helper';
 
 describe('SnippetComponent', () => {
   let component: SnippetComponent;
@@ -11,7 +12,7 @@ describe('SnippetComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [SnippetComponent],
-      imports: [HttpClientModule, NgxsModule.forRoot(), ApiModule],
+      imports: [HttpClientModule, NgxsModule.forRoot(ALL_STATES), ApiModule],
       providers: [],
     }).compileComponents();
   }));

@@ -8,6 +8,7 @@ import { FormlyFieldConfig } from '@ngx-formly/core';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class LoginComponent {
   @Output() login = new EventEmitter<AuthTokenLoginCreateRequestParams>();

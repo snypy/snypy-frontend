@@ -9,6 +9,7 @@ import { LanguageState } from '../../state/language/language.state';
   selector: 'app-languages',
   templateUrl: './languages.component.html',
   styleUrls: ['./languages.component.scss'],
+  standalone: false,
 })
 export class LanguagesComponent implements OnInit, OnDestroy {
   activeFilter: Filter;

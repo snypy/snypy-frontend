@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { Team, User } from '@snypy/rest-client';
 import { SnippetService } from '@snypy/rest-client';
-import { ScopeModel } from '../scope/scope.model';
 import { ScopeState } from '../scope/scope.state';
 import {
   AddSnippet,
@@ -103,7 +102,7 @@ export class SnippetState {
   @Action(UpdateSnippets)
   async updateSnippets(ctx: StateContext<SnippetModel>): Promise<void> {
     const state = ctx.getState();
-    const scope = this.store.selectSnapshot<ScopeModel>(ScopeState);
+    const scope = this.store.selectSnapshot(ScopeState.getScope);
     const filter = {};
 
     switch (scope.area) {

@@ -11,6 +11,7 @@ import { Validators } from '../../helpers/validators';
   selector: 'app-team-modal',
   templateUrl: './team-modal.component.html',
   styleUrls: ['./team-modal.component.scss'],
+  standalone: false,
 })
 export class TeamModalComponent implements OnInit {
   @Input() team: Team = null;

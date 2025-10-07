@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
-@Pipe({ name: 'autolink' })
+@Pipe({ name: 'autolink', standalone: false })
 export class AutoLinkPipe implements PipeTransform {
   // URL pattern that matches most common URL formats
   private urlRegex = /(https?:\/\/[^\s]+)/g;

@@ -13,6 +13,7 @@ import { UpdateScope } from '../../state/scope/scope.actions';
   selector: 'app-teams',
   templateUrl: './teams.component.html',
   styleUrls: ['./teams.component.scss'],
+  standalone: false,
 })
 export class TeamsComponent {
   teams: Team[] = [];

@@ -8,6 +8,7 @@ import { firstValueFrom } from 'rxjs';
   selector: 'app-team-member-delete-modal',
   templateUrl: './team-member-delete-modal.component.html',
   styleUrls: ['./team-member-delete-modal.component.scss'],
+  standalone: false,
 })
 export class TeamMemberDeleteModalComponent {
   @Input() userTeam: UserTeam = null;

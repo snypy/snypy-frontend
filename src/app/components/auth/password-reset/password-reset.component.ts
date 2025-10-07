@@ -7,6 +7,7 @@ import { FormlyFieldConfig } from '@ngx-formly/core';
   templateUrl: './password-reset.component.html',
   styleUrls: ['./password-reset.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class PasswordResetComponent {
   @Output() public passwordReset = new EventEmitter<{ email: string; formGroup: FormGroup }>();

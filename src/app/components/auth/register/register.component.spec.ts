@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { RegisterComponent } from './register.component';
 
@@ -9,7 +10,7 @@ describe('RegisterComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [RegisterComponent],
-      imports: [ToastrModule.forRoot({})],
+      imports: [NoopAnimationsModule, ToastrModule.forRoot({})],
     }).compileComponents();
   }));
 

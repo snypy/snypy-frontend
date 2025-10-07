@@ -26,6 +26,7 @@ import { FormlyFieldConfig } from '@ngx-formly/core';
   templateUrl: './snippet-modal.component.html',
   styleUrls: ['./snippet-modal.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class SnippetModalComponent implements OnInit {
   @ViewChild('labelselect')

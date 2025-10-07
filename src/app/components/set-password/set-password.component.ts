@@ -15,6 +15,7 @@ import { Validators } from '../../helpers/validators';
   templateUrl: './set-password.component.html',
   styleUrls: ['./set-password.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class SetPasswordComponent implements OnInit {
   STATE_INVALID_TOKEN = 'INVALID_TOKEN';
