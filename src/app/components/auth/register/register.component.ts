@@ -73,6 +73,16 @@ export class RegisterComponent implements OnChanges {
         required: true,
       },
     },
+    {
+      key: 'password_confirm',
+      type: 'input',
+      props: {
+        type: 'password',
+        label: 'Confirm Password',
+        placeholder: 'Confirm password',
+        required: true,
+      },
+    },
   ];
 
   constructor(private toastr: ToastrService) {}
