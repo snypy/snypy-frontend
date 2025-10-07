@@ -16,7 +16,11 @@ import { firstValueFrom } from 'rxjs';
 export class FullscreenComponent implements OnInit {
   snippetError = false;
 
-  constructor(private route: ActivatedRoute, private snippetService: SnippetService, private store: Store) {}
+  constructor(
+    private route: ActivatedRoute,
+    private snippetService: SnippetService,
+    private store: Store
+  ) {}
 
   ngOnInit(): void {
     const snippetPk = this.route.snapshot.params.id;

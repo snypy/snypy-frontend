@@ -20,7 +20,12 @@ export class TeamsComponent {
 
   @Select(TeamState) teams$: Observable<Team[]>;
 
-  constructor(private store: Store, private modalService: NgbModal, private router: Router, private teamService: TeamService) {}
+  constructor(
+    private store: Store,
+    private modalService: NgbModal,
+    private router: Router,
+    private teamService: TeamService
+  ) {}
 
   addTeam(): void {
     const modalRef = this.modalService.open(TeamModalComponent, { size: 'sm' });

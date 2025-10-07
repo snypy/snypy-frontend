@@ -25,7 +25,10 @@ export class ViewInfoComponent implements OnInit, OnDestroy {
 
   @Select(ScopeState) scope$: Observable<ScopeModel>;
 
-  constructor(private store: Store, private modalService: NgbModal) {}
+  constructor(
+    private store: Store,
+    private modalService: NgbModal
+  ) {}
 
   ngOnInit(): void {
     this.scopeUpdatedSubscription = this.scope$.subscribe((scope: ScopeModel) => {

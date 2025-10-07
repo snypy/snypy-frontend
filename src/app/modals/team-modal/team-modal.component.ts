@@ -18,7 +18,11 @@ export class TeamModalComponent implements OnInit {
 
   teamForm: FormGroup;
 
-  constructor(private activeModal: NgbActiveModal, private teamService: TeamService, private toastr: ToastrService) {}
+  constructor(
+    private activeModal: NgbActiveModal,
+    private teamService: TeamService,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit(): void {
     this.teamForm = new FormGroup({

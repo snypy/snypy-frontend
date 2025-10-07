@@ -13,7 +13,11 @@ import { firstValueFrom } from 'rxjs';
 export class TeamMemberDeleteModalComponent {
   @Input() userTeam: UserTeam = null;
 
-  constructor(private activeModal: NgbActiveModal, private toastr: ToastrService, private userteamService: UserteamService) {}
+  constructor(
+    private activeModal: NgbActiveModal,
+    private toastr: ToastrService,
+    private userteamService: UserteamService
+  ) {}
 
   confirmAction(): void {
     firstValueFrom(this.userteamService.userteamDestroy({ id: this.userTeam.pk }))

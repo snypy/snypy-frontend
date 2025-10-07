@@ -13,7 +13,11 @@ import { firstValueFrom } from 'rxjs';
 export class LabelDeleteModalComponent {
   @Input() label: Label = null;
 
-  constructor(private activeModal: NgbActiveModal, private toastr: ToastrService, private labelService: LabelService) {}
+  constructor(
+    private activeModal: NgbActiveModal,
+    private toastr: ToastrService,
+    private labelService: LabelService
+  ) {}
 
   confirmAction(): void {
     firstValueFrom(this.labelService.labelDestroy({ id: this.label.pk }))

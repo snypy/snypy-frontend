@@ -37,14 +37,14 @@
               </div>
             </div>
           </div>
-          <div *ngIf="(languages | filterBy : ['pk'] : file.get('language').value : [true]).length">
+          <div *ngIf="(languages | filterBy: ['pk'] : file.get('language').value : [true]).length">
             <ngx-monaco-editor
               style="height: 400px"
               [options]="{
                 theme: 'vs-dark',
-                language: (languages | filterBy : ['pk'] : file.get('language').value : [true])[0].name,
+                language: (languages | filterBy: ['pk'] : file.get('language').value : [true])[0].name,
                 scrollBeyondLastLine: false,
-                scrollbar: { alwaysConsumeMouseWheel: false }
+                scrollbar: { alwaysConsumeMouseWheel: false },
               }"
               formControlName="content"
             ></ngx-monaco-editor>

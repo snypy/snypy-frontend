@@ -24,7 +24,11 @@ export class LabelModalComponent implements OnInit {
   @SelectSnapshot(ScopeState)
   public scope: ScopeModel;
 
-  constructor(private activeModal: NgbActiveModal, private labelService: LabelService, private toastr: ToastrService) {}
+  constructor(
+    private activeModal: NgbActiveModal,
+    private labelService: LabelService,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit(): void {
     const scope = this.scope;

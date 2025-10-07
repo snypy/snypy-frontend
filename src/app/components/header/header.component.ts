@@ -21,7 +21,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
   snippetSearchForm: FormGroup;
   snippetSearchFormSubscription: Subscription;
 
-  constructor(private store: Store, private authResource: AuthResource, private modalService: NgbModal) {}
+  constructor(
+    private store: Store,
+    private authResource: AuthResource,
+    private modalService: NgbModal
+  ) {}
 
   ngOnInit(): void {
     this.currentUser = this.authResource.currentUser;

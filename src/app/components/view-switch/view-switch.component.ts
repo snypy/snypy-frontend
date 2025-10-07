@@ -11,7 +11,11 @@ import { UpdateScope } from '../../state/scope/scope.actions';
   standalone: false,
 })
 export class ViewSwitchComponent {
-  constructor(private router: Router, private store: Store, private authResource: AuthResource) {}
+  constructor(
+    private router: Router,
+    private store: Store,
+    private authResource: AuthResource
+  ) {}
 
   // Custom navigation handlers to prevent full page reload
   navigateToUser(): void {
