@@ -5,7 +5,7 @@
       <div class="d-flex gap-2 metadata">
         <div title="Author"><fa-icon [icon]="['fas', 'user']" size="xs"></fa-icon> {{ activeSnippet.user_display || 'Anonymous' }}</div>
         <div title="Last modified">
-          <fa-icon [icon]="['far', 'calendar']" size="xs"></fa-icon> {{ activeSnippet.modified_date | date : 'medium' }}
+          <fa-icon [icon]="['far', 'calendar']" size="xs"></fa-icon> {{ activeSnippet.modified_date | date: 'medium' }}
         </div>
         <div title="Visibility"><fa-icon [icon]="['fas', 'eye']" size="xs"></fa-icon> {{ activeSnippet.visibility }}</div>
       </div>

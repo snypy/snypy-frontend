@@ -3,14 +3,14 @@
     <img class="user-badge" [src]="snippet.user_avatar" alt="card image" />
     <div class="snippet">
       <h6 class="card-title">
-        {{ snippet.title | slice : 0 : 30 }}
+        {{ snippet.title | slice: 0 : 30 }}
         <span *ngIf="snippet.description.title > 30">...</span>
       </h6>
     </div>
   </div>
   <div class="card-text">
     <p style="line-height: 1; font-size: small">
-      <span [innerHTML]="snippet.description | removemarkdown | slice : 0 : 120 | autolink"></span>
+      <span [innerHTML]="snippet.description | removemarkdown | slice: 0 : 120 | autolink"></span>
       <span *ngIf="snippet.description.length > 120">...</span>
     </p>
   </div>

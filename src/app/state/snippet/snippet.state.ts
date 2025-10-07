@@ -27,7 +27,10 @@ import { firstValueFrom } from 'rxjs';
 })
 @Injectable()
 export class SnippetState {
-  constructor(private store: Store, private snippetService: SnippetService) {}
+  constructor(
+    private store: Store,
+    private snippetService: SnippetService
+  ) {}
 
   @Selector()
   static getFilter(state: SnippetModel) {

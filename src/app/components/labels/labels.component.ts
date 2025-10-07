@@ -24,7 +24,11 @@ export class LabelsComponent {
 
   @Select(LabelState) labels$: Observable<Label[]>;
 
-  constructor(private activeFilterService: ActiveFilterService, private modalService: NgbModal, private store: Store) {
+  constructor(
+    private activeFilterService: ActiveFilterService,
+    private modalService: NgbModal,
+    private store: Store
+  ) {
     this.activeFilter$ = this.activeFilterService.filterUpdated.pipe(map(filter => filter));
     this.activeFilterValue$ = this.activeFilter$.pipe(map(filter => filter.value));
     this.activeFilterArea$ = this.activeFilter$.pipe(map(filter => filter.area));

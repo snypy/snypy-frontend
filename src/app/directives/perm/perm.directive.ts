@@ -49,7 +49,10 @@ export class PermDirective implements OnChanges {
     return !!snippet.pk;
   }
 
-  constructor(private templateRef: TemplateRef<any>, private viewContainer: ViewContainerRef) {}
+  constructor(
+    private templateRef: TemplateRef<any>,
+    private viewContainer: ViewContainerRef
+  ) {}
 
   ngOnChanges(): void {
     this.viewContainer.clear();

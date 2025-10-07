@@ -6,7 +6,7 @@ import { UserService, User, AuthService } from '@snypy/rest-client';
 import { AuthTokenLoginCreateRequestParams } from '@snypy/rest-client';
 
 const AUTH_TOKEN = 'auth.token';
-``;
+
 export interface RegisterPayload {
   username: string;
   first_name: string;
@@ -22,7 +22,12 @@ export class AuthResource {
   currentUser: User = null;
   loginStatusUpdates: Subject<boolean> = new Subject<boolean>();
 
-  constructor(http: HttpClient, private userService: UserService, private toastr: ToastrService, private authService: AuthService) {}
+  constructor(
+    http: HttpClient,
+    private userService: UserService,
+    private toastr: ToastrService,
+    private authService: AuthService
+  ) {}
 
   // Flag to track if initial user load has been done
   private initialUserLoaded = false;
