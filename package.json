@@ -65,7 +65,7 @@
     "@angular-eslint/schematics": "~20.4.0",
     "@angular-eslint/template-parser": "~20.4.0",
     "@angular-eslint/utils": "~20.4.0",
-    "@angular/cli": "^20.3.5",
+    "@angular/cli": "^20.3.6",
     "@angular/compiler-cli": "^20.3.6",
     "@angular/language-service": "^20.3.5",
     "@ngx-formly/schematics": "^7.0.0",
