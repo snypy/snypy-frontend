@@ -64,7 +64,7 @@
     "@angular-eslint/eslint-plugin-template": "~20.5.1",
     "@angular-eslint/schematics": "~20.5.0",
     "@angular-eslint/template-parser": "~20.5.0",
-    "@angular-eslint/utils": "~20.5.0",
+    "@angular-eslint/utils": "~20.5.1",
     "@angular/cli": "^20.3.8",
     "@angular/compiler-cli": "^20.3.9",
     "@angular/language-service": "^20.3.9",
