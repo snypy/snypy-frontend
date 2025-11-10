@@ -43,7 +43,7 @@
     "core-js": "^3.46.0",
     "fs-extra": "^11.3.2",
     "karma-coverage": "^2.2.1",
-    "marked": "^16.4.2",
+    "marked": "^17.0.0",
     "markdown-to-text": "^0.1.1",
     "monaco-editor": "^0.54.0",
     "ngx-clipboard": "^16.0.0",
