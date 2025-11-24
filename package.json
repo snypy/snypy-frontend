@@ -47,7 +47,7 @@
     "markdown-to-text": "^0.1.1",
     "monaco-editor": "^0.55.1",
     "ngx-clipboard": "^16.0.0",
-    "ngx-markdown": "^20.0.0",
+    "ngx-markdown": "^21.0.0",
     "ngx-monaco-editor-v2": "^20.0.0",
     "ngx-pipes": "^3.2.2",
     "ngx-scrollbar": "^18.0.0",
