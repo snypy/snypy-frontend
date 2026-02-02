@@ -34,7 +34,7 @@
     "@ng-select/ng-select": "^20.4.1",
     "@ngneat/until-destroy": "^10.0.0",
     "@ngx-formly/bootstrap": "^7.0.0",
-    "@ngx-formly/core": "^7.0.1",
+    "@ngx-formly/core": "^7.1.0",
     "@ngxs-labs/select-snapshot": "^5.0.0",
     "@ngxs/store": "^20.1.0",
     "@popperjs/core": "^2.11.8",
