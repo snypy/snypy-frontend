@@ -215,7 +215,7 @@ export class SnippetModalComponent implements OnInit {
     firstValueFrom(this.labelService.labelCreate({ labelRequest: { name: label } })).then(response => {
       this.store.dispatch(new AddLabel(response));
       // this.snippetForm.get('snippetRequest.labels').setValue([...this.snippetForm.get('snippetRequest.labels').value, response.pk]);
-      this.labelSelectComponent.searchTerm = null;
+      this.labelSelectComponent.filter('');
       this.toastr.success('Label added!');
     });
   };
