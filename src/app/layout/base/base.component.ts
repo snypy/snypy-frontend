@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Select, Store } from '@ngxs/store';
 import { TeamRetrieveRequestParams, TeamService } from '@snypy/rest-client';
@@ -33,7 +33,8 @@ export class BaseComponent implements OnInit, OnDestroy {
     protected authResource: AuthResource,
     protected activeFilterService: ActiveFilterService,
     protected route: ActivatedRoute,
-    protected teamService: TeamService
+    protected teamService: TeamService,
+    protected cdr: ChangeDetectorRef
   ) {
     // Set initial logged in state from auth resource
     this.isLoggedIn = this.authResource.isLoggedId;
@@ -65,6 +66,7 @@ export class BaseComponent implements OnInit, OnDestroy {
       if (value) {
         this.setScopeData();
       }
+      this.cdr.markForCheck();
     });
 
     /**
