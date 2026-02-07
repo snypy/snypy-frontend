@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { PasswordResetService, AuthService } from '@snypy/rest-client';
@@ -52,7 +52,8 @@ export class AuthComponent implements OnInit {
     private readonly authResource: AuthResource,
     private readonly passwordResetService: PasswordResetService,
     private readonly toastr: ToastrService,
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
+    private readonly cdr: ChangeDetectorRef
   ) {}
 
   public ngOnInit(): void {
@@ -62,7 +63,14 @@ export class AuthComponent implements OnInit {
   }
 
   public doLogin(authCredentials: AuthTokenLoginCreateRequestParams): void {
-    this.authResource.login(authCredentials);
+    this.authResource
+      .login(authCredentials)
+      .then(() => {
+        this.cdr.markForCheck();
+      })
+      .catch(() => {
+        this.cdr.markForCheck();
+      });
   }
 
   public doRegister(registerPayload: RegisterPayload): void {
@@ -70,11 +78,13 @@ export class AuthComponent implements OnInit {
       .then(() => {
         console.log('User registered');
         this.setActiveState(this.STATE_REGISTER_COMPLETE);
+        this.cdr.markForCheck();
       })
       .catch(reason => {
         console.log('Cannot register user');
         console.log(reason);
         this.server_errors = reason.error;
+        this.cdr.markForCheck();
       });
   }
 
