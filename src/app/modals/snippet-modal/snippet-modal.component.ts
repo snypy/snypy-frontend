@@ -51,6 +51,7 @@ export class SnippetModalComponent implements OnInit {
 
   form: FormGroup = new FormGroup([]);
   filesForm = new FormArray([]);
+  fileCollapsedStates: boolean[] = [];
   model = {
     title: null,
     description: '',
@@ -153,12 +154,19 @@ export class SnippetModalComponent implements OnInit {
             content: new FormControl(snippetFile.content),
           })
         );
+        // All files start collapsed
+        this.fileCollapsedStates.push(true);
       }
     }
   }
 
+  public toggleFile(index: number): void {
+    this.fileCollapsedStates[index] = !this.fileCollapsedStates[index];
+  }
+
   public removeFile(index: number): void {
     this.filesForm.removeAt(index);
+    this.fileCollapsedStates.splice(index, 1);
   }
 
   public addFile(): void {
@@ -169,6 +177,8 @@ export class SnippetModalComponent implements OnInit {
         content: new FormControl(null),
       })
     );
+    // New files start expanded
+    this.fileCollapsedStates.push(false);
   }
 
   public confirmAction(closeModal: boolean): void {

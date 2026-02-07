@@ -8,46 +8,53 @@
 
     <div *ngFor="let file of filesForm.controls; let i = index" [formArray]="filesForm" style="margin-top: 0.75rem">
       <div [formGroup]="filesForm.controls[i]">
-        <div class="card" style="border: none">
-          <div class="card-head" style="border: 1px solid rgba(0, 0, 0, 0.125)">
-            <div class="row">
-              <div class="col-4">
-                <div class="form-group" style="margin: 0.75rem">
-                  <input class="form-control" formControlName="name" [id]="'input-title-' + i" />
+        <div class="card">
+          <div class="card-header file-header" (click)="toggleFile(i)">
+            <button class="btn btn-link file-toggle" [class.collapsed]="fileCollapsedStates[i]">
+              {{ file.get('name').value || 'Untitled file' }}
+            </button>
+          </div>
+          <div *ngIf="!fileCollapsedStates[i]">
+            <div class="card-body file-edit-controls">
+              <div class="row">
+                <div class="col-4">
+                  <div class="form-group">
+                    <input class="form-control" formControlName="name" [id]="'input-title-' + i" placeholder="File name" />
+                  </div>
                 </div>
-              </div>
-              <div class="col-4">
-                <div class="form-group" style="margin: 0.75rem">
-                  <ng-select
-                    [items]="languages$ | async"
-                    bindLabel="name"
-                    bindValue="pk"
-                    formControlName="language"
-                    clearable="false"
-                    placeholder="Select language"
-                  ></ng-select>
+                <div class="col-4">
+                  <div class="form-group">
+                    <ng-select
+                      [items]="languages$ | async"
+                      bindLabel="name"
+                      bindValue="pk"
+                      formControlName="language"
+                      clearable="false"
+                      placeholder="Select language"
+                    ></ng-select>
+                  </div>
                 </div>
-              </div>
-              <div class="col-4 text-end">
-                <div class="form-group" style="margin: 0.75rem">
-                  <button class="btn btn-link" aria-label="Remove" (click)="removeFile(i)">
-                    <fa-icon [icon]="['fas', 'trash']" size="sm"></fa-icon>
-                  </button>
+                <div class="col-4 text-end">
+                  <div class="form-group">
+                    <button class="btn btn-link" aria-label="Remove" (click)="removeFile(i)">
+                      <fa-icon [icon]="['fas', 'trash']" size="sm"></fa-icon>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div *ngIf="(languages | filterBy: ['pk'] : file.get('language').value : [true]).length">
-            <ngx-monaco-editor
-              style="height: 400px"
-              [options]="{
-                theme: 'vs-dark',
-                language: (languages | filterBy: ['pk'] : file.get('language').value : [true])[0].name,
-                scrollBeyondLastLine: false,
-                scrollbar: { alwaysConsumeMouseWheel: false },
-              }"
-              formControlName="content"
-            ></ngx-monaco-editor>
+            <div *ngIf="(languages | filterBy: ['pk'] : file.get('language').value : [true]).length">
+              <ngx-monaco-editor
+                style="height: 400px"
+                [options]="{
+                  theme: 'vs-dark',
+                  language: (languages | filterBy: ['pk'] : file.get('language').value : [true])[0].name,
+                  scrollBeyondLastLine: false,
+                  scrollbar: { alwaysConsumeMouseWheel: false },
+                }"
+                formControlName="content"
+              ></ngx-monaco-editor>
+            </div>
           </div>
         </div>
       </div>
