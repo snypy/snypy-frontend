@@ -1,3 +1,40 @@
 textarea {
   height: 150px;
 }
+
+.file-header {
+  cursor: pointer;
+  padding: 0;
+
+  .file-toggle {
+    width: 100%;
+    text-align: left;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.75rem 1.25rem;
+
+    &::before {
+      display: inline-block;
+      content: '';
+      border-top: 0.3em solid;
+      border-right: 0.3em solid transparent;
+      border-bottom: 0;
+      border-left: 0.3em solid transparent;
+      margin-right: 0.5em;
+      transition: transform 0.2s;
+      transform: rotate(0deg);
+    }
+
+    &.collapsed::before {
+      transform: rotate(-90deg);
+    }
+  }
+}
+
+.file-edit-controls {
+  padding: 0.75rem;
+
+  .form-group {
+    margin: 0;
+  }
+}
