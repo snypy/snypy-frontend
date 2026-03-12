@@ -19,7 +19,7 @@
     "@angular/common": "^21.2.2",
     "@angular/compiler": "^21.2.1",
     "@angular/core": "^21.2.2",
-    "@angular/forms": "^21.2.2",
+    "@angular/forms": "^21.2.3",
     "@angular/localize": "^21.2.2",
     "@angular/platform-browser": "^21.2.2",
     "@angular/platform-browser-dynamic": "^21.2.2",
