@@ -89,7 +89,7 @@
     "prettier": "^3.8.3",
     "protractor": "~7.0.0",
     "ts-node": "^10.9.2",
-    "typescript": "~5.9.3"
+    "typescript": "~6.0.2"
   },
   "overrides": {
     "@snypy/rest-client": {
