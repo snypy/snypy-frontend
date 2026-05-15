@@ -75,7 +75,7 @@
     "@types/node": "^25.8.0",
     "@typescript-eslint/eslint-plugin": "^8.59.3",
     "@typescript-eslint/parser": "^8.59.3",
-    "eslint": "^9.39.2",
+    "eslint": "^10.3.0",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-prettier": "^5.5.5",
     "git-describe": "^4.1.1",
