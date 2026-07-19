@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ActiveFilterService, Filter } from '../../services/navigation/activeFilter.service';
 
@@ -6,6 +6,7 @@ import { ActiveFilterService, Filter } from '../../services/navigation/activeFil
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class MenuComponent implements OnInit, OnDestroy {

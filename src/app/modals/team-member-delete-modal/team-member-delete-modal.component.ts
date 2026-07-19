@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { UserTeam, UserteamService } from '@snypy/rest-client';
@@ -8,6 +8,7 @@ import { firstValueFrom } from 'rxjs';
   selector: 'app-team-member-delete-modal',
   templateUrl: './team-member-delete-modal.component.html',
   styleUrls: ['./team-member-delete-modal.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class TeamMemberDeleteModalComponent {

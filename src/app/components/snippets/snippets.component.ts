@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Select, Store } from '@ngxs/store';
 import { Observable, Subscription } from 'rxjs';
@@ -11,6 +11,7 @@ import { SetActiveSnippet } from '../../state/snippet/snippet.actions';
   selector: 'app-snippets',
   templateUrl: './snippets.component.html',
   styleUrls: ['./snippets.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class SnippetsComponent implements OnInit, OnDestroy {

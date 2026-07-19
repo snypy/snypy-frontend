@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngxs/store';
 import { AuthResource } from '../../services/resources/auth.resource';
@@ -8,6 +8,7 @@ import { UpdateScope } from '../../state/scope/scope.actions';
   selector: 'app-view-switch',
   templateUrl: './view-switch.component.html',
   styleUrls: ['./view-switch.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class ViewSwitchComponent {

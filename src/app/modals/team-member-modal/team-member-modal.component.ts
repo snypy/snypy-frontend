@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { SelectSnapshot } from '@ngxs-labs/select-snapshot';
@@ -15,6 +15,7 @@ import { mapFormErrors } from '../../helpers/form-error-mapper';
   selector: 'app-team-member-modal',
   templateUrl: './team-member-modal.component.html',
   styleUrls: ['./team-member-modal.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class TeamMemberModalComponent implements OnInit {

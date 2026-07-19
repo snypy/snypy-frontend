@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '@snypy/rest-client';
 import { ToastrService } from 'ngx-toastr';
@@ -8,6 +8,7 @@ import { firstValueFrom } from 'rxjs';
   selector: 'app-auth-activate',
   templateUrl: './auth-activate.component.html',
   styleUrls: ['./auth-activate.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class AuthActivateComponent implements OnInit {
