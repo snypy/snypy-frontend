@@ -42,6 +42,7 @@ import { MenuComponent } from './components/menu/menu.component';
 import { SetPasswordComponent } from './components/set-password/set-password.component';
 import { SnippetOptionsComponent } from './components/snippet-options/snippet-options.component';
 import { SnippetOrderComponent } from './components/snippet-order/snippet-order.component';
+import { MarkdownClipboardButtonComponent } from './components/markdown-clipboard-button/markdown-clipboard-button.component';
 import { SnippetComponent } from './components/snippet/snippet.component';
 import { SnippetsComponent } from './components/snippets/snippets.component';
 import { TeamMembersComponent } from './components/team-members/team-members.component';
@@ -136,6 +137,7 @@ export function apiConfigFactory(): Configuration {
     MenuComponent,
     SnippetsComponent,
     SnippetComponent,
+    MarkdownClipboardButtonComponent,
     SnippetOptionsComponent,
     FooterComponent,
     HeaderComponent,
