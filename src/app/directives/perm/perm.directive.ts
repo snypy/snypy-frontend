@@ -2,11 +2,11 @@ import { Directive, Input, OnChanges, TemplateRef, ViewContainerRef } from '@ang
 import { UserTeam, RoleEnum, Snippet, User } from '@snypy/rest-client';
 
 export enum PERMISSION {
-  'cadAddTeamMember',
-  'canEditTeamMember',
-  'canDeleteTeamMember',
-  'canEditSnippet',
-  'canDeleteSnippet',
+  cadAddTeamMember,
+  canEditTeamMember,
+  canDeleteTeamMember,
+  canEditSnippet,
+  canDeleteSnippet,
 }
 
 @Directive({

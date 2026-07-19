@@ -6,9 +6,7 @@ import { AuthResource } from './resources/auth.resource';
   imports: [],
   exports: [],
   declarations: [],
-  providers: [
-    /* declare in `forRoot()` */
-  ],
+  providers: [/* declare in `forRoot()` */],
 })
 export class ServicesModule {
   static forRoot(): ModuleWithProviders<ServicesModule> {

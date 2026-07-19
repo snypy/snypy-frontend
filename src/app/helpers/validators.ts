@@ -2,7 +2,6 @@ import { AbstractControl, ValidationErrors } from '@angular/forms';
 
 export class Validators {
   public static required(control: AbstractControl): ValidationErrors | null {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const value = control.value;
     if (value === null || value === undefined || value === '') {
       return {
