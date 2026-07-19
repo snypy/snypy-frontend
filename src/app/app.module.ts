@@ -49,6 +49,7 @@ import { TeamMembersComponent } from './components/team-members/team-members.com
 import { TeamsComponent } from './components/teams/teams.component';
 import { ViewInfoComponent } from './components/view-info/view-info.component';
 import { ViewSwitchComponent } from './components/view-switch/view-switch.component';
+import { CopyInlineCodeDirective } from './directives/copy-inline-code/copy-inline-code.directive';
 import { PermDirective } from './directives/perm/perm.directive';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { LoadingScreenInterceptor } from './helpers/loading.interceptor';
@@ -160,6 +161,7 @@ export function apiConfigFactory(): Configuration {
     BootstrapSwitchComponent,
     LoadingScreenComponent,
     PermDirective,
+    CopyInlineCodeDirective,
     AuthComponent,
     RegisterComponent,
     RegisterCompleteComponent,

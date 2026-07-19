@@ -8,7 +8,13 @@
   </div>
 
   <div style="padding: 15px">
-    <markdown ngPreserveWhitespaces clipboard [clipboardButtonComponent]="clipboardButton" [data]="activeSnippet.description"></markdown>
+    <markdown
+      ngPreserveWhitespaces
+      clipboard
+      appCopyInlineCode
+      [clipboardButtonComponent]="clipboardButton"
+      [data]="activeSnippet.description"
+    ></markdown>
   </div>
 
   <div *ngFor="let file of files$ | async" style="margin: 20px" #container>

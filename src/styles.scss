@@ -40,5 +40,15 @@
       opacity: 1;
     }
   }
+
+  // inline code copies on click, see CopyInlineCodeDirective
+  markdown code:not(pre code) {
+    cursor: pointer;
+
+    &:hover {
+      background-color: #{$secondary-color-100};
+      border-radius: 2px;
+    }
+  }
 }
 
