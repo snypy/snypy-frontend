@@ -2,3 +2,17 @@
     display: block;
     background-color: #f7f7f7;
 }
+
+.content-column {
+    display: flex;
+    flex-direction: column;
+
+    .content-scrollbar {
+        flex: 1 1 auto;
+        min-height: 0;
+    }
+
+    app-footer {
+        margin-top: auto;
+    }
+}
