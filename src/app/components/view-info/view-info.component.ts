@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Select, Store } from '@ngxs/store';
 import { Team } from '@snypy/rest-client';
@@ -15,6 +15,7 @@ import { UpdateTeam } from '../../state/team/team.actions';
   selector: 'app-view-info',
   templateUrl: './view-info.component.html',
   styleUrls: ['./view-info.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class ViewInfoComponent implements OnInit, OnDestroy {

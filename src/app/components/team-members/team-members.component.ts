@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Select } from '@ngxs/store';
 import { Team } from '@snypy/rest-client';
@@ -15,6 +15,7 @@ import { UserTeam, UserteamService } from '@snypy/rest-client';
   selector: 'app-team-members',
   templateUrl: './team-members.component.html',
   styleUrls: ['./team-members.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class TeamMembersComponent implements OnInit, OnDestroy {

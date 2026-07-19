@@ -29,7 +29,8 @@
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
-                "node_modules/bootstrap/scss/"
+                "node_modules/bootstrap/scss/",
+                "src/"
               ]
             },
             "scripts": [],
@@ -97,7 +98,8 @@
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
-                "node_modules/bootstrap/scss/"
+                "node_modules/bootstrap/scss/",
+                "src/"
               ]
             },
             "assets": [

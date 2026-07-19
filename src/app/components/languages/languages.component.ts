@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { SelectSnapshot } from '@ngxs-labs/select-snapshot';
 import { Subscription } from 'rxjs';
 import { ActiveFilterService, Filter } from '../../services/navigation/activeFilter.service';
@@ -9,6 +9,7 @@ import { LanguageState } from '../../state/language/language.state';
   selector: 'app-languages',
   templateUrl: './languages.component.html',
   styleUrls: ['./languages.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class LanguagesComponent implements OnInit, OnDestroy {

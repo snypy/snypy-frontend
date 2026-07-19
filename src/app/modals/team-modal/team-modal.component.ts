@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Team, TeamService } from '@snypy/rest-client';
@@ -11,6 +11,7 @@ import { Validators } from '../../helpers/validators';
   selector: 'app-team-modal',
   templateUrl: './team-modal.component.html',
   styleUrls: ['./team-modal.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class TeamModalComponent implements OnInit {

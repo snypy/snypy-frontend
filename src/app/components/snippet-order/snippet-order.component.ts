@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { UpdateSnippetOrderingFilter } from '../../state/snippet/snippet.actions';
 
@@ -6,6 +6,7 @@ import { UpdateSnippetOrderingFilter } from '../../state/snippet/snippet.actions
   selector: 'app-snippet-order',
   templateUrl: './snippet-order.component.html',
   styleUrls: ['./snippet-order.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class SnippetOrderComponent implements OnInit {

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { SelectSnapshot } from '@ngxs-labs/select-snapshot';
@@ -14,6 +14,7 @@ import { mapFormErrors } from '../../helpers/form-error-mapper';
   selector: 'app-label-modal',
   templateUrl: './label-modal.component.html',
   styleUrls: ['./label-modal.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class LabelModalComponent implements OnInit {

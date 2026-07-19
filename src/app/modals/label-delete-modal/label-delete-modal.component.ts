@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { Label, LabelService } from '@snypy/rest-client';
@@ -8,6 +8,7 @@ import { firstValueFrom } from 'rxjs';
   selector: 'app-label-delete-modal',
   templateUrl: './label-delete-modal.component.html',
   styleUrls: ['./label-delete-modal.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class LabelDeleteModalComponent {
