@@ -33,7 +33,7 @@
                 "src/"
               ]
             },
-            "scripts": [],
+            "scripts": ["node_modules/clipboard/dist/clipboard.min.js"],
             "vendorChunk": true,
             "extractLicenses": false,
             "buildOptimizer": false,
@@ -90,7 +90,7 @@
             "karmaConfig": "./karma.conf.js",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.spec.json",
-            "scripts": [],
+            "scripts": ["node_modules/clipboard/dist/clipboard.min.js"],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/@ng-select/ng-select/themes/default.theme.css",

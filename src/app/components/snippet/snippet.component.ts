@@ -8,6 +8,7 @@ import { Label } from '@snypy/rest-client';
 import { Language, Snippet } from '@snypy/rest-client';
 import { LabelState } from '../../state/label/label.state';
 import { LanguageState } from '../../state/language/language.state';
+import { MarkdownClipboardButtonComponent } from '../markdown-clipboard-button/markdown-clipboard-button.component';
 
 @UntilDestroy()
 @Component({
@@ -18,6 +19,8 @@ import { LanguageState } from '../../state/language/language.state';
   standalone: false,
 })
 export class SnippetComponent implements OnInit {
+  public readonly clipboardButton = MarkdownClipboardButtonComponent;
+
   public copiedFile: File | null = null;
   public timer = null;
 

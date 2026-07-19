@@ -30,5 +30,25 @@
   .snypy-scrollbar {
     --scrollbar-padding: 0px;
   }
+
+  // copy button for markdown code blocks, shown on hover only
+  .markdown-clipboard-toolbar {
+    opacity: 0;
+    transition: opacity 250ms ease-out;
+
+    &.hover {
+      opacity: 1;
+    }
+  }
+
+  // inline code copies on click, see CopyInlineCodeDirective
+  markdown code:not(pre code) {
+    cursor: pointer;
+
+    &:hover {
+      background-color: #{$secondary-color-100};
+      border-radius: 2px;
+    }
+  }
 }
 
