@@ -42,7 +42,7 @@
     "bootstrap": "^5.3.8",
     "clipboard": "^2.0.11",
     "core-js": "^3.49.0",
-    "fs-extra": "^11.3.5",
+    "fs-extra": "^11.4.0",
     "karma-coverage": "^2.2.1",
     "katex": "^0.18.1",
     "markdown-to-text": "^0.1.1",
