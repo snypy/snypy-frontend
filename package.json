@@ -48,7 +48,7 @@
     "markdown-to-text": "^0.1.1",
     "marked": "^18.0.5",
     "marked-katex-extension": "^5.1.10",
-    "monaco-editor": "^0.55.1",
+    "monaco-editor": "^0.56.0",
     "ngx-clipboard": "^16.0.0",
     "ngx-markdown": "^22.0.0",
     "ngx-monaco-editor-v2": "^22.0.4",
