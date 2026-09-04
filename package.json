@@ -44,7 +44,7 @@
     "core-js": "^3.50.0",
     "fs-extra": "^11.4.0",
     "karma-coverage": "^2.2.1",
-    "katex": "^0.18.2",
+    "katex": "^0.18.5",
     "markdown-to-text": "^0.1.1",
     "marked": "^18.0.10",
     "marked-katex-extension": "^5.1.10",
