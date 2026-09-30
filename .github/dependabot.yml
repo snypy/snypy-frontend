@@ -7,6 +7,21 @@ updates:
     time: "04:00"
     timezone: Europe/Vienna
   open-pull-requests-limit: 99
+  groups:
+    angular-eslint:
+      patterns:
+        - "@angular-eslint/*"
+        - "angular-eslint"
+    angular:
+      patterns:
+        - "@angular/*"
+        - "@angular-devkit/*"
   ignore:
     - dependency-name: "@ngxs/store"
     - dependency-name: "@ngxs/devtools-plugin"
+    # @angular/compiler-cli 22 requires typescript >=6.0 <6.1
+    - dependency-name: "typescript"
+      update-types: ["version-update:semver-major"]
+    # jasmine-core 7 makes the Jasmine env read-only, which breaks zone.js/testing (zone.js <= 0.16.3)
+    - dependency-name: "jasmine-core"
+      update-types: ["version-update:semver-major"]
