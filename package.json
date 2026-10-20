@@ -79,7 +79,7 @@
     "@typescript-eslint/eslint-plugin": "^8.71.2",
     "@typescript-eslint/parser": "^8.68.0",
     "angular-eslint": "^22.6.0",
-    "eslint": "^10.12.0",
+    "eslint": "^10.13.0",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-prettier": "^5.5.7",
     "git-describe": "^4.1.1",
